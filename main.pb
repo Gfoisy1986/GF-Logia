@@ -26,6 +26,10 @@ Enumeration
       #jobdel
       #jobsave
       #jobnew
+      #frame1
+      #punchin
+      #punchout
+      #punchlist
 
 EndEnumeration
 
@@ -71,6 +75,20 @@ Procedure Administration()
   ButtonGadget(856, 440, 20, 200, 20, "add vehicule")
   ButtonGadget(857, 440, 40, 200, 20, "mod vehicule")
   ButtonGadget(858, 440, 70, 200, 20, "del vehicule")
+  
+  
+  
+  TextGadget(863, 660, 0, 200, 20, "Menu Bon de travail par vehicule", #PB_Text_Border | #PB_Text_Center)
+  ButtonGadget(864, 660, 20, 200, 20, "add Bon de travail")
+  ButtonGadget(865, 660, 40, 200, 20, "archivé Bon de travail")
+  ButtonGadget(866, 660, 70, 200, 20, "del Bon de travail")
+  
+  
+  
+  TextGadget(867, 880, 0, 300, 20, "Menu historique Bon de travail par vehicule", #PB_Text_Border | #PB_Text_Center)
+  
+  
+  ButtonGadget(870, 880, 70, 300, 20, "del H-Bon de travail")
 EndProcedure
 
  
@@ -226,9 +244,60 @@ Procedure closewindowHandler()
     
   
    
-  
-  
+    Procedure listuser()
+      
+      
  
+  
+
+ 
+ 
+  ButtonGadget(950, 0, 60, 215, 20," Liste Employer")
+   ListViewGadget(#listuseradmin, 0, 80, 215, 160) 
+    
+  If DatabaseQuery (0, "SELECT * FROM User")
+  
+    While NextDatabaseRow(#mysql)       
+      AddGadgetItem(#listuseradmin, -1, "" + GetDatabaseString(#mysql, 1))
+      
+    Wend 
+   
+    FinishDatabaseQuery(#mysql)
+   
+    success = #True
+
+  EndIf
+  
+      
+      
+      
+    EndProcedure
+    
+  
+    Procedure punch()
+      
+      ;HideGadget(425, #True)
+ ;HideGadget(#listuser, #True)
+ 
+ 
+  ButtonGadget(951, 0, 260, 215, 20," Liste des Punch par WO")
+   ListViewGadget(#punchlist, 0, 280, 215, 160) 
+    
+  If DatabaseQuery (0, "SELECT * FROM punch")
+  
+    While NextDatabaseRow(#mysql)       
+      AddGadgetItem(#punchlist, -1, "" + GetDatabaseString(#mysql, 0) + " - " + GetDatabaseString(#mysql, 2))
+      
+    Wend 
+   
+    FinishDatabaseQuery(#mysql)
+   
+    success = #True
+
+  EndIf
+      
+    EndProcedure
+    
   
   
   
@@ -263,81 +332,50 @@ Procedure closewindowHandler()
   EndProcedure
   
   
-  Procedure listuser()
-  
-    OpenGadgetList(1, 3)
-    
-   
-  
-  
-  
-   ButtonGadget(425, 0, 60, 215, 20, " Liste Users")
-        ListViewGadget(#listuser, 0, 80, 215, 100) 
-     
-        If DatabaseQuery (0, "SELECT * FROM User")
-  
-         While NextDatabaseRow(#mySql)       
-          AddGadgetItem(#listuser, -1, "" + GetDatabaseString(#mySql, 1))
-         
-         Wend 
-   
-         FinishDatabaseQuery(#mySql)
-   
-         success = #True
 
-       EndIf
-       BindGadgetEvent(#listuser, @loguserHandler(), #PB_EventType_LeftClick)
-  
-   
-        ;BindGadgetEvent(#listuser, @loguserHandler(), #PB_EventType_LeftClick)
-    ;///////////////////////////////////////////
-      CloseGadgetList()
-EndProcedure
   
 Procedure mainwo()
-   ButtonGadget(402, 0, 0, 215, 40," Liste Bon de travail")
+  OpenGadgetList(1, 3)
+  ButtonGadget(402, 0, 0, 215, 40," Liste Bon de travail")
+  
    ListViewGadget(#list, 0, 40, 215, 450) 
     
    DatabaseQuery (0, "SELECT * FROM Workorder")
   
-    While NextDatabaseRow(#mySql)       
-      AddGadgetItem(#list, -1, "WO No: " + GetDatabaseString(#mySql, 0))
+    While NextDatabaseRow(#mysql)       
+      AddGadgetItem(#list, -1, "WO No: " + GetDatabaseString(#mysql, 0))
       
     Wend 
    
-    FinishDatabaseQuery(#mySql)
+    FinishDatabaseQuery(#mysql)
    
     success = #True
-
+  
+  
+   
   
  
   
- ;BindGadgetEvent(#list, @aWOordertHandler(), #PB_EventType_LeftClick)
+ 
+ CloseGadgetList()
+
+  
 EndProcedure
 
 
   Procedure aWOordertHandler()
     ;//////////////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-   
-    OpenGadgetList(1, 3)
-   
-  
- 
-  
- 
- 
+   OpenGadgetList(1, 3)
 
-  
- 
  ;HideGadget(425, #True)
  ;HideGadget(#listuser, #True)
  
  
+ listuser()
+ punch()
  
  
- 
- 
- 
+  
  
     
 
@@ -349,7 +387,8 @@ EndProcedure
    ; For i = 0 To 65000
       ;AddGadgetItem(#list, i, "Ancien élément "+Str(i))
      ; SetGadgetItemData(#list, i, i)
-    ;Next i
+     ;Next i
+
       Debug ("Ouverture du work order " + GetGadgetText(#list))
        
   
@@ -416,16 +455,17 @@ EndProcedure
       
       ButtonGadget(223, 225, 280, 200, 20,"Supprimé")
       
-       FinishDatabaseQuery(#mySql)
+      FinishDatabaseQuery(#mysql)
                  success = #True
       
       TextGadget(224, 225, 300, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
-      ListViewGadget(#listNote3, 225, 320, 200, 150)
-             If DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
-             While NextDatabaseRow(#mySql) 
+      
+       ListViewGadget(#listNote3, 225, 320, 200, 150)
+              DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mysql) 
                
                
-               AddGadgetItem(#listNote3, -1, "" + GetDatabaseString(#mySql, 1))
+               AddGadgetItem(#listNote3, -1, ""+GetDatabaseString(#mysql, 1))
                
                   
                    
@@ -433,43 +473,62 @@ EndProcedure
              
    
              
-            EndIf
-      
-            If DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
-              
-      TextGadget(217, 425, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
-     
-     
-                FinishDatabaseQuery(#mySql)
+            
+            TextGadget(217, 425, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
+                     FinishDatabaseQuery(#mysql)
                  success = #True
-               EndIf
-               ButtonGadget(#jobnew, 0, 490, 215, 30, "Nouvelle Job")
-     ButtonGadget(#jobsave, 0, 520, 215, 30, "Sauvegarder Job")
+               
+               ButtonGadget(#jobnew, 0, 565, 215, 30, "Nouvelle Job")
+     ButtonGadget(#jobsave, 0, 595, 215, 30, "Sauvegarder Job")
      
-     ButtonGadget(#jobdel, 0, 580, 215, 30, "Supprimer Job")
+     ButtonGadget(#jobdel, 0, 635, 215, 30, "Supprimer Job")
+     
+     ButtonGadget(#punchin, 0, 445, 215, 25, "punch-in")
+     ButtonGadget(#punchout, 0, 475, 215, 25, "punch-out")
+     
+     
      TextGadget(#jobscrolllist, 225, 490, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
       ListViewGadget(#listjob1, 225, 510, 200, 170)
              If DatabaseQuery (0, "SELECT * FROM Job")
-             While NextDatabaseRow(#mySql) 
+             While NextDatabaseRow(#mysql) 
                
-               IDJOB$ = GetDatabaseString(#mySql, 1)
+               IDJOB$ = GetDatabaseString(#mysql, 1)
                AddGadgetItem(#listjob1, -1, "" + IDJOB$)
                
                   
                    
               Wend 
+              EndIf
+    FinishDatabaseQuery(#mysql)
+                 success = #True
              
-   
-             
-            EndIf
-     TextGadget(#jobscrollname, 425, 490, 600, 20, "Job editor", #PB_Text_Border | #PB_Text_Center)
+           
+     TextGadget(#jobscrollname, 425, 490, 600, 20, "Éditeur de Travaux", #PB_Text_Border | #PB_Text_Center)
      ScrollAreaGadget(#jobscroll, 425, 510, 600, 170, 580, 170, 800) 
      EditorGadget(#jobscroll1, 0, 0, 580, 85)
      EditorGadget(#jobscroll2, 0, 85, 580, 85)
      
      
+     ; ListViewGadget(#punchlist, 1025, 0, 400, 400)
+           ;  If DatabaseQuery (0, "SELECT * FROM Job")
+           ;  While NextDatabaseRow(#mySql) 
+               
+               
+             ;  AddGadgetItem(#punchlist, -1, "- "+ GetDatabaseString(#mysql, 1))
+               
+           ;   Wend 
+             
+          ;  EndIf
+            
+  ;  FinishDatabaseQuery(#mysql)
+   
+   ; success = #True
+   ; listuser()
+     
+     
+     
      CloseGadgetList()
-      
+    
       ;ResizeGadget(950, 225, 540, 800, 400)
      ; ResizeGadget(524, 0, 20, 780, 60)
      ;
@@ -482,15 +541,15 @@ EndProcedure
      BindGadgetEvent(#listjob1, @OpenJob())
      BindGadgetEvent(223, @deletenote())
        BindGadgetEvent(220, @newnotebuttonHandler())
-              BindGadgetEvent(#listNote3, @opennoteHandler(), #PB_EventType_LeftClick)
-   ; ///////////////////////
+              ;BindGadgetEvent(#listNote3, @opennoteHandler(), #PB_EventType_LeftClick)
+  
+ ;BindGadgetEvent(#list, @aWOordertHandler(), #PB_EventType_LeftClick)
      EndProcedure
      
      
   Procedure main()
     
-  OpenDatabase(0, "Mech-Logia.sqlite", "", "")
-   Debug "Connecté à Mech-Logia.sqlite"
+ 
    
 #FenetrePrincipale = 0
 
@@ -515,8 +574,8 @@ AddGadgetItem(1, -1, "Flottes")
 CloseGadgetList()
 
 OpenGadgetList(1)
-AddGadgetItem(1, -1, "Bon de travail")
-mainwo()
+panel2 = AddGadgetItem(1, -1, "Bon de travail")
+  mainwo()
 CloseGadgetList()
     
    
@@ -662,14 +721,207 @@ AddGadgetItem(1, -1, "Calendar")
  ; If eventGadget = #listuser
    ; loguserHandler()
    ; EndIf
-        If EventGadget = #list
+  
+  
+    If EventGadget = #list
           
           aWOordertHandler()
          
         EndIf
+        
+        If EventGadget = #punchin
+       ; ------------------------------------------------------------
+;
+; PureBasic Win32 API - Get System Time & Date - Example File
+;
+; by MrVainSCL! aka Thorsten   26/Nov/2002    PB v3.40+
+;
+; ------------------------------------------------------------
+;
+    Info.SYSTEMTIME                           ; Init API Structure for _SYTEMTIME()
+;
+; -------- Win32 API Structure --------
+;
+;   typedef struct _SYSTEMTIME   
+;     WORD wYear
+;     WORD wMonth 
+;     WORD wDayOfWeek 
+;     WORD wDay 
+;     WORD wHour 
+;     WORD wMinute 
+;     WORD wSecond 
+;     WORD wMilliseconds 
+;   SYSTEMTIME; 
+;
+; ------------------------------------------------------------
+;
+    GetLocalTime_(Info)                       ; Get acutal LOCAL Time by System
+    ;
+    ; -------- Get actual Date --------
+    ;
+    cday$       = Str((Info\wDay))
+    cmonth$     = Str((Info\wMonth))
+    cyear$      = Str((Info\wYear))
+    cwday$      = Str((Info\wDayOfWeek))
+    ;
+    ; -------- Get Actual Time --------
+    ; 
+    chour$      = Str((Info\wHour)) 
+    cminute$    = Str((Info\wMinute))
+    csecond$    = Str((Info\wSecond))
+    cmillisec$  = Str((Info\wMilliseconds)) 
+    ;
+    ; -------- Select cwday$ num to get correct weekday --------
+    ;
+    Select cwday$                           ; Same num handling like in Excel :wink:
+      Case "1" : cweekday$ = "Monday" 
+      Case "2" : cweekday$ = "Thursday"
+      Case "3" : cweekday$ = "Wednesday"
+      Case "4" : cweekday$ = "Thursday"
+      Case "5" : cweekday$ = "Friday"
+      Case "6" : cweekday$ = "Saturday"
+      Case "0" : cweekday$ = "Sunday"       
+    EndSelect 
+    ;
+    ; -------- Write results into one string --------
+    ;  
+    actdate$ = cweekday$ + ", " + cday$ + "-" + cmonth$ + "-" + cyear$ 
+    acttime$ = chour$ + ":" + cminute$ + ":" + csecond$ + " and " + cmillisec$ + " millisconds"
+    ;
+    ; -------- Print the result to the user --------
+    ;    
+    MessageRequester("Actual Date:",actdate$,0)
+    MessageRequester("Actual Time:",acttime$,0)
+
+;
+; ------------------------------------------------------------
+             
+   If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+    
+   query10.s = "INSERT INTO punch (WO, USER, Punchin, nomtravaux) " + "VALUES ('"+GetGadgetText(100)+"', '"+GetGadgetText(#listuseradmin)+"', '"+ actdate$ + acttime$ +"', '"+GetGadgetText(#listjob1)+"')"
+  
+  ; update the database with the literal prepared query and confirm the write
+  If DatabaseUpdate(0, query10)
+    
+    Debug "data successfully inserted."
+
+  Else
+    
+    Debug "error inserting data! " + DatabaseError()
+    
+  EndIf
+
+  ; close the database file
+  
+  
+Else
+  
+  Debug "error opening database! " + DatabaseError()
+  
+EndIf
+        EndIf
+        
+        If EventGadget = #punchout
+          
+          
+             ; ------------------------------------------------------------
+;
+; PureBasic Win32 API - Get System Time & Date - Example File
+;
+; by MrVainSCL! aka Thorsten   26/Nov/2002    PB v3.40+
+;
+; ------------------------------------------------------------
+;
+    Info.SYSTEMTIME                           ; Init API Structure for _SYTEMTIME()
+;
+; -------- Win32 API Structure --------
+;
+;   typedef struct _SYSTEMTIME   
+;     WORD wYear
+;     WORD wMonth 
+;     WORD wDayOfWeek 
+;     WORD wDay 
+;     WORD wHour 
+;     WORD wMinute 
+;     WORD wSecond 
+;     WORD wMilliseconds 
+;   SYSTEMTIME; 
+;
+; ------------------------------------------------------------
+;
+    GetLocalTime_(Info)                       ; Get acutal LOCAL Time by System
+    ;
+    ; -------- Get actual Date --------
+    ;
+    cday$       = Str((Info\wDay))
+    cmonth$     = Str((Info\wMonth))
+    cyear$      = Str((Info\wYear))
+    cwday$      = Str((Info\wDayOfWeek))
+    ;
+    ; -------- Get Actual Time --------
+    ; 
+    chour$      = Str((Info\wHour)) 
+    cminute$    = Str((Info\wMinute))
+    csecond$    = Str((Info\wSecond))
+    cmillisec$  = Str((Info\wMilliseconds)) 
+    ;
+    ; -------- Select cwday$ num to get correct weekday --------
+    ;
+    Select cwday$                           ; Same num handling like in Excel :wink:
+      Case "1" : cweekday$ = "Monday" 
+      Case "2" : cweekday$ = "Thursday"
+      Case "3" : cweekday$ = "Wednesday"
+      Case "4" : cweekday$ = "Thursday"
+      Case "5" : cweekday$ = "Friday"
+      Case "6" : cweekday$ = "Saturday"
+      Case "0" : cweekday$ = "Sunday"       
+    EndSelect 
+    ;
+    ; -------- Write results into one string --------
+    ;  
+    actdate$ = cweekday$ + ", " + cday$ + "-" + cmonth$ + "-" + cyear$ 
+    acttime$ = chour$ + ":" + cminute$ + ":" + csecond$ + " and " + cmillisec$ + " millisconds"
+    ;
+    ; -------- Print the result to the user --------
+    ;    
+    MessageRequester("Actual Date:",actdate$,0)
+    MessageRequester("Actual Time:",acttime$,0)
+
+;
+; ------------------------------------------------------------
+    
+    
+          If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+     
+            query11.s = "UPDATE punch SET punchout=('"+actdate$+acttime$+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(100)+"', '"+GetGadgetText(#listuseradmin)+"', '"+GetGadgetText(#listjob1)+"')"
+  
+  ; update the database with the literal prepared query and confirm the write
+  If DatabaseUpdate(0, query11)
+    
+    Debug "data successfully inserted."
+
+  Else
+    
+    Debug "error inserting data! " + DatabaseError()
+    
+  EndIf
+
+  ; close the database file
+  
+  
+Else
+  
+  Debug "error opening database! " + DatabaseError()
+  
+EndIf
+        EndIf
+         
+
+        
          If EventGadget = 402
           
-          mainwo()
+           main()
+           SetGadgetState(1, 3)
          
         EndIf
         
@@ -827,8 +1079,8 @@ ListViewGadget(#listjob1, 225, 510, 200, 170)
 
 ;main()
 ; IDE Options = PureBasic 6.02 LTS (Windows - x64)
-; CursorPosition = 701
-; FirstLine = 672
+; CursorPosition = 892
+; FirstLine = 863
 ; Folding = ---
 ; EnableXP
 ; DPIAware
