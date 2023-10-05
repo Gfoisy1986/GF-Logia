@@ -283,10 +283,10 @@ Procedure closewindowHandler()
   ButtonGadget(951, 0, 260, 215, 20," Liste des Punch par WO")
    ListViewGadget(#punchlist, 0, 280, 215, 160) 
     
-  If DatabaseQuery (0, "SELECT * FROM punch")
+  If DatabaseQuery (0, "SELECT * FROM punch WHERE WO='"+GetGadgetText(100)+"'")
   
     While NextDatabaseRow(#mysql)       
-      AddGadgetItem(#punchlist, -1, "" + GetDatabaseString(#mysql, 0) + " - " + GetDatabaseString(#mysql, 2))
+      AddGadgetItem(#punchlist, -1, "" + GetDatabaseString(#mysql, 0) + " - " + GetDatabaseString(#mysql, 2) + "   " + GetDatabaseString(#mysql, 5))
       
     Wend 
    
@@ -371,8 +371,7 @@ EndProcedure
  ;HideGadget(#listuser, #True)
  
  
- listuser()
- punch()
+
  
  
   
@@ -489,7 +488,7 @@ EndProcedure
      
      TextGadget(#jobscrolllist, 225, 490, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
       ListViewGadget(#listjob1, 225, 510, 200, 170)
-             If DatabaseQuery (0, "SELECT * FROM Job")
+             If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
              While NextDatabaseRow(#mysql) 
                
                IDJOB$ = GetDatabaseString(#mysql, 1)
@@ -599,11 +598,31 @@ AddGadgetItem(1, -1, "Calendar")
     OpenGadgetList(1)
     AddGadgetItem(1, -1, "Calendrier des maintenances")
      TextGadget(726, 100, 0, 100, 20, "heya")
-                
-  
-    
-    
-    
+     CloseGadgetList()
+     
+      OpenGadgetList(1)
+    AddGadgetItem(1, -1, "Les Stastistiques")
+     TextGadget(726, 100, 0, 100, 20, "heya")
+     CloseGadgetList()
+     
+      OpenGadgetList(1)
+    AddGadgetItem(1, -1, "Facturation")
+     TextGadget(726, 100, 0, 100, 20, "heya")
+     CloseGadgetList()
+     
+      OpenGadgetList(1)
+    AddGadgetItem(1, -1, "Carnet Comptabilité")
+     TextGadget(726, 100, 0, 100, 20, "heya")
+     CloseGadgetList()
+     
+      OpenGadgetList(1)
+    AddGadgetItem(1, -1, "Catalogues des pieces")
+     TextGadget(726, 100, 0, 100, 20, "heya")
+     CloseGadgetList()
+     
+      OpenGadgetList(1)
+    AddGadgetItem(1, -1, "Les liens et informations utiles")
+     TextGadget(726, 100, 0, 100, 20, "heya")
     CloseGadgetList()
     
       ;/////////////////////////////////////////////////////////////////////////////////////////////////////////menu/////////////////////////menu///////////////////////////////////menu///////////////////////////////
@@ -726,7 +745,8 @@ AddGadgetItem(1, -1, "Calendar")
     If EventGadget = #list
           
           aWOordertHandler()
-         
+          punch()
+          listuser()
         EndIf
         
         If EventGadget = #punchin
@@ -938,7 +958,7 @@ EndIf
  MessageRequester("job supprimé!", "job supprimé!",  #PB_MessageRequester_Info)
  
  ListViewGadget(#listjob1, 225, 510, 200, 170)
-             If DatabaseQuery (0, "SELECT * FROM Job")
+             If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
              While NextDatabaseRow(#mySql) 
                
                IDJOB$ = GetDatabaseString(#mySql, 1)
@@ -995,7 +1015,7 @@ EndIf
           
    If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
      DatabaseQuery (0, "SELECT * FROM Job")
-   query.s = "INSERT INTO Job (Jobname, jobinfo)" + "VALUES ('"+Text200$+"', '"+Text201$+"')"
+   query.s = "INSERT INTO Job (Jobname, jobinfo, WO)" + "VALUES ('"+Text200$+"', '"+Text201$+"', '"+GetGadgetText(100)+"')"
   
   ; update the database with the literal prepared query and confirm the write
   If DatabaseUpdate(0, query)
@@ -1079,8 +1099,8 @@ ListViewGadget(#listjob1, 225, 510, 200, 170)
 
 ;main()
 ; IDE Options = PureBasic 6.02 LTS (Windows - x64)
-; CursorPosition = 892
-; FirstLine = 863
+; CursorPosition = 1017
+; FirstLine = 986
 ; Folding = ---
 ; EnableXP
 ; DPIAware
