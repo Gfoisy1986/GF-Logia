@@ -45,35 +45,20 @@ Icone$ = "icon.ico"
 
 Procedure Administration()
   
-  TextGadget(859, 0, 0, 200, 20, "Menu employer", #PB_Text_Border | #PB_Text_Center)
-  ButtonGadget(850, 0, 20, 200, 20, "add employer")
-  ButtonGadget(851, 0, 40, 200, 20, "mod employer")
-  ButtonGadget(852, 0, 70, 200, 20, "del employer")
-   TextGadget(862, 0, 100, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Center)
-        ListViewGadget(1200, 0, 120, 200, 300) 
-        If DatabaseQuery (0, "SELECT * FROM User")
-         While NextDatabaseRow(#mySql)       
-          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 1))
-         Wend 
-   
-         FinishDatabaseQuery(#mySql)
-   
-         success = #True
-
-       EndIf
+ 
        
        
        
   TextGadget(860, 220, 0, 200, 20, "Menu Client", #PB_Text_Border | #PB_Text_Center)
   ButtonGadget(853, 220, 20, 200, 20, "add client")
-  ButtonGadget(854, 220, 40, 200, 20, "mod client")
+ ; ButtonGadget(854, 220, 40, 200, 20, "mod client")
   ButtonGadget(855, 220, 70, 200, 20, "del client")
   
   
   
   TextGadget(861, 440, 0, 200, 20, "Menu Vehicule par client", #PB_Text_Border | #PB_Text_Center)
   ButtonGadget(856, 440, 20, 200, 20, "add vehicule")
-  ButtonGadget(857, 440, 40, 200, 20, "mod vehicule")
+ ; ButtonGadget(857, 440, 40, 200, 20, "mod vehicule")
   ButtonGadget(858, 440, 70, 200, 20, "del vehicule")
   
   
@@ -91,7 +76,34 @@ Procedure Administration()
   ButtonGadget(870, 880, 70, 300, 20, "del H-Bon de travail")
 EndProcedure
 
+
+
+
+Procedure employer()
+  
+  TextGadget(859, 0, 0, 200, 20, "Menu employer", #PB_Text_Border | #PB_Text_Center)
+  ButtonGadget(850, 0, 25, 200, 20, "add employer")
  
+  ButtonGadget(852, 0, 50, 200, 20, "del employer")
+   TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Center)
+        ListViewGadget(1200, 0, 100, 200, 300) 
+        If DatabaseQuery (0, "SELECT * FROM User")
+         While NextDatabaseRow(#mySql)       
+          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 1))
+         Wend 
+   
+         FinishDatabaseQuery(#mySql)
+   
+         success = #True
+
+       EndIf
+       
+        
+       
+EndProcedure
+
+
+
 
   Procedure QuitHandler()
     
@@ -111,7 +123,20 @@ EndProcedure
  MessageRequester("Note supprimé!", "Note supprimé!",  #PB_MessageRequester_Info)
   
 EndIf
-
+ListViewGadget(#listNote3, 225, 320, 200, 150)
+             If DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mySql) 
+               
+               
+               AddGadgetItem(#listNote3, -1, "" + GetDatabaseString(#mySql, 1))
+               
+                  
+                   
+              Wend 
+             
+   
+             
+            EndIf
     EndProcedure
   
   
@@ -300,7 +325,7 @@ Procedure closewindowHandler()
    
 
   Procedure loguserHandler()
-    OpenGadgetList(1, 3)
+    OpenGadgetList(1, 4)
  
   
  ;HideGadget(425, #True)
@@ -331,7 +356,7 @@ Procedure closewindowHandler()
 
   
 Procedure mainwo()
-  OpenGadgetList(1, 3)
+  OpenGadgetList(1, 4)
   ButtonGadget(402, 0, 0, 215, 40," Liste Bon de travail")
   
    ListViewGadget(#list, 0, 40, 215, 450) 
@@ -361,7 +386,7 @@ EndProcedure
 
   Procedure aWOordertHandler()
     ;//////////////////////<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<
-   OpenGadgetList(1, 3)
+   OpenGadgetList(1, 4)
 
  ;HideGadget(425, #True)
  ;HideGadget(#listuser, #True)
@@ -561,6 +586,11 @@ EndProcedure
 CloseGadgetList()
 
 OpenGadgetList(1)
+AddGadgetItem(1, -1, "Employées")
+employer()
+CloseGadgetList()
+
+OpenGadgetList(1)
 AddGadgetItem(1, -1, "Clients")
 CloseGadgetList()
 
@@ -618,6 +648,11 @@ AddGadgetItem(1, -1, "Calendar")
      
       OpenGadgetList(1)
     AddGadgetItem(1, -1, "Les liens et informations utiles")
+     TextGadget(726, 100, 0, 100, 20, "heya")
+     CloseGadgetList()
+     
+     OpenGadgetList(1)
+    AddGadgetItem(1, -1, "Boite à outils")
      TextGadget(726, 100, 0, 100, 20, "heya")
     CloseGadgetList()
     
@@ -937,7 +972,7 @@ EndIf
          If EventGadget = 402
           
            main()
-           SetGadgetState(1, 3)
+           SetGadgetState(1, 4)
          
         EndIf
         
@@ -1053,11 +1088,86 @@ ListViewGadget(#listjob1, 225, 510, 200, 170)
         
         
         
+  ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
+        
+        If EventGadget = 850
+          OpenGadgetList(1, 1)
+          Textemployer100$ = InputRequester("ajoutez un employer", "Veuillez entrer le username du nouveau", "")
+        Textemployer101$ = InputRequester("ajoutez un employer", "Veuillez entrer le Nom propre du nouveau", "")
+        Textemployer102$ = InputRequester("ajoutez un employer", "Veuillez entrer le Prenom du nouveau", "")
+   If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+   ;  DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
+   queryemployer.s = "INSERT INTO User (username, Nom, Prenom) " + "VALUES ('"+Textemployer100$+"', '"+Textemployer101$+"', '"+Textemployer102$+"')"
+  
+  ; update the database with the literal prepared query and confirm the write
+ If DatabaseUpdate(0, queryemployer)
+    
+    Debug "data successfully inserted."
+
+  Else
+    
+    Debug "error inserting data! " + DatabaseError()
+    
+  EndIf
+
+  ; close the database file
+  
+  
+Else
+  
+  Debug "error opening database! " + DatabaseError()
+  
+EndIf
+TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Center)
+ ListViewGadget(1200, 0, 100, 200, 300) 
+        If DatabaseQuery (0, "SELECT * FROM User")
+         While NextDatabaseRow(#mySql)       
+          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 1))
+         Wend 
+   
+         FinishDatabaseQuery(#mySql)
+   
+         success = #True
+
+       EndIf
+       CloseGadgetList()
+        EndIf
         
         
-       ; If EventGadget = 223
-         ; aWOordertHandler()
-         ; EndIf
+ ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+        If EventGadget = 852
+          
+          OpenGadgetList(1, 1)
+          
+         If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+      Querydelemployer.s = "DELETE FROM User WHERE username = '"+GetGadgetText(1200)+"'"
+      DatabaseUpdate(0, querydelemployer)
+    
+   
+
+  FinishDatabaseQuery(0)
+  
+  MessageRequester("employer à supprimé!", "Employer " +GetGadgetText(1200)+ " supprimé!",  #PB_MessageRequester_Info)
+  
+EndIf
+
+TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Center)
+ ListViewGadget(1200, 0, 100, 200, 300) 
+        If DatabaseQuery (0, "SELECT * FROM User")
+         While NextDatabaseRow(#mySql)       
+          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 1))
+         Wend 
+   
+         FinishDatabaseQuery(#mySql)
+   
+         success = #True
+
+       EndIf
+       CloseGadgetList()
+       
+EndIf
+
+;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         If EventGadget = 900
           main()
           
@@ -1074,7 +1184,7 @@ ListViewGadget(#listjob1, 225, 510, 200, 170)
           ; Do nothing here.
           
         EndIf
-        
+ ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
      ; Case #PB_Event_SizeWindow
         ; The window was moved or resized.
       ;  If EventWindow = #WindowFiles
@@ -1095,8 +1205,8 @@ ListViewGadget(#listjob1, 225, 510, 200, 170)
 
 ;main()
 ; IDE Options = PureBasic 6.02 LTS (Windows - x64)
-; CursorPosition = 228
-; FirstLine = 224
+; CursorPosition = 1142
+; FirstLine = 1124
 ; Folding = ---
 ; EnableXP
 ; DPIAware
