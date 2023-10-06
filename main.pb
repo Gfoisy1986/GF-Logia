@@ -50,10 +50,10 @@ Procedure Administration()
   ButtonGadget(851, 0, 40, 200, 20, "mod employer")
   ButtonGadget(852, 0, 70, 200, 20, "del employer")
    TextGadget(862, 0, 100, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Center)
-        ListViewGadget(#listuseradmin, 0, 120, 200, 300) 
+        ListViewGadget(1200, 0, 120, 200, 300) 
         If DatabaseQuery (0, "SELECT * FROM User")
          While NextDatabaseRow(#mySql)       
-          AddGadgetItem(#listuseradmin, -1, "" + GetDatabaseString(#mySql, 1))
+          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 1))
          Wend 
    
          FinishDatabaseQuery(#mySql)
@@ -143,11 +143,7 @@ EndIf
 EndProcedure
 
 
-  Procedure opennoteHandler()
-    ButtonGadget(221, 225, 240, 200, 20,"Sauvegardé")
-    
-  BindGadgetEvent(221, @savenotebuttonHandler())
-  EndProcedure
+
   
 
   
@@ -230,7 +226,7 @@ EndIf
       
      ; BindGadgetEvent(221, @savenotebuttonHandler())
        BindGadgetEvent(220, @newnotebuttonHandler())
-              BindGadgetEvent(#listNote3, @opennoteHandler(), #PB_EventType_LeftClick)
+             ; BindGadgetEvent(#listNote3, @opennoteHandler(), #PB_EventType_LeftClick)
  EndProcedure
  
  
@@ -734,7 +730,7 @@ AddGadgetItem(1, -1, "Calendar")
        NextDatabaseRow(0) 
    EditorGadget(117, 425, 220, 600, 250)
    AddGadgetItem(117, -1, GetDatabaseString(0, 3))
-   
+    ButtonGadget(221, 225, 240, 200, 20,"Sauvegardé")
   
   EndIf
  ; If eventGadget = #listuser
@@ -1099,8 +1095,8 @@ ListViewGadget(#listjob1, 225, 510, 200, 170)
 
 ;main()
 ; IDE Options = PureBasic 6.02 LTS (Windows - x64)
-; CursorPosition = 1017
-; FirstLine = 986
+; CursorPosition = 228
+; FirstLine = 224
 ; Folding = ---
 ; EnableXP
 ; DPIAware
