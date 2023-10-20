@@ -877,100 +877,40 @@ AddGadgetItem(1, -1, "Calendar")
         
         
         
-      ;  If EventGadget = #punchout
+       If EventGadget = #punchout
           
-          
-             ; ------------------------------------------------------------
-;
-; PureBasic Win32 API - Get System Time & Date - Example File
-;
-; by MrVainSCL! aka Thorsten   26/Nov/2002    PB v3.40+
-;
-; ------------------------------------------------------------
-;
-  ;  Info.SYSTEMTIME                           ; Init API Structure for _SYTEMTIME()
-;
-; -------- Win32 API Structure --------
-;
-;   typedef struct _SYSTEMTIME   
-;     WORD wYear
-;     WORD wMonth 
-;     WORD wDayOfWeek 
-;     WORD wDay 
-;     WORD wHour 
-;     WORD wMinute 
-;     WORD wSecond 
-;     WORD wMilliseconds 
-;   SYSTEMTIME; 
-;
-; ------------------------------------------------------------
-;
-  ;  GetLocalTime_(Info)                       ; Get acutal LOCAL Time by System
-    ;
-    ; -------- Get actual Date --------
-    ;
-   ; cday$       = Str((Info\wDay))
-    ;cmonth$     = Str((Info\wMonth))
-    ;cyear$      = Str((Info\wYear))
-    ;cwday$      = Str((Info\wDayOfWeek))
-    ;
-    ; -------- Get Actual Time --------
-    ; 
-   ; chour$      = Str((Info\wHour)) 
-    ;cminute$    = Str((Info\wMinute))
- ;   csecond$    = Str((Info\wSecond))
-  ;  cmillisec$  = Str((Info\wMilliseconds)) 
-    ;
-    ; -------- Select cwday$ num to get correct weekday --------
-    ;
-   ; Select cwday$                           ; Same num handling like in Excel :wink:
-    ;  Case "1" : cweekday$ = "Monday" 
-     ; Case "2" : cweekday$ = "Thursday"
-      ;Case "3" : cweekday$ = "Wednesday"
-     ; Case "4" : cweekday$ = "Thursday"
-      ;Case "5" : cweekday$ = "Friday"
-      ;Case "6" : cweekday$ = "Saturday"
-      ;Case "0" : cweekday$ = "Sunday"       
-    ;EndSelect 
-    ;
-    ; -------- Write results into one string --------
-    ;  
-    ;actdate$ = cweekday$ + ", " + cday$ + "-" + cmonth$ + "-" + cyear$ 
-   ; acttime$ = chour$ + ":" + cminute$ + ":" + csecond$ + " and " + cmillisec$ + " millisconds"
-    ;
-    ; -------- Print the result to the user --------
-    ;    
-    ;MessageRequester("Actual Date:",actdate$,0)
-    ;MessageRequester("Actual Time:",acttime$,0)
+          ImportC "" 
+  time(*tm)
+EndImport
 
-;
-; ------------------------------------------------------------
+Debug FormatDate("%dd %mm %yyyy %hh:%ii:%ss UTC", time(#Null))
+           
+   time.s = FormatDate("%dd %mm %yyyy %hh:%ii:%ss UTC", time(#Null))
     
-    
-     ;     If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+         If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
      
-      ;      query11.s = "UPDATE punch SET punchout=('"+actdate$+acttime$+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(100)+"', '"+GetGadgetText(#listuseradmin)+"', '"+GetGadgetText(#listjob1)+"')"
+           query11.s = "UPDATE punch SET punchout=('"+time+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(100)+"', '"+GetGadgetText(#listuseradmin)+"', '"+GetGadgetText(#listjob1)+"')"
   
-  ; update the database with the literal prepared query and confirm the write
-  ;If DatabaseUpdate(0, query11)
+  ; update the database With the literal prepared query And confirm the write
+  If DatabaseUpdate(0, query11)
     
-   ; Debug "data successfully inserted."
+    Debug "punch out "+time+" successfully inserted."
 
- ; Else
+  Else
     
-  ;  Debug "error inserting data! " + DatabaseError()
+    Debug "error inserting data! " + DatabaseError()
     
- ; EndIf
+  EndIf
 
   ; close the database file
   
   
-;Else
+Else
   
- ; Debug "error opening database! " + DatabaseError()
+  Debug "error opening database! " + DatabaseError()
   
-;EndIf
-;        EndIf
+EndIf
+       EndIf
          
 
         
@@ -1209,9 +1149,9 @@ EndIf
 
 
 ;main()
-; IDE Options = PureBasic 6.02 LTS (Linux - x64)
-; CursorPosition = 877
-; FirstLine = 859
+; IDE Options = PureBasic 6.03 LTS (Linux - x64)
+; CursorPosition = 896
+; FirstLine = 880
 ; Folding = ---
 ; EnableXP
 ; DPIAware
