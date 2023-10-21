@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 6.02 LTS (Windows - x64)">
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 6.03 LTS (Windows - x64)">
   <section name="config">
     <options closefiles="1" openmode="0" name="Meca_Logia"/>
   </section>
   <section name="data">
     <explorer view="C:\ProgramData\PureBasic\Examples\" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2023-10-06 04:25" user="foisy" host="DESKTOP-TVMIHJO"/>
+    <lastopen date="2023-10-19 22:57" user="gfoisy" host="GFOISY-M11X-R2"/>
   </section>
   <section name="files">
     <file name="main.pb">
