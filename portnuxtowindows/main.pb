@@ -1198,9 +1198,9 @@ EndIf
 
 
 ;main()
-; IDE Options = PureBasic 6.03 LTS (Linux - x64)
+; IDE Options = PureBasic 6.03 LTS (Windows - x86)
 ; CursorPosition = 1133
-; FirstLine = 1117
+; FirstLine = 1101
 ; Folding = ---
 ; EnableXP
 ; DPIAware
