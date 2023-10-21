@@ -13,7 +13,9 @@ Enumeration
       #mysql = 0
       #close
       #File
-     #_1
+      #_1
+      #_2
+      #_3
       #WO
     #_1208
     #_221
@@ -625,8 +627,6 @@ EndProcedure
 
      
    
-       ButtonGadget(#_1, 1050, 0, 800, 500, "M")      
-           
      
      CloseGadgetList()
     
@@ -1131,10 +1131,10 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
     
    
 
-    EditorGadget(1206, 425, 510, 600, 85, #PB_Gadget_BackColor)
+    EditorGadget(1206, 425, 510, 600, 85)
     AddGadgetItem(1206, -1, GetDatabaseString(0, 2))
  
-     EditorGadget(1207, 425, 595, 600, 85, #PB_Gadget_BackColor)
+     EditorGadget(1207, 425, 595, 600, 85)
      
     AddGadgetItem(1207, -1, GetDatabaseString(0, 3))
     
@@ -1199,8 +1199,8 @@ EndIf
 
 ;main()
 ; IDE Options = PureBasic 6.03 LTS (Linux - x64)
-; CursorPosition = 627
-; FirstLine = 612
+; CursorPosition = 1133
+; FirstLine = 1117
 ; Folding = ---
 ; EnableXP
 ; DPIAware
