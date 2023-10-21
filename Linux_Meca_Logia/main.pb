@@ -13,11 +13,11 @@ Enumeration
       #mysql = 0
       #close
       #File
-     
+     #_1
       #WO
-    
-    
-      
+    #_1208
+    #_221
+#_1203
       #jobsave
      
       #frame1
@@ -107,7 +107,7 @@ EndProcedure
   
   Procedure deletenote()
     If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
-      Query.s = "DELETE FROM Note WHERE Notename = '"+GetGadgetText(1203)+"'"
+      Query.s = "DELETE FROM Note WHERE Notename = '"+GetGadgetText(#_1203)+"'"
       DatabaseUpdate(0, query)
     
    
@@ -117,12 +117,12 @@ EndProcedure
  MessageRequester("Note supprimé!", "Note supprimé!",  #PB_MessageRequester_Info)
   
 EndIf
-ListViewGadget(1203, 225, 320, 200, 150)
+ListViewGadget(#_1203, 225, 320, 200, 150)
              If DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
              While NextDatabaseRow(#mySql) 
                
                
-               AddGadgetItem(1203, -1, "" + GetDatabaseString(#mySql, 1))
+               AddGadgetItem(#_1203, -1, "" + GetDatabaseString(#mySql, 1))
                
                   
                    
@@ -144,8 +144,27 @@ ListViewGadget(1203, 225, 320, 200, 150)
   
   
   ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
+Procedure savenotebuttonHandler()
+      Debug "editor window saved"
+    
+    
+    
+    
+   
+     
+             ;  query11.s = "UPDATE punch SET punchout=('"+time+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(100)+"', '"+GetGadgetText(1200)+"', '"+GetGadgetText(#_1208)+"')"
+    query4.s = "UPDATE Note SET Content=('"+GetGadgetText(117)+"') WHERE (Notename)=('"+GetGadgetText(#_1203)+"')"
   
+  ; update the database with the literal prepared query and confirm the write
+  DatabaseUpdate(0, query4)
+    
+   
+
+  FinishDatabaseQuery(0)
+  
+ MessageRequester("Note "+GetGadgetText(#_1203)+" Sauvegardée", "Note "+GetGadgetText(#_1203)+" Sauvegardée",  #PB_MessageRequester_Info)
+  
+EndProcedure
 
   ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -176,12 +195,12 @@ Else
   Debug "error opening database! " + DatabaseError()
   
 EndIf
-  ListViewGadget(1203, 225, 320, 200, 150)
+  ListViewGadget(#_1203, 225, 320, 200, 150)
              If DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
              While NextDatabaseRow(#mySql) 
                
                
-               AddGadgetItem(1203, -1, "" + GetDatabaseString(#mySql, 1))
+               AddGadgetItem(#_1203, -1, "" + GetDatabaseString(#mySql, 1))
                
                   
                    
@@ -199,10 +218,140 @@ EndIf
      
       CloseGadgetList()
       
-     ; BindGadgetEvent(221, @savenotebuttonHandler())
+     ; BindGadgetEvent(#_221, @savenotebuttonHandler())
        BindGadgetEvent(220, @newnotebuttonHandler())
-             ; BindGadgetEvent(1203, @opennoteHandler(), #PB_EventType_LeftClick)
+             ; BindGadgetEvent(#_1203, @opennoteHandler(), #PB_EventType_LeftClick)
  EndProcedure
+ 
+ 
+ 
+ Procedure newjobentry()
+   
+   
+ OpenGadgetList(1, 4)
+ Text200$ = InputRequester("nouvelle job", "Veuillez entrer le nom de la nouvelle job", "")
+          Text201$ = InputRequester("Info job", "Veuillez entrer les information sur les travaux", "")
+          
+          
+   If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+     DatabaseQuery (0, "SELECT * FROM Job")
+   query.s = "INSERT INTO Job (Jobname, jobinfo, WO)" + "VALUES ('"+Text200$+"', '"+Text201$+"', '"+GetGadgetText(100)+"')"
+  
+  ; update the database with the literal prepared query and confirm the write
+  If DatabaseUpdate(0, query)
+    
+    Debug "data successfully inserted."
+
+  Else
+    
+    Debug "error inserting data! " + DatabaseError()
+    
+  EndIf
+
+  ; close the database file
+  
+  
+Else
+  
+  Debug "error opening database! " + DatabaseError()
+  
+EndIf
+
+ListViewGadget(#_1208, 225, 510, 200, 170)
+            If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
+            While NextDatabaseRow(#mySql) 
+               
+              IDJOB$ = GetDatabaseString(#mySql, 1)
+              AddGadgetItem(#_1208, -1, "" + IDJOB$)
+               
+                  
+                   
+             Wend 
+             
+   
+             
+           EndIf
+           CloseGadgetList()
+ EndProcedure
+          
+ 
+ 
+ Procedure deljobentry()
+    OpenGadgetList(1, 4)
+   
+    If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+      Query.s = "DELETE FROM Job WHERE Jobname = '"+GetGadgetText(#_1208)+"'"
+      DatabaseUpdate(0, query)
+    
+   
+
+  FinishDatabaseQuery(0)
+  
+ MessageRequester("job supprimé!", "job supprimé!",  #PB_MessageRequester_Info)
+ 
+ ListViewGadget(#_1208, 225, 510, 200, 170)
+             If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mySql) 
+               
+               IDJOB$ = GetDatabaseString(#mySql, 1)
+               AddGadgetItem(#_1208, -1, "" + IDJOB$)
+               
+                  
+                   
+              Wend 
+             
+   
+             
+            EndIf
+            
+ 
+          EndIf
+          CloseGadgetList()
+          
+ EndProcedure 
+ 
+ 
+ Procedure savejobentry()
+   
+   
+   
+    OpenGadgetList(1, 4)
+          result10 = GetGadgetState(#_1208)
+          
+    If result10 = 0
+    Debug "editor window saved"
+      OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+    
+   
+     
+               
+       query3.s = "UPDATE Job SET jobinfo='"+GetGadgetText(1206)+"' WHERE Jobname='"+GetGadgetText(#_1208)+"'"
+       query2.s = "UPDATE Job SET jobrepport='"+GetGadgetText(1207)+"' WHERE Jobname='"+GetGadgetText(#_1208)+"'"
+  
+  ; update the database with the literal prepared query and confirm the write
+       DatabaseUpdate(0, query3)
+       DatabaseUpdate(0, query2)
+    
+   
+
+  FinishDatabaseQuery(0)
+  
+ MessageRequester("job "+GetGadgetText(1205)+" Sauvegardée", "job "+GetGadgetText(1205)+" Sauvegardée",  #PB_MessageRequester_Info)
+ CloseGadgetList()
+
+ElseIf result10 = -1 
+  
+  
+  Debug "Cant save job no job selected !"
+         
+       
+    
+           
+  EndIf 
+
+    
+ EndProcedure
+ 
  
  
 
@@ -239,7 +388,43 @@ Procedure closewindowHandler()
 
   EndIf
   
-      CloseGadgetList()
+  
+  TextGadget(224, 225, 300, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
+      
+      
+       ListViewGadget(#_1203, 225, 320, 200, 150)
+            If  DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mysql) 
+               
+               
+               AddGadgetItem(#_1203, -1, ""+GetDatabaseString(#mysql, 1))
+               
+                  
+                   
+              Wend 
+             
+   EndIf
+             
+            
+   TextGadget(217, 425, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
+    EditorGadget(117, 425, 220, 600, 250)
+                     FinishDatabaseQuery(#mysql)
+                 success = #True
+               
+             
+           
+     
+     CloseGadgetList()
+    
+     
+       BindGadgetEvent(#_221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
+       BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
+       BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
+             
+  
+      
+    
+     
       
      
     EndProcedure
@@ -265,12 +450,50 @@ Procedure closewindowHandler()
     success = #True
 
   EndIf
-      CloseGadgetList()
+  
+  
+                 
+                ;    BindGadgetEvent(1210, @newjobentry(), #PB_EventType_LeftClick)
+      ; BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
+      ; BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
     EndProcedure
     
   
   
-  
+    Procedure work()
+      OpenGadgetList(1, 4)
+               ButtonGadget(1210, 0, 565, 215, 30, "Nouvelle Job")
+     ButtonGadget(#jobsave, 0, 595, 215, 30, "Sauvegarder Job")
+     
+     ButtonGadget(1209, 0, 635, 215, 30, "Supprimer Job")
+     
+     ButtonGadget(1211, 0, 445, 215, 25, "punch-in")
+     ButtonGadget(#punchout, 0, 475, 215, 25, "punch-out")
+     
+     
+     TextGadget(1205, 225, 490, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
+      ListViewGadget(#_1208, 225, 510, 200, 170)
+             If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mysql) 
+               
+               IDJOB$ = GetDatabaseString(#mysql, 1)
+               AddGadgetItem(#_1208, -1, ""+IDJOB$)
+               
+                  
+                   
+              Wend 
+              EndIf
+    FinishDatabaseQuery(#mysql)
+    success = #True
+    
+    ;punch()
+    CloseGadgetList()
+    
+              BindGadgetEvent(1210, @newjobentry(), #PB_EventType_LeftClick)
+       BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
+       BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
+                 
+      EndProcedure
    
 
 
@@ -393,101 +616,30 @@ EndProcedure
       
       TextGadget(218, 225, 200, 200, 20, "Menu de Notes", #PB_Text_Border | #PB_Text_Center)
       ButtonGadget(220, 225, 220, 200, 20,"Nouvelle note")
-     ; ButtonGadget(221, 225, 240, 200, 20,"Sauvegardé")
-      
+     
+       ButtonGadget(#_221, 225, 245, 200, 20,"Sauvegardé")
       ButtonGadget(223, 225, 270, 200, 20,"Supprimé")
       
       FinishDatabaseQuery(#mysql)
                  success = #True
-      
-      TextGadget(224, 225, 300, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
-      
-       ListViewGadget(1203, 225, 320, 200, 150)
-              DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
-             While NextDatabaseRow(#mysql) 
-               
-               
-               AddGadgetItem(1203, -1, ""+GetDatabaseString(#mysql, 1))
-               
-                  
-                   
-              Wend 
-             
+
+     
    
-             
-            
-            TextGadget(217, 425, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
-                     FinishDatabaseQuery(#mysql)
-                 success = #True
-               
-               ButtonGadget(1210, 0, 565, 215, 30, "Nouvelle Job")
-     ButtonGadget(#jobsave, 0, 595, 215, 30, "Sauvegarder Job")
-     
-     ButtonGadget(1209, 0, 635, 215, 30, "Supprimer Job")
-     
-     ButtonGadget(1211, 0, 445, 215, 25, "punch-in")
-     ButtonGadget(#punchout, 0, 475, 215, 25, "punch-out")
-     
-     
-     TextGadget(1205, 225, 490, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
-      ListViewGadget(1208, 225, 510, 200, 170)
-             If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
-             While NextDatabaseRow(#mysql) 
-               
-               IDJOB$ = GetDatabaseString(#mysql, 1)
-               AddGadgetItem(1208, -1, "" + IDJOB$)
-               
-                  
-                   
-              Wend 
-              EndIf
-    FinishDatabaseQuery(#mysql)
-                 success = #True
-             
+       ButtonGadget(#_1, 1050, 0, 800, 500, "M")      
            
-     ;TextGadget(1204, 425, 490, 600, 20, "Éditeur de Travaux", #PB_Text_Border | #PB_Text_Center)
-     ;ScrollAreaGadget(1207, 425, 510, 600, 170, 580, 170, 800) 
-     ;ClearGadgetItems(1206)
-    ; EditorGadget(1206, 425, 510, 580, 85, #PB_Gadget_BackColor)
-     ;ClearGadgetItems(12072)
-     ;EditorGadget(12072, 425, 595, 580, 85, #PB_Gadget_BackColor)
-     
-     
-     ; ListViewGadget(1212, 1025, 0, 400, 400)
-           ;  If DatabaseQuery (0, "SELECT * FROM Job")
-           ;  While NextDatabaseRow(#mySql) 
-               
-               
-             ;  AddGadgetItem(1212, -1, "- "+ GetDatabaseString(#mysql, 1))
-               
-           ;   Wend 
-             
-          ;  EndIf
-            
-  ;  FinishDatabaseQuery(#mysql)
-   
-   ; success = #True
-   ; listuser()
-     
-     
      
      CloseGadgetList()
     
-      ;ResizeGadget(950, 225, 540, 800, 400)
-     ; ResizeGadget(524, 0, 20, 780, 60)
-     ;
-     ; ResizeGadget(525, 0, 80, 780, 100)
      
-     ; ResizeGadget(725, 0, 0, 550, 20)
-      
-       ; BindGadgetEvent(426, @logoutHandler())
-        ;BindGadgetEvent(221, @savenotebuttonHandler())
-    
-     BindGadgetEvent(223, @deletenote())
-       BindGadgetEvent(220, @newnotebuttonHandler())
-              ;BindGadgetEvent(1203, @opennoteHandler(), #PB_EventType_LeftClick)
+      ; BindGadgetEvent(#_221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
+       ;BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
+       ;BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
+             
   
- ;BindGadgetEvent(#list, @aWOordertHandler(), #PB_EventType_LeftClick)
+      
+     ;  BindGadgetEvent(1210, @newjobentry())
+      ; BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
+      ; BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
      EndProcedure
      
      
@@ -520,7 +672,24 @@ CloseGadgetList()
 
 OpenGadgetList(1)
 AddGadgetItem(1, -1, "Flottes")
+
+
+
+
+
+
+
+   
+  
+  
+  
+  
+
+  
+  
 CloseGadgetList()
+
+
 
 OpenGadgetList(1)
 AddGadgetItem(1, -1, "Bon de travail")
@@ -682,14 +851,15 @@ AddGadgetItem(1, -1, "Calendar")
          ; LabelUpdate(Folder)
          ; FilesExamine(Folder, Files())
          ; ListLoad(#FilesList, Files())
-        If EventGadget = 1203
+        If EventGadget = #_1203 ;open note
             OpenGadgetList(1, 4)
            
-      DatabaseQuery (0, "SELECT * FROM Note WHERE Notename='"+GetGadgetText(1203)+"'");;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+            DatabaseQuery (0, "SELECT * FROM Note WHERE Notename='"+GetGadgetText(#_1203)+"'")
+            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
        NextDatabaseRow(0) 
-   EditorGadget(117, 425, 220, 600, 250, #PB_Gadget_BackColor)
+   EditorGadget(117, 425, 220, 600, 250)
    AddGadgetItem(117, -1, GetDatabaseString(0, 3))
-    ButtonGadget(221, 225, 245, 200, 20,"Sauvegardé")
+   
   CloseGadgetList()
   EndIf
  ; If eventGadget = 1201
@@ -697,12 +867,54 @@ AddGadgetItem(1, -1, "Calendar")
    ; EndIf
   
   
-    If EventGadget = 1202
-   
+  If EventGadget = 1202
+     OpenGadgetList(1, 4)
+   result5 = GetGadgetState(1200)
+          
+    If result5 = 0
+          Debug "yes"
+          mainwo()
           aWOordertHandler()
-          punch()
+          ;punch()
           listuser()
-        EndIf
+          
+         ElseIf result5 = -1
+          ClearGadgetItems(1200)
+         
+             aWOordertHandler()
+        ;  punch()
+             listuser()
+            
+             
+           
+           
+          
+           EndIf
+             CloseGadgetList()
+           
+         EndIf
+        
+         If EventGadget = 1200
+  ;  ClearGadgetItems(#_1208)
+           ;aWOordertHandler()
+          ; work()
+           
+           punch()
+           work()
+          ;listuser()
+           result6 = GetGadgetState(1202)
+           ElseIf result6 = -1
+             ;ClearGadgetItems(#_1208)
+             ; work()
+             punch()
+             work()
+             Debug "OMG NO!!!"
+         EndIf
+         
+        ; If EventGadget = #_1208
+           ;punch()
+          ; work()
+          ; EndIf
         
 ;         If EventGadget = 1211
        ; ------------------------------------------------------------
@@ -773,7 +985,7 @@ AddGadgetItem(1, -1, "Calendar")
              
    ;If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
     
-   ;query10.s = "INSERT INTO punch (WO, USER, Punchin, nomtravaux) " + "VALUES ('"+GetGadgetText(100)+"', '"+GetGadgetText(1200)+"', '"+ actdate$ + acttime$ +"', '"+GetGadgetText(1208)+"')"
+   ;query10.s = "INSERT INTO punch (WO, USER, Punchin, nomtravaux) " + "VALUES ('"+GetGadgetText(100)+"', '"+GetGadgetText(1200)+"', '"+ actdate$ + acttime$ +"', '"+GetGadgetText(#_1208)+"')"
   
   ; update the database with the literal prepared query and confirm the write
   ;If DatabaseUpdate(0, query10)
@@ -821,7 +1033,7 @@ second.s = "%ss"
     
          If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
      
-           query11.s = "UPDATE punch SET punchout=('"+time+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(100)+"', '"+GetGadgetText(1200)+"', '"+GetGadgetText(1208)+"')"
+           query11.s = "UPDATE punch SET punchout=('"+time+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(100)+"', '"+GetGadgetText(1200)+"', '"+GetGadgetText(#_1208)+"')"
   
   ; update the database With the literal prepared query And confirm the write
   If DatabaseUpdate(0, query11)
@@ -848,114 +1060,14 @@ EndIf
         
          
         
-        If EventGadget = 1209
-           
-    If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
-      Query.s = "DELETE FROM Job WHERE Jobname = '"+GetGadgetText(1208)+"'"
-      DatabaseUpdate(0, query)
-    
-   
-
-  FinishDatabaseQuery(0)
-  
- MessageRequester("job supprimé!", "job supprimé!",  #PB_MessageRequester_Info)
- 
- ListViewGadget(1208, 225, 510, 200, 170)
-             If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
-             While NextDatabaseRow(#mySql) 
-               
-               IDJOB$ = GetDatabaseString(#mySql, 1)
-               AddGadgetItem(1208, -1, "" + IDJOB$)
-               
-                  
-                   
-              Wend 
-             
-   
-             
-            EndIf
-            
- 
-EndIf
-
-    
-          EndIf
+       
         
         
-        If EventGadget = #jobsave
-          
-          Debug "editor window saved"
-    
-    
-     If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
-    
-   
+       
+        
+        
      
-               
-       query3.s = "UPDATE Job SET jobinfo='"+GetGadgetText(1206)+"' WHERE Jobname='"+GetGadgetText(1208)+"'"
-       query2.s = "UPDATE Job SET jobrepport='"+GetGadgetText(12072)+"' WHERE Jobname='"+GetGadgetText(1208)+"'"
-  
-  ; update the database with the literal prepared query and confirm the write
-       DatabaseUpdate(0, query3)
-       DatabaseUpdate(0, query2)
-    
-   
 
-  FinishDatabaseQuery(0)
-  
- MessageRequester("job "+GetGadgetText(1205)+" Sauvegardée", "job "+GetGadgetText(1205)+" Sauvegardée",  #PB_MessageRequester_Info)
-  
-  EndIf
-         
-        EndIf
-        
-        
-        
-        If EventGadget = 1210
-          Text200$ = InputRequester("nouvelle job", "Veuillez entrer le nom de la nouvelle job", "")
-          Text201$ = InputRequester("Info job", "Veuillez entrer les information sur les travaux", "")
-          
-          
-   If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
-     DatabaseQuery (0, "SELECT * FROM Job")
-   query.s = "INSERT INTO Job (Jobname, jobinfo, WO)" + "VALUES ('"+Text200$+"', '"+Text201$+"', '"+GetGadgetText(100)+"')"
-  
-  ; update the database with the literal prepared query and confirm the write
-  If DatabaseUpdate(0, query)
-    
-    Debug "data successfully inserted."
-
-  Else
-    
-    Debug "error inserting data! " + DatabaseError()
-    
-  EndIf
-
-  ; close the database file
-  
-  
-Else
-  
-  Debug "error opening database! " + DatabaseError()
-  
-EndIf
-
-ListViewGadget(1208, 225, 510, 200, 170)
-             If DatabaseQuery (0, "SELECT * FROM Job")
-             While NextDatabaseRow(#mySql) 
-               
-               IDJOB$ = GetDatabaseString(#mySql, 1)
-               AddGadgetItem(1208, -1, "" + IDJOB$)
-               
-                  
-                   
-              Wend 
-             
-   
-             
-            EndIf
-           
-        EndIf
         
         
         
@@ -1007,11 +1119,11 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
         
         
         
-        If EventGadget = 1208
+        If EventGadget = #_1208 ;joblist
              OpenGadgetList(1, 4)
     If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
       Debug "Connecté à Mech-Logia.sqlite Note DB"
-      DatabaseQuery (0, "SELECT * FROM Job WHERE Jobname='"+GetGadgetText(1208)+"'")
+      DatabaseQuery (0, "SELECT * FROM Job WHERE Jobname='"+GetGadgetText(#_1208)+"'")
       NextDatabaseRow(0) 
        EndIf
      TextGadget(1204, 425, 490, 600, 20, "Editeur de Travaux", #PB_Text_Border | #PB_Text_Center)
@@ -1030,28 +1142,7 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
    CloseGadgetList()
  EndIf
  
- If GadgetEvent = 221
-     Debug "editor window saved"
-    
-    
-     If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
-    
-   
-     
-               
-    query.s = "UPDATE Note SET Content='"+GetGadgetText(117)+"' WHERE Notename='"+GetGadgetText(1203)+"'"
-  
-  ; update the database with the literal prepared query and confirm the write
-  DatabaseUpdate(0, query)
-    
-   
 
-  FinishDatabaseQuery(0)
-  
- MessageRequester("Note "+GetGadgetText(1203)+" Sauvegardée", "Note "+GetGadgetText(1203)+" Sauvegardée",  #PB_MessageRequester_Info)
-  
-  EndIf
-   EndIf
  ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         If EventGadget = 852
           
@@ -1108,9 +1199,9 @@ EndIf
 
 ;main()
 ; IDE Options = PureBasic 6.03 LTS (Linux - x64)
-; CursorPosition = 1026
-; FirstLine = 1003
-; Folding = --
+; CursorPosition = 627
+; FirstLine = 612
+; Folding = ---
 ; EnableXP
 ; DPIAware
 ; UseIcon = icon.ico
