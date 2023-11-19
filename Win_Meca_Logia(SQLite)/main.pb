@@ -4,9 +4,9 @@ UseSQLiteDatabase()
 
 Enumeration
       #PageWO
-      
-     
-      
+      #popmenu
+      #puncon
+      #workcon
       
       #job
       
@@ -21,7 +21,7 @@ Enumeration
     #_221
 #_1203
       #jobsave
-     
+     #contwo
       #frame1
     
       #punchout
@@ -352,8 +352,23 @@ ElseIf result10 = -1
   EndIf 
 
     
- EndProcedure
- 
+EndProcedure
+
+
+Procedure opennote()
+  OpenGadgetList(1, 4)
+  OpenGadgetList(#contwo, 0)
+  
+    DatabaseQuery (0, "SELECT * FROM Note WHERE Notename='"+GetGadgetText(#_1203)+"'")
+        
+      NextDatabaseRow(0) 
+  EditorGadget(117, 200, 220, 600, 240)
+  AddGadgetItem(117, -1, GetDatabaseString(0, 3))
+   
+  CloseGadgetList()
+  CloseGadgetList()
+  
+EndProcedure
  
  
 
@@ -366,99 +381,9 @@ Procedure closewindowHandler()
     
   
    
-    Procedure listuser()
-      
-      
- OpenGadgetList(1, 4)
-  
+   
+    
 
- 
- 
-  ButtonGadget(950, 0, 140, 215, 20," Liste Employer")
-   ListViewGadget(1200, 0, 160, 215, 100) 
-    
-  If DatabaseQuery (0, "SELECT * FROM User")
-  
-    While NextDatabaseRow(#mysql)       
-      AddGadgetItem(1200, -1, "" + GetDatabaseString(#mysql, 1))
-      
-    Wend 
-   
-    FinishDatabaseQuery(#mysql)
-   
-    success = #True
-
-  EndIf
-  
-  
-  TextGadget(224, 225, 300, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
-      
-      
-       ListViewGadget(#_1203, 225, 320, 200, 150)
-            If  DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
-             While NextDatabaseRow(#mysql) 
-               
-               
-               AddGadgetItem(#_1203, -1, ""+GetDatabaseString(#mysql, 1))
-               
-                  
-                   
-              Wend 
-             
-   EndIf
-             
-            
-   TextGadget(217, 425, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
-    EditorGadget(117, 425, 220, 600, 250)
-                     FinishDatabaseQuery(#mysql)
-                 success = #True
-               
-             
-           
-     
-     CloseGadgetList()
-    
-     
-       BindGadgetEvent(#_221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
-       BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
-       BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
-             
-  
-      
-    
-     
-      
-     
-    EndProcedure
-    
-  
-    Procedure punch()
-      OpenGadgetList(1, 4)
-      
- 
- 
-  ButtonGadget(951, 0, 320, 215, 20," Liste des Punch par WO")
-   ListViewGadget(1212, 0, 340, 215, 100) 
-    
-  If DatabaseQuery (0, "SELECT * FROM punch WHERE WO='"+GetGadgetText(100)+"'")
-  
-    While NextDatabaseRow(#mysql)       
-      AddGadgetItem(1212, -1, "" + GetDatabaseString(#mysql, 0) + " - " + GetDatabaseString(#mysql, 2) + "   " + GetDatabaseString(#mysql, 5))
-      
-    Wend 
-   
-    FinishDatabaseQuery(#mysql)
-   
-    success = #True
-
-  EndIf
-  
-  
-                 
-                ;    BindGadgetEvent(1210, @newjobentry(), #PB_EventType_LeftClick)
-      ; BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
-      ; BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
-    EndProcedure
     
   
   
@@ -474,7 +399,7 @@ Procedure closewindowHandler()
      
      
      TextGadget(1205, 225, 490, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
-      ListViewGadget(#_1208, 225, 510, 200, 170)
+      ListViewGadget(#_1208, 225, 510, 200, 140)
              If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
              While NextDatabaseRow(#mysql) 
                
@@ -505,6 +430,11 @@ Procedure closewindowHandler()
   
 Procedure mainwo()
   OpenGadgetList(1, 4)
+  
+  
+
+  
+  
   ButtonGadget(402, 0, 0, 215, 40," Liste Bon de travail")
   
    ListViewGadget(1202, 0, 40, 215, 100) 
@@ -565,81 +495,199 @@ EndProcedure
       
     
       
-                                
+         ContainerGadget(#contwo, 220, 0, 800, 700)                       
       
       
-      TextGadget(200, 225 , 0, 200, 20, "Bon de Travail #", #PB_Text_Border | #PB_Text_Center)
-      TextGadget(100, 225   , 20, 200, 30, "" + GetGadgetText(1202), #PB_Text_Border | #PB_Text_Center)
+      TextGadget(200, 0, 0, 200, 20, "Bon de Travail #", #PB_Text_Border | #PB_Text_Center)
+      TextGadget(100, 0, 20, 200, 30, "" + GetGadgetText(1202), #PB_Text_Border | #PB_Text_Center)
       
-       TextGadget(201, 425 , 0, 200, 20, "# Série (VIN)", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(101, 425 , 20, 200, 30, "")
+       TextGadget(201, 200 , 0, 200, 20, "# Série (VIN)", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(101, 200 , 20, 200, 30, "")
       
-      TextGadget(202, 625 , 0, 200, 20, "Année", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(102, 625 , 20, 200, 30, "")
+      TextGadget(202, 400 , 0, 200, 20, "Année", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(102, 400 , 20, 200, 30, "")
       
-      TextGadget(203, 825 , 0, 200, 20, "Model", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(103, 825 , 20, 200, 30, "")
+      TextGadget(203, 600 , 0, 200, 20, "Model", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(103, 600 , 20, 200, 30, "")
       
-      TextGadget(204, 225 , 50, 200, 20, "# Unité", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(104, 225   , 70, 200, 30, "")
+      TextGadget(204, 0 , 50, 200, 20, "# Unité", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(104, 0   , 70, 200, 30, "")
       
-      TextGadget(205, 425 , 50, 200, 20, "Kilométrages", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(105, 425 , 70, 200, 30, "")
+      TextGadget(205, 200 , 50, 200, 20, "Kilométrages", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(105, 200 , 70, 200, 30, "")
       
-      TextGadget(206, 625 ,50, 200, 20, "Heures", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(106, 625 , 70, 200, 30, "")
+      TextGadget(206, 400 ,50, 200, 20, "Heures", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(106, 400 , 70, 200, 30, "")
       
-      TextGadget(207, 825 , 50, 200, 20, "Date", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(107, 825 , 70, 200, 30, "")
+      TextGadget(207, 600 , 50, 200, 20, "Date", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(107, 600 , 70, 200, 30, "")
       
-      TextGadget(208, 225 , 100, 200, 20, "Prochaine Maintenance", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(108, 225   , 120, 200, 30, "")
+      TextGadget(208, 0 , 100, 200, 20, "Prochaine Maintenance", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(108, 0, 120, 200, 30, "")
       
-      TextGadget(209, 425 , 100, 200, 20, "Date Prochaine INSP. SAAQ // P.E.P", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(109, 425 , 120, 200, 30, "")
+      TextGadget(209, 200, 100, 200, 20, "Date Prochaine INSP. SAAQ // P.E.P", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(109, 200, 120, 200, 30, "")
       
-      TextGadget(210, 625 , 100, 200, 20, "Date Fin Garantie", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(110, 625 , 120, 200, 30, "")
+      TextGadget(210, 400, 100, 200, 20, "Date Fin Garantie", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(110, 400, 120, 200, 30, "")
       
-      TextGadget(211, 825 , 100, 200, 20, "Imatriculation", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(111, 825 , 120, 200, 30, "")
+      TextGadget(211, 600, 100, 200, 20, "Imatriculation", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(111, 600, 120, 200, 30, "")
       
-      TextGadget(212, 225 , 150, 200, 20, "Nom Propriétaire", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(112, 225   , 170, 200, 30, "")
+      TextGadget(212, 0 , 150, 200, 20, "Nom Propriétaire", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(112, 0, 170, 200, 30, "")
       
-      TextGadget(213, 425 , 150, 200, 20, "Addresse Propriétaire", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(113, 425 , 170, 200, 30, "")
+      TextGadget(213, 200, 150, 200, 20, "Addresse Propriétaire", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(113, 200, 170, 200, 30, "")
       
-      TextGadget(214, 625 , 150, 200, 20, "Addresse du Vehicule (Home)", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(114, 625 , 170, 200, 30, "")
+      TextGadget(214, 400, 150, 200, 20, "Addresse du Vehicule (Home)", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(114, 400, 170, 200, 30, "")
       
-      TextGadget(215, 825, 150, 200, 20, "Mot de passe 'ECM'", #PB_Text_Border | #PB_Text_Center)
-      StringGadget(115, 825 , 170, 200, 30, "")
+      TextGadget(215, 600, 150, 200, 20, "Mot de passe 'ECM'", #PB_Text_Border | #PB_Text_Center)
+      StringGadget(115, 600, 170, 200, 30, "")
       
-      TextGadget(218, 225, 200, 200, 20, "Menu de Notes", #PB_Text_Border | #PB_Text_Center)
-      ButtonGadget(220, 225, 220, 200, 20,"Nouvelle note")
+      TextGadget(218, 0, 200, 200, 20, "Menu de Notes", #PB_Text_Border | #PB_Text_Center)
+      ButtonGadget(220, 0, 220, 200, 20,"Nouvelle note")
      
-       ButtonGadget(#_221, 225, 245, 200, 20,"Sauvegardé")
-      ButtonGadget(223, 225, 270, 200, 20,"Supprimé")
+       ButtonGadget(#_221, 0, 245, 200, 20,"Sauvegardé")
+       ButtonGadget(223, 0, 270, 200, 20,"Supprimé")
+       
+       
+        TextGadget(224, 0, 300, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
       
+      
+       ListViewGadget(#_1203, 0, 320, 200, 140)
+            If  DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mysql) 
+               
+               
+               AddGadgetItem(#_1203, -1, ""+GetDatabaseString(#mysql, 1))
+               
+                  
+                   
+              Wend 
+             
+   EndIf
+             
+            
+   TextGadget(217, 200, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
+   EditorGadget(117, 200, 220, 600, 240)
+   
+   
+   
+ 
+                   
       FinishDatabaseQuery(#mysql)
                  success = #True
 
      
    
-     
      CloseGadgetList()
+    
     
      
       ; BindGadgetEvent(#_221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
        ;BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
        ;BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
              
-  
+  BindGadgetEvent(#_1203, @opennote(), #PB_EventType_LeftClick)
       
      ;  BindGadgetEvent(1210, @newjobentry())
       ; BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
       ; BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
+  
+  
+  
+  OpenGadgetList(1, 4)
+
+ If ContainerGadget(#puncon, 0, 140, 215, 160)
+  
+      
+ 
+ 
+  ButtonGadget(951, 0, 0, 215, 20," Liste des Punch par WO")
+   ListViewGadget(1212, 0, 20, 215, 140) 
+    
+  If DatabaseQuery (0, "SELECT * FROM punch WHERE WO='"+GetGadgetText(100)+"'")
+  
+    While NextDatabaseRow(#mysql)       
+      AddGadgetItem(1212, -1, "" + GetDatabaseString(#mysql, 0) + " - " + GetDatabaseString(#mysql, 2) + "   " + GetDatabaseString(#mysql, 5))
+      
+    Wend 
+   
+    FinishDatabaseQuery(#mysql)
+   
+    success = #True
+CloseGadgetList()
+  EndIf
+  
+  
+  EndIf
+  
+  
+  CloseGadgetList()
+  
+  OpenGadgetList(1, 4)
+
+  If ContainerGadget(#workcon, 0, 300, 215, 160)
+  
+  
+  
+  
+  
+     
+     ;ButtonGadget(1211, 0, 445, 215, 25, "punch-in")
+    ; ButtonGadget(#punchout, 0, 475, 215, 25, "punch-out")
+     
+     
+     TextGadget(1205, 0, 0, 215, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
+      ListViewGadget(#_1208, 0, 20, 215, 140)
+             If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mysql) 
+               
+               IDJOB$ = GetDatabaseString(#mysql, 1)
+               AddGadgetItem(#_1208, -1, ""+IDJOB$)
+               
+                  
+                   
+              Wend 
+              EndIf
+    FinishDatabaseQuery(#mysql)
+    success = #True
+    
+   
+    CloseGadgetList()
+    
+      EndIf
+  
+  CloseGadgetList()
+  
+  
+  
+ 
+  
+  
+    OpenGadgetList(1, 4)
+  ButtonGadget(1210, 0, 460, 215, 30, "Nouvelle Job")
+  ButtonGadget(#jobsave, 0, 495, 215, 30, "Sauvegarder Job")
+  ButtonGadget(1209, 0, 530, 215, 30, "Supprimer Job")
+  
+  ButtonGadget(1252, 0, 570, 215, 30, "Créé 'WO'")
+  ButtonGadget(1251, 0, 605, 215, 30, "Créé 'Custom WO'")
+  ButtonGadget(1250, 0, 640, 215, 30, "Supprimer 'WO'")
+  
+  ButtonGadget(1253, 0, 675, 215, 30, "Info Punch par 'WO'")
+  
+       BindGadgetEvent(1210, @newjobentry(), #PB_EventType_LeftClick)
+       BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
+       BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
+       
+  
+  
+  
+  
+   CloseGadgetList()
+  
      EndProcedure
      
      
@@ -649,7 +697,7 @@ EndProcedure
    
 #FenetrePrincipale = 0
 
-  If OpenWindow(#FenetrePrincipale, 0, 0, 1900, 1000, "Mech-Logia", #PB_Window_TitleBar |  #PB_Window_MinimizeGadget | #PB_Window_SystemMenu |  #PB_Window_SizeGadget | #PB_Window_ScreenCentered)
+  If OpenWindow(#FenetrePrincipale, 0, 0, 1024, 768, "Mech-Logia", #PB_Window_TitleBar |  #PB_Window_MinimizeGadget | #PB_Window_SystemMenu |  #PB_Window_SizeGadget | #PB_Window_ScreenCentered)
    
     panel1 = PanelGadget(1, 0, 10, 1900, 980)
     
@@ -734,20 +782,7 @@ AddGadgetItem(1, -1, "Calendar")
      TextGadget(726, 100, 0, 100, 20, "heya")
      CloseGadgetList()
      
-      OpenGadgetList(1)
-    AddGadgetItem(1, -1, "Catalogues des pieces")
-     TextGadget(726, 100, 0, 100, 20, "heya")
-     CloseGadgetList()
-     
-      OpenGadgetList(1)
-    AddGadgetItem(1, -1, "Les liens et informations utiles")
-     TextGadget(726, 100, 0, 100, 20, "heya")
-     CloseGadgetList()
-     
-     OpenGadgetList(1)
-    AddGadgetItem(1, -1, "Boite à outils")
-     TextGadget(726, 100, 0, 100, 20, "heya")
-    CloseGadgetList()
+    
     
       ;/////////////////////////////////////////////////////////////////////////////////////////////////////////menu/////////////////////////menu///////////////////////////////////menu///////////////////////////////
    
@@ -843,6 +878,7 @@ AddGadgetItem(1, -1, "Calendar")
     
     ; Take some action.
     Select Event
+        
       Case #PB_Event_Gadget
         ; A gadget event occurred.
       ;  If EventGadget = #FolderButton
@@ -851,17 +887,24 @@ AddGadgetItem(1, -1, "Calendar")
          ; LabelUpdate(Folder)
          ; FilesExamine(Folder, Files())
          ; ListLoad(#FilesList, Files())
-        If EventGadget = #_1203 ;open note
-            OpenGadgetList(1, 4)
-           
-            DatabaseQuery (0, "SELECT * FROM Note WHERE Notename='"+GetGadgetText(#_1203)+"'")
-            ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-       NextDatabaseRow(0) 
-   EditorGadget(117, 425, 220, 600, 250)
-   AddGadgetItem(117, -1, GetDatabaseString(0, 3))
+        
+        ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+        
+       ; If EventGadget = #_1203 ;open note
+          
+          ; OpenGadgetList(1, 4)
+         
+           ;
+          ;  DatabaseQuery (0, "SELECT * FROM Note WHERE Notename='"+GetGadgetText(#_1203)+"'")
+        
+      ; NextDatabaseRow(0) 
+ ;  EditorGadget(117, 225, 220, 600, 250)
+ ;  AddGadgetItem(117, -1, GetDatabaseString(0, 3))
    
-  CloseGadgetList()
-  EndIf
+ ; CloseGadgetList()
+ ; EndIf
+        
+        
  ; If eventGadget = 1201
    ; loguserHandler()
    ; EndIf
@@ -876,14 +919,15 @@ AddGadgetItem(1, -1, "Calendar")
           mainwo()
           aWOordertHandler()
           ;punch()
-          listuser()
+          ; work()
+          
           
          ElseIf result5 = -1
           ClearGadgetItems(1200)
          
              aWOordertHandler()
         ;  punch()
-             listuser()
+             
             
              
            
@@ -894,22 +938,7 @@ AddGadgetItem(1, -1, "Calendar")
            
          EndIf
         
-         If EventGadget = 1200
-  ;  ClearGadgetItems(#_1208)
-           ;aWOordertHandler()
-          ; work()
-           
-           punch()
-           work()
-          ;listuser()
-           result6 = GetGadgetState(1202)
-           ElseIf result6 = -1
-             ;ClearGadgetItems(#_1208)
-             ; work()
-             punch()
-             work()
-             Debug "OMG NO!!!"
-         EndIf
+    
          
         ; If EventGadget = #_1208
            ;punch()
@@ -1198,9 +1227,9 @@ EndIf
 
 
 ;main()
-; IDE Options = PureBasic 6.03 LTS (Windows - x86)
-; CursorPosition = 1133
-; FirstLine = 1101
+; IDE Options = PureBasic 6.03 LTS (Windows - x64)
+; CursorPosition = 364
+; FirstLine = 354
 ; Folding = ---
 ; EnableXP
 ; DPIAware
