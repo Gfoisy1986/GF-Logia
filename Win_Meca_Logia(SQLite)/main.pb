@@ -6,6 +6,7 @@ Enumeration
       #PageWO
       #popmenu
       #puncon
+      #punchin
       #workcon
       
       #job
@@ -235,7 +236,7 @@ EndIf
           Text201$ = InputRequester("Info job", "Veuillez entrer les information sur les travaux", "")
           
           
-   If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+   If  OpenDatabase(0, "Mech-Logia.sqlite", "", "")
      DatabaseQuery (0, "SELECT * FROM Job")
    query.s = "INSERT INTO Job (Jobname, jobinfo, WO)" + "VALUES ('"+Text200$+"', '"+Text201$+"', '"+GetGadgetText(100)+"')"
   
@@ -259,24 +260,99 @@ Else
   
 EndIf
 
-ListViewGadget(#_1208, 225, 510, 200, 170)
-            If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
-            While NextDatabaseRow(#mySql) 
-               
-              IDJOB$ = GetDatabaseString(#mySql, 1)
-              AddGadgetItem(#_1208, -1, "" + IDJOB$)
-               
-                  
-                   
-             Wend 
-             
+
+
+  If ContainerGadget(#workcon, 0, 300, 215, 160)
+  
+  
+  
+  
+  
    
-             
-           EndIf
-           CloseGadgetList()
+
+     ;ButtonGadget(1211, 0, 445, 215, 25, "punch-in")
+    ; ButtonGadget(#punchout, 0, 475, 215, 25, "punch-out")
+     
+     
+     TextGadget(1205, 0, 0, 215, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
+      ListViewGadget(#_1208, 0, 20, 215, 140)
+             If DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mysql) 
+               
+               IDJOB$ = GetDatabaseString(#mysql, 1)
+               AddGadgetItem(#_1208, -1, ""+IDJOB$+"")
+               
+       
+                   
+              Wend 
+              EndIf
+    FinishDatabaseQuery(#mysql)
+    success = #True
+    
+   
+    CloseGadgetList()
+    
+      EndIf
+  
+  CloseGadgetList()
+
+
  EndProcedure
-          
  
+ 
+ 
+ Procedure joblist()
+   
+   
+       OpenGadgetList(1, 4)
+  OpenGadgetList(#contwo)
+  
+
+      If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+     DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetDatabaseLong(#mysql, 6)+"'")
+      NextDatabaseRow(0) 
+ EndIf
+    TextGadget(1204, 0, 460, 800, 20, "Editeur de Travaux", #PB_Text_Border | #PB_Text_Center)
+    TextGadget(1254, 0, 480, 800, 60, ""+GetDatabaseString(#mysql, 2)+"", #PB_Text_Border | #PB_Text_Center)
+    
+    
+    
+ 
+     EditorGadget(1207, 0, 540, 800, 165)
+    AddGadgetItem(1207, -1, GetDatabaseString(0, 3))
+    
+    
+   CloseGadgetList()
+  
+  
+ 
+   CloseGadgetList()
+   
+    OpenGadgetList(1, 4)
+  OpenGadgetList(#contwo)
+  
+
+       If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+     DatabaseQuery (0, "SELECT * FROM Job WHERE (WO, Jobname)=('"+GetGadgetText(100)+"', '"+GetGadgetText(#_1208)+"')")
+      NextDatabaseRow(0) 
+ EndIf
+    TextGadget(1204, 0, 460, 800, 20, "Editeur de Travaux", #PB_Text_Border | #PB_Text_Center)
+    TextGadget(1254, 0, 480, 800, 60, ""+GetDatabaseString(#mysql, 2)+"", #PB_Text_Border | #PB_Text_Center)
+    
+    
+    
+ 
+     EditorGadget(1207, 0, 540, 800, 165)
+    AddGadgetItem(1207, -1, GetDatabaseString(0, 3))
+    
+    
+   CloseGadgetList()
+  
+  
+  CloseGadgetList()
+
+   
+ EndProcedure  
  
  Procedure deljobentry()
     OpenGadgetList(1, 4)
@@ -595,24 +671,25 @@ EndProcedure
      ;  BindGadgetEvent(1210, @newjobentry())
       ; BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
       ; BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
-  
+ 
   
   
   OpenGadgetList(1, 4)
 
  If ContainerGadget(#puncon, 0, 140, 215, 160)
-  
-       LoadImage(100, "punchin.bmp") 
+   If DatabaseQuery (0, "SELECT * FROM punch  WHERE (WO)=('"+GetGadgetText(100)+"')")
+   LoadImage(100, "punchin.bmp") 
+   TextGadget(#PB_Any, 85, 140, 45, 20, ""+GetDatabaseString(#mysql, 7)+"")
        LoadImage(101, "punchout.bmp") 
  
   ButtonGadget(951, 0, 0, 215, 20," Liste des Punch par WO")
   ListViewGadget(1212, 0, 20, 215, 120) 
-  ImageGadget(#PB_Any, 50, 140, 25, 20, ImageID(100))
-  ImageGadget(#PB_Any, 140, 140, 25, 20, ImageID(101))
+  ImageGadget(#punchin, 50, 140, 25, 20, ImageID(100))
+  ImageGadget(#punchout, 140, 140, 25, 20, ImageID(101))
   If DatabaseQuery (0, "SELECT * FROM punch WHERE WO='"+GetGadgetText(100)+"'")
   
     While NextDatabaseRow(#mysql)       
-      AddGadgetItem(1212, -1, "" + GetDatabaseString(#mysql, 0) + " - " + GetDatabaseString(#mysql, 2) + "   " + GetDatabaseString(#mysql, 5))
+      AddGadgetItem(1212, -1, ""+ GetDatabaseString(#mysql, 0) +" - " + "   "+ GetDatabaseString(#mysql, 5) +"  "+ GetDatabaseString(#mysql, 7) +" ")
       
     Wend 
    
@@ -624,6 +701,7 @@ CloseGadgetList()
   
   
   EndIf
+  
   
   
   CloseGadgetList()
@@ -663,7 +741,7 @@ CloseGadgetList()
       EndIf
   
   CloseGadgetList()
-  
+  BindGadgetEvent(#_1208, @joblist(), #PB_EventType_LeftClick)
   
   
  OpenGadgetList(1, 4)
@@ -711,7 +789,7 @@ CloseGadgetList()
   
   
    CloseGadgetList()
-  
+  EndIf
      EndProcedure
      
      
@@ -1056,7 +1134,9 @@ AddGadgetItem(1, -1, "Calendar")
         
         
         
-        
+         If EventGadget = #punchin
+           
+         EndIf
         
         
        If EventGadget = #punchout
@@ -1165,31 +1245,7 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
         
         ;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
-        If EventGadget = #_1208 ;joblist
-       OpenGadgetList(1, 4)
-  OpenGadgetList(#contwo)
-  
-
-      If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
-     DatabaseQuery (0, "SELECT * FROM Job")
-      NextDatabaseRow(0) 
- EndIf
-    TextGadget(1204, 0, 460, 800, 20, "Editeur de Travaux", #PB_Text_Border | #PB_Text_Center)
-    TextGadget(1254, 0, 480, 800, 60, ""+GetDatabaseString(#mysql, 1)+"", #PB_Text_Border | #PB_Text_Center)
-    
-    
-    
- 
-     EditorGadget(1207, 0, 540, 800, 165)
-    AddGadgetItem(1207, -1, GetDatabaseString(0, 3))
-    
-    
-   CloseGadgetList()
-  
-  
- 
-CloseGadgetList()
- EndIf
+       
  
 
  ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1248,8 +1304,8 @@ EndIf
 
 ;main()
 ; IDE Options = PureBasic 6.03 LTS (Windows - x64)
-; CursorPosition = 610
-; FirstLine = 588
+; CursorPosition = 335
+; FirstLine = 314
 ; Folding = ---
 ; EnableXP
 ; DPIAware
