@@ -391,40 +391,10 @@ Procedure closewindowHandler()
   EndIf
   
   
-  TextGadget(224, 225, 300, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
-      
-      
-       ListViewGadget(#_1203, 225, 320, 200, 150)
-            If  DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
-             While NextDatabaseRow(#mysql) 
-               
-               
-               AddGadgetItem(#_1203, -1, ""+GetDatabaseString(#mysql, 1))
-               
-                  
-                   
-              Wend 
-             
-   EndIf
-             
-            
-   TextGadget(217, 425, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
-    EditorGadget(117, 425, 220, 600, 250)
-                     FinishDatabaseQuery(#mysql)
-                 success = #True
-               
-             
-           
-     
-     CloseGadgetList()
-    
-     
-       BindGadgetEvent(#_221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
-       BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
-       BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
+  
              
   
-      
+        CloseGadgetList()
     
      
       
@@ -625,12 +595,46 @@ EndProcedure
       FinishDatabaseQuery(#mysql)
                  success = #True
 
+     TextGadget(224, 225, 300, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
+      
+      
+       ListViewGadget(#_1203, 225, 320, 200, 150)
+            If  DatabaseQuery (0, "SELECT * FROM Note WHERE Wo='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mysql) 
+               
+               
+               AddGadgetItem(#_1203, -1, ""+GetDatabaseString(#mysql, 1))
+               
+                  
+                   
+              Wend 
+             
+   EndIf
+             
+            
+   TextGadget(217, 425, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
+    EditorGadget(117, 425, 220, 600, 250)
+                     FinishDatabaseQuery(#mysql)
+                 success = #True
+               
+             
+           
      
+   
+    
+     
+      
    
      
      CloseGadgetList()
     
      
+     
+      BindGadgetEvent(#_221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
+       BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
+       BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
+       
+       
       ; BindGadgetEvent(#_221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
        ;BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
        ;BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
@@ -869,27 +873,20 @@ AddGadgetItem(1, -1, "Calendar")
   
   If EventGadget = 1202
      OpenGadgetList(1, 4)
-   result5 = GetGadgetState(1200)
+   
           
-    If result5 = 0
+    
           Debug "yes"
-          mainwo()
+          ;mainwo()
           aWOordertHandler()
+          work()
+          
           ;punch()
-          listuser()
-          
-         ElseIf result5 = -1
-          ClearGadgetItems(1200)
+          ;listuser()
          
-             aWOordertHandler()
-        ;  punch()
-             listuser()
-            
-             
-           
-           
+        
           
-           EndIf
+          
              CloseGadgetList()
            
          EndIf
@@ -1198,9 +1195,9 @@ EndIf
 
 
 ;main()
-; IDE Options = PureBasic 6.03 LTS (Linux - x64)
-; CursorPosition = 1133
-; FirstLine = 1117
+; IDE Options = PureBasic 6.04 beta 2 LTS (Linux - x64)
+; CursorPosition = 882
+; FirstLine = 867
 ; Folding = ---
 ; EnableXP
 ; DPIAware
