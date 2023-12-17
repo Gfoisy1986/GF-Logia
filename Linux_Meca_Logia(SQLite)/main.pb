@@ -6,10 +6,10 @@ Enumeration
       #PageWO
       
      
-      
-      
+      #p14
+      #p13
       #job
-      
+      #p12
       #mysql = 0
       #close
       #File
@@ -366,81 +366,62 @@ Procedure closewindowHandler()
     
   
    
-    Procedure listuser()
-      
-      
- OpenGadgetList(1, 4)
-  
-
- 
- 
-  ButtonGadget(950, 0, 140, 215, 20," Liste Employer")
-   ListViewGadget(1200, 0, 160, 215, 100) 
-    
-  If DatabaseQuery (0, "SELECT * FROM User")
-  
-    While NextDatabaseRow(#mysql)       
-      AddGadgetItem(1200, -1, "" + GetDatabaseString(#mysql, 1))
-      
-    Wend 
    
-    FinishDatabaseQuery(#mysql)
-   
-    success = #True
-
-  EndIf
-  
-  
-  
-             
-  
-        CloseGadgetList()
-    
-     
-      
-     
-    EndProcedure
-    
-  
     Procedure punch()
       OpenGadgetList(1, 4)
       
- 
- 
-  ButtonGadget(951, 0, 320, 215, 20," Liste des Punch par WO")
-   ListViewGadget(1212, 0, 340, 215, 100) 
-    
-  If DatabaseQuery (0, "SELECT * FROM punch WHERE WO='"+GetGadgetText(100)+"'")
-  
-    While NextDatabaseRow(#mysql)       
-      AddGadgetItem(1212, -1, "" + GetDatabaseString(#mysql, 0) + " - " + GetDatabaseString(#mysql, 2) + "   " + GetDatabaseString(#mysql, 5))
+      TextGadget(#p12, 0, 160, 215, 40, "Punch > WO",  #PB_Text_Border | #PB_Text_Center)
       
-    Wend 
+      FrameGadget(#p13, 0, 200, 215, 200, "")
+              DatabaseQuery (0, "SELECT * FROM Job WHERE WO='"+GetGadgetText(100)+"'")
+             While NextDatabaseRow(#mysql) 
+               
+               ID1$ = GetDatabaseString(#mysql, 0)
+               ButtonGadget(#PB_Any, 0, 0, 20, 20, ""+ID1)
+               
+                  
+                   
+              Wend 
+             
    
-    FinishDatabaseQuery(#mysql)
-   
-    success = #True
-
-  EndIf
-  
-  
-                 
-                ;    BindGadgetEvent(1210, @newjobentry(), #PB_EventType_LeftClick)
-      ; BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
-      ; BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
+    
+      CloseGadgetList()
     EndProcedure
+  
+   
     
   
   
     Procedure work()
       OpenGadgetList(1, 4)
+      
+      
+  
+     TextGadget(1204, 425, 490, 600, 20, "Editeur de Travaux", #PB_Text_Border | #PB_Text_Center)
+    
+    
+   
+
+    EditorGadget(1206, 425, 510, 600, 85)
+    AddGadgetItem(1206, -1, GetDatabaseString(0, 2))
+ 
+     EditorGadget(1207, 425, 595, 600, 85)
+     
+    AddGadgetItem(1207, -1, GetDatabaseString(0, 3))
+    
+    
+  
+      
+      
+      
+      ClearGadgetItems(1206)
+      ClearGadgetItems(1207)
                ButtonGadget(1210, 0, 565, 215, 30, "Nouvelle Job")
      ButtonGadget(#jobsave, 0, 595, 215, 30, "Sauvegarder Job")
      
      ButtonGadget(1209, 0, 635, 215, 30, "Supprimer Job")
      
-     ButtonGadget(1211, 0, 445, 215, 25, "punch-in")
-     ButtonGadget(#punchout, 0, 475, 215, 25, "punch-out")
+   
      
      
      TextGadget(1205, 225, 490, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
@@ -565,7 +546,7 @@ EndProcedure
       TextGadget(208, 225 , 100, 200, 20, "Prochaine Maintenance", #PB_Text_Border | #PB_Text_Center)
       StringGadget(108, 225   , 120, 200, 30, "")
       
-      TextGadget(209, 425 , 100, 200, 20, "Date Prochaine INSP. SAAQ // P.E.P", #PB_Text_Border | #PB_Text_Center)
+      TextGadget(209, 425 , 100, 200, 20, "Date Prochaine INSP...", #PB_Text_Border | #PB_Text_Center)
       StringGadget(109, 425 , 120, 200, 30, "")
       
       TextGadget(210, 625 , 100, 200, 20, "Date Fin Garantie", #PB_Text_Border | #PB_Text_Center)
@@ -877,133 +858,19 @@ AddGadgetItem(1, -1, "Calendar")
           
     
           Debug "yes"
-          ;mainwo()
+        
           aWOordertHandler()
           work()
-          
-          ;punch()
-          ;listuser()
-         
-        
+          punch()
           
           
-             CloseGadgetList()
+          
+     CloseGadgetList()
            
-         EndIf
+ EndIf
         
-         If EventGadget = 1200
-  ;  ClearGadgetItems(#_1208)
-           ;aWOordertHandler()
-          ; work()
-           
-           punch()
-           work()
-          ;listuser()
-           result6 = GetGadgetState(1202)
-           ElseIf result6 = -1
-             ;ClearGadgetItems(#_1208)
-             ; work()
-             punch()
-             work()
-             Debug "OMG NO!!!"
-         EndIf
-         
-        ; If EventGadget = #_1208
-           ;punch()
-          ; work()
-          ; EndIf
+    
         
-;         If EventGadget = 1211
-       ; ------------------------------------------------------------
-;
-; PureBasic Win32 API - Get System Time & Date - Example File
-;
-; by MrVainSCL! aka Thorsten   26/Nov/2002    PB v3.40+
-;
-; ------------------------------------------------------------
-;
-   ; Info.SYSTEMTIME                           ; Init API Structure for _SYTEMTIME()
-;
-; -------- Win32 API Structure --------
-;
-;   typedef struct _SYSTEMTIME   
-;     WORD wYear
-;     WORD wMonth 
-;     WORD wDayOfWeek 
-;     WORD wDay 
-;     WORD wHour 
-;     WORD wMinute 
-;     WORD wSecond 
-;     WORD wMilliseconds 
-;   SYSTEMTIME; 
-;
-; ------------------------------------------------------------
-;
-;     GetLocalTime_(Info)                       ; Get acutal LOCAL Time by System
-    ;
-    ; -------- Get actual Date --------
-    ;
-;     cday$       = Str((Info\wDay))
-;     cmonth$     = Str((Info\wMonth))
-;     cyear$      = Str((Info\wYear))
-;     cwday$      = Str((Info\wDayOfWeek))
-    ;
-    ; -------- Get Actual Time --------
-    ; 
-;     chour$      = Str((Info\wHour)) 
-;     cminute$    = Str((Info\wMinute))
-;     csecond$    = Str((Info\wSecond))
-;     cmillisec$  = Str((Info\wMilliseconds)) 
-    ;
-    ; -------- Select cwday$ num to get correct weekday --------
-    ;
-;     Select cwday$                           ; Same num handling like in Excel :wink:
-;       Case "1" : cweekday$ = "Monday" 
-;       Case "2" : cweekday$ = "Thursday"
- ;     Case "3" : cweekday$ = "Wednesday"
-  ;    Case "4" : cweekday$ = "Thursday"
-   ;   Case "5" : cweekday$ = "Friday"
-    ;  Case "6" : cweekday$ = "Saturday"
-     ; Case "0" : cweekday$ = "Sunday"       
-;    EndSelect 
-    ;
-    ; -------- Write results into one string --------
-    ;  
- ;   actdate$ = cweekday$ + ", " + cday$ + "-" + cmonth$ + "-" + cyear$ 
-  ;  acttime$ = chour$ + ":" + cminute$ + ":" + csecond$ + " and " + cmillisec$ + " millisconds"
-    ;
-    ; -------- Print the result to the user --------
-    ;    
-   ; MessageRequester("Actual Date:",actdate$,0)
-    ;MessageRequester("Actual Time:",acttime$,0)
-
-;
-; ------------------------------------------------------------
-             
-   ;If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
-    
-   ;query10.s = "INSERT INTO punch (WO, USER, Punchin, nomtravaux) " + "VALUES ('"+GetGadgetText(100)+"', '"+GetGadgetText(1200)+"', '"+ actdate$ + acttime$ +"', '"+GetGadgetText(#_1208)+"')"
-  
-  ; update the database with the literal prepared query and confirm the write
-  ;If DatabaseUpdate(0, query10)
-    
-   ; Debug "data successfully inserted."
-
- ; Else
-    
-  ;  Debug "error inserting data! " + DatabaseError()
-    
-  ;EndIf
-
-  ; close the database file
-  
-  
-;Else
-  
- ; Debug "error opening database! " + DatabaseError()
-  
-;EndIf
-;       EndIf
         
         
         
@@ -1051,8 +918,9 @@ Else
   Debug "error opening database! " + DatabaseError()
   
 EndIf
-       EndIf
-         
+EndIf
+
+   
 
         
          
@@ -1140,38 +1008,7 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
  EndIf
  
 
- ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        If EventGadget = 852
-          
-          OpenGadgetList(1, 1)
-          
-         If OpenDatabase(0, "Mech-Logia.sqlite", "", "")
-      Querydelemployer.s = "DELETE FROM User WHERE username = '"+GetGadgetText(1200)+"'"
-      DatabaseUpdate(0, querydelemployer)
-    
-   
 
-  FinishDatabaseQuery(0)
-  
-  MessageRequester("employer à supprimé!", "Employer " +GetGadgetText(1200)+ " supprimé!",  #PB_MessageRequester_Info)
-  
-EndIf
-
-TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Center)
- ListViewGadget(1200, 0, 100, 200, 300) 
-        If DatabaseQuery (0, "SELECT * FROM User")
-         While NextDatabaseRow(#mySql)       
-          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 1))
-         Wend 
-   
-         FinishDatabaseQuery(#mySql)
-   
-         success = #True
-
-       EndIf
-       CloseGadgetList()
-       
-EndIf
 
 ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
@@ -1195,9 +1032,9 @@ EndIf
 
 
 ;main()
-; IDE Options = PureBasic 6.04 beta 2 LTS (Linux - x64)
-; CursorPosition = 882
-; FirstLine = 867
+; IDE Options = PureBasic 6.03 LTS (Linux - x64)
+; CursorPosition = 369
+; FirstLine = 369
 ; Folding = ---
 ; EnableXP
 ; DPIAware
