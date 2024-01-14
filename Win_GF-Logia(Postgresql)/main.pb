@@ -239,81 +239,10 @@ EndIf
           
  
  
- Procedure deljobentry()
-    OpenGadgetList(1, 4)
-   
-  
-      Query.s = "DELETE FROM job WHERE jobname = '"+GetGadgetText(#_1208)+"'"
-      DatabaseUpdate(0, query)
-    
-   
 
-  FinishDatabaseQuery(0)
-  
- MessageRequester("job supprimé!", "job supprimé!",  #PB_MessageRequester_Info)
- 
- ListViewGadget(#_1208, 225, 510, 200, 170)
-             If DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo='"+GetGadgetText(100)+"'")
-             While NextDatabaseRow(#mySql) 
-               
-               IDJOB$ = GetDatabaseString(#mySql, 1)
-               AddGadgetItem(#_1208, -1, "" + IDJOB$)
-               
-                  
-                   
-              Wend 
-             
-   
-             
-            EndIf
-            
- 
-         FinishDatabaseQuery(#mySql)
-          CloseGadgetList()
-          
- EndProcedure 
  
  
- Procedure savejobentry()
-   
-   
-   
-    OpenGadgetList(1, 4)
-          result10 = GetGadgetState(#_1208)
-          
-    If result10 = 0
-    Debug "editor window saved"
-    
-    
-   
-     
-               
-       query3.s = "UPDATE job SET jobinfo='"+GetGadgetText(1206)+"' WHERE jobname='"+GetGadgetText(#_1208)+"'"
-       query2.s = "UPDATE job SET jobrepport='"+GetGadgetText(1207)+"' WHERE jobname='"+GetGadgetText(#_1208)+"'"
-  
-  ; update the database with the literal prepared query and confirm the write
-       DatabaseUpdate(#mysql, query3)
-       DatabaseUpdate(#mysql, query2)
-    
-   
 
-  FinishDatabaseQuery(#mysql)
-  
- MessageRequester("job "+GetGadgetText(1205)+" Sauvegardée", "job "+GetGadgetText(1205)+" Sauvegardée",  #PB_MessageRequester_Info)
- CloseGadgetList()
-
-ElseIf result10 = -1 
-  
-  
-  Debug "Cant save job no job selected !"
-         
-       
-    
-           
-  EndIf 
-
-    
- EndProcedure
  
  
  
@@ -409,8 +338,7 @@ Procedure closewindowHandler()
     CloseGadgetList()
     
              
-       BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
-       BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
+    
                  
       EndProcedure
    
@@ -829,7 +757,63 @@ AddGadgetItem(1, -1, "Calendar")
      CloseGadgetList()
            
  EndIf
-      
+ 
+ 
+ If EventGadget = #jobsave  ;jobsave
+   
+     OpenGadgetList(1, 4)
+       
+   
+    Debug "editor window saved"
+    
+    
+   
+     
+               
+       query3.s = "UPDATE job SET jobinfo='"+GetGadgetText(1206)+"' WHERE jobname='"+GetGadgetText(#_1208)+"'"
+       query2.s = "UPDATE job SET jobrepport='"+GetGadgetText(1207)+"' WHERE jobname='"+GetGadgetText(#_1208)+"'"
+  
+  ; update the database with the literal prepared query and confirm the write
+       DatabaseUpdate(#mysql, query3)
+       DatabaseUpdate(#mysql, query2)
+    
+   
+
+  FinishDatabaseQuery(#mysql)
+  
+ MessageRequester("job "+GetGadgetText(1205)+" Sauvegardée", "job "+GetGadgetText(1205)+" Sauvegardée",  #PB_MessageRequester_Info)
+ CloseGadgetList()
+
+work()
+         
+       
+    
+   
+ EndIf
+ 
+ If EventGadget = 1209 ;job delete
+   
+    OpenGadgetList(1, 4)
+   
+  
+      Query.s = "DELETE FROM job WHERE jobname = '"+GetGadgetText(#_1208)+"'"
+      DatabaseUpdate(#mysql, query)
+    
+   
+
+  FinishDatabaseQuery(#mysql)
+  
+ MessageRequester("job supprimé!", "job supprimé!",  #PB_MessageRequester_Info)
+ 
+
+            
+ 
+         FinishDatabaseQuery(#mySql)
+          CloseGadgetList()
+   work()
+ EndIf
+ 
+ 
  If EventGadget = 1210  ;newjobbuttonhandler
    
    OpenGadgetList(1, 4)
@@ -994,11 +978,11 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
    
 
     EditorGadget(1206, 425, 510, 600, 85)
-    AddGadgetItem(1206, -1, GetGadgetText(#_1208)+":  "+GetDatabaseString(#mysql, 3))
+    AddGadgetItem(1206, -1, "  "+GetDatabaseString(#mysql, 3))
  
      EditorGadget(1207, 425, 595, 600, 85)
      
-    AddGadgetItem(1207, -1, GetGadgetText(#_1208)+":  "+GetDatabaseString(#mysql, 4))
+    AddGadgetItem(1207, -1, "  "+GetDatabaseString(#mysql, 4))
     
     
    CloseGadgetList()
@@ -1030,8 +1014,8 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 866
-; FirstLine = 727
+; CursorPosition = 980
+; FirstLine = 952
 ; Folding = ---
 ; EnableXP
 ; DPIAware
