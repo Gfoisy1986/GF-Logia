@@ -1,10 +1,12 @@
-# Meca_Logia
+# GF-Logia
 Application de gestion d'atelier de mécanique.
+
+Changement de nom du logiciel Meca_Logia vers GF-Logia.
+Changement base de donnée pour le logiciel.
 
 Application en dévelopment!
 
-Cette version de l'application utilise SQLite comme base de donnée embarquée.
-Donc vous ne pouvez utiliser ce logiciel avec plusieurs apareilles, 1 programme, 1 ordinateur pour tous l'atelier!
+Postgresql comme base de donnée.
 
 À Venir!
 
