@@ -6,7 +6,7 @@ Changement base de donnée pour le logiciel.
 
 Application en dévelopment!
 
-MySQL comme base de donnée.
+Postgresql comme base de donnée.
 
 À Venir!
 
