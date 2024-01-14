@@ -523,7 +523,7 @@ EndProcedure
    
 #FenetrePrincipale = 0
 
-  If OpenWindow(#FenetrePrincipale, 0, 0, 1900, 1000, "Mech-Logia", #PB_Window_TitleBar |  #PB_Window_MinimizeGadget | #PB_Window_SystemMenu |  #PB_Window_SizeGadget | #PB_Window_ScreenCentered)
+  If OpenWindow(#FenetrePrincipale, 0, 0, 1900, 1000, "GF-Logia", #PB_Window_TitleBar |  #PB_Window_MinimizeGadget | #PB_Window_SystemMenu |  #PB_Window_SizeGadget | #PB_Window_ScreenCentered)
    
     panel1 = PanelGadget(1, 0, 10, 1900, 980)
     
@@ -1014,8 +1014,8 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 980
-; FirstLine = 952
+; CursorPosition = 525
+; FirstLine = 519
 ; Folding = ---
 ; EnableXP
 ; DPIAware
