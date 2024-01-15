@@ -20,7 +20,7 @@ Enumeration
       #p13
       #job
       #p12
-
+      #_2001
       #close
       #File
       #_1
@@ -31,11 +31,11 @@ Enumeration
     #_221
 #_1203
       #jobsave
-     
+      #_2000
       #frame1
-    
+      #_2002
       #punchout
-     
+     #_0
 
 EndEnumeration
 
@@ -260,29 +260,61 @@ Procedure closewindowHandler()
     Procedure punch()
       OpenGadgetList(1, 4)
       
-      TextGadget(#p12, 0, 160, 215, 40, "Punch > WO",  #PB_Text_Border | #PB_Text_Center)
+      TextGadget(#p12, 0, 160, 215, 20, "Punch par Job",  #PB_Text_Border | #PB_Text_Center)
       
       
-              DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo='"+GetGadgetText(100)+"'")
-            ; While NextDatabaseRow(#mysql) 
+             If DatabaseQuery (#mysql, "SELECT * FROM punch WHERE jobname='"+GetGadgetText(#_1208)+"'")
+             
                
-              ListIconGadget(0, 0, 200, 215, 125, "Nom", 85, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
-              LoadImage(100, "punchin.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
-              LoadImage(101, "punchinred.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
-              LoadImage(200, "punchout.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
-              LoadImage(202, "punchoutred.bmp")  ; changez le chemin/fichier contenant votre image 32x32 pixel
+              ListIconGadget(#_0, 0, 180, 215, 245, "name", 85, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+            pic1 = LoadImage(100, "punchin.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
+            pic2 = LoadImage(101, "punchinred.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
+            pic3 = LoadImage(200, "punchout.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
+            pic4 = LoadImage(202, "punchoutred.bmp")  ; changez le chemin/fichier contenant votre image 32x32 pixel
               
-             AddGadgetColumn(0, 1, "Punch in", 60)
-             AddGadgetColumn(0, 2, "Punch out", 60)
-   AddGadgetItem(0, -1, "Harry Rannit"+Chr(10)+"testy"+Chr(10)+"testy", ImageID(100))
-   AddGadgetItem(0, -1, "Ginger Brokeit"+Chr(10)+"testy"+Chr(10)+"testy", ImageID(202))
-   
-                
+             AddGadgetColumn(#_0, 1, "Punch in", 107)
+             AddGadgetColumn(#_0, 2, "Punch out", 107)
+  ; AddGadgetItem(0, -1, ""+GetDatabaseString(#mysql, 2), ImageID(100))
+  
+              
+            
+            
+              While NextDatabaseRow(#mysql)
+     ; SetGadgetAttribute(0, #PB_ListIcon_DisplayMode, #PB_ListIcon_LargeIcon)
+      AddGadgetItem(#_0, -1, GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4))
+      
+      
+      
+      
+      
+               Wend  
+               EndIf
+               FinishDatabaseQuery(#mysql)
+               TextGadget(#PB_Any, 0, 425, 215, 20, "liste utilisateur", #PB_Text_Border | #PB_Text_Center)
+      
+               If DatabaseQuery (#mysql, "SELECT * FROM username")
+                 ListViewGadget(#_2000, 0, 445, 215, 60)
+                While NextDatabaseRow(#mysql) 
+               
+               
+                   AddGadgetItem(#_2000, -1, ""+GetDatabaseString(#mysql, 1))
+               
                   
                    
-            ;  Wend 
+                Wend 
              
-   FinishDatabaseQuery(#mySql)
+   
+             
+              EndIf
+              
+             
+            ButtonGadget(#_2001, 0, 505, 215, 20,"Punch IN")
+            ButtonGadget(#_2002, 0, 525, 215, 20,"Punch OUT")
+               
+               
+          
+ 
+   FinishDatabaseQuery(#mysql)
     
       CloseGadgetList()
     EndProcedure
@@ -511,15 +543,15 @@ EndProcedure
             EndIf
            
             
-
- 
     FinishDatabaseQuery(#mysql)
    
     
      
       
-   
-     
+    punch()
+    ClearGadgetItems(#p12)
+    ClearGadgetItems(#_0)
+    ClearGadgetItems(#_2000)
     
     
      
@@ -774,7 +806,7 @@ AddGadgetItem(1, -1, "Calendar")
         
            aWOordertHandler()
           
-          punch()
+         ; punch()
           
           
           
@@ -848,7 +880,7 @@ aWOordertHandler()
    
      DatabaseQuery (#mysql, "SELECT * FROM job")
    query.s = "INSERT INTO job (id, jobname, jobinfo, wo) VALUES ('"+GetGadgetText(100)+"', '"+Text200$+"', '"+Text201$+"', '"+GetGadgetText(100)+"')"
-  
+   
   ; update the database with the literal prepared query and confirm the write
   If DatabaseUpdate(#mysql, query)
     
@@ -882,7 +914,7 @@ aWOordertHandler()
         
         
         
-       If EventGadget = #punchout
+       If EventGadget = #_2002
           
         
 
@@ -900,9 +932,9 @@ second.s = "%ss"
 
    time.s = FormatDate(""+day+"/"+month+"/"+year+"  "+hour+":"+minute+":"+second+"", Date())
     
-          ;OpenDatabase(0, "Mech-Logia.sqlite", "", "")
+       
      
-          If query11.s = "UPDATE punch SET punchout=('"+time+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(100)+"', '"+GetGadgetText(1200)+"', '"+GetGadgetText(#_1208)+"')"
+           query11.s = "UPDATE punch SET (punchout, pstatus)=('"+time+"', '2') WHERE (wo, username, pstatus, jobname)=('"+GetGadgetText(100)+"', '"+GetGadgetText(#_2000)+"', '1', '"+GetGadgetText(#_1208)+"')"
   
   ; update the database With the literal prepared query And confirm the write
   If DatabaseUpdate(#mysql, query11)
@@ -918,18 +950,55 @@ second.s = "%ss"
   ; close the database file
   
   
-Else
-  
-  Debug "error opening database! " + DatabaseError()
-  
-EndIf
+
+  FinishDatabaseQuery(#mysql)
+  punch()
 EndIf
 
    
 
         
          
+   If EventGadget = #_2001
+          
         
+
+;Debug FormatDate("%dd %mm %yyyy %hh:%ii:%ss", Date())
+
+
+day.s = "%dd"
+month.s = "%mm"
+year.s = "%yyyy"
+hour.s = "%hh"
+minute.s = "%ii"
+second.s = "%ss"
+
+
+
+   time.s = FormatDate(""+day+"/"+month+"/"+year+"  "+hour+":"+minute+":"+second+"", Date())
+    
+       
+     
+           query11.s = "INSERT INTO punch (id, wo, username, punchin, pstatus, jobname) VALUES ('"+GetGadgetText(100)+"', '"+GetGadgetText(100)+"', '"+GetGadgetText(#_2000)+"', '"+time+"', '1', '"+GetGadgetText(#_1208)+"')"
+  
+  ; update the database With the literal prepared query And confirm the write
+  If DatabaseUpdate(#mysql, query11)
+    
+    Debug "punch out "+time+" successfully inserted."
+
+  Else
+    
+    Debug "error inserting data! " + DatabaseError()
+    
+  EndIf
+
+  ; close the database file
+  
+  
+
+  FinishDatabaseQuery(#mysql)
+  punch()
+EndIf      
        
         
         
@@ -1009,7 +1078,8 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
     AddGadgetItem(1207, -1, "  "+GetDatabaseString(#mysql, 4))
     
     
-   CloseGadgetList()
+    CloseGadgetList()
+    punch()
  EndIf
  
 
@@ -1038,8 +1108,8 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 273
-; FirstLine = 253
+; CursorPosition = 999
+; FirstLine = 981
 ; Folding = --
 ; EnableXP
 ; DPIAware
