@@ -262,16 +262,25 @@ Procedure closewindowHandler()
       
       TextGadget(#p12, 0, 160, 215, 40, "Punch > WO",  #PB_Text_Border | #PB_Text_Center)
       
-      FrameGadget(#p13, 0, 200, 215, 200, "")
-              DatabaseQuery (#mysql, "SELECT * FROM job WHERE WO='"+GetGadgetText(100)+"'")
-             While NextDatabaseRow(#mysql) 
+      
+              DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo='"+GetGadgetText(100)+"'")
+            ; While NextDatabaseRow(#mysql) 
                
-               ID1$ = GetDatabaseString(#mysql, 0)
-               ButtonGadget(#PB_Any, 0, 0, 20, 20, ""+ID1)
-               
+              ListIconGadget(0, 0, 200, 215, 125, "Nom", 85, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+              LoadImage(100, "punchin.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
+              LoadImage(101, "punchinred.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
+              LoadImage(200, "punchout.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
+              LoadImage(202, "punchoutred.bmp")  ; changez le chemin/fichier contenant votre image 32x32 pixel
+              
+             AddGadgetColumn(0, 1, "Punch in", 60)
+             AddGadgetColumn(0, 2, "Punch out", 60)
+   AddGadgetItem(0, -1, "Harry Rannit"+Chr(10)+"testy"+Chr(10)+"testy", ImageID(100))
+   AddGadgetItem(0, -1, "Ginger Brokeit"+Chr(10)+"testy"+Chr(10)+"testy", ImageID(202))
+   
+                
                   
                    
-              Wend 
+            ;  Wend 
              
    FinishDatabaseQuery(#mySql)
     
@@ -465,10 +474,10 @@ EndProcedure
   
    
 
-    EditorGadget(1206, 425, 510, 600, 85)
+    EditorGadget(1206, 425, 510, 600, 65)
     AddGadgetItem(1206, -1, GetDatabaseString(#mysql, 4))
  
-     EditorGadget(1207, 425, 595, 600, 85)
+     EditorGadget(1207, 425, 575, 600, 85)
      
     AddGadgetItem(1207, -1, GetDatabaseString(#mysql, 5))
    
@@ -488,7 +497,7 @@ EndProcedure
      
      TextGadget(1205, 225, 490, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
      
-     If  ListViewGadget(#_1208, 225, 510, 200, 170)
+     If  ListViewGadget(#_1208, 225, 510, 200, 150)
              
              While NextDatabaseRow(#mysql) 
                
@@ -538,9 +547,9 @@ EndProcedure
    
 #FenetrePrincipale = 0
 
-  If OpenWindow(#FenetrePrincipale, 0, 0, 1900, 1000, "GF-Logia", #PB_Window_TitleBar |  #PB_Window_MinimizeGadget | #PB_Window_SystemMenu |  #PB_Window_SizeGadget | #PB_Window_ScreenCentered)
+  If OpenWindow(#FenetrePrincipale, 0, 0, 1280, 720, "GF-Logia", #PB_Window_TitleBar |  #PB_Window_MinimizeGadget | #PB_Window_SystemMenu |  #PB_Window_SizeGadget | #PB_Window_ScreenCentered)
    
-    panel1 = PanelGadget(1, 0, 10, 1900, 980)
+    panel1 = PanelGadget(1, 0, 10, 1280, 720)
     
     ;///////////////////////////////////////////
     
@@ -765,7 +774,7 @@ AddGadgetItem(1, -1, "Calendar")
         
            aWOordertHandler()
           
-         ; punch()
+          punch()
           
           
           
@@ -992,10 +1001,10 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
    
 
    
-     TextGadget(1206, 425, 510, 600, 85, GetDatabaseString(#mysql, 3), #PB_Text_Border | #PB_Text_Center)
+     TextGadget(1206, 425, 510, 600, 65, GetDatabaseString(#mysql, 3), #PB_Text_Border | #PB_Text_Center)
    
  
-     EditorGadget(1207, 425, 595, 600, 85)
+     EditorGadget(1207, 425, 575, 600, 85)
      
     AddGadgetItem(1207, -1, "  "+GetDatabaseString(#mysql, 4))
     
@@ -1029,8 +1038,8 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 956
-; FirstLine = 928
+; CursorPosition = 273
+; FirstLine = 253
 ; Folding = --
 ; EnableXP
 ; DPIAware
