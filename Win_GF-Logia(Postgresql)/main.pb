@@ -14,8 +14,11 @@ UsePostgreSQLDatabase()
 
 Enumeration
       #PageWO
-      
-     
+      #_INSP0
+  #_INSPW
+      #_INSP1
+      #_INSP2
+      #_INSP3
       #p14
       #p13
       #job
@@ -346,11 +349,10 @@ Procedure mainwo()
     Wend 
    
    EndIf
-  
    
-
+   
+   
   
- FinishDatabaseQuery(#mysql)
  CloseGadgetList()
 
   
@@ -392,13 +394,13 @@ OpenGadgetList(1, 4)
       
      
       TextGadget(200, 480 , 0, 200, 20, "Bon de Travail #", #PB_Text_Border | #PB_Text_Center)
-      TextGadget(100, 480   , 20, 200, 30, "" + GetGadgetText(1202), #PB_Text_Border | #PB_Text_Center)
+      TextGadget(100, 480, 20, 200, 30, ""+GetGadgetText(1202), #PB_Text_Border | #PB_Text_Center)
       
       
       
      
-     If DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE wo = '"+GetGadgetText(100)+"'")
-      TextGadget(201,680 , 0, 200, 20, "# Série (VIN)", #PB_Text_Border | #PB_Text_Center)
+      DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE wo = '"+GetGadgetText(100)+"'")
+      TextGadget(201, 680 , 0, 200, 20, "# Série (VIN)", #PB_Text_Border | #PB_Text_Center)
      While NextDatabaseRow(#mysql)
       TextGadget(101, 680, 20, 200, 30, "" + GetDatabaseString(#mysql, 3), #PB_Text_Border | #PB_Text_Center)
       Wend
@@ -468,17 +470,40 @@ OpenGadgetList(1, 4)
       ButtonGadget(220, 480, 220, 200, 20,"Nouvelle note")
      
        ButtonGadget(#_221, 480, 245, 200, 20,"Sauvegardé")
-      ButtonGadget(223, 480, 270, 200, 20,"Supprimé")
+       ButtonGadget(223, 480, 270, 200, 20,"Supprimé")
+       
+       FinishDatabaseQuery(#mysql)
+       
+       DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo="+GetGadgetText(100)+" LIMIT 1")
+       
+      TextGadget(#PB_Any, 220, 0, 225, 20, "Feuillet inspection", #PB_Text_Border | #PB_Text_Center)
+     ; ButtonGadget(#_INSP1, 220, 20, 225, 20, "Vehicule light-duty")
+    ;  ButtonGadget(#_INSP2, 220, 40, 225, 20, "Vehicule Medium-duty")
+    ; ButtonGadget(#_INSP3, 220, 60, 225, 20, "Vehicule Heavy-duty")
       
-     EndIf
-    FinishDatabaseQuery(#mysql)
+      
+      ListViewGadget(#_INSPW, 220, 20, 225, 30)
+      
+      
+              NextDatabaseRow(#mysql) 
+               
+               
+              AddGadgetItem(#_INSPW, -1, ""+GetDatabaseString(#mysql, 8))
+               
+                  
+                   
+        
      
+    FinishDatabaseQuery(#mysql)
+    
+    TextGadget(#PB_Any, 220, 70, 225, 20, "** ! Ne pas oubliée ! **", #PB_Text_Center)
+    TextGadget(#PB_Any, 220, 90, 225, 20, "Select > Travaux > Utilisateur + Punch", #PB_Text_Border | #PB_Text_Center)
 
     TextGadget(224, 480, 300, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
       
       
        ListViewGadget(#_1203, 480, 320, 200, 150)
-            If  DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo='"+GetGadgetText(100)+"'")
+            DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo="+GetGadgetText(100))
              While NextDatabaseRow(#mysql) 
                
                
@@ -488,7 +513,7 @@ OpenGadgetList(1, 4)
                    
               Wend 
              
-   EndIf
+ 
              
             
    TextGadget(217, 680, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
@@ -503,21 +528,6 @@ OpenGadgetList(1, 4)
  
      TextGadget(1204, 680, 490, 600, 20, "Editeur de Travaux", #PB_Text_Border | #PB_Text_Center)
    
-   
- 
-        
-      
-   
-    
-      
-    
-        
-         
-   
-        
-   
-  
-      
       
      
                ButtonGadget(1210, 480, 630, 200, 30, "Nouvelle Job")
@@ -532,12 +542,12 @@ OpenGadgetList(1, 4)
      
      If  ListViewGadget(#_1208, 480, 510, 200, 120)
              
-             While NextDatabaseRow(#mysql) 
+           While  NextDatabaseRow(#mysql) 
                
                IDJOB$ = GetDatabaseString(#mysql, 2)
                AddGadgetItem(#_1208, -1, ""+IDJOB$)
                Debug ("joblist on")
-                  Wend  
+                 Wend  
              
            Else
              Debug ("not working") 
@@ -545,14 +555,9 @@ OpenGadgetList(1, 4)
            
             
     FinishDatabaseQuery(#mysql)
-   
-    
-     
       
-    punch()
-    ClearGadgetItems(#p12)
-    ClearGadgetItems(#_0)
-    ClearGadgetItems(#_2000)
+    
+   
     
     
      CloseGadgetList()
@@ -562,15 +567,7 @@ OpenGadgetList(1, 4)
        BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
        
        
-      ; BindGadgetEvent(#_221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
-       ;BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
-       ;BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
-             
-  
-      
-     ;  BindGadgetEvent(1210, @newjobentry())
-      ; BindGadgetEvent(1209, @deljobentry(), #PB_EventType_LeftClick)
-      ; BindGadgetEvent(#jobsave, @savejobentry(), #PB_EventType_LeftClick)
+     
      EndProcedure
      
      
@@ -580,7 +577,7 @@ OpenGadgetList(1, 4)
    
 #FenetrePrincipale = 0
 
-  If OpenWindow(#FenetrePrincipale, 0, 0, 1280, 720, "GF-Logia", #PB_Window_TitleBar |  #PB_Window_MinimizeGadget | #PB_Window_SystemMenu |  #PB_Window_SizeGadget | #PB_Window_ScreenCentered)
+  If OpenWindow(#FenetrePrincipale, 0, 0, 1280, 720, "GF-Logia",  #PB_Window_ScreenCentered)
    
     panel1 = PanelGadget(1, 0, 10, 1280, 720)
     
@@ -814,6 +811,16 @@ AddGadgetItem(1, -1, "Calendar")
      CloseGadgetList()
            
  EndIf
+ 
+ 
+ If EventGadget = #_INSPW
+   
+   OpenWindow(1, 0, 0, 800, 600, "GF-Logia_Insp-Sheet", #PB_Window_TitleBar |  #PB_Window_MinimizeGadget | #PB_Window_SizeGadget | #PB_Window_ScreenCentered)
+   
+ EndIf
+ 
+ 
+ 
  
  
  If EventGadget = #jobsave  ;jobsave
@@ -1147,8 +1154,8 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
         
       Case #PB_Event_CloseWindow
         ; The window was closed.
-        
-          End
+             CloseWindow(1)
+         ; End
           
           
         
@@ -1159,8 +1166,8 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 283
-; FirstLine = 259
+; CursorPosition = 524
+; FirstLine = 517
 ; Folding = --
 ; EnableXP
 ; DPIAware
