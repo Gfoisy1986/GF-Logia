@@ -38,8 +38,10 @@ Enumeration
       #frame1
       #_2002
       #punchout
-     #_0
-   #_JK
+      #_0
+      #_p20
+      #_JK
+      #_020
 EndEnumeration
 
   
@@ -87,25 +89,57 @@ EndProcedure
 
 
 Procedure employer()
-  
+  OpenGadgetList(1, 1)
   TextGadget(859, 0, 0, 200, 20, "Menu employer", #PB_Text_Border | #PB_Text_Center)
   ButtonGadget(850, 0, 25, 200, 20, "add employer")
  
   ButtonGadget(852, 0, 50, 200, 20, "del employer")
    TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Center)
         ListViewGadget(1200, 0, 100, 200, 300) 
-        If DatabaseQuery (#mysql, "SELECT * FROM User")
+        If DatabaseQuery (#mysql, "SELECT * FROM username")
          While NextDatabaseRow(#mySql)       
-          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 1))
+          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 0))
          Wend 
    
          FinishDatabaseQuery(#mySql)
    
-         success = #True
+         
+         
+         TextGadget(#_p20, 225, 0, 305, 20, "Feuillet employé'",  #PB_Text_Border | #PB_Text_Center)
+      
+      
+             If DatabaseQuery (#mysql, "SELECT * FROM username")
+             
+               
+              ListIconGadget(#_020, 225, 20, 305, 380, "username", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+          
+             AddGadgetColumn(#_020, 1, "Nom", 120)
+             AddGadgetColumn(#_020, 2, "Prenom", 120)
+             
+  
+  
+              
+            
+            
+              While NextDatabaseRow(#mysql)
+     
+      AddGadgetItem(#_020, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2))
+      
+      
+      
+      
+      
+               Wend  
+               EndIf
+               FinishDatabaseQuery(#mysql)
+         
+         
+         
+         
+         
 
        EndIf
-       
-        
+ CloseGadgetList()
        
 EndProcedure
 
@@ -270,10 +304,7 @@ Procedure closewindowHandler()
              
                
               ListIconGadget(#_0, 0, 180, 420, 245, "name", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
-            pic1 = LoadImage(100, "punchin.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
-            pic2 = LoadImage(101, "punchinred.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
-            pic3 = LoadImage(200, "punchout.bmp")     ; changez le chemin/fichier contenant votre image 32x32 pixel
-            pic4 = LoadImage(202, "punchoutred.bmp")  ; changez le chemin/fichier contenant votre image 32x32 pixel
+          
              AddGadgetColumn(#_0, 1, "jobname", 120)
              AddGadgetColumn(#_0, 2, "Punch in", 120)
              AddGadgetColumn(#_0, 3, "Punch out", 120)
@@ -300,7 +331,7 @@ Procedure closewindowHandler()
                 While NextDatabaseRow(#mysql) 
                
                
-                   AddGadgetItem(#_2000, -1, ""+GetDatabaseString(#mysql, 1))
+                   AddGadgetItem(#_2000, -1, ""+GetDatabaseString(#mysql, 0))
                
                   
                    
@@ -522,7 +553,7 @@ OpenGadgetList(1, 4)
                
              
            
-      DatabaseQuery (1, "SELECT * FROM job WHERE wo="+GetGadgetText(100))
+      DatabaseQuery (1, "SELECT * FROM job WHERE (username, wo)=('Garage', '"+GetGadgetText(100)+"')")
 	
 
  
@@ -546,9 +577,8 @@ OpenGadgetList(1, 4)
                
                IDJOB$ = GetDatabaseString(#mysql, 2)
                AddGadgetItem(#_1208, -1, ""+IDJOB$)
-               Debug ("joblist on")
                  Wend  
-             
+             Debug ("joblist on")
            Else
              Debug ("not working") 
             EndIf
@@ -804,7 +834,7 @@ AddGadgetItem(1, -1, "Calendar")
         
            aWOordertHandler()
           
-         ; punch()
+          punch()
           
           
           
@@ -1056,46 +1086,28 @@ EndIf
         
         
   ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
-        
+        If EventGadget = 852
+          OpenGadgetList(1, 1)
+                         querydelemployer.s = "DELETE FROM username WHERE username='"+GetGadgetText(1200)+"'"
+  
+                         DatabaseUpdate(#mysql, querydelemployer) 
+                           
+                         employer()
+                         
+                 CloseGadgetList()
+        EndIf
+
         If EventGadget = 850
           OpenGadgetList(1, 1)
           Textemployer100$ = InputRequester("ajoutez un employer", "Veuillez entrer le username du nouveau", "")
         Textemployer101$ = InputRequester("ajoutez un employer", "Veuillez entrer le Nom propre du nouveau", "")
         Textemployer102$ = InputRequester("ajoutez un employer", "Veuillez entrer le Prenom du nouveau", "")
   
-  If  queryemployer.s = "INSERT INTO User (username, Nom, Prenom) " + "VALUES ('"+Textemployer100$+"', '"+Textemployer101$+"', '"+Textemployer102$+"')"
+             queryemployer.s = "INSERT INTO username (username, nom, prenom) " + "VALUES ('"+Textemployer100$+"', '"+Textemployer101$+"', '"+Textemployer102$+"')"
   
   
- If DatabaseUpdate(#mysql, queryemployer)
-    
-    Debug "data successfully inserted."
-
-  Else
-    
-    Debug "error inserting data! " + DatabaseError()
-    
-  EndIf
-
-  
-  
-  
-Else
-  
-  Debug "error opening database! " + DatabaseError()
-  
-EndIf
-TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Center)
- ListViewGadget(1200, 0, 100, 200, 300) 
-        If DatabaseQuery (#mysql, "SELECT * FROM User")
-         While NextDatabaseRow(#mySql)       
-          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 1))
-         Wend 
-   
-         FinishDatabaseQuery(#mySql)
-   
-         success = #True
-
-       EndIf
+         DatabaseUpdate(#mysql, queryemployer)
+         employer()
        CloseGadgetList()
         EndIf
         
@@ -1166,8 +1178,8 @@ TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Ce
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 524
-; FirstLine = 517
+; CursorPosition = 107
+; FirstLine = 81
 ; Folding = --
 ; EnableXP
 ; DPIAware
