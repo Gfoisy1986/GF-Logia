@@ -78,28 +78,21 @@ EndProcedure
 
 Procedure employer()
   OpenGadgetList(1, 1)
-  TextGadget(859, 0, 0, 200, 20, "Menu employer", #PB_Text_Border | #PB_Text_Center)
-  ButtonGadget(850, 0, 25, 200, 20, "add employer")
+  TextGadget(859, 0, 400, 1280, 20, "Menu employé", #PB_Text_Border | #PB_Text_Center)
+  ButtonGadget(850, 0, 420, 200, 20, "Ajouté un employé")
  
-  ButtonGadget(852, 0, 50, 200, 20, "del employer")
-   TextGadget(862, 0, 80, 200, 20, " Liste employer", #PB_Text_Border | #PB_Text_Center)
-        ListViewGadget(1200, 0, 100, 200, 300) 
-        If DatabaseQuery (#mysql, "SELECT * FROM username")
-         While NextDatabaseRow(#mySql)       
-          AddGadgetItem(1200, -1, "" + GetDatabaseString(#mySql, 0))
-         Wend 
+  ButtonGadget(852, 250, 420, 200, 20, "Supprimé un employé")
    
-         FinishDatabaseQuery(#mySql)
    
          
          
-         TextGadget(#_p20, 225, 0, 305, 20, "Feuillet employé'",  #PB_Text_Border | #PB_Text_Center)
+         TextGadget(#_p20, 0, 0, 1280, 20, "Feuillet employé",  #PB_Text_Border | #PB_Text_Center)
       
       
              If DatabaseQuery (#mysql, "SELECT * FROM username")
              
                
-              ListIconGadget(#_020, 225, 20, 305, 380, "username", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+              ListIconGadget(#_020, 0, 20, 1280, 380, "username", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
           
              AddGadgetColumn(#_020, 1, "Nom", 120)
              AddGadgetColumn(#_020, 2, "Prenom", 120)
@@ -126,7 +119,7 @@ Procedure employer()
          
          
 
-       EndIf
+
  CloseGadgetList()
        
 EndProcedure
@@ -1078,7 +1071,7 @@ EndIf
   ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
         If EventGadget = 852
           OpenGadgetList(1, 1)
-                         querydelemployer.s = "DELETE FROM username WHERE username='"+GetGadgetText(1200)+"'"
+                         querydelemployer.s = "DELETE FROM username WHERE username='"+GetGadgetText(#_020)+"'"
   
                          DatabaseUpdate(#mysql, querydelemployer) 
                            
@@ -1168,8 +1161,8 @@ EndIf
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 706
-; FirstLine = 678
+; CursorPosition = 83
+; FirstLine = 69
 ; Folding = ---
 ; EnableXP
 ; DPIAware
