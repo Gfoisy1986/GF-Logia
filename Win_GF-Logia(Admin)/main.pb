@@ -32,7 +32,10 @@ Enumeration
       #WO
     #_1208
     #_221
-#_1203
+    #_1203
+    #BG_1
+    #BG_2
+    #BG_3
       #jobsave
       #_2000
       #frame1
@@ -83,7 +86,13 @@ Procedure employer()
  
   ButtonGadget(852, 250, 420, 200, 20, "Supprimé un employé")
    
-   
+   TextGadget(#PB_Any, 0, 450, 1280, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
+         ButtonGadget(#BG_1, 0, 470, 120, 20, "Username")
+         ButtonGadget(#BG_2, 120, 470, 120, 20, "Nom propre")
+         ButtonGadget(#BG_3, 240, 470, 120, 20, "Prénom")
+         
+         
+         
          
          
          TextGadget(#_p20, 0, 0, 1280, 20, "Feuillet employé",  #PB_Text_Border | #PB_Text_Center)
@@ -92,7 +101,7 @@ Procedure employer()
              If DatabaseQuery (#mysql, "SELECT * FROM username")
              
                
-              ListIconGadget(#_020, 0, 20, 1280, 380, "username", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+              ListIconGadget(#_020, 0, 20, 1280, 380, "username", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
           
              AddGadgetColumn(#_020, 1, "Nom", 120)
              AddGadgetColumn(#_020, 2, "Prenom", 120)
@@ -1161,8 +1170,8 @@ EndIf
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 83
-; FirstLine = 69
+; CursorPosition = 89
+; FirstLine = 75
 ; Folding = ---
 ; EnableXP
 ; DPIAware
