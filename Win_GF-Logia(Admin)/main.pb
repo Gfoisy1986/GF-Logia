@@ -36,6 +36,21 @@ Enumeration
     #BG_1
     #BG_2
     #BG_3
+    #BG_4
+    #BG_5
+    #BG_6
+    #BG_7
+    #BG_8
+    #BG_9
+    #BG_10
+    #BG_11
+    #BG_12
+    #BG_13
+    #BG_14
+    #BG_15
+    #BG_16
+    #BG_17
+    #BG_18
       #jobsave
       #_2000
       #frame1
@@ -90,8 +105,21 @@ Procedure employer()
          ButtonGadget(#BG_1, 0, 470, 120, 20, "Username")
          ButtonGadget(#BG_2, 120, 470, 120, 20, "Nom propre")
          ButtonGadget(#BG_3, 240, 470, 120, 20, "Prénom")
-         
-         
+         ButtonGadget(#BG_4, 360, 470, 60, 20, "Age")
+         ButtonGadget(#BG_5, 420, 470, 120, 20, "# Téléphone")
+         ButtonGadget(#BG_6, 540, 470, 120, 20, "# Cell")
+         ButtonGadget(#BG_7, 660, 470, 120, 20, "Addresse")
+         ButtonGadget(#BG_8, 780, 470, 120, 20, "# Permis Conduire")
+         ButtonGadget(#BG_9, 900, 470, 120, 20, "# Liscence Méca")
+         ButtonGadget(#BG_10, 1020, 470, 120, 20, "# Liscence P.E.P")
+         ButtonGadget(#BG_11, 1140, 470, 120, 20, "# Liscence S.A.A.Q")
+         ButtonGadget(#BG_12, 0, 490, 120, 20, "Date Embauche")
+         ButtonGadget(#BG_13, 120, 490, 120, 20, "Ville")
+         ButtonGadget(#BG_14, 240, 490, 120, 20, "Province")
+         ButtonGadget(#BG_15, 360, 490, 120, 20, "Pays")
+         ButtonGadget(#BG_16, 480, 490, 120, 20, "Code Postal")
+         ButtonGadget(#BG_17, 600, 490, 120, 20, "E-mail Personel")
+         ButtonGadget(#BG_18, 720, 490, 120, 20, "E-mail Job")
          
          
          
@@ -105,7 +133,22 @@ Procedure employer()
           
              AddGadgetColumn(#_020, 1, "Nom", 120)
              AddGadgetColumn(#_020, 2, "Prenom", 120)
-             
+             AddGadgetColumn(#_020, 3, "Age", 60)
+             AddGadgetColumn(#_020, 4, "# Téléphone", 120)
+             AddGadgetColumn(#_020, 5, "# Cell", 120)
+             AddGadgetColumn(#_020, 6, "Addresse", 120)
+             AddGadgetColumn(#_020, 7, "# Permis Conduire", 120)
+             AddGadgetColumn(#_020, 8, "# Liscence Méca", 120)
+             AddGadgetColumn(#_020, 9, "# Liscence P.E.P", 120)
+             AddGadgetColumn(#_020, 10, "# Liscence S.A.A.Q", 120)
+             AddGadgetColumn(#_020, 11, "Date Naissance", 120)
+             AddGadgetColumn(#_020, 12, "Date Embauche", 120)
+             AddGadgetColumn(#_020, 13, "Ville", 120)
+             AddGadgetColumn(#_020, 14, "Province", 120)
+             AddGadgetColumn(#_020, 15, "Pays", 120)
+             AddGadgetColumn(#_020, 16, "Code Postal", 120)
+             AddGadgetColumn(#_020, 17, "E-mail Personel", 120)
+             AddGadgetColumn(#_020, 18, "E-mail Job", 120)
   
   
               
@@ -113,7 +156,7 @@ Procedure employer()
             
               While NextDatabaseRow(#mysql)
      
-      AddGadgetItem(#_020, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2))
+      AddGadgetItem(#_020, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18))
       
       
       
@@ -1170,8 +1213,8 @@ EndIf
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 89
-; FirstLine = 75
+; CursorPosition = 112
+; FirstLine = 96
 ; Folding = ---
 ; EnableXP
 ; DPIAware
