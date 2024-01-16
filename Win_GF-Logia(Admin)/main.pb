@@ -77,18 +77,6 @@ Procedure GFoisyWEBSITE()
        URL$ = "https://www.google.ca"
        WebGadget(#PB_Any,25, 25, 800, 600, URL$)
        
-       
- 
-  
-  
-  
-  
-  
-  
-   
-
-  
-  
   
   CloseGadgetList()
 EndProcedure
@@ -172,10 +160,6 @@ Procedure employer()
                FinishDatabaseQuery(#mysql)
          
          
-         
-         
-         
-
 
  CloseGadgetList()
        
@@ -240,23 +224,11 @@ ListViewGadget(#_1203, 225, 320, 200, 150)
     EndProcedure
   
   
-
-  
-
-
-
-  
-
-  
-  
   ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Procedure savenotebuttonHandler()
       Debug "editor window saved"
     
     
-    
-    
-   
      
              ;  query11.s = "UPDATE punch SET punchout=('"+time+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(100)+"', '"+GetGadgetText(1200)+"', '"+GetGadgetText(#_1208)+"')"
     query4.s = "UPDATE note SET content=('"+GetGadgetText(117)+"') WHERE (notename)=('"+GetGadgetText(#_1203)+"')"
@@ -330,18 +302,6 @@ EndIf
  EndProcedure
  
  
- 
-
-          
- 
- 
-
- 
- 
-
- 
- 
- 
 
 Procedure closewindowHandler()
     Debug "End program WO"
@@ -349,9 +309,6 @@ Procedure closewindowHandler()
       End
     EndProcedure
     
-    
-  
-   
    
     Procedure punch()
       OpenGadgetList(1, 4)
@@ -413,16 +370,6 @@ Procedure closewindowHandler()
     EndProcedure
   
    
-    
-  
-  
-   
-   
-
-
-  
-  
-
   
 Procedure mainwo()
   OpenGadgetList(1, 4)
@@ -454,16 +401,6 @@ EndProcedure
 
 OpenGadgetList(1, 4)
  
-
- 
- 
-  
- 
-    
-
-      
-
-
     
       ;DatabaseQuery (0, "SELECT * FROM Workorder")
    ; For i = 0 To 65000
@@ -473,15 +410,6 @@ OpenGadgetList(1, 4)
 
       Debug ("Ouverture du work order " + GetGadgetText(1202))
         
-  
-         
-
-  
-      
-    
-      
-                                
-      
      
       TextGadget(200, 480 , 0, 200, 20, "Bon de Travail #", #PB_Text_Border | #PB_Text_Center)
       TextGadget(100, 480, 20, 200, 30, ""+GetGadgetText(1202), #PB_Text_Border | #PB_Text_Center)
@@ -509,10 +437,6 @@ OpenGadgetList(1, 4)
      
      
 
-   
-   
-   
-   
       
       TextGadget(203, 1080 , 0, 200, 20, "Model", #PB_Text_Border | #PB_Text_Center)
       TextGadget(103, 1080, 20, 200, 30, "" + GetDatabaseString(#mysql, 5), #PB_Text_Border | #PB_Text_Center)
@@ -581,8 +505,6 @@ OpenGadgetList(1, 4)
               AddGadgetItem(#_INSPW, -1, ""+GetDatabaseString(#mysql, 8))
                
                   
-                   
-        
      
     FinishDatabaseQuery(#mysql)
     
@@ -707,9 +629,6 @@ CloseGadgetList()
      TextGadget(726, 100, 0, 100, 20, "heya")
                 
   
-    
-    
-    
     CloseGadgetList()
  
     
@@ -765,70 +684,22 @@ AddGadgetItem(1, -1, "Calendar")
       MenuTitle("  Menu  ")
      
       
-        MenuItem(1, "Fermer")
+      MenuItem(1, "Fermer")
         
       
-        
-      
-      
      
-     
-      
-      
-      ;//////////////////////////////////////////
-      ; WebGadget (100, 0, 0, 800, 600, "https://www.google.ca")
-      ;//////////////////////////////////////////////
-        ;BindMenuEvent(0, 1, @GfoisyHandler())
-       ; BindMenuEvent(0, 2, @GitHandler())
-       ; BindMenuEvent(0, 3, @DonateHandler())
-        BindMenuEvent(0, 1, @QuitHandler())
+      BindMenuEvent(0, 1, @QuitHandler())
        
-       ; BindMenuEvent(0, 5, @GWOHandler())
-      ;  BindMenuEvent(0, 8, @CGHNHandler())
-       ; BindMenuEvent(0, 7, @CGWOHandler())
-       ; BindMenuEvent(0, 9, @CGMHandler())
-      ;  BindMenuEvent(0, 6, @HBTHandler())
-       ; BindMenuEvent(0, 10, @IGPHandler())
-      ;  BindMenuEvent(0, 11, @IGEHandler())
-       ; BindMenuEvent(0, 12, @IGCHandler())
-       ; BindMenuEvent(0, 13, @IGFHandler())
-       ; BindMenuEvent(0, 14, @DGFHandler())
-       ; BindMenuEvent(0, 15, @IGHandler())
-       ; BindMenuEvent(0, 16, @EXFHandler())
-        
-       ; BindMenuEvent(0, 18, @BOSMHandler())
-       ; BindMenuEvent(0, 17, @BOCOMPTAHandler())
-       ; BindMenuEvent(0, 19, @BOCALCUHandler())
-      ;  BindMenuEvent(0, 20, @BOCONVHandler())
-       ; BindMenuEvent(0, 21, @BOEDITHandler())
-       ; BindMenuEvent(0, 22, @BOGRIHandler())
-       ; BindMenuEvent(0, 23, @BOTODOHandler())
-       ; BindMenuEvent(0, 24, @BOCARNHandler())
-       ; BindMenuEvent(0, 25, @CONTACTHandler())
-       ; BindMenuEvent(0, 26, @FAQHandler())
-       ; BindMenuEvent(0, 28, @NIHandler())
-       ; BindMenuEvent(0, 29, @CFHandler())
-      ;  BindMenuEvent(0, 30, @DLHandler())
-       ; BindMenuEvent(0, 31, @freecadHandler())
-        
-        
-        ;//////////////////////////////////////////////////////////////////////MEnu///////////////////////Menu////////////////////////////////Menu//////////////////////////////////
-        
-      
-        
-        
-        
-      
       EndIf
     EndProcedure
-    main()
-   ; Repeat : Until WaitWindowEvent()=#PB_Event_CloseWindow
-
-      
-      
- 
-        
     
+    
+    ;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    
+    main()
+   
+
+      ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
     
     
     ;- Event Loop
@@ -1327,30 +1198,20 @@ EndIf
                   
                 
 ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-        
- ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
-     ; Case #PB_Event_SizeWindow
-        ; The window was moved or resized.
-      ;  If EventWindow = #WindowFiles
-       ;   WindowResize()  
-       ; EndIf
-        
+      
       Case #PB_Event_CloseWindow
         ; The window was closed.
              CloseWindow(1)
          ; End
-          
-          
-        
+      
     EndSelect
   ForEver
       
 
 
-;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 36
-; FirstLine = 13
+; CursorPosition = 696
+; FirstLine = 726
 ; Folding = ---
 ; EnableXP
 ; DPIAware
