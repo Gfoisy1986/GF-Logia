@@ -15,7 +15,8 @@ UsePostgreSQLDatabase()
 Enumeration
       #PageWO
       #_INSP0
-  #_INSPW
+      #_INSPW
+      #_listuserBG
       #_INSP1
       #_INSP2
       #_INSP3
@@ -33,6 +34,7 @@ Enumeration
     #_1208
     #_221
     #_1203
+    #BG_0
     #BG_1
     #BG_2
     #BG_3
@@ -100,19 +102,22 @@ Procedure employer()
   ButtonGadget(850, 0, 420, 200, 20, "Ajouté un employé")
  
   ButtonGadget(852, 250, 420, 200, 20, "Supprimé un employé")
-   
+  
+  
+  
    TextGadget(#PB_Any, 0, 450, 1280, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
-         ButtonGadget(#BG_1, 0, 470, 120, 20, "Username")
-         ButtonGadget(#BG_2, 120, 470, 120, 20, "Nom propre")
-         ButtonGadget(#BG_3, 240, 470, 120, 20, "Prénom")
-         ButtonGadget(#BG_4, 360, 470, 60, 20, "Age")
-         ButtonGadget(#BG_5, 420, 470, 120, 20, "# Téléphone")
-         ButtonGadget(#BG_6, 540, 470, 120, 20, "# Cell")
-         ButtonGadget(#BG_7, 660, 470, 120, 20, "Addresse")
-         ButtonGadget(#BG_8, 780, 470, 120, 20, "# Permis Conduire")
-         ButtonGadget(#BG_9, 900, 470, 120, 20, "# Liscence Méca")
-         ButtonGadget(#BG_10, 1020, 470, 120, 20, "# Liscence P.E.P")
-         ButtonGadget(#BG_11, 1140, 470, 120, 20, "# Liscence S.A.A.Q")
+         ButtonGadget(#BG_0, 0, 470, 120, 20, "Username")
+         ButtonGadget(#BG_1, 120, 470, 120, 20, "Nom propre")
+         ButtonGadget(#BG_2, 240, 470, 120, 20, "Prénom")
+         ButtonGadget(#BG_3, 360, 470, 60, 20, "Age")
+         ButtonGadget(#BG_4, 420, 470, 120, 20, "# Téléphone")
+         ButtonGadget(#BG_5, 540, 470, 120, 20, "# Cell")
+         ButtonGadget(#BG_6, 660, 470, 120, 20, "Addresse")
+         ButtonGadget(#BG_7, 780, 470, 120, 20, "# Permis Conduire")
+         ButtonGadget(#BG_8, 900, 470, 120, 20, "# Liscence Méca")
+         ButtonGadget(#BG_9, 1020, 470, 120, 20, "# Liscence P.E.P")
+         ButtonGadget(#BG_10, 1140, 470, 120, 20, "# Liscence S.A.A.Q")
+         ButtonGadget(#BG_11, 0, 490, 120, 20, "Date Naissance")
          ButtonGadget(#BG_12, 0, 490, 120, 20, "Date Embauche")
          ButtonGadget(#BG_13, 120, 490, 120, 20, "Ville")
          ButtonGadget(#BG_14, 240, 490, 120, 20, "Province")
@@ -1187,9 +1192,140 @@ EndIf
    punch()
  EndIf
  
-
-
-
+ If EventGadget = #BG_0
+   texteuser0.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser0.s = "UPDATE username SET username='"+texteuser0+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser0)
+   employer()
+EndIf
+ 
+ If EventGadget = #BG_1
+   texteuser1.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser1.s = "UPDATE username SET nom='"+texteuser1+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser1)
+   employer()
+EndIf
+ 
+  If EventGadget = #BG_2
+   texteuser2.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser2.s = "UPDATE username SET prenom='"+texteuser2+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser2)
+   employer()
+  EndIf
+  
+   If EventGadget = #BG_3
+   texteuser3.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser3.s = "UPDATE username SET age='"+texteuser3+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser3)
+   employer()
+ EndIf
+ 
+    If EventGadget = #BG_4
+     texteuser4.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser4.s = "UPDATE username SET tel='"+texteuser4+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser4)
+   employer()
+ EndIf
+ 
+     If EventGadget = #BG_5
+   texteuser5.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser5.s = "UPDATE username SET cell='"+texteuser5+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser5)
+   employer()
+ EndIf
+ 
+      If EventGadget = #BG_6
+   texteuser6.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser6.s = "UPDATE username SET add='"+texteuser6+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser6)
+   employer()
+ EndIf
+ 
+       If EventGadget = #BG_7
+   texteuser7.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser7.s = "UPDATE username SET permis='"+texteuser7+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser7)
+   employer()
+       EndIf
+       
+        If EventGadget = #BG_8
+   texteuser8.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser8.s = "UPDATE username SET liscence='"+texteuser8+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser8)
+   employer()
+        EndIf
+        
+         If EventGadget = #BG_9
+   texteuser9.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser9.s = "UPDATE username SET pep='"+texteuser9+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser9)
+   employer()
+         EndIf
+         
+          If EventGadget = #BG_10
+   texteuser10.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser10.s = "UPDATE username SET saaq='"+texteuser10+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser10)
+   employer()
+          EndIf
+          
+           If EventGadget = #BG_11
+   texteuser11.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser11.s = "UPDATE username SET date='"+texteuser11+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser11)
+   employer()
+           EndIf
+           
+            If EventGadget = #BG_12
+   texteuser12.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser12.s = "UPDATE username SET embauche='"+texteuser12+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser12)
+   employer()
+            EndIf
+            
+             If EventGadget = #BG_13
+   texteuser13.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser13.s = "UPDATE username SET city='"+texteuser13+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser13)
+   employer()
+             EndIf
+             
+              If EventGadget = #BG_14
+   texteuser14.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser14.s = "UPDATE username SET province='"+texteuser14+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser14)
+   employer()
+              EndIf
+              
+               If EventGadget = #BG_15
+   texteuser15.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser15.s = "UPDATE username SET pays='"+texteuser15+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser15)
+   employer()
+               EndIf
+               
+                If EventGadget = #BG_16
+   texteuser16.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser16.s = "UPDATE username SET zip='"+texteuser16+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser16)
+   employer()
+                EndIf
+                
+                 If EventGadget = #BG_17
+   texteuser17.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser17.s = "UPDATE username SET email1='"+texteuser17+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser17)
+   employer()
+                 EndIf
+                 
+                  If EventGadget = #BG_18
+   texteuser18.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau username.", "")
+   queryuser18.s = "UPDATE username SET email2='"+texteuser18+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, queryuser18)
+   employer()
+                  EndIf
+                  
+                
 ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
         
  ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////       
@@ -1213,8 +1349,8 @@ EndIf
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 112
-; FirstLine = 96
+; CursorPosition = 36
+; FirstLine = 13
 ; Folding = ---
 ; EnableXP
 ; DPIAware
