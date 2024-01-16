@@ -21,7 +21,8 @@ INSERT INTO "job" ("id", "username", "jobname", "jobinfo", "jobrepport", "punchi
 	(1, 'Garage', 'ytutyuy', 'tyutyu', NULL, NULL, NULL, 1, NULL),
 	(1, 'gfoisy', 'fghfgh', '', '(gfoisy) : tyutyutyu', NULL, NULL, 1, NULL),
 	(1, 'gfoisy', 'fghfgh', '', '(gfoisy) : heya this is a test', NULL, NULL, 1, NULL),
-	(2, 'Garage', 'hgjhgjhgjhgj', 'ghjhgjfghj', NULL, NULL, NULL, 2, NULL);
+	(2, 'Garage', 'hgjhgjhgjhgj', 'ghjhgjfghj', NULL, NULL, NULL, 2, NULL),
+	(1, 'GFoisy', 'fghfgh', '', '(GFoisy) : Done', NULL, NULL, 1, NULL);
 /*!40000 ALTER TABLE "job" ENABLE KEYS */;
 
 -- Dumping data for table public.note: -1 rows
@@ -34,13 +35,15 @@ INSERT INTO "note" ("id", "notename", "wo", "content", "serie") VALUES
 -- Dumping data for table public.punch: 0 rows
 DELETE FROM "punch";
 /*!40000 ALTER TABLE "punch" DISABLE KEYS */;
+INSERT INTO "punch" ("id", "wo", "username", "punchin", "punchout", "pstatus", "jobname") VALUES
+	('1', '1', 'GFoisy', '16/01/2024  11:02:47', '16/01/2024  11:02:56', '2', 'fghfgh');
 /*!40000 ALTER TABLE "punch" ENABLE KEYS */;
 
--- Dumping data for table public.username: 0 rows
+-- Dumping data for table public.username: 1 rows
 DELETE FROM "username";
 /*!40000 ALTER TABLE "username" DISABLE KEYS */;
-INSERT INTO "username" ("username", "nom", "prenom") VALUES
-	('GFoisy', 'Foisy', 'Guillaume');
+INSERT INTO "username" ("username", "nom", "prenom", "age", "tel", "cell", "add", "permis", "liscence", "pep", "saaq", "date", "embauche", "city", "province", "pays", "zip", "email1", "email2") VALUES
+	('GFoisy', 'Foisy', 'Guillaume', '37', '455-455-4545', '544-455-4545', '80 25 Rue Timonier', 'test', 'test', 'test', 'test', '2024-01-16 16:36:24', '2024-01-16', 'Lune', 'QC', 'CANADA', 'TEST', 'Test@test.com', 'Test2@test.com');
 /*!40000 ALTER TABLE "username" ENABLE KEYS */;
 
 -- Dumping data for table public.workorder: -1 rows
