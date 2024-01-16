@@ -39,7 +39,7 @@ INSERT INTO "punch" ("id", "wo", "username", "punchin", "punchout", "pstatus", "
 	('1', '1', 'GFoisy', '16/01/2024  11:02:47', '16/01/2024  11:02:56', '2', 'fghfgh');
 /*!40000 ALTER TABLE "punch" ENABLE KEYS */;
 
--- Dumping data for table public.username: 1 rows
+-- Dumping data for table public.username: -1 rows
 DELETE FROM "username";
 /*!40000 ALTER TABLE "username" DISABLE KEYS */;
 INSERT INTO "username" ("username", "nom", "prenom", "age", "tel", "cell", "add", "permis", "liscence", "pep", "saaq", "date", "embauche", "city", "province", "pays", "zip", "email1", "email2") VALUES

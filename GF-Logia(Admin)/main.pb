@@ -1,11 +1,7 @@
-﻿    
-;UseSQLiteDatabase()
+﻿UsePostgreSQLDatabase()
 
-UsePostgreSQLDatabase()
-; UseMySQLDatabase()
 #mysql =  1
-  ; You should have a server running on localhost
-  ;
+  
   If OpenDatabase(1, "host=localhost port=5432 dbname=gf-logia", "postgres", "!@Athene")
     Debug "Connected to PostgreSQL"
   Else
@@ -1210,8 +1206,7 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1192
-; FirstLine = 1162
+; FirstLine = 594
 ; Folding = ---
 ; EnableXP
 ; DPIAware
