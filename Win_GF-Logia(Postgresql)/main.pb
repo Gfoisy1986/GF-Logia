@@ -52,37 +52,25 @@ Icone$ = "icon.ico"
 
   
 
-Procedure Administration()
-  
+Procedure GFoisyWEBSITE()
+  OpenGadgetList(1, 0)
+       URL$ = "https://www.google.ca"
+       WebGadget(#PB_Any,25, 25, 800, 600, URL$)
+       
+       
  
-       
-       
-       
-  TextGadget(860, 220, 0, 200, 20, "Menu Client", #PB_Text_Border | #PB_Text_Center)
-  ButtonGadget(853, 220, 20, 200, 20, "add client")
- ; ButtonGadget(854, 220, 40, 200, 20, "mod client")
-  ButtonGadget(855, 220, 70, 200, 20, "del client")
   
   
   
-  TextGadget(861, 440, 0, 200, 20, "Menu Vehicule par client", #PB_Text_Border | #PB_Text_Center)
-  ButtonGadget(856, 440, 20, 200, 20, "add vehicule")
- ; ButtonGadget(857, 440, 40, 200, 20, "mod vehicule")
-  ButtonGadget(858, 440, 70, 200, 20, "del vehicule")
   
   
   
-  TextGadget(863, 660, 0, 200, 20, "Menu Bon de travail par vehicule", #PB_Text_Border | #PB_Text_Center)
-  ButtonGadget(864, 660, 20, 200, 20, "add Bon de travail")
-  ButtonGadget(865, 660, 40, 200, 20, "archivé Bon de travail")
-  ButtonGadget(866, 660, 70, 200, 20, "del Bon de travail")
+   
+
   
   
   
-  TextGadget(867, 880, 0, 300, 20, "Menu historique Bon de travail par vehicule", #PB_Text_Border | #PB_Text_Center)
-  
-  
-  ButtonGadget(870, 880, 70, 300, 20, "del H-Bon de travail")
+  CloseGadgetList()
 EndProcedure
 
 
@@ -143,6 +131,27 @@ Procedure employer()
        
 EndProcedure
 
+Procedure Client()
+  OpenGadgetList(1, 2)
+  
+   TextGadget(860, 220, 0, 200, 20, "Menu Client", #PB_Text_Border | #PB_Text_Center)
+  ButtonGadget(853, 220, 20, 200, 20, "add client")
+ ; ButtonGadget(854, 220, 40, 200, 20, "mod client")
+  ButtonGadget(855, 220, 70, 200, 20, "del client")
+  
+  
+  
+  CloseGadgetList()
+EndProcedure
+
+Procedure Flotte()
+  OpenGadgetList(1, 3)
+    TextGadget(861, 440, 0, 200, 20, "Menu Vehicule par client", #PB_Text_Border | #PB_Text_Center)
+    ButtonGadget(856, 440, 20, 200, 20, "add vehicule")
+    ; ButtonGadget(857, 440, 40, 200, 20, "mod vehicule")
+    ButtonGadget(858, 440, 70, 200, 20, "del vehicule")
+  CloseGadgetList()
+EndProcedure
 
 
 
@@ -615,8 +624,8 @@ OpenGadgetList(1, 4)
     
     
     OpenGadgetList(1)
-    AddGadgetItem(1, -1, "Administration")
-    Administration()
+    AddGadgetItem(1, -1, "GuillaumeFoisy.ca")
+    GFoisyWEBSITE()
 CloseGadgetList()
 
 OpenGadgetList(1)
@@ -626,25 +635,12 @@ CloseGadgetList()
 
 OpenGadgetList(1)
 AddGadgetItem(1, -1, "Clients")
+Client()
 CloseGadgetList()
 
 OpenGadgetList(1)
 AddGadgetItem(1, -1, "Flottes")
-
-
-
-
-
-
-
-   
-  
-  
-  
-  
-
-  
-  
+Flotte()
 CloseGadgetList()
 
 
@@ -705,6 +701,11 @@ AddGadgetItem(1, -1, "Calendar")
      OpenGadgetList(1)
     AddGadgetItem(1, -1, "Boite à outils")
      TextGadget(726, 100, 0, 100, 20, "heya")
+     CloseGadgetList()
+     
+      OpenGadgetList(1)
+    AddGadgetItem(1, -1, "Support Technique")
+     TextGadget(726, 100, 0, 100, 20, "heya")
     CloseGadgetList()
     
       ;/////////////////////////////////////////////////////////////////////////////////////////////////////////menu/////////////////////////menu///////////////////////////////////menu///////////////////////////////
@@ -712,26 +713,15 @@ AddGadgetItem(1, -1, "Calendar")
     
       CreateMenu(0, WindowID(0))  ; la création du menu commence ici....
       MenuTitle("  Menu  ")
-      MenuItem(1, "GuillaumeFoisy.ca")
      
-    
-      MenuBar()                 ; la barre de séparation sera insérée ici
-      MenuBar()                 ; la barre de séparation sera insérée ici
-      MenuBar()                 ; la barre de séparation sera insérée ici
       
-        MenuItem(4, "Fermer")
+        MenuItem(1, "Fermer")
         
       
         
-      MenuTitle("  Support Technique  ")
+      
       
      
-      MenuItem(25, "Contact")
-      MenuItem(26, "F.A.Q")
-      
-       MenuTitle(" $$ Donation $$ ")
-      
-      MenuItem(3, "$$ Donation $$")
      
       
       
@@ -741,7 +731,7 @@ AddGadgetItem(1, -1, "Calendar")
         ;BindMenuEvent(0, 1, @GfoisyHandler())
        ; BindMenuEvent(0, 2, @GitHandler())
        ; BindMenuEvent(0, 3, @DonateHandler())
-        BindMenuEvent(0, 4, @QuitHandler())
+        BindMenuEvent(0, 1, @QuitHandler())
        
        ; BindMenuEvent(0, 5, @GWOHandler())
       ;  BindMenuEvent(0, 8, @CGHNHandler())
@@ -1178,9 +1168,9 @@ EndIf
 
 ;main()
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 107
-; FirstLine = 81
-; Folding = --
+; CursorPosition = 706
+; FirstLine = 678
+; Folding = ---
 ; EnableXP
 ; DPIAware
 ; UseIcon = icon.ico
