@@ -10,6 +10,10 @@ Postgresql comme base de donnée.
 
 À Venir!
 
+Service hébergement base de donnée postgresql.
+
+Service de Compilation du logiciel avec vos information de connexion base de donné personel ou hébergé.
+
 Version prevue pour la release: Windows_X64 et Linux_X64 (En *V_1.0*) 
 - aucune date n'est déterminer pour la premiere release!
 
