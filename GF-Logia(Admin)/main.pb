@@ -116,6 +116,9 @@ Enumeration
       #_qq
       #_ww
       #_lt1205
+      #_p50
+      #_p51
+      #_p52
 EndEnumeration
 
   
@@ -162,7 +165,7 @@ Procedure histwo()
   
 EndProcedure
 
-Procedure calendar()
+Procedure ModWO()
   OpenGadgetList(1, 6)
        
        CalendarGadget(#cal, 0, 0, 1280, 650)
@@ -417,6 +420,47 @@ Procedure closewindowHandler()
       End
     EndProcedure
     
+     Procedure punchhist()
+      OpenGadgetList(1, 5)
+      
+      TextGadget(#_p50, 0, 160, 420, 20, "Punch par Job",  #PB_Text_Border | #PB_Text_Center)
+      
+      
+             If DatabaseQuery (#mysql, "SELECT * FROM punch WHERE jobname='"+GetGadgetText(#_z0)+"'")
+             
+               
+              ListIconGadget(#_p51, 0, 180, 420, 245, "name", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+          
+             AddGadgetColumn(#_p51, 1, "jobname", 120)
+             AddGadgetColumn(#_p51, 2, "Punch in", 120)
+             AddGadgetColumn(#_p51, 3, "Punch out", 120)
+ 
+  
+              
+            
+            
+              While NextDatabaseRow(#mysql)
+     
+      AddGadgetItem(#_p51, -1, GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4))
+      
+      
+      
+      
+      
+               Wend  
+               EndIf
+               FinishDatabaseQuery(#mysql)
+               
+             
+            
+               
+               
+          
+ 
+   FinishDatabaseQuery(#mysql)
+    
+      CloseGadgetList()
+    EndProcedure
    
     Procedure punch()
       OpenGadgetList(1, 4)
@@ -649,13 +693,13 @@ Procedure oderhist()
    
       
      
-               ButtonGadget(#_1210, 480, 630, 200, 30, "Nouvelle Job")
+               
     
      
    
      TextGadget(#_zz, 480, 490, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
      
-     If  ListViewGadget(#_z0, 480, 510, 200, 120)
+     If  ListViewGadget(#_z0, 480, 510, 200, 150)
              
            While  NextDatabaseRow(#mysql) 
                
@@ -912,8 +956,8 @@ CloseGadgetList()
  
     
    OpenGadgetList(1)
-AddGadgetItem(1, -1, "Calendar")
-     calendar()
+AddGadgetItem(1, -1, "Modification Bon travail")
+     ModWO()
      CloseGadgetList()
      
     OpenGadgetList(1)
@@ -999,6 +1043,26 @@ AddGadgetItem(1, -1, "Calendar")
          ; LabelUpdate(Folder)
          ; FilesExamine(Folder, Files())
          ; ListLoad(#FilesList, Files())
+        
+        
+      If EventGadget =  #_402  ;archive Workorder
+        OpenGadgetList(1 ,4)
+        queryarchwo.s = "UPDATE workorder SET status='2' WHERE wo='"+GetGadgetText(1202)+"'"
+  
+        ; update the database with the literal prepared query and confirm the write
+     
+       DatabaseUpdate(#mysql, queryarchwo)
+    
+   
+       mainwo()
+       histwo()
+       CloseGadgetList()
+      
+       FinishDatabaseQuery(#mysql)
+       
+      EndIf
+      
+      
         If EventGadget = #_1203 ;open note
             OpenGadgetList(1, 4)
            
@@ -1345,9 +1409,9 @@ EndIf
    
    
 
-    
+     punchhist()
     CloseGadgetList()
-   ;punch()
+  
           
           EndIf
           
@@ -1538,8 +1602,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1312
-; FirstLine = 1286
+; CursorPosition = 958
+; FirstLine = 933
 ; Folding = ----
 ; EnableXP
 ; DPIAware
