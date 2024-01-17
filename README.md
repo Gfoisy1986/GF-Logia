@@ -15,11 +15,15 @@ Version prevue pour la release: Windows_X64 et Linux_X64 (En *V_1.0*)
 
 INSTALL:
 
--Pour installer le logiciel vous devez éditer les premieres lignes du code source "main.pb" et modifier la ligne de connection PostgreSQL pour refléter les information de connexion a votre base de donné.
--Ensuite vous devez Compiler le programme avec Purebasic(V6.04) pro, la version gratuite ne peu compiler le programme car il ya trop de ligne de code.
--Vous devez parametrer les information du compilleur avant de le construire.
--Le Code Source est Cross-Plateforme Windows 11(.exe) et Linux(.sh)
--Vous devez importer à partir de SQL(postgresql) la base de donnée.
+- Pour installer le logiciel vous devez éditer les premieres lignes du code source "main.pb" et modifier la ligne de connection PostgreSQL pour refléter les information de connexion a votre base de donné.
+
+- Ensuite vous devez Compiler le programme avec Purebasic(V6.04) pro, la version gratuite ne peu compiler le programme car il ya trop de ligne de code.
+
+- Vous devez parametrer les information du compilleur avant de le construire.
+
+- Le Code Source est Cross-Plateforme Windows 11(.exe) et Linux(.sh).
+
+- Vous devez importer à partir de SQL(postgresql) la base de donnée.
 
 
   
