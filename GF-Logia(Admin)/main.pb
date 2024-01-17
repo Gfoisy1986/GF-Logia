@@ -58,6 +58,8 @@ Enumeration
       #_p20
       #_JK
       #_020
+      #cal
+      #cal2
 EndEnumeration
 
   
@@ -65,8 +67,23 @@ EndEnumeration
  
 Icone$ = "icon.ico"
 
-
+Procedure calendar()
+  OpenGadgetList(1, 6)
+       
+       CalendarGadget(#cal, 0, 0, 1280, 650)
   
+  CloseGadgetList()
+EndProcedure
+
+
+Procedure calendarmaint()
+  OpenGadgetList(1, 7)
+       
+       CalendarGadget(#cal2, 0, 0, 650, 650)
+  
+  CloseGadgetList()
+EndProcedure
+
 
 Procedure GFoisyWEBSITE()
   OpenGadgetList(1, 0)
@@ -102,13 +119,13 @@ Procedure employer()
          ButtonGadget(#BG_9, 1020, 470, 120, 20, "# Liscence P.E.P")
          ButtonGadget(#BG_10, 1140, 470, 120, 20, "# Liscence S.A.A.Q")
          ButtonGadget(#BG_11, 0, 490, 120, 20, "Date Naissance")
-         ButtonGadget(#BG_12, 0, 490, 120, 20, "Date Embauche")
-         ButtonGadget(#BG_13, 120, 490, 120, 20, "Ville")
-         ButtonGadget(#BG_14, 240, 490, 120, 20, "Province")
-         ButtonGadget(#BG_15, 360, 490, 120, 20, "Pays")
-         ButtonGadget(#BG_16, 480, 490, 120, 20, "Code Postal")
-         ButtonGadget(#BG_17, 600, 490, 120, 20, "E-mail Personel")
-         ButtonGadget(#BG_18, 720, 490, 120, 20, "E-mail Job")
+         ButtonGadget(#BG_12, 120, 490, 120, 20, "Date Embauche")
+         ButtonGadget(#BG_13, 240, 490, 120, 20, "Ville")
+         ButtonGadget(#BG_14, 360, 490, 120, 20, "Province")
+         ButtonGadget(#BG_15, 480, 490, 120, 20, "Pays")
+         ButtonGadget(#BG_16, 600, 490, 120, 20, "Code Postal")
+         ButtonGadget(#BG_17, 720, 490, 120, 20, "E-mail Personel")
+         ButtonGadget(#BG_18, 840, 490, 120, 20, "E-mail Job")
          
          
          
@@ -630,12 +647,12 @@ CloseGadgetList()
     
    OpenGadgetList(1)
 AddGadgetItem(1, -1, "Calendar")
-     ButtonGadget(659, 0, 0, 230, 20, "A Cross Window Test :P !")
+     calendar()
      CloseGadgetList()
      
     OpenGadgetList(1)
     AddGadgetItem(1, -1, "Calendrier des maintenances")
-     TextGadget(726, 100, 0, 100, 20, "heya")
+     calendarmaint()
      CloseGadgetList()
      
       OpenGadgetList(1)
@@ -1206,7 +1223,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; FirstLine = 594
+; CursorPosition = 654
+; FirstLine = 630
 ; Folding = ---
 ; EnableXP
 ; DPIAware
