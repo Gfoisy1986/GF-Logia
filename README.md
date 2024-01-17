@@ -17,6 +17,21 @@ INSTALL:
 
 - Pour installer le logiciel vous devez éditer les premieres lignes du code source "main.pb" et modifier la ligne de connection PostgreSQL pour refléter les information de connexion a votre base de donné.
 
+   : Modification de la ligne # "5".
+  
+-   If OpenDatabase(1, "host=localhost port=5432 dbname=gf-logia", "postgres", "!@Athene")
+
+-   host= ip or addresse.
+-   
+-   port= port de la base de donnée.
+-   
+-   dbname=  nom de la base de donnée.
+-   
+-   Where "postgres"  > entré votre username de la base de donnée.
+-   
+-   Where "!@Athene"  > entré votre mot de passe de la base de donnée.
+
+
 - Ensuite vous devez Compiler le programme avec Purebasic(V6.04) pro, la version gratuite ne peu compiler le programme car il ya trop de ligne de code.
 
 - Vous devez parametrer les information du compilleur avant de le construire.
