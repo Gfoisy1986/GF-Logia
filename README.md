@@ -26,5 +26,7 @@ INSTALL:
 - Vous devez importer à partir de SQL(postgresql) la base de donnée.
 
 
-  
+
+- Version Admin  = Cadre de l'entreprise.
+- Version User   = Mécanicien.
 Guillaume Foisy
