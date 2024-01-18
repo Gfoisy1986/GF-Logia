@@ -13,16 +13,14 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
+-- Dumping data for table public.client: -1 rows
+DELETE FROM "client";
+/*!40000 ALTER TABLE "client" DISABLE KEYS */;
+/*!40000 ALTER TABLE "client" ENABLE KEYS */;
+
 -- Dumping data for table public.job: 1 rows
 DELETE FROM "job";
 /*!40000 ALTER TABLE "job" DISABLE KEYS */;
-INSERT INTO "job" ("id", "username", "jobname", "jobinfo", "jobrepport", "punchin", "punchout", "wo", "inpectionsheet") VALUES
-	(1, 'Garage', 'fghfgh', 'fghfgh', NULL, NULL, NULL, 1, NULL),
-	(1, 'Garage', 'ytutyuy', 'tyutyu', NULL, NULL, NULL, 1, NULL),
-	(1, 'gfoisy', 'fghfgh', '', '(gfoisy) : tyutyutyu', NULL, NULL, 1, NULL),
-	(1, 'gfoisy', 'fghfgh', '', '(gfoisy) : heya this is a test', NULL, NULL, 1, NULL),
-	(2, 'Garage', 'hgjhgjhgjhgj', 'ghjhgjfghj', NULL, NULL, NULL, 2, NULL),
-	(1, 'GFoisy', 'fghfgh', '', '(GFoisy) : Done', NULL, NULL, 1, NULL);
 /*!40000 ALTER TABLE "job" ENABLE KEYS */;
 
 -- Dumping data for table public.note: -1 rows
@@ -35,8 +33,6 @@ INSERT INTO "note" ("id", "notename", "wo", "content", "serie") VALUES
 -- Dumping data for table public.punch: 0 rows
 DELETE FROM "punch";
 /*!40000 ALTER TABLE "punch" DISABLE KEYS */;
-INSERT INTO "punch" ("id", "wo", "username", "punchin", "punchout", "pstatus", "jobname") VALUES
-	('1', '1', 'GFoisy', '16/01/2024  11:02:47', '16/01/2024  11:02:56', '2', 'fghfgh');
 /*!40000 ALTER TABLE "punch" ENABLE KEYS */;
 
 -- Dumping data for table public.username: -1 rows
@@ -49,9 +45,8 @@ INSERT INTO "username" ("username", "nom", "prenom", "age", "tel", "cell", "add"
 -- Dumping data for table public.workorder: -1 rows
 DELETE FROM "workorder";
 /*!40000 ALTER TABLE "workorder" DISABLE KEYS */;
-INSERT INTO "workorder" ("id", "wo", "user", "serie", "annee", "model", "unitee", "km", "hrs", "date", "maintn", "inspn", "garantie", "plate", "proprioname", "proprioadd", "vehadd", "ecm") VALUES
-	(1, '1', 'GFoisy', 'test', '2002', 'ford', '5', '25000', '250', NULL, NULL, NULL, NULL, 'test', 'gui', '85 28', 'rue contrefait', '111'),
-	(1, '2', 'GFoisy', 'test1', '2005', 'kenworth', '10', '300000', '3500', NULL, NULL, NULL, NULL, 'test', 'elie', '171 27', 'rue cochon', '0000');
+INSERT INTO "workorder" ("id", "wo", "user", "serie", "annee", "model", "unitee", "km", "hrs", "date", "maintn", "inspn", "garantie", "plate", "proprioname", "proprioadd", "vehadd", "ecm", "status") VALUES
+	(1, '1', 'GFoisy', 'test', '2002', 'ford', '5', '25000', '250', NULL, NULL, NULL, NULL, 'test', 'gui', '85 28', 'rue contrefait', '111', 1);
 /*!40000 ALTER TABLE "workorder" ENABLE KEYS */;
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
