@@ -119,6 +119,34 @@ Enumeration
       #_p50
       #_p51
       #_p52
+      #_pc20
+       #BC_0
+    #BC_1
+    #BC_2
+    #BC_3
+    #BC_4
+    #BC_5
+    #BC_6
+    #BC_7
+    #BC_8
+    #BC_9
+    #BC_10
+    #BC_11
+    #BC_12
+    #BC_13
+    #BC_14
+    #BC_15
+    #BC_16
+    #BC_17
+    #BC_18
+    #BC_19
+    #BC_20
+    #BC_21
+    #BC_22
+    #BC_23
+    #BC_24
+    #BC_25
+    #_BCC20
 EndEnumeration
 
   
@@ -279,10 +307,93 @@ EndProcedure
 Procedure Client()
   OpenGadgetList(1, 2)
   
-   TextGadget(860, 220, 0, 200, 20, "Menu Client", #PB_Text_Border | #PB_Text_Center)
-  ButtonGadget(853, 220, 20, 200, 20, "add client")
- ; ButtonGadget(854, 220, 40, 200, 20, "mod client")
-  ButtonGadget(855, 220, 70, 200, 20, "del client")
+   TextGadget(8591, 0, 400, 1280, 20, "Menu Client", #PB_Text_Border | #PB_Text_Center)
+ ; ButtonGadget(8501, 0, 420, 200, 20, "Ajouté un client")
+ 
+ ; ButtonGadget(8521, 250, 420, 200, 20, "Supprimé un client")
+  
+  
+  
+   TextGadget(#PB_Any, 0, 450, 1280, 20, "Modification table des Clients", #PB_Text_Border | #PB_Text_Center)
+         ButtonGadget(#BC_0, 0, 470, 120, 20, "Nom propre propriétaire")
+         ButtonGadget(#BC_1, 120, 470, 120, 20, "Prenom propriétaire")
+         ButtonGadget(#BC_2, 240, 470, 120, 20, "# Téléphone propriétaire")
+         ButtonGadget(#BC_3, 360, 470, 120, 20, "# Cell propriétaire")
+         ButtonGadget(#BC_4, 480, 470, 120, 20, "Date naissance propriétaire")
+         ButtonGadget(#BC_5, 600, 470, 120, 20, "Addresse propriétaire")
+         ButtonGadget(#BC_6, 720, 470, 120, 20, "Ville propriétaire")
+         ButtonGadget(#BC_7, 840, 470, 120, 20, "Province propriétaire")
+         ButtonGadget(#BC_8, 960, 470, 120, 20, "Pays propriétaire")
+         ButtonGadget(#BC_9, 1080, 470, 120, 20, "Code Postal propriétaire")
+         ButtonGadget(#BC_10, 0, 490, 120, 20, "E-mail perssonel propriétaire")
+         ButtonGadget(#BC_11, 120, 490, 120, 20, "E-mail professionel propriétaire")
+         ButtonGadget(#BC_12, 240, 490, 120, 20, "Nom entreprise")
+         ButtonGadget(#BC_13, 360, 490, 120, 20, "Addresse entreprise")
+         ButtonGadget(#BC_14, 480, 490, 120, 20, "Ville entreprise")
+         ButtonGadget(#BC_15, 600, 490, 120, 20, "Province entreprise")
+         ButtonGadget(#BC_16, 720, 490, 120, 20, "Pays entreprise")
+         ButtonGadget(#BC_17, 840, 490, 120, 20, "Code Pastal entreprise")
+         ButtonGadget(#BC_18, 960, 490, 120, 20, "# Téléphone entreprise")
+         ButtonGadget(#BC_19, 1080, 490, 120, 20, "Nom du responsable")
+         ButtonGadget(#BC_20, 0, 510, 120, 20, "# Téléphone responsable")
+         ButtonGadget(#BC_21, 120, 510, 120, 20, "E-mail responsable")
+         ButtonGadget(#BC_22, 240, 510, 120, 20, "Date Création client")
+         ButtonGadget(#BC_23, 360, 510, 120, 20, "Nom Entreprise")
+         ButtonGadget(#BC_24, 480, 510, 120, 20, "Taux Horraire")
+         ButtonGadget(#BC_25, 600, 510, 120, 20, "Fax Entreprise")
+   
+         
+         
+         TextGadget(#_pc20, 0, 0, 1280, 20, "Feuillet client",  #PB_Text_Border | #PB_Text_Center)
+      
+      
+             If DatabaseQuery (#mysql, "SELECT * FROM client")
+             
+               
+              ListIconGadget(#_BCC20, 0, 20, 1280, 380, "Nom Propre", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+          
+             AddGadgetColumn(#_BCC20, 1, "Prenom", 120)
+             AddGadgetColumn(#_BCC20, 2, "# Téléphone", 120)
+             AddGadgetColumn(#_BCC20, 3, "# Cell", 60)
+             AddGadgetColumn(#_BCC20, 4, "Date naissance", 120)
+             AddGadgetColumn(#_BCC20, 5, "Addresse client", 120)
+             AddGadgetColumn(#_BCC20, 6, "Ville Client", 120)
+             AddGadgetColumn(#_BCC20, 7, "Province client", 120)
+             AddGadgetColumn(#_BCC20, 8, "Pays client", 120)
+             AddGadgetColumn(#_BCC20, 9, "Code Postal client", 120)
+             AddGadgetColumn(#_BCC20, 10, "E-mail personel client", 120)
+             AddGadgetColumn(#_BCC20, 11, "E-mail proffesionel client", 120)
+             AddGadgetColumn(#_BCC20, 12, "Nom entreprise", 120)
+             AddGadgetColumn(#_BCC20, 13, "Addresse entreprise", 120)
+             AddGadgetColumn(#_BCC20, 14, "Ville entreprise", 120)
+             AddGadgetColumn(#_BCC20, 15, "Province entreprise", 120)
+             AddGadgetColumn(#_BCC20, 16, "Pays Entreprise", 120)
+             AddGadgetColumn(#_BCC20, 17, "Code Postal entreprise", 120)
+             AddGadgetColumn(#_BCC20, 18, "# téléphone entreprise", 120)
+             AddGadgetColumn(#_BCC20, 19, "Nom responsable", 120)
+             AddGadgetColumn(#_BCC20, 20, "# Téléphone responsable", 120)
+             AddGadgetColumn(#_BCC20, 21, "E-mail responsable", 120)
+             AddGadgetColumn(#_BCC20, 22, "Date Création", 120)
+             AddGadgetColumn(#_BCC20, 23, "Username Client", 120)
+             AddGadgetColumn(#_BCC20, 24, "Taux Horraire", 120)
+             AddGadgetColumn(#_BCC20, 25, "Fax entreprise", 120)
+              
+            
+            
+              While NextDatabaseRow(#mysql)
+     
+      AddGadgetItem(#_BCC20, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18))
+      
+      
+      
+      
+      
+               Wend  
+               EndIf
+               FinishDatabaseQuery(#mysql)
+         
+         
+
   
   
   
@@ -634,8 +745,8 @@ Procedure oderhist()
       TextGadget(#_218, 480, 200, 200, 20, "Menu de Notes", #PB_Text_Border | #PB_Text_Center)
       ButtonGadget(#_220, 480, 220, 200, 20,"Nouvelle note")
      
-       ButtonGadget(#_qq, 480, 245, 200, 20,"Sauvegardé")
-       ButtonGadget(#_ww, 480, 270, 200, 20,"Supprimé")
+       ButtonGadget(#_qq, 480, 245, 200, 20, "Sauvegardé")
+       ButtonGadget(#_ww, 480, 270, 200, 20, "Supprimé")
        
        FinishDatabaseQuery(#mysql)
        
@@ -774,7 +885,7 @@ OpenGadgetList(1, 4)
        TextGadget(105, 680, 70, 200, 30, "" + GetDatabaseString(#mysql, 7), #PB_Text_Border | #PB_Text_Center)
       
       TextGadget(206, 880 ,50, 200, 20, "Heures", #PB_Text_Border | #PB_Text_Center)
-       TextGadget(106, 880, 70, 200, 30, "" + GetDatabaseString(#mysql, 8), #PB_Text_Border | #PB_Text_Center)
+       TextGadget(1060, 880, 70, 200, 30, "" + GetDatabaseString(#mysql, 8), #PB_Text_Border | #PB_Text_Center)
       
       TextGadget(207, 1080 , 50, 200, 20, "Date", #PB_Text_Border | #PB_Text_Center)
        TextGadget(107, 1080, 70, 200, 30, "" + GetDatabaseString(#mysql, 9), #PB_Text_Border | #PB_Text_Center)
@@ -1455,6 +1566,12 @@ EndIf
    punch()
  EndIf
  
+ ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+ ;////////////////////////////////////////
+ ;// Table des employer ici bas  /////////
+ ;////////////////////////////////////////
+ 
  If EventGadget = #BG_0
    texteuser0.s = InputRequester("Modification du username de l'employé.", "Veuillez entrer le nouveau username.", "")
    queryuser0.s = "UPDATE username SET username='"+texteuser0+"' WHERE username='"+GetGadgetText(#_020)+"'"
@@ -1586,9 +1703,198 @@ EndIf
    queryuser18.s = "UPDATE username SET email2='"+texteuser18+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser18)
    employer()
-                  EndIf
-                  
+ EndIf 
+ 
+ ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+ 
+ ;////////////////////////////////////////
+ ;// Table des Client ici bas  /////////
+ ;////////////////////////////////////////  
+ 
+ 
+ If EventGadget = #BC_0
+   texteclient0.s = InputRequester("Modification du nom propre du client.", "Veuillez entrer le nouveau nom propre.", "")
+   queryclient0.s = "UPDATE client SET nomproprec='"+texteclient0+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient0)
+   Client()
+EndIf
+ 
+ If EventGadget = #BC_1
+   texteclient1.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau nom propre.", "")
+   queryclient1.s = "UPDATE client SET prenomc='"+texteclient1+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient1)
+   Client()
+EndIf
+ 
+  If EventGadget = #BC_2
+   texteclient2.s = InputRequester("Modification du prenom de l'employé.", "Veuillez entrer le nouveau prenom.", "")
+   queryclient2.s = "UPDATE client SET telc='"+texteclient2+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient2)
+   Client()
+  EndIf
+  
+   If EventGadget = #BC_3
+   texteclient3.s = InputRequester("Modification de age de l'employé.", "Veuillez entrer la nouvelle age.", "")
+   queryclient3.s = "UPDATE client SET cellc='"+texteclient3+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient3)
+   Client()
+ EndIf
+ 
+    If EventGadget = #BC_4
+     texteclient4.s = InputRequester("Modification du # téléphone de l'employé.", "Veuillez entrer le nouveau # téléphone.", "")
+   queryclient4.s = "UPDATE client SET datenc='"+texteclient4+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient4)
+   Client()
+ EndIf
+ 
+     If EventGadget = #BC_5
+   texteclient5.s = InputRequester("Modification du # cellulaire de l'employé.", "Veuillez entrer le nouveau # cellulaire.", "")
+   queryclient5.s = "UPDATE client SET addc='"+texteclient5+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient5)
+   Client()
+ EndIf
+ 
+      If EventGadget = #BC_6
+   texteclient6.s = InputRequester("Modification de l'addresse de l'employé.", "Veuillez entrer la nouvelle addresse.", "")
+   queryclient6.s = "UPDATE client SET villec='"+texteclient6+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient6)
+   Client()
+ EndIf
+ 
+       If EventGadget = #BC_7
+   texteclient7.s = InputRequester("Modification du # permis conduire de l'employé.", "Veuillez entrer le nouveau # permis.", "")
+   queryclient7.s = "UPDATE client SET provincec='"+texteclient7+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient7)
+   Client()
+       EndIf
+       
+        If EventGadget = #BC_8
+   texteclient8.s = InputRequester("Modification de la liscence de mécanique de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
+   queryclient8.s = "UPDATE client SET paysc='"+texteclient8+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient8)
+   Client()
+        EndIf
+        
+         If EventGadget = #BC_9
+   texteclient9.s = InputRequester("Modification du # p.e.p de l'employé.", "Veuillez entrer le nouveau # p.e.p.", "")
+   queryclient9.s = "UPDATE client SET zipc='"+texteclient9+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient9)
+   Client()
+         EndIf
+         
+          If EventGadget = #BC_10
+   texteclient10.s = InputRequester("Modification du # liscence inspection SAAQ de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
+   queryclient10.s = "UPDATE client SET email1c='"+texteclient10+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient10)
+   Client()
+          EndIf
+          
+           If EventGadget = #BC_11
+   texteclient11.s = InputRequester("Modification de la date de naissance de l'employé.", "Veuillez entrer la nouvelle date de naissance.", "")
+   queryclient11.s = "UPDATE client SET email2c='"+texteclient11+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient11)
+   Client()
+           EndIf
+           
+            If EventGadget = #BC_12
+   texteclient12.s = InputRequester("Modification de la date embauche de l'employé.", "Veuillez entrer la nouvelle date", "")
+   queryclient12.s = "UPDATE client SET nomentc='"+texteclient12+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient12)
+   Client()
+            EndIf
+            
+             If EventGadget = #BC_13
+   texteclient13.s = InputRequester("Modification du nom de ville de l'employé.", "Veuillez entrer le nom de la nouvelle ville.", "")
+   queryclient13.s = "UPDATE client SET addentc='"+texteclient13+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient13)
+   Client()
+             EndIf
+             
+              If EventGadget = #BC_14
+   texteclient14.s = InputRequester("Modification de la province de l'employé.", "Veuillez entrer la nouvelle province", "")
+   queryclient14.s = "UPDATE client SET villeentc='"+texteclient14+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient14)
+   Client()
+              EndIf
+              
+               If EventGadget = #BC_15
+   texteclient15.s = InputRequester("Modification du pays de l'employé.", "Veuillez entrer le nouveau pays.", "")
+   queryclient15.s = "UPDATE client SET provinceentc='"+texteclient15+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient15)
+   Client()
+               EndIf
+               
+                If EventGadget = #BC_16
+   texteclient16.s = InputRequester("Modification du Code Postal de l'employé.", "Veuillez entrer le nouveau Code Postal.", "")
+   queryclient16.s = "UPDATE client SET paysentc='"+texteclient16+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient16)
+   Client()
+                EndIf
                 
+                 If EventGadget = #BC_17
+   texteclient17.s = InputRequester("Modification du email personel de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
+   queryclient17.s = "UPDATE client SET zipentc='"+texteclient17+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient17)
+   Client()
+                 EndIf
+                 
+                  If EventGadget = #BC_18
+   texteclient18.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
+   queryclient18.s = "UPDATE client SET telentc='"+texteclient18+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient18)
+   Client()
+ EndIf 
+ 
+        If EventGadget = #BC_19
+   texteclient19.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
+   queryclient19.s = "UPDATE client SET nomrepc='"+texteclient19+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient19)
+   Client()
+ EndIf
+ 
+  If EventGadget = #BC_20
+   texteclient20.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
+   queryclient20.s = "UPDATE client SET telrespc='"+texteclient20+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient20)
+   Client()
+ EndIf
+ 
+  If EventGadget = #BC_21
+   texteclient21.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
+   queryclient21.s = "UPDATE client SET emailrespc='"+texteclient21+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient21)
+   Client()
+ EndIf
+ 
+ If EventGadget = #BC_22
+   texteclient22.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
+   queryclient22.s = "UPDATE client SET datesc='"+texteclient22+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient22)
+   Client()
+ EndIf
+ 
+ If EventGadget = #BC_23
+   texteclient23.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
+   queryclient23.s = "UPDATE client SET usernamec='"+texteclient23+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient23)
+   Client()
+ EndIf
+ 
+  If EventGadget = #BC_24
+   texteclient24.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
+   queryclient24.s = "UPDATE client SET tauxhc='"+texteclient24+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient24)
+   Client()
+ EndIf
+ 
+  If EventGadget = #BC_25
+   texteclient25.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
+   queryclient25.s = "UPDATE client SET faxentc='"+texteclient25+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, queryclient25)
+   Client()
+ EndIf
+
+ 
 ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
       
       Case #PB_Event_CloseWindow
@@ -1602,8 +1908,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 958
-; FirstLine = 933
+; CursorPosition = 1891
+; FirstLine = 1867
 ; Folding = ----
 ; EnableXP
 ; DPIAware
