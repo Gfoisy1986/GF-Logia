@@ -146,6 +146,7 @@ Enumeration
     #BC_23
     #BC_24
     #BC_25
+    #_BCC8521
     #_BCC20
 EndEnumeration
 
@@ -310,7 +311,7 @@ Procedure Client()
    TextGadget(8591, 0, 400, 1280, 20, "Menu Client", #PB_Text_Border | #PB_Text_Center)
   ButtonGadget(8501, 0, 420, 200, 20, "Ajouté un client")
  
-  ButtonGadget(8521, 250, 420, 200, 20, "Supprimé un client")
+  ButtonGadget(#_BCC8521, 250, 420, 200, 20, "Supprimé un client")
   
   
   
@@ -382,7 +383,7 @@ Procedure Client()
             
               While NextDatabaseRow(#mysql)
      
-      AddGadgetItem(#_BCC20, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18))
+      AddGadgetItem(#_BCC20, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19)+Chr(10)+GetDatabaseString(#mysql, 20)+Chr(10)+GetDatabaseString(#mysql, 21)+Chr(10)+GetDatabaseString(#mysql, 22)+Chr(10)+GetDatabaseString(#mysql, 23)+Chr(10)+GetDatabaseString(#mysql, 24)+Chr(10)+GetDatabaseString(#mysql, 25))
       
       
       
@@ -1471,11 +1472,11 @@ EndIf
                EndIf
                
                
-               If EventGadget = 8521  ;DEL client
+               If EventGadget = #_BCC8521  ;DEL client
           OpenGadgetList(1, 2)
-                         querydelclient.s = "DELETE FROM client WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+                         querydelclient2.s = "DELETE FROM client WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
   
-                         DatabaseUpdate(#mysql, querydelclient) 
+                         DatabaseUpdate(#mysql, querydelclient2) 
                            
                         client()
                          
@@ -1498,34 +1499,34 @@ EndIf
         
          If EventGadget = 8501  ;add client
           OpenGadgetList(1, 2)
-          Textclient100$ = InputRequester("ajoutez un client", "Veuillez entrer le nom de l'entrprise", "")
-        Textclient101$ = InputRequester("ajoutez un client", "Veuillez entrer le Nom propre du propriétaire", "")
-        Textclient102$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient103$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient104$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient105$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient106$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient107$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient108$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient109$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient110$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient111$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient112$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient113$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient114$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient115$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient116$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient117$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient118$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient119$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient120$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient121$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient122$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient123$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient124$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
-        Textclient125$ = InputRequester("ajoutez un client", "Veuillez entrer le Prenom du propriétaire", "")
+          Textclient100$ = InputRequester("ajoutez un client", "Veuillez entrer le nom propre du propriétaire", "")
+        Textclient101$ = InputRequester("ajoutez un client", "Veuillez entrer le prenom du propriétaire", "")
+        Textclient102$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone du propriétaire", "")
+        Textclient103$ = InputRequester("ajoutez un client", "Veuillez entrer le # cell du propriétaire", "")
+        Textclient104$ = InputRequester("ajoutez un client", "Veuillez entrer la date de naissance du propriétaire", "")
+        Textclient105$ = InputRequester("ajoutez un client", "Veuillez entrer l'addresse du propriétaire", "")
+        Textclient106$ = InputRequester("ajoutez un client", "Veuillez entrer la ville du propriétaire", "")
+        Textclient107$ = InputRequester("ajoutez un client", "Veuillez entrer la province du propriétaire", "")
+        Textclient108$ = InputRequester("ajoutez un client", "Veuillez entrer le pays du propriétaire", "")
+        Textclient109$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal du propriétaire", "")
+        Textclient110$ = InputRequester("ajoutez un client", "Veuillez entrer le e-mail personel du propriétaire", "")
+        Textclient111$ = InputRequester("ajoutez un client", "Veuillez entrer le e-mail professionel du propriétaire", "")
+        Textclient112$ = InputRequester("ajoutez un client", "Veuillez entrer le nom de l'entreprise", "")
+        Textclient113$ = InputRequester("ajoutez un client", "Veuillez entrer l'addresse de l'entreprise", "")
+        Textclient114$ = InputRequester("ajoutez un client", "Veuillez entrer la ville de l'entreprise", "")
+        Textclient115$ = InputRequester("ajoutez un client", "Veuillez entrer la province de l'entreprise", "")
+        Textclient116$ = InputRequester("ajoutez un client", "Veuillez entrer le pays de l'entreprise", "")
+        Textclient117$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal de l'entreprise", "")
+        Textclient118$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone de l'entreprise", "")
+        Textclient119$ = InputRequester("ajoutez un client", "Veuillez entrer le nom complet du responsable", "")
+        Textclient120$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone du responsable", "")
+        Textclient121$ = InputRequester("ajoutez un client", "Veuillez entrer le e-mail du responsable", "")
+        Textclient122$ = InputRequester("ajoutez un client", "Veuillez entrer le #FAX du responsable", "")
+        Textclient123$ = InputRequester("ajoutez un client", "Veuillez entrer la date de création du client", "")
+        ;Textclient124$ = InputRequester("ajoutez un client", "Veuillez entrer le username du client", "")
+        Textclient125$ = InputRequester("ajoutez un client", "Veuillez entrer le taux horraire du client", "")
         
-             queryclient5.s = "INSERT INTO client (nomproprec, prenomc, telc, cellc, addc, datenc, villec, provincec, paysc, zipc, email1c, email2c, nomentc, addentc, villeentc, provinceentc, paysentc, zipentc, telentc, nomrespc, telrespc, emailrespc, faxentc, datesc, usernamec, tauxhc) " + "VALUES ('"+Textclient101$+"', '"+Textclient102$+"',     ;'"+Textclient100$+"')"
+             queryclient5.s = "INSERT INTO client (nomproprec, prenomc, telc, cellc, addc, datenc, villec, provincec, paysc, zipc, email1c, email2c, nomentc, addentc, villeentc, provinceentc, paysentc, zipentc, telentc, nomrespc, telrespc, emailrespc, faxentc, datesc, usernamec, tauxhc) " + "VALUES ('"+Textclient100$+"', '"+Textclient101$+"', '"+Textclient102$+"', '"+Textclient103$+"', '"+Textclient104$+"', '"+Textclient105$+"', '"+Textclient106$+"', '"+Textclient107$+"', '"+Textclient108$+"', '"+Textclient109$+"', '"+Textclient110$+"', '"+Textclient111$+"', '"+Textclient112$+"', '"+Textclient113$+"', '"+Textclient114$+"', '"+Textclient115$+"', '"+Textclient116$+"', '"+Textclient117$+"', '"+Textclient118$+"', '"+Textclient119$+"', '"+Textclient120$+"', '"+Textclient121$+"', '"+Textclient122$+"', '"+Textclient123$+"', '"+Textclient112$+"', '"+Textclient125$+"')"
   
   
          DatabaseUpdate(#mysql, queryclient5)
@@ -1958,8 +1959,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1526
-; FirstLine = 1495
+; CursorPosition = 1476
+; FirstLine = 1462
 ; Folding = ----
 ; EnableXP
 ; DPIAware
