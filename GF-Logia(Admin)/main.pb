@@ -1765,182 +1765,182 @@ EndIf
  
  If EventGadget = #BC_0
    texteclient0.s = InputRequester("Modification du nom propre du client.", "Veuillez entrer le nouveau nom propre.", "")
-   queryclient0.s = "UPDATE client SET nomproprec='"+texteclient0+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient0.s = "UPDATE client SET nomproprec='"+texteclient0+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient0)
    Client()
 EndIf
  
  If EventGadget = #BC_1
    texteclient1.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau nom propre.", "")
-   queryclient1.s = "UPDATE client SET prenomc='"+texteclient1+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient1.s = "UPDATE client SET prenomc='"+texteclient1+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient1)
    Client()
 EndIf
  
   If EventGadget = #BC_2
    texteclient2.s = InputRequester("Modification du prenom de l'employé.", "Veuillez entrer le nouveau prenom.", "")
-   queryclient2.s = "UPDATE client SET telc='"+texteclient2+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient2.s = "UPDATE client SET telc='"+texteclient2+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient2)
    Client()
   EndIf
   
    If EventGadget = #BC_3
    texteclient3.s = InputRequester("Modification de age de l'employé.", "Veuillez entrer la nouvelle age.", "")
-   queryclient3.s = "UPDATE client SET cellc='"+texteclient3+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient3.s = "UPDATE client SET cellc='"+texteclient3+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient3)
    Client()
  EndIf
  
     If EventGadget = #BC_4
      texteclient4.s = InputRequester("Modification du # téléphone de l'employé.", "Veuillez entrer le nouveau # téléphone.", "")
-   queryclient4.s = "UPDATE client SET datenc='"+texteclient4+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient4.s = "UPDATE client SET datenc='"+texteclient4+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient4)
    Client()
  EndIf
  
      If EventGadget = #BC_5
    texteclient5.s = InputRequester("Modification du # cellulaire de l'employé.", "Veuillez entrer le nouveau # cellulaire.", "")
-   queryclient5.s = "UPDATE client SET addc='"+texteclient5+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient5.s = "UPDATE client SET addc='"+texteclient5+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient5)
    Client()
  EndIf
  
       If EventGadget = #BC_6
    texteclient6.s = InputRequester("Modification de l'addresse de l'employé.", "Veuillez entrer la nouvelle addresse.", "")
-   queryclient6.s = "UPDATE client SET villec='"+texteclient6+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient6.s = "UPDATE client SET villec='"+texteclient6+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient6)
    Client()
  EndIf
  
        If EventGadget = #BC_7
    texteclient7.s = InputRequester("Modification du # permis conduire de l'employé.", "Veuillez entrer le nouveau # permis.", "")
-   queryclient7.s = "UPDATE client SET provincec='"+texteclient7+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient7.s = "UPDATE client SET provincec='"+texteclient7+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient7)
    Client()
        EndIf
        
         If EventGadget = #BC_8
    texteclient8.s = InputRequester("Modification de la liscence de mécanique de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
-   queryclient8.s = "UPDATE client SET paysc='"+texteclient8+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient8.s = "UPDATE client SET paysc='"+texteclient8+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient8)
    Client()
         EndIf
         
          If EventGadget = #BC_9
    texteclient9.s = InputRequester("Modification du # p.e.p de l'employé.", "Veuillez entrer le nouveau # p.e.p.", "")
-   queryclient9.s = "UPDATE client SET zipc='"+texteclient9+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient9.s = "UPDATE client SET zipc='"+texteclient9+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient9)
    Client()
          EndIf
          
           If EventGadget = #BC_10
    texteclient10.s = InputRequester("Modification du # liscence inspection SAAQ de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
-   queryclient10.s = "UPDATE client SET email1c='"+texteclient10+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient10.s = "UPDATE client SET email1c='"+texteclient10+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient10)
    Client()
           EndIf
           
            If EventGadget = #BC_11
    texteclient11.s = InputRequester("Modification de la date de naissance de l'employé.", "Veuillez entrer la nouvelle date de naissance.", "")
-   queryclient11.s = "UPDATE client SET email2c='"+texteclient11+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient11.s = "UPDATE client SET email2c='"+texteclient11+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient11)
    Client()
            EndIf
            
             If EventGadget = #BC_12
    texteclient12.s = InputRequester("Modification de la date embauche de l'employé.", "Veuillez entrer la nouvelle date", "")
-   queryclient12.s = "UPDATE client SET nomentc='"+texteclient12+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient12.s = "UPDATE client SET nomentc='"+texteclient12+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient12)
    Client()
             EndIf
             
              If EventGadget = #BC_13
    texteclient13.s = InputRequester("Modification du nom de ville de l'employé.", "Veuillez entrer le nom de la nouvelle ville.", "")
-   queryclient13.s = "UPDATE client SET addentc='"+texteclient13+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient13.s = "UPDATE client SET addentc='"+texteclient13+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient13)
    Client()
              EndIf
              
               If EventGadget = #BC_14
    texteclient14.s = InputRequester("Modification de la province de l'employé.", "Veuillez entrer la nouvelle province", "")
-   queryclient14.s = "UPDATE client SET villeentc='"+texteclient14+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient14.s = "UPDATE client SET villeentc='"+texteclient14+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient14)
    Client()
               EndIf
               
                If EventGadget = #BC_15
    texteclient15.s = InputRequester("Modification du pays de l'employé.", "Veuillez entrer le nouveau pays.", "")
-   queryclient15.s = "UPDATE client SET provinceentc='"+texteclient15+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient15.s = "UPDATE client SET provinceentc='"+texteclient15+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient15)
    Client()
                EndIf
                
                 If EventGadget = #BC_16
    texteclient16.s = InputRequester("Modification du Code Postal de l'employé.", "Veuillez entrer le nouveau Code Postal.", "")
-   queryclient16.s = "UPDATE client SET paysentc='"+texteclient16+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient16.s = "UPDATE client SET paysentc='"+texteclient16+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient16)
    Client()
                 EndIf
                 
                  If EventGadget = #BC_17
    texteclient17.s = InputRequester("Modification du email personel de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient17.s = "UPDATE client SET zipentc='"+texteclient17+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient17.s = "UPDATE client SET zipentc='"+texteclient17+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient17)
    Client()
                  EndIf
                  
                   If EventGadget = #BC_18
    texteclient18.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient18.s = "UPDATE client SET telentc='"+texteclient18+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient18.s = "UPDATE client SET telentc='"+texteclient18+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient18)
    Client()
  EndIf 
  
         If EventGadget = #BC_19
    texteclient19.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient19.s = "UPDATE client SET nomrepc='"+texteclient19+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient19.s = "UPDATE client SET nomrepc='"+texteclient19+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient19)
    Client()
  EndIf
  
   If EventGadget = #BC_20
    texteclient20.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient20.s = "UPDATE client SET telrespc='"+texteclient20+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient20.s = "UPDATE client SET telrespc='"+texteclient20+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient20)
    Client()
  EndIf
  
   If EventGadget = #BC_21
    texteclient21.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient21.s = "UPDATE client SET emailrespc='"+texteclient21+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient21.s = "UPDATE client SET emailrespc='"+texteclient21+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient21)
    Client()
  EndIf
  
  If EventGadget = #BC_22
    texteclient22.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient22.s = "UPDATE client SET datesc='"+texteclient22+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient22.s = "UPDATE client SET datesc='"+texteclient22+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient22)
    Client()
  EndIf
  
  If EventGadget = #BC_23
    texteclient23.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient23.s = "UPDATE client SET usernamec='"+texteclient23+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient23.s = "UPDATE client SET usernamec='"+texteclient23+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient23)
    Client()
  EndIf
  
   If EventGadget = #BC_24
    texteclient24.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient24.s = "UPDATE client SET tauxhc='"+texteclient24+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient24.s = "UPDATE client SET tauxhc='"+texteclient24+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient24)
    Client()
  EndIf
  
   If EventGadget = #BC_25
    texteclient25.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient25.s = "UPDATE client SET faxentc='"+texteclient25+"' WHERE usernamec='"+GetGadgetText(#_BCC20)+"'"
+   queryclient25.s = "UPDATE client SET faxentc='"+texteclient25+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient25)
    Client()
  EndIf
@@ -1959,8 +1959,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1476
-; FirstLine = 1462
+; CursorPosition = 1942
+; FirstLine = 1928
 ; Folding = ----
 ; EnableXP
 ; DPIAware
