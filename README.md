@@ -36,7 +36,7 @@ INSTALL:
 -   Where "!@Athene"  > entré votre mot de passe de la base de donnée.
 
 
-- Ensuite vous devez Compiler le programme avec Purebasic(V6.04) pro, la version gratuite ne peu compiler le programme car il ya trop de ligne de code.
+- Ensuite vous devez Compiler le programme avec Purebasic(V6.04) LTS, la version gratuite ne peu compiler le programme car il ya trop de ligne de code.
 
 - Vous devez parametrer les information du compilleur avant de le construire.
 
