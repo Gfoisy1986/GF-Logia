@@ -17,6 +17,7 @@ Service de Compilation du logiciel avec vos information de connexion base de don
 Version prevue pour la release: Windows_X64 et Linux_X64 (En *V_1.0*) 
 - aucune date n'est déterminer pour la premiere release!
 - une version (RPI) est envisagé!
+
 INSTALL:
 
 - Pour installer le logiciel vous devez éditer les premieres lignes du code source "main.pb" et modifier la ligne de connection PostgreSQL pour refléter les information de connexion a votre base de donné.
