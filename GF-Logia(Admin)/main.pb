@@ -9,7 +9,9 @@
   EndIf
 
 Enumeration
-      #PageWO
+  #PageWO
+  #_WO117
+  #_WO217
       #_INSP0
       #_INSPW
       #_listuserBG
@@ -58,13 +60,13 @@ Enumeration
       #_2002
       #_402
       #punchout
-      #_0
+      #_punch
       #_p20
       #_JK
       #_020
       #cal
       #cal2
-      #_002
+      #_F002
       #_001
       #_101
       #_201
@@ -126,7 +128,7 @@ Enumeration
     #BC_3
     #BC_4
     #BC_5
-    #BC_6
+    #BC_66
     #BC_7
     #BC_8
     #BC_9
@@ -148,6 +150,7 @@ Enumeration
     #BC_25
     #_BCC8521
     #_BCC20
+    #_WO1202
 EndEnumeration
 
   
@@ -170,12 +173,12 @@ Procedure histwo()
        
  ButtonGadget(#_001, 0, 0, 215, 30," Liste Bon de travail Archivé")
   
-   ListViewGadget(#_002, 0, 30, 215, 90) 
+   ListViewGadget(#_F002, 0, 30, 215, 90) 
     
  If  DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='2'")
   
     While NextDatabaseRow(#mysql)       
-      AddGadgetItem(#_002, -1, "" + GetDatabaseString(#mysql, 1))
+      AddGadgetItem(#_F002, -1, "" + GetDatabaseString(#mysql, 1))
       
     Wend 
    FinishDatabaseQuery(#mysql)
@@ -210,18 +213,6 @@ Procedure calendarmaint()
   
   CloseGadgetList()
 EndProcedure
-
-
-Procedure GFoisyWEBSITE()
-  OpenGadgetList(1, 0)
-       URL$ = "https://www.google.ca"
-       WebGadget(#PB_Any,25, 25, 800, 600, URL$)
-       
-  
-  CloseGadgetList()
-EndProcedure
-
-
 
 
 Procedure employer()
@@ -322,7 +313,7 @@ Procedure Client()
          ButtonGadget(#BC_3, 360, 470, 120, 20, "# Cell propriétaire")
          ButtonGadget(#BC_4, 480, 470, 120, 20, "Date naissance propriétaire")
          ButtonGadget(#BC_5, 600, 470, 120, 20, "Addresse propriétaire")
-         ButtonGadget(#BC_6, 720, 470, 120, 20, "Ville propriétaire")
+         ButtonGadget(#BC_66, 720, 470, 120, 20, "Ville propriétaire")
          ButtonGadget(#BC_7, 840, 470, 120, 20, "Province propriétaire")
          ButtonGadget(#BC_8, 960, 470, 120, 20, "Pays propriétaire")
          ButtonGadget(#BC_9, 1080, 470, 120, 20, "Code Postal propriétaire")
@@ -431,7 +422,7 @@ EndProcedure
   
 
 ListViewGadget(#_1203, 225, 320, 200, 150)
-             If DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(100)+"'")
+             If DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
              While NextDatabaseRow(#mySql) 
                
                
@@ -453,8 +444,8 @@ Procedure savenotebuttonHandler()
     
     
      
-             ;  query11.s = "UPDATE punch SET punchout=('"+time+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(100)+"', '"+GetGadgetText(1200)+"', '"+GetGadgetText(#_1208)+"')"
-    query4.s = "UPDATE note SET content=('"+GetGadgetText(117)+"') WHERE (notename)=('"+GetGadgetText(#_1203)+"')"
+             ;  query11.s = "UPDATE punch SET punchout=('"+time+"') WHERE (WO, USER, nomtravaux)=('"+GetGadgetText(4500)+"', '"+GetGadgetText(1200)+"', '"+GetGadgetText(#_1208)+"')"
+    query4.s = "UPDATE note SET content=('"+GetGadgetText(#_WO117)+"') WHERE (notename)=('"+GetGadgetText(#_1203)+"')"
   
   ; update the database with the literal prepared query and confirm the write
   DatabaseUpdate(0, query4)
@@ -474,8 +465,8 @@ EndProcedure
      OpenGadgetList(1, 4)
     Text100$ = InputRequester("New Note name", "Veuillez entrer le nom de la nouvelle note", "")
     
-   If  DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(100)+"'")
-   query.s = "INSERT INTO note (notename, wo, content, serie) " + "VALUES ('"+Text100$+"', '"+GetGadgetText(100)+"', '', '"+GetGadgetText(100)+"')"
+   If  DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
+   query.s = "INSERT INTO note (notename, wo, content, serie) " + "VALUES ('"+Text100$+"', '"+GetGadgetText(4500)+"', '', '"+GetGadgetText(4500)+"')"
   
   ; update the database with the literal prepared query and confirm the write
   If DatabaseUpdate(0, query)
@@ -497,7 +488,7 @@ Else
   
 EndIf
   ListViewGadget(#_1203, 225, 320, 200, 150)
-             If DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(100)+"'")
+             If DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
              While NextDatabaseRow(#mySql) 
                
                
@@ -583,11 +574,11 @@ Procedure closewindowHandler()
              If DatabaseQuery (#mysql, "SELECT * FROM punch WHERE jobname='"+GetGadgetText(#_1208)+"'")
              
                
-              ListIconGadget(#_0, 0, 180, 420, 245, "name", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+              ListIconGadget(#_punch, 0, 180, 420, 245, "name", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
           
-             AddGadgetColumn(#_0, 1, "jobname", 120)
-             AddGadgetColumn(#_0, 2, "Punch in", 120)
-             AddGadgetColumn(#_0, 3, "Punch out", 120)
+             AddGadgetColumn(#_punch, 1, "jobname", 120)
+             AddGadgetColumn(#_punch, 2, "Punch in", 120)
+             AddGadgetColumn(#_punch, 3, "Punch out", 120)
   ; AddGadgetItem(0, -1, ""+GetDatabaseString(#mysql, 2), ImageID(100))
   
               
@@ -595,15 +586,16 @@ Procedure closewindowHandler()
             
               While NextDatabaseRow(#mysql)
      
-      AddGadgetItem(#_0, -1, GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4))
+      AddGadgetItem(#_punch, -1, GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4))
       
       
       
       
       
-               Wend  
+    Wend 
+    FinishDatabaseQuery(#mysql)
                EndIf
-               FinishDatabaseQuery(#mysql)
+               
                TextGadget(#PB_Any, 0, 485, 420, 20, "liste utilisateur", #PB_Text_Border | #PB_Text_Center)
       
                If DatabaseQuery (#mysql, "SELECT * FROM username")
@@ -640,12 +632,12 @@ Procedure mainwo()
   
   ButtonGadget(402, 0, 0, 215, 30," Liste Bon de travail")
   
-   ListViewGadget(1202, 0, 30, 215, 90) 
+   ListViewGadget(#_WO1202, 0, 30, 215, 90) 
     
  If  DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='1'")
   
     While NextDatabaseRow(#mysql)       
-      AddGadgetItem(1202, -1, "" + GetDatabaseString(#mysql, 1))
+      AddGadgetItem(#_WO1202, -1, "" + GetDatabaseString(#mysql, 1))
       
     Wend 
    FinishDatabaseQuery(#mysql)
@@ -664,27 +656,23 @@ Procedure oderhist()
   
    OpenGadgetList(1, 5)
  
-      ;DatabaseQuery (0, "SELECT * FROM Workorder")
-   ; For i = 0 To 65000
-      ;AddGadgetItem(#list, i, "Ancien élément "+Str(i))
-     ; SetGadgetItemData(#list, i, i)
-     ;Next i
+     
 
-      Debug ("Ouverture du work order " + GetGadgetText(#_002))
+      Debug ("Ouverture du work order " + GetGadgetText(#_F002))
       
      
      
       TextGadget(#_200, 480 , 0, 200, 20, "Bon de Travail #", #PB_Text_Border | #PB_Text_Center)
-      TextGadget(#_100, 480, 20, 200, 30, ""+GetGadgetText(#_002), #PB_Text_Border | #PB_Text_Center)
+      TextGadget(#_100, 480, 20, 200, 30, ""+GetGadgetText(#_F002), #PB_Text_Border | #PB_Text_Center)
       
       
       
      
-      DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE wo = '"+GetGadgetText(#_002)+"'")
+      DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE wo = '"+GetGadgetText(#_F002)+"'")
       TextGadget(#_201, 680 , 0, 200, 20, "# Série (VIN)", #PB_Text_Border | #PB_Text_Center)
-     While NextDatabaseRow(#mysql)
+      NextDatabaseRow(#mysql)
       TextGadget(#_101, 680, 20, 200, 30, "" + GetDatabaseString(#mysql, 3), #PB_Text_Border | #PB_Text_Center)
-      Wend
+      
      
  
   
@@ -751,7 +739,7 @@ Procedure oderhist()
        
        FinishDatabaseQuery(#mysql)
        
-       DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo="+GetGadgetText(#_002)+" LIMIT 1")
+       DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo="+GetGadgetText(#_F002)+" LIMIT 1")
        
       TextGadget(#PB_Any, 220, 0, 225, 20, "Feuillet inspection", #PB_Text_Border | #PB_Text_Center)
      ; ButtonGadget(#_INSP1, 220, 20, 225, 20, "Vehicule light-duty")
@@ -778,7 +766,7 @@ Procedure oderhist()
       
       
        ListViewGadget(#_12030, 480, 320, 200, 150)
-            DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo="+GetGadgetText(#_002))
+            DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo="+GetGadgetText(#_F002))
              While NextDatabaseRow(#mysql) 
                
                
@@ -797,7 +785,7 @@ Procedure oderhist()
                
              
            
-      DatabaseQuery (1, "SELECT * FROM job WHERE (username, wo)=('Garage', '"+GetGadgetText(#_002)+"')")
+      DatabaseQuery (1, "SELECT * FROM job WHERE (username, wo)=('Garage', '"+GetGadgetText(#_F002)+"')")
 	
 
  
@@ -836,31 +824,27 @@ Procedure oderhist()
 OpenGadgetList(1, 4)
  
     
-      ;DatabaseQuery (0, "SELECT * FROM Workorder")
-   ; For i = 0 To 65000
-      ;AddGadgetItem(#list, i, "Ancien élément "+Str(i))
-     ; SetGadgetItemData(#list, i, i)
-     ;Next i
+   
 
-      Debug ("Ouverture du work order " + GetGadgetText(1202))
+      Debug ("Ouverture du work order " + GetGadgetText(#_WO1202))
+
       
       ButtonGadget(#_402, 0, 120, 215, 30,"Archiver Bon tavail")
      
       TextGadget(200, 480 , 0, 200, 20, "Bon de Travail #", #PB_Text_Border | #PB_Text_Center)
-      TextGadget(100, 480, 20, 200, 30, ""+GetGadgetText(1202), #PB_Text_Border | #PB_Text_Center)
+      TextGadget(4500, 480, 20, 200, 30, ""+GetGadgetText(#_WO1202), #PB_Text_Border | #PB_Text_Center)
       
       
       
-     
-      DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE wo = '"+GetGadgetText(100)+"'")
+     DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE wo='"+GetGadgetText(#_WO1202)+"'") 
       TextGadget(201, 680 , 0, 200, 20, "# Série (VIN)", #PB_Text_Border | #PB_Text_Center)
-     While NextDatabaseRow(#mysql)
-      TextGadget(101, 680, 20, 200, 30, "" + GetDatabaseString(#mysql, 3), #PB_Text_Border | #PB_Text_Center)
-      Wend
+      NextDatabaseRow(#mysql)
+      TextGadget(101, 680, 20, 200, 30, ""+GetDatabaseString(#mysql, 3), #PB_Text_Border | #PB_Text_Center)
+     
      
  
   
-      ; TextGadget(101, 425, 20, 200, 30, ana$, #PB_Text_Border | #PB_Text_Center)
+    
    
    
    
@@ -868,7 +852,7 @@ OpenGadgetList(1, 4)
       
       TextGadget(202, 880 , 0, 200, 20, "Année", #PB_Text_Border | #PB_Text_Center)
       
-      TextGadget(102, 880, 20, 200, 30, "" + GetDatabaseString(#mysql, 4), #PB_Text_Border | #PB_Text_Center)
+      TextGadget(102, 880, 20, 200, 30, ""+GetDatabaseString(#mysql, 4), #PB_Text_Border | #PB_Text_Center)
      
      
 
@@ -914,18 +898,18 @@ OpenGadgetList(1, 4)
       
       TextGadget(215, 1080, 150, 200, 20, "Mot de passe 'ECM'", #PB_Text_Border | #PB_Text_Center)
       TextGadget(115, 1080, 170, 200, 30, "" + GetDatabaseString(#mysql, 17), #PB_Text_Border | #PB_Text_Center)
-      
-      FinishDatabaseQuery(#mysql)
-      
+    
+     
+     
       TextGadget(218, 480, 200, 200, 20, "Menu de Notes", #PB_Text_Border | #PB_Text_Center)
       ButtonGadget(220, 480, 220, 200, 20,"Nouvelle note")
      
-       ButtonGadget(#_221, 480, 245, 200, 20,"Sauvegardé")
+       ButtonGadget(221, 480, 245, 200, 20,"Sauvegardé")
        ButtonGadget(223, 480, 270, 200, 20,"Supprimé")
        
-      
+       FinishDatabaseQuery(#mysql)
        
-       DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo="+GetGadgetText(100)+" LIMIT 1")
+       DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo="+GetGadgetText(#_WO1202)+" LIMIT 1")
        
       TextGadget(#PB_Any, 220, 0, 225, 20, "Feuillet inspection", #PB_Text_Border | #PB_Text_Center)
      ; ButtonGadget(#_INSP1, 220, 20, 225, 20, "Vehicule light-duty")
@@ -936,10 +920,10 @@ OpenGadgetList(1, 4)
       ListViewGadget(#_INSPW, 220, 20, 225, 30)
       
       
-              NextDatabaseRow(#mysql) 
+             NextDatabaseRow(#mysql) 
                
                
-              AddGadgetItem(#_INSPW, -1, ""+GetDatabaseString(#mysql, 8))
+             AddGadgetItem(#_INSPW, -1, ""+GetDatabaseString(#mysql, 8))
                
                   
      
@@ -952,26 +936,26 @@ OpenGadgetList(1, 4)
       
       
        ListViewGadget(#_1203, 480, 320, 200, 150)
-            DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo="+GetGadgetText(100))
-             While NextDatabaseRow(#mysql) 
+     If  DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo="+GetGadgetText(#_WO1202))
+            While NextDatabaseRow(#mysql) 
                
                
-               AddGadgetItem(#_1203, -1, ""+GetDatabaseString(#mysql, 1))
+              AddGadgetItem(#_1203, -1, ""+GetDatabaseString(#mysql, 1))
                
                   
                    
               Wend 
              
- 
-             
+              FinishDatabaseQuery(#mysql)
+          EndIf   
             
    TextGadget(217, 680, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
-    EditorGadget(117, 680, 220, 600, 250)
+    EditorGadget(4600, 680, 220, 600, 250)
                     
                
              
            
-      DatabaseQuery (1, "SELECT * FROM job WHERE (username, wo)=('Garage', '"+GetGadgetText(100)+"')")
+    
 	
 
  
@@ -980,26 +964,23 @@ OpenGadgetList(1, 4)
       
      
                ButtonGadget(1210, 480, 630, 200, 30, "Nouvelle Job")
-    ; ButtonGadget(#jobsave, 0, 595, 215, 30, "Sauvegarder Job")
+     ButtonGadget(#jobsave, 0, 595, 215, 30, "Sauvegarder Job")
      
-    ; ButtonGadget(1209, 0, 635, 215, 30, "Supprimer Job")
+     ButtonGadget(1209, 0, 635, 215, 30, "Supprimer Job")
      
    
-   
+  DatabaseQuery (#mysql, "SELECT * FROM job WHERE (username, wo)=('Garage', '"+GetGadgetText(4500)+"')")
      
      TextGadget(#_lt1205, 480, 490, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
      
-     If  ListViewGadget(#_1208, 480, 510, 200, 120)
+      ListViewGadget(#_1208, 480, 510, 200, 120)
              
-           While  NextDatabaseRow(#mysql) 
+          While  NextDatabaseRow(#mysql) 
                
-               IDJOB$ = GetDatabaseString(#mysql, 2)
+              IDJOB$ = GetDatabaseString(#mysql, 2)
                AddGadgetItem(#_1208, -1, ""+IDJOB$)
-                 Wend  
-             Debug ("joblist on")
-           Else
-             Debug ("not working") 
-            EndIf
+                Wend  
+            
            
             
     FinishDatabaseQuery(#mysql)
@@ -1010,9 +991,9 @@ OpenGadgetList(1, 4)
     
      CloseGadgetList()
      
-      BindGadgetEvent(#_221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
-       BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
-       BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
+     ; BindGadgetEvent(221, @savenotebuttonHandler(), #PB_EventType_LeftClick)
+    ;   BindGadgetEvent(223, @deletenote(), #PB_EventType_LeftClick)
+      ; BindGadgetEvent(220, @newnotebuttonHandler(), #PB_EventType_LeftClick)
        
        
      
@@ -1033,8 +1014,8 @@ OpenGadgetList(1, 4)
     
     
     OpenGadgetList(1)
-    AddGadgetItem(1, -1, "GuillaumeFoisy.ca")
-    GFoisyWEBSITE()
+    AddGadgetItem(1, -1, "Inventaire")
+   
 CloseGadgetList()
 
 OpenGadgetList(1)
@@ -1159,18 +1140,18 @@ AddGadgetItem(1, -1, "Modification Bon travail")
         
       If EventGadget =  #_402  ;archive Workorder
         OpenGadgetList(1 ,4)
-        queryarchwo.s = "UPDATE workorder SET status='2' WHERE wo='"+GetGadgetText(1202)+"'"
+        queryarchwo.s = "UPDATE workorder SET status='2' WHERE wo='"+GetGadgetText(#_WO1202)+"'"
   
         ; update the database with the literal prepared query and confirm the write
      
        DatabaseUpdate(#mysql, queryarchwo)
-    
+     FinishDatabaseQuery(#mysql)
    
        mainwo()
        histwo()
        CloseGadgetList()
       
-       FinishDatabaseQuery(#mysql)
+      
        
       EndIf
       
@@ -1181,15 +1162,15 @@ AddGadgetItem(1, -1, "Modification Bon travail")
             DatabaseQuery (1, "SELECT * FROM note WHERE notename='"+GetGadgetText(#_1203)+"'")
             ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
        NextDatabaseRow(1) 
-   EditorGadget(117, 680, 220, 600, 250)
-   AddGadgetItem(117, -1, GetDatabaseString(1, 3))
-   
+   EditorGadget(4600, 680, 220, 600, 250)
+   AddGadgetItem(4600, -1, GetDatabaseString(1, 3))
+   FinishDatabaseQuery(#mysql)
   CloseGadgetList()
   EndIf
  
   
   
-  If EventGadget = 1202
+  If EventGadget = #_WO1202
      OpenGadgetList(1, 4)
    
           
@@ -1206,7 +1187,7 @@ AddGadgetItem(1, -1, "Modification Bon travail")
            
  EndIf
  
- If EventGadget = #_002
+ If EventGadget = #_F002
     OpenGadgetList(1, 5)
       oderhist()
     CloseGadgetList()
@@ -1222,56 +1203,9 @@ AddGadgetItem(1, -1, "Modification Bon travail")
  
  
  
- If EventGadget = #jobsave  ;jobsave
-   
-     OpenGadgetList(1, 4)
-       
-   
-    Debug "editor window saved"
-    
-    
-   
-     
-               
-    
-       query2.s = "UPDATE job SET jobrepport='"+GetGadgetText(1207)+"' WHERE jobname='"+GetGadgetText(#_1208)+"'"
-  
-  ; update the database with the literal prepared query and confirm the write
-     
-       DatabaseUpdate(#mysql, query2)
-    
-   
 
-  FinishDatabaseQuery(#mysql)
-  
- MessageRequester("job "+GetGadgetText(1205)+" Sauvegardée", "job "+GetGadgetText(1205)+" Sauvegardée",  #PB_MessageRequester_Info)
- aWOordertHandler()
- 
- CloseGadgetList()
- EndIf
- 
- If EventGadget = 1209 ;job delete
-   
-    OpenGadgetList(1, 4)
-   
-  
-      Query.s = "DELETE FROM job WHERE jobname = '"+GetGadgetText(#_1208)+"'"
-      DatabaseUpdate(#mysql, query)
-    
-   
-
-  FinishDatabaseQuery(#mysql)
-  
- MessageRequester("job supprimé!", "job supprimé!",  #PB_MessageRequester_Info)
  
 
-            
- 
-         FinishDatabaseQuery(#mySql)
-         aWOordertHandler()  
-         CloseGadgetList()
-   
- EndIf
  
  If EventGadget = #_1210  ;newjobbutton handler historique
    
@@ -1282,7 +1216,7 @@ AddGadgetItem(1, -1, "Modification Bon travail")
           
    
      DatabaseQuery (#mysql, "SELECT * FROM job")
-   queryhist.s = "INSERT INTO job (id, jobname, jobinfo, wo) VALUES ('"+GetGadgetText(#_002)+"', '"+Text202$+"', '"+Text203$+"', '"+GetGadgetText(#_002)+"')"
+   queryhist.s = "INSERT INTO job (id, jobname, jobinfo, wo) VALUES ('"+GetGadgetText(#_F002)+"', '"+Text202$+"', '"+Text203$+"', '"+GetGadgetText(#_F002)+"')"
    
   ; update the database with the literal prepared query and confirm the write
   If DatabaseUpdate(#mysql, queryhist)
@@ -1309,10 +1243,10 @@ AddGadgetItem(1, -1, "Modification Bon travail")
           
    
      DatabaseQuery (#mysql, "SELECT * FROM job")
-   query.s = "INSERT INTO job (id, jobname, jobinfo, wo) VALUES ('"+GetGadgetText(100)+"', '"+Text200$+"', '"+Text201$+"', '"+GetGadgetText(100)+"')"
+   query67.s = "INSERT INTO job (id, jobname, jobinfo, wo) VALUES ('"+GetGadgetText(4500)+"', '"+Text200$+"', '"+Text201$+"', '"+GetGadgetText(4500)+"')"
    
   ; update the database with the literal prepared query and confirm the write
-  If DatabaseUpdate(#mysql, query)
+  If DatabaseUpdate(#mysql, query67)
     
     Debug "data successfully inserted."
 
@@ -1343,7 +1277,7 @@ AddGadgetItem(1, -1, "Modification Bon travail")
                
        query3$ = InputRequester(GetDatabaseString(#mysql, 6), ""+GetGadgetText(#_2000)+" : Veuillez écrire le nouveau rapport", "")
       ; query2.s = "UPDATE job SET jobrepport='"+query3+"' WHERE jobname='"+GetGadgetText(#_1208)+"'"
-       query2.s = "INSERT INTO job (id, wo, username, jobname, jobinfo, jobrepport ) VALUES ('"+GetGadgetText(100)+"', '"+GetGadgetText(100)+"', '"+GetGadgetText(#_2000)+"', '"+GetGadgetText(#_1208)+"', '"+GetGadgetText(1206)+"', '"+"("+GetGadgetText(#_2000)+") : "+query3$+"')"
+       query2.s = "INSERT INTO job (id, wo, username, jobname, jobinfo, jobrepport ) VALUES ('"+GetGadgetText(4500)+"', '"+GetGadgetText(4500)+"', '"+GetGadgetText(#_2000)+"', '"+GetGadgetText(#_1208)+"', '"+GetGadgetText(1206)+"', '"+"("+GetGadgetText(#_2000)+") : "+query3$+"')"
           
   ; update the database with the literal prepared query and confirm the write
      
@@ -1379,7 +1313,7 @@ second.s = "%ss"
     
        
      
-           query12.s = "UPDATE punch SET (punchout, pstatus)=('"+time+"', '2') WHERE (wo, username, pstatus, jobname)=('"+GetGadgetText(100)+"', '"+GetGadgetText(#_2000)+"', '1', '"+GetGadgetText(#_1208)+"')"
+           query12.s = "UPDATE punch SET (punchout, pstatus)=('"+time+"', '2') WHERE (wo, username, pstatus, jobname)=('"+GetGadgetText(4500)+"', '"+GetGadgetText(#_2000)+"', '1', '"+GetGadgetText(#_1208)+"')"
   
   ; update the database With the literal prepared query And confirm the write
   If DatabaseUpdate(#mysql, query12)
@@ -1423,7 +1357,7 @@ second.s = "%ss"
     
        
      
-           query11.s = "INSERT INTO punch (id, wo, username, punchin, pstatus, jobname) VALUES ('"+GetGadgetText(100)+"', '"+GetGadgetText(100)+"', '"+GetGadgetText(#_2000)+"', '"+time+"', '1', '"+GetGadgetText(#_1208)+"')"
+           query11.s = "INSERT INTO punch (id, wo, username, punchin, pstatus, jobname) VALUES ('"+GetGadgetText(4500)+"', '"+GetGadgetText(4500)+"', '"+GetGadgetText(#_2000)+"', '"+time+"', '1', '"+GetGadgetText(#_1208)+"')"
           
   ; update the database With the literal prepared query And confirm the write
                   
@@ -1443,8 +1377,9 @@ second.s = "%ss"
   
 
   FinishDatabaseQuery(#mysql)
-  punch()
   aWOordertHandler()
+  punch()
+  
   CloseGadgetList()
 EndIf      
        
@@ -1465,7 +1400,7 @@ EndIf
                          querydelemployer.s = "DELETE FROM username WHERE username='"+GetGadgetText(#_020)+"'"
   
                          DatabaseUpdate(#mysql, querydelemployer) 
-                           
+                           FinishDatabaseQuery(#mysql)
                          employer()
                          
                  CloseGadgetList()
@@ -1477,7 +1412,7 @@ EndIf
                          querydelclient2.s = "DELETE FROM client WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
   
                          DatabaseUpdate(#mysql, querydelclient2) 
-                           
+                           FinishDatabaseQuery(#mysql)
                         client()
                          
                  CloseGadgetList()
@@ -1529,7 +1464,8 @@ EndIf
              queryclient5.s = "INSERT INTO client (nomproprec, prenomc, telc, cellc, addc, datenc, villec, provincec, paysc, zipc, email1c, email2c, nomentc, addentc, villeentc, provinceentc, paysentc, zipentc, telentc, nomrespc, telrespc, emailrespc, faxentc, datesc, usernamec, tauxhc) " + "VALUES ('"+Textclient100$+"', '"+Textclient101$+"', '"+Textclient102$+"', '"+Textclient103$+"', '"+Textclient104$+"', '"+Textclient105$+"', '"+Textclient106$+"', '"+Textclient107$+"', '"+Textclient108$+"', '"+Textclient109$+"', '"+Textclient110$+"', '"+Textclient111$+"', '"+Textclient112$+"', '"+Textclient113$+"', '"+Textclient114$+"', '"+Textclient115$+"', '"+Textclient116$+"', '"+Textclient117$+"', '"+Textclient118$+"', '"+Textclient119$+"', '"+Textclient120$+"', '"+Textclient121$+"', '"+Textclient122$+"', '"+Textclient123$+"', '"+Textclient112$+"', '"+Textclient125$+"')"
   
   
-         DatabaseUpdate(#mysql, queryclient5)
+             DatabaseUpdate(#mysql, queryclient5)
+             FinishDatabaseQuery(#mysql)
          client()
        CloseGadgetList()
         EndIf
@@ -1541,7 +1477,7 @@ EndIf
             OpenGadgetList(1, 5)
     
      
-      DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo='"+GetGadgetText(#_002)+"'")
+      DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo='"+GetGadgetText(#_F002)+"'")
       
      
      TextGadget(#_pb04, 680, 490, 600, 20, "Liste des rapports de travaux", #PB_Text_Border | #PB_Text_Center)
@@ -1582,7 +1518,7 @@ EndIf
              OpenGadgetList(1, 4)
     
      
-      DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo='"+GetGadgetText(100)+"'")
+      DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo='"+GetGadgetText(4500)+"'")
       
      
      TextGadget(1204, 680, 490, 600, 20, "Liste des rapports de travaux", #PB_Text_Border | #PB_Text_Center)
@@ -1611,10 +1547,10 @@ EndIf
          FinishDatabaseQuery(#mysql)
    
    
-
+punch()
     
     CloseGadgetList()
-   punch()
+   
  EndIf
  
  ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1624,136 +1560,193 @@ EndIf
  ;////////////////////////////////////////
  
  If EventGadget = #BG_0
+    OpenGadgetList(1, 1)
    texteuser0.s = InputRequester("Modification du username de l'employé.", "Veuillez entrer le nouveau username.", "")
    queryuser0.s = "UPDATE username SET username='"+texteuser0+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser0)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
 EndIf
  
- If EventGadget = #BG_1
+If EventGadget = #BG_1
+  OpenGadgetList(1, 1)
    texteuser1.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau nom propre.", "")
    queryuser1.s = "UPDATE username SET nom='"+texteuser1+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser1)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
 EndIf
  
-  If EventGadget = #BG_2
+If EventGadget = #BG_2
+  OpenGadgetList(1, 1)
    texteuser2.s = InputRequester("Modification du prenom de l'employé.", "Veuillez entrer le nouveau prenom.", "")
    queryuser2.s = "UPDATE username SET prenom='"+texteuser2+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser2)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
   EndIf
   
-   If EventGadget = #BG_3
+  If EventGadget = #BG_3
+    OpenGadgetList(1, 1)
    texteuser3.s = InputRequester("Modification de age de l'employé.", "Veuillez entrer la nouvelle age.", "")
    queryuser3.s = "UPDATE username SET age='"+texteuser3+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser3)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
  EndIf
  
-    If EventGadget = #BG_4
+ If EventGadget = #BG_4
+   OpenGadgetList(1, 1)
      texteuser4.s = InputRequester("Modification du # téléphone de l'employé.", "Veuillez entrer le nouveau # téléphone.", "")
    queryuser4.s = "UPDATE username SET tel='"+texteuser4+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser4)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
  EndIf
  
-     If EventGadget = #BG_5
+ If EventGadget = #BG_5
+   OpenGadgetList(1, 1)
    texteuser5.s = InputRequester("Modification du # cellulaire de l'employé.", "Veuillez entrer le nouveau # cellulaire.", "")
    queryuser5.s = "UPDATE username SET cell='"+texteuser5+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser5)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
  EndIf
  
-      If EventGadget = #BG_6
-   texteuser6.s = InputRequester("Modification de l'addresse de l'employé.", "Veuillez entrer la nouvelle addresse.", "")
-   queryuser6.s = "UPDATE username SET add='"+texteuser6+"' WHERE username='"+GetGadgetText(#_020)+"'"
-   DatabaseUpdate(#mysql, queryuser6)
+If EventGadget = #BG_6
+   OpenGadgetList(1, 1)
+   pbuser6.s = InputRequester("Modification de l'addresse de l'employé.", "Veuillez entrer la nouvelle addresse.", "")
+   pbuserqury.s = "UPDATE username SET add='"+pbuser6+"' WHERE username='"+GetGadgetText(#_020)+"'"
+   DatabaseUpdate(#mysql, pbuserqury)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
  EndIf
  
-       If EventGadget = #BG_7
+ If EventGadget = #BG_7
+   OpenGadgetList(1, 1)
    texteuser7.s = InputRequester("Modification du # permis conduire de l'employé.", "Veuillez entrer le nouveau # permis.", "")
    queryuser7.s = "UPDATE username SET permis='"+texteuser7+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser7)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
        EndIf
        
-        If EventGadget = #BG_8
+       If EventGadget = #BG_8
+         OpenGadgetList(1, 1)
    texteuser8.s = InputRequester("Modification de la liscence de mécanique de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
    queryuser8.s = "UPDATE username SET liscence='"+texteuser8+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser8)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
         EndIf
         
-         If EventGadget = #BG_9
+        If EventGadget = #BG_9
+          OpenGadgetList(1, 1)
    texteuser9.s = InputRequester("Modification du # p.e.p de l'employé.", "Veuillez entrer le nouveau # p.e.p.", "")
    queryuser9.s = "UPDATE username SET pep='"+texteuser9+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser9)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
          EndIf
          
-          If EventGadget = #BG_10
+         If EventGadget = #BG_10
+           OpenGadgetList(1, 1)
    texteuser10.s = InputRequester("Modification du # liscence inspection SAAQ de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
    queryuser10.s = "UPDATE username SET saaq='"+texteuser10+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser10)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
           EndIf
           
-           If EventGadget = #BG_11
+          If EventGadget = #BG_11
+            OpenGadgetList(1, 1)
    texteuser11.s = InputRequester("Modification de la date de naissance de l'employé.", "Veuillez entrer la nouvelle date de naissance.", "")
    queryuser11.s = "UPDATE username SET date='"+texteuser11+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser11)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
            EndIf
            
-            If EventGadget = #BG_12
+           If EventGadget = #BG_12
+             OpenGadgetList(1, 1)
    texteuser12.s = InputRequester("Modification de la date embauche de l'employé.", "Veuillez entrer la nouvelle date", "")
    queryuser12.s = "UPDATE username SET embauche='"+texteuser12+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser12)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
             EndIf
             
-             If EventGadget = #BG_13
+            If EventGadget = #BG_13
+              OpenGadgetList(1, 1)
    texteuser13.s = InputRequester("Modification du nom de ville de l'employé.", "Veuillez entrer le nom de la nouvelle ville.", "")
    queryuser13.s = "UPDATE username SET city='"+texteuser13+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser13)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
              EndIf
              
-              If EventGadget = #BG_14
+             If EventGadget = #BG_14
+               OpenGadgetList(1, 1)
    texteuser14.s = InputRequester("Modification de la province de l'employé.", "Veuillez entrer la nouvelle province", "")
    queryuser14.s = "UPDATE username SET province='"+texteuser14+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser14)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
               EndIf
               
-               If EventGadget = #BG_15
+              If EventGadget = #BG_15
+                OpenGadgetList(1, 1)
    texteuser15.s = InputRequester("Modification du pays de l'employé.", "Veuillez entrer le nouveau pays.", "")
    queryuser15.s = "UPDATE username SET pays='"+texteuser15+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser15)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
                EndIf
                
-                If EventGadget = #BG_16
+               If EventGadget = #BG_16
+                 OpenGadgetList(1, 1)
    texteuser16.s = InputRequester("Modification du Code Postal de l'employé.", "Veuillez entrer le nouveau Code Postal.", "")
    queryuser16.s = "UPDATE username SET zip='"+texteuser16+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser16)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
                 EndIf
                 
-                 If EventGadget = #BG_17
+                If EventGadget = #BG_17
+                  OpenGadgetList(1, 1)
    texteuser17.s = InputRequester("Modification du email personel de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryuser17.s = "UPDATE username SET email1='"+texteuser17+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser17)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
                  EndIf
                  
-                  If EventGadget = #BG_18
+                 If EventGadget = #BG_18
+                   OpenGadgetList(1, 1)
    texteuser18.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryuser18.s = "UPDATE username SET email2='"+texteuser18+"' WHERE username='"+GetGadgetText(#_020)+"'"
    DatabaseUpdate(#mysql, queryuser18)
+   FinishDatabaseQuery(#mysql)
    employer()
+   CloseGadgetList()
  EndIf 
  
  ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -1764,185 +1757,263 @@ EndIf
  
  
  If EventGadget = #BC_0
+   OpenGadgetList(1, 2)
    texteclient0.s = InputRequester("Modification du nom propre du client.", "Veuillez entrer le nouveau nom propre.", "")
    queryclient0.s = "UPDATE client SET nomproprec='"+texteclient0+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient0)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
 EndIf
  
- If EventGadget = #BC_1
-   texteclient1.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau nom propre.", "")
-   queryclient1.s = "UPDATE client SET prenomc='"+texteclient1+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+If EventGadget = #BC_1
+  OpenGadgetList(1, 2)
+   client1.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau nom propre.", "")
+   queryclient1.s = "UPDATE client SET prenomc='"+client1+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient1)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
 EndIf
  
-  If EventGadget = #BC_2
-   texteclient2.s = InputRequester("Modification du prenom de l'employé.", "Veuillez entrer le nouveau prenom.", "")
-   queryclient2.s = "UPDATE client SET telc='"+texteclient2+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+If EventGadget = #BC_2
+  OpenGadgetList(1, 2)
+   client2.s = InputRequester("Modification du prenom de l'employé.", "Veuillez entrer le nouveau prenom.", "")
+   queryclient2.s = "UPDATE client SET telc='"+client2+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient2)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
   EndIf
   
-   If EventGadget = #BC_3
+  If EventGadget = #BC_3
+    OpenGadgetList(1, 2)
    texteclient3.s = InputRequester("Modification de age de l'employé.", "Veuillez entrer la nouvelle age.", "")
    queryclient3.s = "UPDATE client SET cellc='"+texteclient3+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient3)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
-    If EventGadget = #BC_4
+ If EventGadget = #BC_4
+   OpenGadgetList(1, 2)
      texteclient4.s = InputRequester("Modification du # téléphone de l'employé.", "Veuillez entrer le nouveau # téléphone.", "")
    queryclient4.s = "UPDATE client SET datenc='"+texteclient4+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient4)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
-     If EventGadget = #BC_5
+ If EventGadget = #BC_5
+   OpenGadgetList(1, 2)
    texteclient5.s = InputRequester("Modification du # cellulaire de l'employé.", "Veuillez entrer le nouveau # cellulaire.", "")
    queryclient5.s = "UPDATE client SET addc='"+texteclient5+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient5)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
-      If EventGadget = #BC_6
-   texteclient6.s = InputRequester("Modification de l'addresse de l'employé.", "Veuillez entrer la nouvelle addresse.", "")
-   queryclient6.s = "UPDATE client SET villec='"+texteclient6+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
-   DatabaseUpdate(#mysql, queryclient6)
-   Client()
+ If EventGadget = #BC_66
+   OpenGadgetList(1, 2)
+   client6.s = InputRequester("Modification de l'addresse de l'employé.", "Veuillez entrer la nouvelle addresse.", "")
+   client66.s = "UPDATE client SET villec='"+client6+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   DatabaseUpdate(#mysql, client66)
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
-       If EventGadget = #BC_7
+ If EventGadget = #BC_7
+   OpenGadgetList(1, 2)
    texteclient7.s = InputRequester("Modification du # permis conduire de l'employé.", "Veuillez entrer le nouveau # permis.", "")
    queryclient7.s = "UPDATE client SET provincec='"+texteclient7+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient7)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
        EndIf
        
-        If EventGadget = #BC_8
+       If EventGadget = #BC_8
+         OpenGadgetList(1, 2)
    texteclient8.s = InputRequester("Modification de la liscence de mécanique de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
    queryclient8.s = "UPDATE client SET paysc='"+texteclient8+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient8)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
         EndIf
         
-         If EventGadget = #BC_9
+        If EventGadget = #BC_9
+          OpenGadgetList(1, 2)
    texteclient9.s = InputRequester("Modification du # p.e.p de l'employé.", "Veuillez entrer le nouveau # p.e.p.", "")
    queryclient9.s = "UPDATE client SET zipc='"+texteclient9+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient9)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
          EndIf
          
-          If EventGadget = #BC_10
+         If EventGadget = #BC_10
+           OpenGadgetList(1, 2)
    texteclient10.s = InputRequester("Modification du # liscence inspection SAAQ de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
    queryclient10.s = "UPDATE client SET email1c='"+texteclient10+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient10)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
           EndIf
           
-           If EventGadget = #BC_11
+          If EventGadget = #BC_11
+            OpenGadgetList(1, 2)
    texteclient11.s = InputRequester("Modification de la date de naissance de l'employé.", "Veuillez entrer la nouvelle date de naissance.", "")
    queryclient11.s = "UPDATE client SET email2c='"+texteclient11+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient11)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
            EndIf
            
-            If EventGadget = #BC_12
+           If EventGadget = #BC_12
+             OpenGadgetList(1, 2)
    texteclient12.s = InputRequester("Modification de la date embauche de l'employé.", "Veuillez entrer la nouvelle date", "")
    queryclient12.s = "UPDATE client SET nomentc='"+texteclient12+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient12)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
             EndIf
             
-             If EventGadget = #BC_13
+            If EventGadget = #BC_13
+              OpenGadgetList(1, 2)
    texteclient13.s = InputRequester("Modification du nom de ville de l'employé.", "Veuillez entrer le nom de la nouvelle ville.", "")
    queryclient13.s = "UPDATE client SET addentc='"+texteclient13+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient13)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
              EndIf
              
-              If EventGadget = #BC_14
+             If EventGadget = #BC_14
+               OpenGadgetList(1, 2)
    texteclient14.s = InputRequester("Modification de la province de l'employé.", "Veuillez entrer la nouvelle province", "")
    queryclient14.s = "UPDATE client SET villeentc='"+texteclient14+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient14)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
               EndIf
               
-               If EventGadget = #BC_15
+              If EventGadget = #BC_15
+                OpenGadgetList(1, 2)
    texteclient15.s = InputRequester("Modification du pays de l'employé.", "Veuillez entrer le nouveau pays.", "")
    queryclient15.s = "UPDATE client SET provinceentc='"+texteclient15+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient15)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
                EndIf
                
-                If EventGadget = #BC_16
+               If EventGadget = #BC_16
+                 OpenGadgetList(1, 2)
    texteclient16.s = InputRequester("Modification du Code Postal de l'employé.", "Veuillez entrer le nouveau Code Postal.", "")
    queryclient16.s = "UPDATE client SET paysentc='"+texteclient16+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient16)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
                 EndIf
                 
-                 If EventGadget = #BC_17
+                If EventGadget = #BC_17
+                  OpenGadgetList(1, 2)
    texteclient17.s = InputRequester("Modification du email personel de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryclient17.s = "UPDATE client SET zipentc='"+texteclient17+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient17)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
                  EndIf
                  
-                  If EventGadget = #BC_18
+                 If EventGadget = #BC_18
+                   OpenGadgetList(1, 2)
    texteclient18.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryclient18.s = "UPDATE client SET telentc='"+texteclient18+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient18)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf 
  
-        If EventGadget = #BC_19
+ If EventGadget = #BC_19
+   OpenGadgetList(1, 2)
    texteclient19.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryclient19.s = "UPDATE client SET nomrepc='"+texteclient19+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient19)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
-  If EventGadget = #BC_20
+ If EventGadget = #BC_20
+   OpenGadgetList(1, 2)
    texteclient20.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryclient20.s = "UPDATE client SET telrespc='"+texteclient20+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient20)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
-  If EventGadget = #BC_21
+ If EventGadget = #BC_21
+   OpenGadgetList(1, 2)
    texteclient21.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryclient21.s = "UPDATE client SET emailrespc='"+texteclient21+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient21)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
  If EventGadget = #BC_22
+   OpenGadgetList(1, 2)
    texteclient22.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryclient22.s = "UPDATE client SET datesc='"+texteclient22+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient22)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
  If EventGadget = #BC_23
+   OpenGadgetList(1, 2)
    texteclient23.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryclient23.s = "UPDATE client SET usernamec='"+texteclient23+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient23)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
-  If EventGadget = #BC_24
+ If EventGadget = #BC_24
+   OpenGadgetList(1, 2)
    texteclient24.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryclient24.s = "UPDATE client SET tauxhc='"+texteclient24+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient24)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
  
-  If EventGadget = #BC_25
+ If EventGadget = #BC_25
+   OpenGadgetList(1, 2)
    texteclient25.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryclient25.s = "UPDATE client SET faxentc='"+texteclient25+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient25)
-   Client()
+    FinishDatabaseQuery(#mysql)
+    Client()
+    CloseGadgetList()
  EndIf
 
  
@@ -1959,8 +2030,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1942
-; FirstLine = 1928
+; CursorPosition = 1629
+; FirstLine = 1541
 ; Folding = ----
 ; EnableXP
 ; DPIAware
