@@ -309,32 +309,32 @@ Procedure Client()
   
   
    TextGadget(#PB_Any, 0, 450, 1280, 20, "Modification table des Clients", #PB_Text_Border | #PB_Text_Center)
-         ButtonGadget(#BC_0, 0, 470, 120, 20, "Nom propre propriétaire")
-         ButtonGadget(#BC_1, 120, 470, 120, 20, "Prenom propriétaire")
-         ButtonGadget(#BC_2, 240, 470, 120, 20, "# Téléphone propriétaire")
-         ButtonGadget(#BC_3, 360, 470, 120, 20, "# Cell propriétaire")
-         ButtonGadget(#BC_4, 480, 470, 120, 20, "Date naissance propriétaire")
-         ButtonGadget(#BC_5, 600, 470, 120, 20, "Addresse propriétaire")
-         ButtonGadget(#BC_66, 720, 470, 120, 20, "Ville propriétaire")
-         ButtonGadget(#BC_7, 840, 470, 120, 20, "Province propriétaire")
-         ButtonGadget(#BC_8, 960, 470, 120, 20, "Pays propriétaire")
-         ButtonGadget(#BC_9, 1080, 470, 120, 20, "Code Postal propriétaire")
-         ButtonGadget(#BC_10, 0, 490, 120, 20, "E-mail perssonel propriétaire")
-         ButtonGadget(#BC_11, 120, 490, 120, 20, "E-mail professionel propriétaire")
-         ButtonGadget(#BC_12, 240, 490, 120, 20, "Nom entreprise")
-         ButtonGadget(#BC_13, 360, 490, 120, 20, "Addresse entreprise")
-         ButtonGadget(#BC_14, 480, 490, 120, 20, "Ville entreprise")
-         ButtonGadget(#BC_15, 600, 490, 120, 20, "Province entreprise")
-         ButtonGadget(#BC_16, 720, 490, 120, 20, "Pays entreprise")
-         ButtonGadget(#BC_17, 840, 490, 120, 20, "Code Pastal entreprise")
-         ButtonGadget(#BC_18, 960, 490, 120, 20, "# Téléphone entreprise")
-         ButtonGadget(#BC_19, 1080, 490, 120, 20, "Nom du responsable")
-         ButtonGadget(#BC_20, 0, 510, 120, 20, "# Téléphone responsable")
-         ButtonGadget(#BC_21, 120, 510, 120, 20, "E-mail responsable")
-         ButtonGadget(#BC_22, 240, 510, 120, 20, "Date Création client")
-         ButtonGadget(#BC_23, 360, 510, 120, 20, "Nom Entreprise")
-         ButtonGadget(#BC_24, 480, 510, 120, 20, "Taux Horraire")
-         ButtonGadget(#BC_25, 600, 510, 120, 20, "Fax Entreprise")
+        ; ButtonGadget(#BC_0, 0, 470, 120, 20, "Nom propre propriétaire")
+       ;  ButtonGadget(#BC_1, 120, 470, 120, 20, "Prenom propriétaire")
+        ; ButtonGadget(#BC_2, 240, 470, 120, 20, "# Téléphone propriétaire")
+        ; ButtonGadget(#BC_3, 360, 470, 120, 20, "# Cell propriétaire")
+        ; ButtonGadget(#BC_4, 480, 470, 120, 20, "Date naissance propriétaire")
+        ; ButtonGadget(#BC_5, 600, 470, 120, 20, "Addresse propriétaire")
+        ; ButtonGadget(#BC_66, 720, 470, 120, 20, "Ville propriétaire")
+        ; ButtonGadget(#BC_7, 840, 470, 120, 20, "Province propriétaire")
+        ; ButtonGadget(#BC_8, 960, 470, 120, 20, "Pays propriétaire")
+        ; ButtonGadget(#BC_9, 1080, 470, 120, 20, "Code Postal propriétaire")
+        ; ButtonGadget(#BC_10, 0, 490, 120, 20, "E-mail perssonel propriétaire")
+        ; ButtonGadget(#BC_11, 120, 490, 120, 20, "E-mail professionel propriétaire")
+        ; ButtonGadget(#BC_12, 240, 490, 120, 20, "Nom entreprise")
+       ;  ButtonGadget(#BC_13, 360, 490, 120, 20, "Addresse entreprise")
+       ;  ButtonGadget(#BC_14, 480, 490, 120, 20, "Ville entreprise")
+       ;  ButtonGadget(#BC_15, 600, 490, 120, 20, "Province entreprise")
+       ;  ButtonGadget(#BC_16, 720, 490, 120, 20, "Pays entreprise")
+       ;  ButtonGadget(#BC_17, 840, 490, 120, 20, "Code Pastal entreprise")
+       ;  ButtonGadget(#BC_18, 960, 490, 120, 20, "# Téléphone entreprise")
+       ;  ButtonGadget(#BC_19, 1080, 490, 120, 20, "Nom du responsable")
+       ;  ButtonGadget(#BC_20, 0, 510, 120, 20, "# Téléphone responsable")
+       ;  ButtonGadget(#BC_21, 120, 510, 120, 20, "E-mail responsable")
+       ;  ButtonGadget(#BC_22, 240, 510, 120, 20, "Date Création client")
+       ;  ButtonGadget(#BC_23, 360, 510, 120, 20, "Nom Entreprise")
+        ; ButtonGadget(#BC_24, 480, 510, 120, 20, "Taux Horraire")
+        ; ButtonGadget(#BC_25, 600, 510, 120, 20, "Fax Entreprise")
    
          
          
@@ -1447,32 +1447,31 @@ EndIf
         wocli6$ = InputRequester("ajoutez un client", "Veuillez entrer le # Fax de l'entreprise", "")
         wocli7$ = InputRequester("ajoutez un client", "Veuillez entrer le prenoms du propriétaire.", "")
         wocli8$ = InputRequester("ajoutez un client", "Veuillez entrer le noms du propriétaire.", "")
-       ; Textclient108$ = InputRequester("ajoutez un client", "Veuillez entrer le pays du propriétaire", "")
-       ; Textclient109$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal du propriétaire", "")
-       ; Textclient110$ = InputRequester("ajoutez un client", "Veuillez entrer le e-mail personel du propriétaire", "")
-       ; Textclient111$ = InputRequester("ajoutez un client", "Veuillez entrer le e-mail professionel du propriétaire", "")
-       ; Textclient112$ = InputRequester("ajoutez un client", "Veuillez entrer le nom de l'entreprise", "")
-       ; Textclient113$ = InputRequester("ajoutez un client", "Veuillez entrer l'addresse de l'entreprise", "")
-       ; Textclient114$ = InputRequester("ajoutez un client", "Veuillez entrer la ville de l'entreprise", "")
-       ; Textclient115$ = InputRequester("ajoutez un client", "Veuillez entrer la province de l'entreprise", "")
-       ; Textclient116$ = InputRequester("ajoutez un client", "Veuillez entrer le pays de l'entreprise", "")
-       ; Textclient117$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal de l'entreprise", "")
-       ; Textclient118$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone de l'entreprise", "")
-       ; Textclient119$ = InputRequester("ajoutez un client", "Veuillez entrer le nom complet du responsable", "")
-       ; Textclient120$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone du responsable", "")
-       ; Textclient121$ = InputRequester("ajoutez un client", "Veuillez entrer le e-mail du responsable", "")
-       ; Textclient123$ = InputRequester("ajoutez un client", "Veuillez entrer la date de création du client", "")
-       ; Textclient124$ = InputRequester("ajoutez un client", "Veuillez entrer le username du client", "")
-       ; Textclient125$ = InputRequester("ajoutez un client", "Veuillez entrer le taux horraire du client", "")
+        wocli9$ = InputRequester("ajoutez un client", "Veuillez entrer le # cellulaire du propriétaire", "")
+        cli_10$ = InputRequester("ajoutez un client", "Veuillez entrer le # cellulaire du responsable", "")
+        cli_11$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone propriétaire", "")
+        cli_12$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone du responsable", "")
+        cli_13$ = InputRequester("ajoutez un client", "Veuillez entrer la date de création du client", "")
+        cli_14$ = InputRequester("ajoutez un client", "Veuillez entrer l'addresse de l'entreprise", "")
+        cli_15$ = InputRequester("ajoutez un client", "Veuillez entrer la ville de l'entreprise", "")
+        cli_16$ = InputRequester("ajoutez un client", "Veuillez entrer la province de l'entreprise", "")
+        cli_17$ = InputRequester("ajoutez un client", "Veuillez entrer le pays de l'entreprise", "")
+        cli_18$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal de l'entreprise", "")
+        cli_19$ = InputRequester("ajoutez un client", "Veuillez entrer l'addresse du propriétaire", "")
+        i_20$ = InputRequester("ajoutez un client", "Veuillez entrer la ville du propriétaire", "")
+        i_21$ = InputRequester("ajoutez un client", "Veuillez entrer la province du propriétaire", "")
+        i_22$ = InputRequester("ajoutez un client", "Veuillez entrer le pays du propriétaire", "")
+        i_23$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal du propriétaire", "")
+        i_24$ = InputRequester("ajoutez un client", "Veuillez entrer le Taux horraire du client", "")
+       
    
         
-        If     qq.s = "INSERT INTO client (nomsent, nomres, emailp, emailres, faxres, faxent, noms, prenoms) VALUES('"+wocli1$+"', '"+wocli2$+"', '"+wocli3$+"', '"+wocli4$+"', '"+wocli5$+"', '"+wocli6$+"', '"+wocli7$+"', '"+wocli8$+"')" 
-          DatabaseUpdate(#mysql, qq)
-        Else
-          
-           MessageRequester("Ajouté un client", "Le client a pas été ajouté , noms entreprise dupliqué",  #PB_MessageRequester_Info)
-  
-         EndIf
+           qq.s = "INSERT INTO client (nomsent, nomres, emailp, emailres, faxres, faxent, _prenoms, _noms, cellp, cellresp, telent, telresp, datesc, addent, villeent, provent, paysent, zipent, addp, villep, provp, paysp, zipp, tauxhc) VALUES('"+wocli1$+"', '"+wocli2$+"', '"+wocli3$+"', '"+wocli4$+"', '"+wocli5$+"', '"+wocli6$+"', '"+wocli7$+"', '"+wocli8$+"', '"+wocli9$+"', '"+cli_10$+"', '"+cli_11$+"', '"+cli_12$+"', '"+cli_13$+"', '"+cli_14$+"', '"+cli_15$+"', '"+cli_16$+"', '"+cli_17$+"', '"+cli_18$+"', '"+cli_19$+"', '"+i_20$+"', '"+i_21$+"', '"+i_22$+"', '"+i_23$+"', '"+i_24$+"')" 
+           ww.s = "INSERT INTO client ( ) VALUES(, )" 
+           ee.s ="INSERT INTO client () VALUES()"
+           
+           DatabaseUpdate(#mysql, qq)
+           
               FinishDatabaseQuery(#mysql)
              
          client()
@@ -1847,8 +1846,8 @@ If EventGadget = #BC_2
        
        If EventGadget = #BC_8
          OpenGadgetList(1, 2)
-   texteclient8.s = InputRequester("Modification de la liscence de mécanique de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
-   queryclient8.s = "UPDATE client SET paysc='"+texteclient8+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient8.s = InputRequester("Modification du prenoms du propriétaire.", "Veuillez entrer le nouveau prenoms du propriétaire.", "")
+   queryclient8.s = "UPDATE client SET prenoms='"+texteclient8+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient8)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1857,8 +1856,8 @@ If EventGadget = #BC_2
         
         If EventGadget = #BC_9
           OpenGadgetList(1, 2)
-   texteclient9.s = InputRequester("Modification du # p.e.p de l'employé.", "Veuillez entrer le nouveau # p.e.p.", "")
-   queryclient9.s = "UPDATE client SET zipc='"+texteclient9+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient9.s = InputRequester("Modification du noms propre du propriétaire.", "Veuillez entrer le nouveau noms propre du propriétaire", "")
+   queryclient9.s = "UPDATE client SET noms='"+texteclient9+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient9)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1867,8 +1866,8 @@ If EventGadget = #BC_2
          
          If EventGadget = #BC_10
            OpenGadgetList(1, 2)
-   texteclient10.s = InputRequester("Modification du # liscence inspection SAAQ de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
-   queryclient10.s = "UPDATE client SET email1c='"+texteclient10+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient10.s = InputRequester("Modification du nouveau # cellulaire du propriétaire.", "Veuillez entrer le nouveau # cellulaire du propriétaire.", "")
+   queryclient10.s = "UPDATE client SET cellp='"+texteclient10+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient10)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1877,8 +1876,8 @@ If EventGadget = #BC_2
           
           If EventGadget = #BC_11
             OpenGadgetList(1, 2)
-   texteclient11.s = InputRequester("Modification de la date de naissance de l'employé.", "Veuillez entrer la nouvelle date de naissance.", "")
-   queryclient11.s = "UPDATE client SET email2c='"+texteclient11+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient11.s = InputRequester("Modification du nouveau # cellulaire du responsable.", "Veuillez entrer le nouveau # cellulaire du responsable.", "")
+   queryclient11.s = "UPDATE client SET cellresp='"+texteclient11+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient11)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1887,8 +1886,8 @@ If EventGadget = #BC_2
            
            If EventGadget = #BC_12
              OpenGadgetList(1, 2)
-   texteclient12.s = InputRequester("Modification de la date embauche de l'employé.", "Veuillez entrer la nouvelle date", "")
-   queryclient12.s = "UPDATE client SET nomentc='"+texteclient12+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient12.s = InputRequester("Modification du nouveau # téléphone de l'entreprise.", "Veuillez entrer le nouveau # téléphone de l'entreprise.", "")
+   queryclient12.s = "UPDATE client SET telent='"+texteclient12+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient12)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1897,8 +1896,8 @@ If EventGadget = #BC_2
             
             If EventGadget = #BC_13
               OpenGadgetList(1, 2)
-   texteclient13.s = InputRequester("Modification du nom de ville de l'employé.", "Veuillez entrer le nom de la nouvelle ville.", "")
-   queryclient13.s = "UPDATE client SET addentc='"+texteclient13+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient13.s = InputRequester("Modification du nouveau # téléphone du responsables.", "Veuillez entrer le nouveau # téléphone du responsable.", "")
+   queryclient13.s = "UPDATE client SET telresp='"+texteclient13+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient13)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1907,8 +1906,8 @@ If EventGadget = #BC_2
              
              If EventGadget = #BC_14
                OpenGadgetList(1, 2)
-   texteclient14.s = InputRequester("Modification de la province de l'employé.", "Veuillez entrer la nouvelle province", "")
-   queryclient14.s = "UPDATE client SET villeentc='"+texteclient14+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient14.s = InputRequester("Modification de la date de création du client.", "Veuillez entrer la nouvelle date de création du client", "")
+   queryclient14.s = "UPDATE client SET datesc='"+texteclient14+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient14)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1917,8 +1916,8 @@ If EventGadget = #BC_2
               
               If EventGadget = #BC_15
                 OpenGadgetList(1, 2)
-   texteclient15.s = InputRequester("Modification du pays de l'employé.", "Veuillez entrer le nouveau pays.", "")
-   queryclient15.s = "UPDATE client SET provinceentc='"+texteclient15+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient15.s = InputRequester("Modification de la nouvelle addresse de l'entreprise.", "Veuillez entrer la nouvelle addresse de l'entreprise.", "")
+   queryclient15.s = "UPDATE client SET addent='"+texteclient15+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient15)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1927,8 +1926,8 @@ If EventGadget = #BC_2
                
                If EventGadget = #BC_16
                  OpenGadgetList(1, 2)
-   texteclient16.s = InputRequester("Modification du Code Postal de l'employé.", "Veuillez entrer le nouveau Code Postal.", "")
-   queryclient16.s = "UPDATE client SET paysentc='"+texteclient16+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient16.s = InputRequester("Modification de la nouvelle ville de l'entreprise.", "Veuillez entrer la nouvelle ville de l'entreprise.", "")
+   queryclient16.s = "UPDATE client SET villeent='"+texteclient16+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient16)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1937,8 +1936,8 @@ If EventGadget = #BC_2
                 
                 If EventGadget = #BC_17
                   OpenGadgetList(1, 2)
-   texteclient17.s = InputRequester("Modification du email personel de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient17.s = "UPDATE client SET zipentc='"+texteclient17+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient17.s = InputRequester("Modification de la nouvelle province de l'entreprise.", "Veuillez entrer la nouvelle province de l'entreprise.", "")
+   queryclient17.s = "UPDATE client SET provent='"+texteclient17+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient17)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1947,8 +1946,8 @@ If EventGadget = #BC_2
                  
                  If EventGadget = #BC_18
                    OpenGadgetList(1, 2)
-   texteclient18.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient18.s = "UPDATE client SET telentc='"+texteclient18+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient18.s = InputRequester("Modification du pays de l'entrprise.", "Veuillez entrer le nouveau pays de l'entrprise.", "")
+   queryclient18.s = "UPDATE client SET paysent='"+texteclient18+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient18)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1957,8 +1956,8 @@ If EventGadget = #BC_2
  
  If EventGadget = #BC_19
    OpenGadgetList(1, 2)
-   texteclient19.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient19.s = "UPDATE client SET nomrepc='"+texteclient19+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient19.s = InputRequester("Modification du Code Postal de l'entreprise.", "Veuillez entrer le nouveau Code Postal de l'entrprise.", "")
+   queryclient19.s = "UPDATE client SET zipent='"+texteclient19+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient19)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1967,8 +1966,8 @@ If EventGadget = #BC_2
  
  If EventGadget = #BC_20
    OpenGadgetList(1, 2)
-   texteclient20.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient20.s = "UPDATE client SET telrespc='"+texteclient20+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient20.s = InputRequester("Modification de l'addresse du propriétaire.", "Veuillez entrer la nouvelle addresse du propriétaire.", "")
+   queryclient20.s = "UPDATE client SET addp='"+texteclient20+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient20)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1977,8 +1976,8 @@ If EventGadget = #BC_2
  
  If EventGadget = #BC_21
    OpenGadgetList(1, 2)
-   texteclient21.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient21.s = "UPDATE client SET emailrespc='"+texteclient21+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient21.s = InputRequester("Modification de la ville du propriétaire.", "Veuillez entrer la nouvelle ville du propriétaire.", "")
+   queryclient21.s = "UPDATE client SET villep='"+texteclient21+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient21)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1987,8 +1986,8 @@ If EventGadget = #BC_2
  
  If EventGadget = #BC_22
    OpenGadgetList(1, 2)
-   texteclient22.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient22.s = "UPDATE client SET datesc='"+texteclient22+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient22.s = InputRequester("Modification de la province du propriétaire.", "Veuillez entrer la nouvelle province du propriétaire.", "")
+   queryclient22.s = "UPDATE client SET provp='"+texteclient22+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient22)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -1997,8 +1996,8 @@ If EventGadget = #BC_2
  
  If EventGadget = #BC_23
    OpenGadgetList(1, 2)
-   texteclient23.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient23.s = "UPDATE client SET usernamec='"+texteclient23+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient23.s = InputRequester("Modification du pays du propriétaire.", "Veuillez entrer le nouveau pays du propriétaire.", "")
+   queryclient23.s = "UPDATE client SET paysp='"+texteclient23+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient23)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -2007,8 +2006,8 @@ If EventGadget = #BC_2
  
  If EventGadget = #BC_24
    OpenGadgetList(1, 2)
-   texteclient24.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient24.s = "UPDATE client SET tauxhc='"+texteclient24+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient24.s = InputRequester("Modification du Code Postal du propriétaire.", "Veuillez entrer le nouveau Code Postal du propriétaire.", "")
+   queryclient24.s = "UPDATE client SET zipp='"+texteclient24+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient24)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -2017,8 +2016,8 @@ If EventGadget = #BC_2
  
  If EventGadget = #BC_25
    OpenGadgetList(1, 2)
-   texteclient25.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
-   queryclient25.s = "UPDATE client SET faxentc='"+texteclient25+"' WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+   texteclient25.s = InputRequester("Modification du taux horraire du client.", "Veuillez entrer le nouveau taux horraire du client.", "")
+   queryclient25.s = "UPDATE client SET tauxhc='"+texteclient25+"' WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
    DatabaseUpdate(#mysql, queryclient25)
     FinishDatabaseQuery(#mysql)
     Client()
@@ -2040,7 +2039,7 @@ If EventGadget = #BC_2
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
 ; CursorPosition = 1468
-; FirstLine = 1436
+; FirstLine = 1440
 ; Folding = ----
 ; EnableXP
 ; DPIAware
