@@ -344,7 +344,7 @@ Procedure Client()
              If DatabaseQuery (#mysql, "SELECT * FROM client")
              
                
-              ListIconGadget(#_BCC20, 0, 20, 1280, 380, "Nom Entreprise", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+              ListIconGadget(#_BCC20, 0, 20, 1280, 380, "Noms Entreprise", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
           
             
              AddGadgetColumn(#_BCC20, 1, "Nom du Responsable", 120)
@@ -352,33 +352,31 @@ Procedure Client()
              AddGadgetColumn(#_BCC20, 3, "Email Responsable", 120)
              AddGadgetColumn(#_BCC20, 4, "Fax Responsable", 120)
              AddGadgetColumn(#_BCC20, 5, "Fax de l'entreprise", 120)
-             AddGadgetColumn(#_BCC20, 6, "Nom Propre Propriétaire", 120)
-              AddGadgetColumn(#_BCC20, 7, "Prenom Propriétaire", 120)
-              
-            ; AddGadgetColumn(#_BCC20, 8, "Pays client", 120)
-            ; AddGadgetColumn(#_BCC20, 9, "Code Postal client", 120)
-            ; AddGadgetColumn(#_BCC20, 10, "E-mail personel client", 120)
-            ; AddGadgetColumn(#_BCC20, 11, "E-mail proffesionel client", 120)
-            ; AddGadgetColumn(#_BCC20, 12, "Nom entreprise", 120)
-            ; AddGadgetColumn(#_BCC20, 13, "Addresse entreprise", 120)
-            ; AddGadgetColumn(#_BCC20, 14, "Ville entreprise", 120)
-            ; AddGadgetColumn(#_BCC20, 15, "Province entreprise", 120)
-            ; AddGadgetColumn(#_BCC20, 16, "Pays Entreprise", 120)
-            ; AddGadgetColumn(#_BCC20, 17, "Code Postal entreprise", 120)
-            ; AddGadgetColumn(#_BCC20, 18, "# téléphone entreprise", 120)
-            ; AddGadgetColumn(#_BCC20, 19, "Nom responsable", 120)
-            ; AddGadgetColumn(#_BCC20, 20, "# Téléphone responsable", 120)
-            ; AddGadgetColumn(#_BCC20, 21, "E-mail responsable", 120)
-            ; AddGadgetColumn(#_BCC20, 22, "Date Création", 120)
-            ; AddGadgetColumn(#_BCC20, 23, "Username Client", 120)
-            ; AddGadgetColumn(#_BCC20, 24, "Taux Horraire", 120)
-            ; AddGadgetColumn(#_BCC20, 25, "Fax entreprise", 120)
+             AddGadgetColumn(#_BCC20, 6, "Prenom Propriétaire", 120)
+             AddGadgetColumn(#_BCC20, 7, "Noms Propriétaire", 120)
+             AddGadgetColumn(#_BCC20, 8, "# cell propriétaire", 120)
+             AddGadgetColumn(#_BCC20, 9, "# cell responsable", 120)
+             AddGadgetColumn(#_BCC20, 10, "# téléphone entreprise", 120)
+             AddGadgetColumn(#_BCC20, 11, "# téléphone responsable", 120)
+             AddGadgetColumn(#_BCC20, 12, "Date création client", 120)
+             AddGadgetColumn(#_BCC20, 13, "Addresse entreprise", 120)
+             AddGadgetColumn(#_BCC20, 14, "Ville entreprise", 120)
+             AddGadgetColumn(#_BCC20, 15, "Province entreprise", 120)
+             AddGadgetColumn(#_BCC20, 16, "Pays Entreprise", 120)
+             AddGadgetColumn(#_BCC20, 17, "Code Postal entreprise", 120)
+             AddGadgetColumn(#_BCC20, 18, "Addresse propriétaire", 120)
+             AddGadgetColumn(#_BCC20, 19, "Ville propriétaire", 120)
+             AddGadgetColumn(#_BCC20, 20, "Province propriétaire", 120)
+             AddGadgetColumn(#_BCC20, 21, "Pays propriétaire", 120)
+             AddGadgetColumn(#_BCC20, 22, "Code Postal propriétaire", 120)
+             AddGadgetColumn(#_BCC20, 23, "Taux Horraire", 120)
+           
               
             
             
               While NextDatabaseRow(#mysql)
      
-      AddGadgetItem(#_BCC20, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19)+Chr(10)+GetDatabaseString(#mysql, 20)+Chr(10)+GetDatabaseString(#mysql, 21)+Chr(10)+GetDatabaseString(#mysql, 22)+Chr(10)+GetDatabaseString(#mysql, 23)+Chr(10)+GetDatabaseString(#mysql, 24)+Chr(10)+GetDatabaseString(#mysql, 25))
+      AddGadgetItem(#_BCC20, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19)+Chr(10)+GetDatabaseString(#mysql, 20)+Chr(10)+GetDatabaseString(#mysql, 21)+Chr(10)+GetDatabaseString(#mysql, 22)+Chr(10)+GetDatabaseString(#mysql, 23))
       
       
       
@@ -1441,14 +1439,14 @@ EndIf
          If EventGadget = #_BCC8501  ;add client
           OpenGadgetList(1, 2)
         
-        wocli3$ = InputRequester("ajoutez un client", "Veuillez entrer le nom de l'entreprise.", "")
-        wocli4$ = InputRequester("ajoutez un client", "Veuillez entrer le nom du responsable.", "")
-        wocli5$ = InputRequester("ajoutez un client", "Veuillez entrer le email du propriétaire", "")
-        wocli6$ = InputRequester("ajoutez un client", "Veuillez entrer le email du responsable", "")
-        wocli7$ = InputRequester("ajoutez un client", "Veuillez entrer le # Fax du responsable", "")
-        wocli8$ = InputRequester("ajoutez un client", "Veuillez entrer le # Fax de l'entreprise", "")
-        wocli1$ = InputRequester("ajoutez un client", "Veuillez entrer le nom propre du propriétaire.", "")
-        wocli2$ = InputRequester("ajoutez un client", "Veuillez entrer le prenom du propriétaire.", "")
+        wocli1$ = InputRequester("ajoutez un client", "Veuillez entrer le nom de l'entreprise.", "")
+        wocli2$ = InputRequester("ajoutez un client", "Veuillez entrer le nom du responsable.", "")
+        wocli3$ = InputRequester("ajoutez un client", "Veuillez entrer le email du propriétaire", "")
+        wocli4$ = InputRequester("ajoutez un client", "Veuillez entrer le email du responsable", "")
+        wocli5$ = InputRequester("ajoutez un client", "Veuillez entrer le # Fax du responsable", "")
+        wocli6$ = InputRequester("ajoutez un client", "Veuillez entrer le # Fax de l'entreprise", "")
+        wocli7$ = InputRequester("ajoutez un client", "Veuillez entrer le prenoms du propriétaire.", "")
+        wocli8$ = InputRequester("ajoutez un client", "Veuillez entrer le noms du propriétaire.", "")
        ; Textclient108$ = InputRequester("ajoutez un client", "Veuillez entrer le pays du propriétaire", "")
        ; Textclient109$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal du propriétaire", "")
        ; Textclient110$ = InputRequester("ajoutez un client", "Veuillez entrer le e-mail personel du propriétaire", "")
@@ -1468,7 +1466,7 @@ EndIf
        ; Textclient125$ = InputRequester("ajoutez un client", "Veuillez entrer le taux horraire du client", "")
    
         
-        If     qq.s = "INSERT INTO client (nomsent, nomres, emailp, emailres, faxres, faxent, noms, prenoms) VALUES('"+wocli3$+"', '"+wocli4$+"', '"+wocli5$+"', '"+wocli6$+"', '"+wocli7$+"', '"+wocli8$+"', '"+wocli1$+"', '"+wocli2$+"')" 
+        If     qq.s = "INSERT INTO client (nomsent, nomres, emailp, emailres, faxres, faxent, noms, prenoms) VALUES('"+wocli1$+"', '"+wocli2$+"', '"+wocli3$+"', '"+wocli4$+"', '"+wocli5$+"', '"+wocli6$+"', '"+wocli7$+"', '"+wocli8$+"')" 
           DatabaseUpdate(#mysql, qq)
         Else
           
@@ -2041,8 +2039,8 @@ If EventGadget = #BC_2
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 354
-; FirstLine = 341
+; CursorPosition = 1468
+; FirstLine = 1436
 ; Folding = ----
 ; EnableXP
 ; DPIAware
