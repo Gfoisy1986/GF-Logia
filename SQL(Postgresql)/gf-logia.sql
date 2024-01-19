@@ -16,6 +16,20 @@
 -- Dumping data for table public.client: -1 rows
 DELETE FROM "client";
 /*!40000 ALTER TABLE "client" DISABLE KEYS */;
+INSERT INTO "client" ("nomsent", "nomres", "emailp", "emailres", "faxres", "faxent", "_prenoms", "_noms", "cellp", "cellresp", "telent", "telresp", "datesc", "addent", "villeent", "provent", "paysent", "zipent", "addp", "villep", "provp", "paysp", "zipp", "tauxhc") VALUES
+	('gfoisy', 'drg', 'dg', 'dg', 'dg', 'dg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('dd', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('hg', 'sfd', 'dsf', 'sdf', 'dsf', 'dsf', 'dsf', 'sd', 'fds', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('ert', 'rtyrtytry', 'tyrt', 'rt', 't', 'y', 'ty', 'ty', 'ty', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('sdfdsf', 'dsfdsf', 'df', 'f', '', 'df', '', 'd', 'd', 'd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('erttt', 'ert', 'ert', 'ert', 'ert', 'ert', 'ert', 'ert', 'ert', 'ert', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('ghjghjghjghj', 'ghj', 'ghj', 'hgj', 'ghj', 'ghj', 'ghj', 'ghj', 'ghj', 'ghj', 'ghj', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('efoisy', 'hjk', 'k', 'k', 'k', 'k', 'k', 'k', 'k', 'k', 'k', 'k', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('cfoisy', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('dfoisy', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('mstd', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'gg', 'g', 'g', 'g', 'g', 'g', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('estd', 'd', 'd', 'dd', 'd', 'dd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'dd', 'd', 'dd', 'd', 'd', 'd', NULL, NULL, NULL, NULL, NULL),
+	('cvb', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', '', '', 'v', 'v', 'v', 'v', 'v', 'v', '');
 /*!40000 ALTER TABLE "client" ENABLE KEYS */;
 
 -- Dumping data for table public.job: 1 rows
@@ -39,7 +53,8 @@ DELETE FROM "punch";
 DELETE FROM "username";
 /*!40000 ALTER TABLE "username" DISABLE KEYS */;
 INSERT INTO "username" ("username", "nom", "prenom", "age", "tel", "cell", "add", "permis", "liscence", "pep", "saaq", "date", "embauche", "city", "province", "pays", "zip", "email1", "email2") VALUES
-	('GFoisy', 'Foisy', 'Guillaume', '37', '455-455-4545', '544-455-4545', 'fg', 'test', 'test', 'test', 'test', '2024-01-16 16:36:24', '2024-01-16', 'Lune', 'QC', 'CANADA', 'TEST', 'Test@test.com', 'Test2@test.com');
+	('GFoisy', 'Foisy', 'Guillaume', '37', '455-455-4545', '544-455-4545', 'fg', 'test', 'test', 'test', 'test', '2024-01-16 16:36:24', '2024-01-16', 'Lune', 'QC', 'CANADA', 'TEST', 'Test@test.com', 'Test2@test.com'),
+	('sef', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE "username" ENABLE KEYS */;
 
 -- Dumping data for table public.workorder: -1 rows
