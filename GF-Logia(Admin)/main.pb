@@ -162,6 +162,19 @@ Enumeration
     #PB_fd
     #PB_fe
     #PB_ff
+    #PB_fg0
+    #PB_fg1
+    #PB_fg2
+    #PB_fg3
+    #PB_fg4
+    #PB_fg5
+    #PB_fg6
+    #PB_fg7
+    #PB_fg8
+    #PB_fg9
+    #PB_fg10
+    #PB_fg11
+    #PB_fg12
     #_0fl
     #BC_024
     #PB_111
@@ -431,27 +444,22 @@ Procedure Flotte()
             EndIf
   
   
-  ; TextGadget(#PB_Any, 0, 450, 1280, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
-       ;  ButtonGadget(#BG_0, 0, 470, 200, 30, "Username")
-        ; ButtonGadget(#BG_1, 210, 470, 200, 30, "Nom propre")
-        ; ButtonGadget(#BG_2, 420, 470, 200, 30, "Prénom")
-       ;  ButtonGadget(#BG_3, 630, 470, 200, 30, "Age")
-       ;  ButtonGadget(#BG_4, 840, 470, 200, 30, "# Téléphone")
-       ;  ButtonGadget(#BG_5, 1050, 470, 200, 30, "# Cell")
-; ;        ;  ButtonGadget(#BG_6, 0, 510, 200, 30, "Addresse")
-;          ButtonGadget(#BG_7, 210, 510, 200, 30, "# Permis Conduire")
-;          ButtonGadget(#BG_8, 420, 510, 200, 30, "# Liscence Méca")
-;          ButtonGadget(#BG_9, 630, 510, 200, 30, "# Liscence P.E.P")
-;          ButtonGadget(#BG_10, 840, 510, 200, 30, "# Liscence S.A.A.Q")
-;          ButtonGadget(#BG_11, 1050, 510, 200, 30, "Date Naissance")
-;          ButtonGadget(#BG_12, 0, 550, 200, 30, "Date Embauche")
-;          ButtonGadget(#BG_13, 210, 550, 200, 30, "Ville")
-;          ButtonGadget(#BG_14, 420, 550, 200, 30, "Province")
-;          ButtonGadget(#BG_15, 630, 550, 200, 30, "Pays")
-;          ButtonGadget(#BG_16, 840, 550, 200, 30, "Code Postal")
-;          ButtonGadget(#BG_17, 1050, 550, 200, 30, "E-mail Personel")
-;          ButtonGadget(#BG_18, 0, 590, 200, 30, "E-mail Job")
-;          ButtonGadget(#BG_19, 210, 590, 200, 30, "Taux horraire")
+  TextGadget(#PB_Any, 460, 400, 820, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
+         ButtonGadget(#PB_fg0, 460, 430, 200, 30, "# Série")
+         ButtonGadget(#PB_fg1, 665, 430, 200, 30, "# Unité")
+         ButtonGadget(#PB_fg2, 870, 430, 200, 30, "Annéee Vehivule")
+         ButtonGadget(#PB_fg3, 1075, 430, 200, 30, "Marque Vehicule")
+         ButtonGadget(#PB_fg4, 460, 470, 200, 30, "Model Vehicule")
+         ButtonGadget(#PB_fg5, 665, 470, 200, 30, "Kilometrage")
+         ButtonGadget(#PB_fg6, 870, 470, 200, 30, "heures")
+         ButtonGadget(#PB_fg7, 1075, 470, 200, 30, "Date Derniere maintenance")
+         ButtonGadget(#PB_fg8, 460, 510, 200, 30, "Mot de passe 'ECM'")
+         ButtonGadget(#PB_fg9, 665, 510, 200, 30, "Imatriculation")
+         ButtonGadget(#PB_fg10, 870, 510, 200, 30, "Fin garantie")
+         ButtonGadget(#PB_fg11, 1075, 510, 200, 30, "Prochaine insnp. Pep ou Saaq")
+         ButtonGadget(#PB_fg12, 460, 550, 200, 30, "Prochaine Maintenance")
+
+
          
          
          
@@ -470,7 +478,7 @@ Procedure Flotte()
               AddGadgetColumn(#_0fl, 5, "Model vehicule", 120)
               AddGadgetColumn(#_0fl, 6, "kilometrage", 120)
               AddGadgetColumn(#_0fl, 7, "heure", 120)
-              AddGadgetColumn(#_0fl, 8, "Date", 120)
+              AddGadgetColumn(#_0fl, 8, "Date derniere maintenance", 120)
               AddGadgetColumn(#_0fl, 9, "Mot de passe 'ECM'", 120)
               AddGadgetColumn(#_0fl, 10, "Imatriculation", 120)
               AddGadgetColumn(#_0fl, 11, "Fin garantie", 120)
@@ -2115,8 +2123,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 977
-; FirstLine = 973
+; CursorPosition = 457
+; FirstLine = 439
 ; Folding = ----
 ; EnableXP
 ; DPIAware
