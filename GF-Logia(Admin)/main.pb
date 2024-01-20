@@ -169,10 +169,12 @@ Icone$ = "icon.ico"
 Procedure boite()
   OpenGadgetList(1, 12)
        
-  URLfiltre$ = "https://www.google.ca/"
+ 
   
-        WebGadget(#PB_Any, 0, 0, 800, 650, URLfiltre$)
-       
+        ButtonGadget(#PB_Any, 0, 0, 640, 300, "GF-Comm")
+        ButtonGadget(#PB_Any, 640, 0, 640, 300, "Note on the fly")
+        ButtonGadget(#PB_Any, 0, 300, 640, 300, "GF-Calc")
+        ButtonGadget(#PB_Any, 640, 300, 640, 300, "GF-Conv")
   CloseGadgetList()
 EndProcedure
 
@@ -1146,6 +1148,11 @@ AddGadgetItem(1, -1, "Les Notes")
      boite()
      CloseGadgetList()
      
+     OpenGadgetList(1)
+    AddGadgetItem(1, -1, "GuillaumeFoisy.ca")
+     TextGadget(#PB_Any, 100, 0, 100, 20, "heya")
+    CloseGadgetList()
+     
       OpenGadgetList(1)
     AddGadgetItem(1, -1, "Support Technique")
      TextGadget(726, 100, 0, 100, 20, "heya")
@@ -2083,8 +2090,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 169
-; FirstLine = 158
+; CursorPosition = 1152
+; FirstLine = 1133
 ; Folding = ----
 ; EnableXP
 ; DPIAware
