@@ -17,19 +17,7 @@
 DELETE FROM "client";
 /*!40000 ALTER TABLE "client" DISABLE KEYS */;
 INSERT INTO "client" ("nomsent", "nomres", "emailp", "emailres", "faxres", "faxent", "_prenoms", "_noms", "cellp", "cellresp", "telent", "telresp", "datesc", "addent", "villeent", "provent", "paysent", "zipent", "addp", "villep", "provp", "paysp", "zipp", "tauxhc") VALUES
-	('gfoisy', 'drg', 'dg', 'dg', 'dg', 'dg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('dd', '', '', '', '', '', '', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('hg', 'sfd', 'dsf', 'sdf', 'dsf', 'dsf', 'dsf', 'sd', 'fds', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('ert', 'rtyrtytry', 'tyrt', 'rt', 't', 'y', 'ty', 'ty', 'ty', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('sdfdsf', 'dsfdsf', 'df', 'f', '', 'df', '', 'd', 'd', 'd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('erttt', 'ert', 'ert', 'ert', 'ert', 'ert', 'ert', 'ert', 'ert', 'ert', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('ghjghjghjghj', 'ghj', 'ghj', 'hgj', 'ghj', 'ghj', 'ghj', 'ghj', 'ghj', 'ghj', 'ghj', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('efoisy', 'hjk', 'k', 'k', 'k', 'k', 'k', 'k', 'k', 'k', 'k', 'k', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('cfoisy', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', 'f', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('dfoisy', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', 'l', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('mstd', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'g', 'gg', 'g', 'g', 'g', 'g', 'g', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('estd', 'd', 'd', 'dd', 'd', 'dd', 'd', 'd', 'd', 'd', 'd', 'd', 'd', 'dd', 'd', 'dd', 'd', 'd', 'd', NULL, NULL, NULL, NULL, NULL),
-	('cvb', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', '', '', 'v', 'v', 'v', 'v', 'v', 'v', '');
+	('gfoisy', 'drg', 'dg', 'dg', 'dg', 'dg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE "client" ENABLE KEYS */;
 
 -- Dumping data for table public.flotte: -1 rows

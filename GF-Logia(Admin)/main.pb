@@ -13,6 +13,8 @@ Enumeration
   #_WO117
   #_BCC8501
   #_WO217
+  #PB_210
+  #PB_110
       #_INSP0
       #_INSPW
       #_listuserBG 
@@ -158,7 +160,15 @@ Enumeration
     #PB_fb
     #PB_fc
     #PB_fd
+    #PB_fe
+    #PB_ff
+    #_0fl
     #BC_024
+    #PB_111
+    #PB_115
+    #PB_112
+    #PB_114
+    #PB_113
 EndEnumeration
 
   
@@ -284,14 +294,14 @@ Procedure employer()
              AddGadgetColumn(#_020, 16, "Code Postal", 120)
              AddGadgetColumn(#_020, 17, "E-mail Personel", 120)
              AddGadgetColumn(#_020, 18, "E-mail Job", 120)
-             AddGadgetColumn(#_020, 19, "Taux horraire", 120)
+             
   
               
             
             
               While NextDatabaseRow(#mysql)
      
-      AddGadgetItem(#_020, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19))
+      AddGadgetItem(#_020, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18))
       
       
       
@@ -378,14 +388,14 @@ Procedure Client()
              AddGadgetColumn(#_BCC20, 20, "Province propriétaire", 120)
              AddGadgetColumn(#_BCC20, 21, "Pays propriétaire", 120)
              AddGadgetColumn(#_BCC20, 22, "Code Postal propriétaire", 120)
-             AddGadgetColumn(#_BCC20, 23, "Taux Horraire", 120)
+             
            
               
             
             
     While NextDatabaseRow(#mysql)
      
-      AddGadgetItem(#_BCC20, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19)+Chr(10)+GetDatabaseString(#mysql, 20)+Chr(10)+GetDatabaseString(#mysql, 21)+Chr(10)+GetDatabaseString(#mysql, 22)+Chr(10)+GetDatabaseString(#mysql, 23))
+      AddGadgetItem(#_BCC20, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19)+Chr(10)+GetDatabaseString(#mysql, 20)+Chr(10)+GetDatabaseString(#mysql, 21)+Chr(10)+GetDatabaseString(#mysql, 22))
       
      
     Wend  
@@ -399,11 +409,26 @@ EndProcedure
 Procedure Flotte()
   OpenGadgetList(1, 3)
  
-  TextGadget(#PB_fa, 0, 400, 1280, 20, "Menu Flotte", #PB_Text_Border | #PB_Text_Center)
-  ButtonGadget(#PB_fb, 0, 420, 200, 20, "Ajouté un vehicule")
- 
- ButtonGadget(#PB_fc, 250, 420, 200, 20, "Supprimé un vehicule")
+  TextGadget(#PB_fa, 0, 400, 200, 20, "Menu Flotte", #PB_Text_Border | #PB_Text_Center)
+  ButtonGadget(#PB_fc, 0, 420, 200, 30, "Supprimé un vehicule")
   
+  
+  
+  
+  
+  TextGadget(#PB_ff, 220, 400, 200, 20, "Ajouté par entreprise", #PB_Text_Border | #PB_Text_Center)
+  ButtonGadget(#PB_fb,220, 420, 200, 30, "Ajouté un vehicule")
+ 
+  
+  ListViewGadget(#PB_fe, 220, 450, 200, 200)
+             If DatabaseQuery (#mysql, "SELECT * FROM client")
+             While NextDatabaseRow(#mySql) 
+               
+               AddGadgetItem(#PB_fe, -1, "" + GetDatabaseString(#mySql, 0))
+               
+              Wend 
+             FinishDatabaseQuery(#mysql)
+            EndIf
   
   
   ; TextGadget(#PB_Any, 0, 450, 1280, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
@@ -436,26 +461,26 @@ Procedure Flotte()
              If DatabaseQuery (#mysql, "SELECT * FROM flotte")
              
                
-               ListIconGadget(#_020, 0, 20, 1280, 380, "Noms Entreprise", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+               ListIconGadget(#_0fl, 0, 20, 1280, 380, "Noms Entreprise", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
           
-              AddGadgetColumn(#_020, 1, "# série", 120)
-              AddGadgetColumn(#_020, 2, "# unité", 120)
-              AddGadgetColumn(#_020, 3, "Année vehicule", 60)
-              AddGadgetColumn(#_020, 4, "Marque vehicule", 120)
-              AddGadgetColumn(#_020, 5, "Model vehicule", 120)
-              AddGadgetColumn(#_020, 6, "kilometrage", 120)
-              AddGadgetColumn(#_020, 7, "heure", 120)
-              AddGadgetColumn(#_020, 8, "Date", 120)
-              AddGadgetColumn(#_020, 9, "Mot de passe 'ECM'", 120)
-              AddGadgetColumn(#_020, 10, "Imatriculation", 120)
-              AddGadgetColumn(#_020, 11, "Fin garantie", 120)
-              AddGadgetColumn(#_020, 12, "prochaine inspection pep ou saaq", 120)
-              AddGadgetColumn(#_020, 13, "prochaine maintenance", 120)
+              AddGadgetColumn(#_0fl, 1, "# série", 120)
+              AddGadgetColumn(#_0fl, 2, "# unité", 120)
+              AddGadgetColumn(#_0fl, 3, "Année vehicule", 60)
+              AddGadgetColumn(#_0fl, 4, "Marque vehicule", 120)
+              AddGadgetColumn(#_0fl, 5, "Model vehicule", 120)
+              AddGadgetColumn(#_0fl, 6, "kilometrage", 120)
+              AddGadgetColumn(#_0fl, 7, "heure", 120)
+              AddGadgetColumn(#_0fl, 8, "Date", 120)
+              AddGadgetColumn(#_0fl, 9, "Mot de passe 'ECM'", 120)
+              AddGadgetColumn(#_0fl, 10, "Imatriculation", 120)
+              AddGadgetColumn(#_0fl, 11, "Fin garantie", 120)
+              AddGadgetColumn(#_0fl, 12, "prochaine inspection pep ou saaq", 120)
+              AddGadgetColumn(#_0fl, 13, "prochaine maintenance", 120)
           
    
                While NextDatabaseRow(#mysql)
      
-       AddGadgetItem(#_020, -1, GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11))
+       AddGadgetItem(#_0fl, -1, GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11))
 
      Wend  
      FinishDatabaseQuery(#mysql)
@@ -487,7 +512,7 @@ EndProcedure
   
 
 ListViewGadget(#_1203, 225, 320, 200, 150)
-             If DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
+             If DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
              While NextDatabaseRow(#mySql) 
                
                
@@ -497,7 +522,7 @@ ListViewGadget(#_1203, 225, 320, 200, 150)
                    
               Wend 
              
-   
+   FinishDatabaseQuery(#mysql)
              
             EndIf
     EndProcedure
@@ -946,23 +971,23 @@ OpenGadgetList(1, 4)
       TextGadget(209, 680 , 100, 200, 20, "Date Prochaine INSP...", #PB_Text_Border | #PB_Text_Center)
        TextGadget(#PB_109, 680, 120, 200, 30, "" + GetDatabaseString(#mysql, 11), #PB_Text_Border | #PB_Text_Center)
       
-      TextGadget(210, 880 , 100, 200, 20, "Date Fin Garantie", #PB_Text_Border | #PB_Text_Center)
-       TextGadget(110, 880, 120, 200, 30, "" + GetDatabaseString(#mysql, 12), #PB_Text_Border | #PB_Text_Center)
+      TextGadget(#PB_210, 880 , 100, 200, 20, "Date Fin Garantie", #PB_Text_Border | #PB_Text_Center)
+       TextGadget(#PB_110, 880, 120, 200, 30, "" + GetDatabaseString(#mysql, 12), #PB_Text_Border | #PB_Text_Center)
       
       TextGadget(211, 1080 , 100, 200, 20, "Imatriculation", #PB_Text_Border | #PB_Text_Center)
-       TextGadget(111, 1080, 120, 200, 30, "" + GetDatabaseString(#mysql, 13), #PB_Text_Border | #PB_Text_Center)
+       TextGadget(#PB_111, 1080, 120, 200, 30, "" + GetDatabaseString(#mysql, 13), #PB_Text_Border | #PB_Text_Center)
       
       TextGadget(212, 480 , 150, 200, 20, "Nom Propriétaire", #PB_Text_Border | #PB_Text_Center)
-       TextGadget(112, 480, 170, 200, 30, "" + GetDatabaseString(#mysql, 14), #PB_Text_Border | #PB_Text_Center)
+       TextGadget(#PB_112, 480, 170, 200, 30, "" + GetDatabaseString(#mysql, 14), #PB_Text_Border | #PB_Text_Center)
       
       TextGadget(213, 680 , 150, 200, 20, "Addresse Propriétaire", #PB_Text_Border | #PB_Text_Center)
-       TextGadget(113, 680, 170, 200, 30, "" + GetDatabaseString(#mysql, 15), #PB_Text_Border | #PB_Text_Center)
+       TextGadget(#PB_113, 680, 170, 200, 30, "" + GetDatabaseString(#mysql, 15), #PB_Text_Border | #PB_Text_Center)
       
       TextGadget(214, 880 , 150, 200, 20, "Addresse du Vehicule (Home)", #PB_Text_Border | #PB_Text_Center)
-       TextGadget(114, 880, 170, 200, 30, "" + GetDatabaseString(#mysql, 16), #PB_Text_Border | #PB_Text_Center)
+       TextGadget(#PB_114, 880, 170, 200, 30, "" + GetDatabaseString(#mysql, 16), #PB_Text_Border | #PB_Text_Center)
       
       TextGadget(215, 1080, 150, 200, 20, "Mot de passe 'ECM'", #PB_Text_Border | #PB_Text_Center)
-      TextGadget(115, 1080, 170, 200, 30, "" + GetDatabaseString(#mysql, 17), #PB_Text_Border | #PB_Text_Center)
+      TextGadget(#PB_115, 1080, 170, 200, 30, "" + GetDatabaseString(#mysql, 17), #PB_Text_Border | #PB_Text_Center)
     
      
      
@@ -2090,8 +2115,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1152
-; FirstLine = 1133
+; CursorPosition = 977
+; FirstLine = 973
 ; Folding = ----
 ; EnableXP
 ; DPIAware
