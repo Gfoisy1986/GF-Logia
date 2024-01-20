@@ -32,9 +32,18 @@ INSERT INTO "client" ("nomsent", "nomres", "emailp", "emailres", "faxres", "faxe
 	('cvb', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', 'v', '', '', 'v', 'v', 'v', 'v', 'v', 'v', '');
 /*!40000 ALTER TABLE "client" ENABLE KEYS */;
 
+-- Dumping data for table public.flotte: -1 rows
+DELETE FROM "flotte";
+/*!40000 ALTER TABLE "flotte" DISABLE KEYS */;
+/*!40000 ALTER TABLE "flotte" ENABLE KEYS */;
+
 -- Dumping data for table public.job: 1 rows
 DELETE FROM "job";
 /*!40000 ALTER TABLE "job" DISABLE KEYS */;
+INSERT INTO "job" ("id", "username", "jobname", "jobinfo", "jobrepport", "punchin", "punchout", "wo", "inpectionsheet") VALUES
+	(1, 'Garage', 'PM 500 Heures', 'Maintenance 500 heure unit #5', NULL, NULL, NULL, 1, NULL),
+	(1, '', 'Liste des travaux', '', '() : PM Done', NULL, NULL, 1, NULL),
+	(1, 'GFoisy', 'PM 500 Heures', '', '(GFoisy) : fdg', NULL, NULL, 1, NULL);
 /*!40000 ALTER TABLE "job" ENABLE KEYS */;
 
 -- Dumping data for table public.note: -1 rows
@@ -47,17 +56,19 @@ INSERT INTO "note" ("id", "notename", "wo", "content", "serie") VALUES
 -- Dumping data for table public.punch: 0 rows
 DELETE FROM "punch";
 /*!40000 ALTER TABLE "punch" DISABLE KEYS */;
+INSERT INTO "punch" ("id", "wo", "username", "punchin", "punchout", "pstatus", "jobname") VALUES
+	('1', '1', 'GFoisy', '19/01/2024  17:05:38', '19/01/2024  17:21:20', '2', 'PM 500 Heures');
 /*!40000 ALTER TABLE "punch" ENABLE KEYS */;
 
--- Dumping data for table public.username: -1 rows
+-- Dumping data for table public.username: 2 rows
 DELETE FROM "username";
 /*!40000 ALTER TABLE "username" DISABLE KEYS */;
-INSERT INTO "username" ("username", "nom", "prenom", "age", "tel", "cell", "add", "permis", "liscence", "pep", "saaq", "date", "embauche", "city", "province", "pays", "zip", "email1", "email2") VALUES
-	('GFoisy', 'Foisy', 'Guillaume', '37', '455-455-4545', '544-455-4545', 'fg', 'test', 'test', 'test', 'test', '2024-01-16 16:36:24', '2024-01-16', 'Lune', 'QC', 'CANADA', 'TEST', 'Test@test.com', 'Test2@test.com'),
-	('sef', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO "username" ("username", "nom", "prenom", "age", "tel", "cell", "add", "permis", "liscence", "pep", "saaq", "date", "embauche", "city", "province", "pays", "zip", "email1", "email2", "tauxhr") VALUES
+	('sef', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+	('GFoisy', 'Foisy', 'Guillaume', '37', '455-455-4545', '544-455-4545', 'fg', 'test', 'test', 'test', 'test', '2024-01-16 16:36:24', '2024-01-16', 'Lune', 'QC', 'CANADA', 'TEST', 'Test@test.com', 'Test2@test.com', '10');
 /*!40000 ALTER TABLE "username" ENABLE KEYS */;
 
--- Dumping data for table public.workorder: -1 rows
+-- Dumping data for table public.workorder: 2 rows
 DELETE FROM "workorder";
 /*!40000 ALTER TABLE "workorder" DISABLE KEYS */;
 INSERT INTO "workorder" ("id", "wo", "user", "serie", "annee", "model", "unitee", "km", "hrs", "date", "maintn", "inspn", "garantie", "plate", "proprioname", "proprioadd", "vehadd", "ecm", "status") VALUES
