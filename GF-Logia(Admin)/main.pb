@@ -175,7 +175,8 @@ Enumeration
     #PB_fg10
     #PB_fg11
     #PB_fg12
-    #_0fl
+    #PB_fg13
+    #_a0fl
     #BC_024
     #PB_111
     #PB_115
@@ -284,7 +285,7 @@ Procedure employer()
          TextGadget(#_p20, 0, 0, 1280, 20, "Feuillet employé",  #PB_Text_Border | #PB_Text_Center)
       
       
-             If DatabaseQuery (#mysql, "SELECT * FROM username")
+             If DatabaseQuery (#mysql, "SELECT * FROM username ORDER BY username ASC")
              
                
               ListIconGadget(#_020, 0, 20, 1280, 380, "username", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
@@ -373,7 +374,7 @@ Procedure Client()
          TextGadget(#_pc20, 0, 0, 1280, 20, "Feuillet client",  #PB_Text_Border | #PB_Text_Center)
       
       
-       If DatabaseQuery (#mysql, "SELECT * FROM client")
+       If DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
              
                
          ListIconGadget(#_BCC20, 0, 20, 1280, 380, "Noms Entreprise", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
@@ -434,7 +435,7 @@ Procedure Flotte()
  
   
   ListViewGadget(#PB_fe, 220, 450, 200, 200)
-             If DatabaseQuery (#mysql, "SELECT * FROM client")
+             If DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
              While NextDatabaseRow(#mySql) 
                
                AddGadgetItem(#PB_fe, -1, "" + GetDatabaseString(#mySql, 0))
@@ -444,7 +445,7 @@ Procedure Flotte()
             EndIf
   
   
-  TextGadget(#PB_Any, 460, 400, 820, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(#PB_Any, 460, 400, 820, 20, "Modification table de la flotte", #PB_Text_Border | #PB_Text_Center)
          ButtonGadget(#PB_fg0, 460, 430, 200, 30, "# Série")
          ButtonGadget(#PB_fg1, 665, 430, 200, 30, "# Unité")
          ButtonGadget(#PB_fg2, 870, 430, 200, 30, "Annéee Vehivule")
@@ -458,7 +459,7 @@ Procedure Flotte()
          ButtonGadget(#PB_fg10, 870, 510, 200, 30, "Fin garantie")
          ButtonGadget(#PB_fg11, 1075, 510, 200, 30, "Prochaine insnp. Pep ou Saaq")
          ButtonGadget(#PB_fg12, 460, 550, 200, 30, "Prochaine Maintenance")
-
+         ButtonGadget(#PB_fg13, 665, 550, 200, 30, "Nom Entreprise")
 
          
          
@@ -466,29 +467,30 @@ Procedure Flotte()
           TextGadget(#PB_fd, 0, 0, 1280, 20, "Feuillet de la flotte",  #PB_Text_Border | #PB_Text_Center)
       
       
-             If DatabaseQuery (#mysql, "SELECT * FROM flotte")
+             If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY serie ASC")
              
                
-               ListIconGadget(#_0fl, 0, 20, 1280, 380, "Noms Entreprise", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+              
           
-              AddGadgetColumn(#_0fl, 1, "# série", 120)
-              AddGadgetColumn(#_0fl, 2, "# unité", 120)
-              AddGadgetColumn(#_0fl, 3, "Année vehicule", 60)
-              AddGadgetColumn(#_0fl, 4, "Marque vehicule", 120)
-              AddGadgetColumn(#_0fl, 5, "Model vehicule", 120)
-              AddGadgetColumn(#_0fl, 6, "kilometrage", 120)
-              AddGadgetColumn(#_0fl, 7, "heure", 120)
-              AddGadgetColumn(#_0fl, 8, "Date derniere maintenance", 120)
-              AddGadgetColumn(#_0fl, 9, "Mot de passe 'ECM'", 120)
-              AddGadgetColumn(#_0fl, 10, "Imatriculation", 120)
-              AddGadgetColumn(#_0fl, 11, "Fin garantie", 120)
-              AddGadgetColumn(#_0fl, 12, "prochaine inspection pep ou saaq", 120)
-              AddGadgetColumn(#_0fl, 13, "prochaine maintenance", 120)
+               ListIconGadget(#_a0fl, 0, 20, 1280, 380, "# série", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+               AddGadgetColumn(#_a0fl, 1, "Noms Entreprise", 120)
+              AddGadgetColumn(#_a0fl, 2, "# unité", 120)
+              AddGadgetColumn(#_a0fl, 3, "Année vehicule", 60)
+              AddGadgetColumn(#_a0fl, 4, "Marque vehicule", 120)
+              AddGadgetColumn(#_a0fl, 5, "Model vehicule", 120)
+              AddGadgetColumn(#_a0fl, 6, "kilometrage", 120)
+              AddGadgetColumn(#_a0fl, 7, "heure", 120)
+              AddGadgetColumn(#_a0fl, 8, "Date derniere maintenance", 120)
+              AddGadgetColumn(#_a0fl, 9, "Mot de passe 'ECM'", 120)
+              AddGadgetColumn(#_a0fl, 10, "Imatriculation", 120)
+              AddGadgetColumn(#_a0fl, 11, "Fin garantie", 120)
+              AddGadgetColumn(#_a0fl, 12, "prochaine inspection pep ou saaq", 120)
+              AddGadgetColumn(#_a0fl, 13, "prochaine maintenance", 120)
           
    
                While NextDatabaseRow(#mysql)
      
-       AddGadgetItem(#_0fl, -1, GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11))
+       AddGadgetItem(#_a0fl, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11))
 
      Wend  
      FinishDatabaseQuery(#mysql)
@@ -1562,19 +1564,69 @@ EndIf
    
         
            qq.s = "INSERT INTO client (nomsent, nomres, emailp, emailres, faxres, faxent, _prenoms, _noms, cellp, cellresp, telent, telresp, datesc, addent, villeent, provent, paysent, zipent, addp, villep, provp, paysp, zipp, tauxhc) VALUES('"+wocli1$+"', '"+wocli2$+"', '"+wocli3$+"', '"+wocli4$+"', '"+wocli5$+"', '"+wocli6$+"', '"+wocli7$+"', '"+wocli8$+"', '"+wocli9$+"', '"+cli_10$+"', '"+cli_11$+"', '"+cli_12$+"', '"+cli_13$+"', '"+cli_14$+"', '"+cli_15$+"', '"+cli_16$+"', '"+cli_17$+"', '"+cli_18$+"', '"+cli_19$+"', '"+i_20$+"', '"+i_21$+"', '"+i_22$+"', '"+i_23$+"', '"+i_24$+"')" 
-           ww.s = "INSERT INTO client ( ) VALUES(, )" 
-           ee.s ="INSERT INTO client () VALUES()"
+          
            
            DatabaseUpdate(#mysql, qq)
            
               FinishDatabaseQuery(#mysql)
              
-         client()
+              client()
+              flotte()
        CloseGadgetList()
         EndIf
         
         
         
+  If EventGadget = #PB_fb ; add flotte vehicule
+    
+   ; OpenGadgetList(1, 3)
+        
+      ;  wocli1$ = InputRequester("ajoutez un client", "Veuillez entrer le nom de l'entreprise.", "")
+       ; wocli2$ = InputRequester("ajoutez un client", "Veuillez entrer le nom du responsable.", "")
+       ; wocli3$ = InputRequester("ajoutez un client", "Veuillez entrer le email du propriétaire", "")
+      ;  wocli4$ = InputRequester("ajoutez un client", "Veuillez entrer le email du responsable", "")
+      ;  wocli5$ = InputRequester("ajoutez un client", "Veuillez entrer le # Fax du responsable", "")
+      ;  wocli6$ = InputRequester("ajoutez un client", "Veuillez entrer le # Fax de l'entreprise", "")
+      ;  wocli7$ = InputRequester("ajoutez un client", "Veuillez entrer le prenoms du propriétaire.", "")
+      ;  wocli8$ = InputRequester("ajoutez un client", "Veuillez entrer le noms du propriétaire.", "")
+      ;  wocli9$ = InputRequester("ajoutez un client", "Veuillez entrer le # cellulaire du propriétaire", "")
+      ;  cli_10$ = InputRequester("ajoutez un client", "Veuillez entrer le # cellulaire du responsable", "")
+       ; cli_11$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone propriétaire", "")
+      ;  cli_12$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone du responsable", "")
+      ;  cli_13$ = InputRequester("ajoutez un client", "Veuillez entrer la date de création du client", "")
+      ;  cli_14$ = InputRequester("ajoutez un client", "Veuillez entrer l'addresse de l'entreprise", "")
+      ;  cli_15$ = InputRequester("ajoutez un client", "Veuillez entrer la ville de l'entreprise", "")
+      ;  cli_16$ = InputRequester("ajoutez un client", "Veuillez entrer la province de l'entreprise", "")
+      ;  cli_17$ = InputRequester("ajoutez un client", "Veuillez entrer le pays de l'entreprise", "")
+      ;  cli_18$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal de l'entreprise", "")
+      ;  cli_19$ = InputRequester("ajoutez un client", "Veuillez entrer l'addresse du propriétaire", "")
+      ;  i_20$ = InputRequester("ajoutez un client", "Veuillez entrer la ville du propriétaire", "")
+      ;  i_21$ = InputRequester("ajoutez un client", "Veuillez entrer la province du propriétaire", "")
+      ;  i_22$ = InputRequester("ajoutez un client", "Veuillez entrer le pays du propriétaire", "")
+      ;  i_23$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal du propriétaire", "")
+      ;  i_24$ = InputRequester("ajoutez un client", "Veuillez entrer le Taux horraire du client", "")
+       
+   
+        
+        ;   qq.s = "INSERT INTO client (nomsent, nomres, emailp, emailres, faxres, faxent, _prenoms, _noms, cellp, cellresp, telent, telresp, datesc, addent, villeent, provent, paysent, zipent, addp, villep, provp, paysp, zipp, tauxhc) VALUES('"+wocli1$+"', '"+wocli2$+"', '"+wocli3$+"', '"+wocli4$+"', '"+wocli5$+"', '"+wocli6$+"', '"+wocli7$+"', '"+wocli8$+"', '"+wocli9$+"', '"+cli_10$+"', '"+cli_11$+"', '"+cli_12$+"', '"+cli_13$+"', '"+cli_14$+"', '"+cli_15$+"', '"+cli_16$+"', '"+cli_17$+"', '"+cli_18$+"', '"+cli_19$+"', '"+i_20$+"', '"+i_21$+"', '"+i_22$+"', '"+i_23$+"', '"+i_24$+"')" 
+         
+           
+         ;  DatabaseUpdate(#mysql, qq)
+           
+           ;   FinishDatabaseQuery(#mysql)
+             
+       ;  client()
+     ;  CloseGadgetList()
+    
+    
+    
+    
+    
+  EndIf  
+    
+    
+    
+    
         If EventGadget = #_z0 ;joblist historique
           
             OpenGadgetList(1, 5)
@@ -2107,11 +2159,166 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
-
+  EndIf
+  
+  
+;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+;// Flotte           //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+  
+  
  
-;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-      
+  If EventGadget = #PB_fg0
+    OpenGadgetList(1, 3)
+   w0.s = InputRequester("Modification du # série.", "Veuillez entrer le nouveau # série du vehicule.", "")
+   w1.s = "UPDATE flotte SET serie='"+w0+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, w1)
+   
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+ EndIf
+ 
+ If EventGadget = #PB_fg2
+   OpenGadgetList(1, 3)
+     fg2.s = InputRequester("Modification de l'année.", "Veuillez entrer la nouvelle année du vehicule.", "")
+   fg3.s = "UPDATE flotte SET annee='"+fg2+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg3)
+    FinishDatabaseQuery(#mysql)
+   flotte()
+    CloseGadgetList()
+ EndIf
+ 
+ If EventGadget = #PB_fg3
+   OpenGadgetList(1, 3)
+   fg4.s = InputRequester("Modification de la marque.", "Veuillez entrer la nouvelle marque du vehicule.", "")
+   fg5.s = "UPDATE flotte SET make='"+fg4+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg5)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+ EndIf
+ 
+ If EventGadget = #PB_fg4
+   OpenGadgetList(1, 3)
+   fg6.s = InputRequester("Modification du nouveau model.", "Veuillez entrer le nouveau model du vehicule", "")
+   fg7.s = "UPDATE flotte SET model='"+fg6+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg7)
+    FinishDatabaseQuery(#mysql)
+   flotte()
+    CloseGadgetList()
+ EndIf
+ 
+ If EventGadget = #PB_fg5
+   OpenGadgetList(1, 3)
+   fg8.s = InputRequester("Modification du killometrage.", "Veuillez entrer le nouveau kilometrage du vehicule.", "")
+   fg9.s = "UPDATE flotte SET km='"+fg8+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg9)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+       EndIf
+       
+       If EventGadget = #PB_fg6
+         OpenGadgetList(1, 3)
+   fg10.s = InputRequester("Modification des heures.", "Veuillez entrer les nouvelles heures du vehicule.", "")
+   fg11.s = "UPDATE flotte SET hrs='"+fg10+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg11)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+        EndIf
+        
+        If EventGadget = #PB_fg7
+          OpenGadgetList(1, 3)
+   fg12.s = InputRequester("Modification de la date de la derniere maintenance.", "Veuillez entrer la nouvelle date de la derniere maintenance du vehicule", "")
+   fg13.s = "UPDATE flotte SET date='"+fg12+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg13)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+         EndIf
+         
+         If EventGadget = #PB_fg8
+           OpenGadgetList(1, 3)
+   fg14.s = InputRequester("Modification du nouveau mot de passe 'ECM'.", "Veuillez entrer le nouveau mot de passe 'ECM' du vehicule.", "")
+   fg15.s = "UPDATE flotte SET ecm='"+fg14+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg15)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+          EndIf
+          
+          If EventGadget = #PB_fg9
+            OpenGadgetList(1, 3)
+   fg16.s = InputRequester("Modification du nouveau # plaque.", "Veuillez entrer le nouveau # plaque du vehicule.", "")
+   fg17.s = "UPDATE flotte SET imatri='"+fg16+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg17)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+           EndIf
+           
+           If EventGadget = #PB_fg10
+             OpenGadgetList(1, 3)
+   fg18.s = InputRequester("Modification de la date de fin garantie.", "Veuillez entrer la nouvelle date de fin de garantie du vehicule", "")
+   fg19.s = "UPDATE flotte SET fing='"+fg18+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg19)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+            EndIf
+            
+            If EventGadget = #PB_fg11
+              OpenGadgetList(1, 3)
+   fg20.s = InputRequester("Modification de la date de la prochaine inspection pepe ou saaq.", "Veuillez entrer la date inspection pep ou saaq du vehicule", "")
+   fg21.s = "UPDATE flotte SET nexinspq='"+fg20+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg21)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+             EndIf
+             
+             If EventGadget = #PB_fg12
+               OpenGadgetList(1, 3)
+   fg22.s = InputRequester("Modification de la date de la prochaine maintenance.", "Veuillez entrer la nouvelle date de maintenance du vehicule", "")
+   fg23.s = "UPDATE flotte SET nexmai='"+fg22+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg23)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+              EndIf
+              
+              If EventGadget = #PB_fg1
+                OpenGadgetList(1, 3)
+   fg24.s = InputRequester("Modification du # unité.", "Veuillez entrer le nouveau #unité du vehivule.", "")
+   fg25.s = "UPDATE flotte SET unit='"+fg24+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg25)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+               EndIf
+  
+  
+  If EventGadget = #PB_fg13
+                OpenGadgetList(1, 3)
+   fg26.s = InputRequester("Modification du noms entreprise.", "Veuillez entrer le nouveau noms entreprise du vehicule.", "")
+   fg27.s = "UPDATE flotte SET noment='"+fg26+"' WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+   DatabaseUpdate(#mysql, fg27)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+               EndIf
+  
+  
+  
+  
+  
+
+  
+  
+;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
+  
       Case #PB_Event_CloseWindow
         ; The window was closed.
              CloseWindow(1)
@@ -2123,8 +2330,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 457
-; FirstLine = 439
+; CursorPosition = 287
+; FirstLine = 257
 ; Folding = ----
 ; EnableXP
 ; DPIAware
