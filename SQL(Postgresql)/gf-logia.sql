@@ -13,16 +13,33 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
--- Dumping data for table public.client: -1 rows
+-- Dumping data for table public.client: 1 rows
 DELETE FROM "client";
 /*!40000 ALTER TABLE "client" DISABLE KEYS */;
 INSERT INTO "client" ("nomsent", "nomres", "emailp", "emailres", "faxres", "faxent", "_prenoms", "_noms", "cellp", "cellresp", "telent", "telresp", "datesc", "addent", "villeent", "provent", "paysent", "zipent", "addp", "villep", "provp", "paysp", "zipp", "tauxhc") VALUES
 	('gfoisy', 'drg', 'dg', 'dg', 'dg', 'dg', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE "client" ENABLE KEYS */;
 
+-- Dumping data for table public.comptable: 2 rows
+DELETE FROM "comptable";
+/*!40000 ALTER TABLE "comptable" DISABLE KEYS */;
+INSERT INTO "comptable" ("description", "no", "depot", "chequemis", "soldebank", "montantrepporter", "diffdebitcredit", "tpspercu", "tvqpercu", "tpspaye", "tvqpaye", "revenue", "compterecevoir", "compteapayer", "totaldepense", "timestamp", "totalrevenue") VALUES
+	('depot GG', 1, 600, NULL, 600, 522, 0, 26, 52, NULL, NULL, 522, 600, NULL, NULL, '2024-01-25 10:09:43-05', 600),
+	('emission cheque GG', 2, NULL, 500, 100, 435, 0, NULL, NULL, 22, 43, 0, 0, 500, 435, '2024-01-25 10:09:45-05', -500);
+/*!40000 ALTER TABLE "comptable" ENABLE KEYS */;
+
+-- Dumping data for table public.comptavariable: -1 rows
+DELETE FROM "comptavariable";
+/*!40000 ALTER TABLE "comptavariable" DISABLE KEYS */;
+INSERT INTO "comptavariable" ("taux_tps", "taux_tvq", "nomcomm") VALUES
+	(5, 10, 'Gui');
+/*!40000 ALTER TABLE "comptavariable" ENABLE KEYS */;
+
 -- Dumping data for table public.flotte: -1 rows
 DELETE FROM "flotte";
 /*!40000 ALTER TABLE "flotte" DISABLE KEYS */;
+INSERT INTO "flotte" ("serie", "annee", "make", "model", "km", "hrs", "date", "ecm", "imatri", "fing", "nexinspq", "nexmai", "noment", "unit") VALUES
+	('Fake', 'Fake', 'gmc', 'canyon', '', '', '', '', '', '', '', '', 'efoisy', '10');
 /*!40000 ALTER TABLE "flotte" ENABLE KEYS */;
 
 -- Dumping data for table public.job: 1 rows
@@ -48,12 +65,11 @@ INSERT INTO "punch" ("id", "wo", "username", "punchin", "punchout", "pstatus", "
 	('1', '1', 'GFoisy', '19/01/2024  17:05:38', '19/01/2024  17:21:20', '2', 'PM 500 Heures');
 /*!40000 ALTER TABLE "punch" ENABLE KEYS */;
 
--- Dumping data for table public.username: 2 rows
+-- Dumping data for table public.username: 0 rows
 DELETE FROM "username";
 /*!40000 ALTER TABLE "username" DISABLE KEYS */;
 INSERT INTO "username" ("username", "nom", "prenom", "age", "tel", "cell", "add", "permis", "liscence", "pep", "saaq", "date", "embauche", "city", "province", "pays", "zip", "email1", "email2", "tauxhr") VALUES
-	('sef', '', '', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	('GFoisy', 'Foisy', 'Guillaume', '37', '455-455-4545', '544-455-4545', 'fg', 'test', 'test', 'test', 'test', '2024-01-16 16:36:24', '2024-01-16', 'Lune', 'QC', 'CANADA', 'TEST', 'Test@test.com', 'Test2@test.com', '10');
+	('gfoisy', 'Foisy', 'Guillaume', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 /*!40000 ALTER TABLE "username" ENABLE KEYS */;
 
 -- Dumping data for table public.workorder: 2 rows

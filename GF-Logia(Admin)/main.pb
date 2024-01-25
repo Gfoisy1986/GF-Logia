@@ -182,7 +182,9 @@ Enumeration
     #PB_115
     #PB_112
     #PB_114
+    #PB_2
     #PB_113
+    #_compta2
 EndEnumeration
 
   
@@ -247,6 +249,91 @@ Procedure agenda()
   
   CloseGadgetList()
 EndProcedure
+
+
+Procedure compta()
+  OpenGadgetList(#PB_2, 0)
+
+;   TextGadget(859, 0, 400, 1280, 20, "Menu employé", #PB_Text_Border | #PB_Text_Center)
+;   ButtonGadget(850, 0, 420, 200, 20, "Ajouté un employé")
+ 
+;   ButtonGadget(852, 250, 420, 200, 20, "Supprimé un employé")
+  
+  
+  
+  ; TextGadget(#PB_Any, 0, 450, 1280, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
+       ;  ButtonGadget(#BG_0, 0, 470, 200, 30, "Username")
+        ; ButtonGadget(#BG_1, 210, 470, 200, 30, "Nom propre")
+        ; ButtonGadget(#BG_2, 420, 470, 200, 30, "Prénom")
+;          ButtonGadget(#BG_3, 630, 470, 200, 30, "Age")
+;          ButtonGadget(#BG_4, 840, 470, 200, 30, "# Téléphone")
+;          ButtonGadget(#BG_5, 1050, 470, 200, 30, "# Cell")
+;          ButtonGadget(#BG_6, 0, 510, 200, 30, "Addresse")
+;          ButtonGadget(#BG_7, 210, 510, 200, 30, "# Permis Conduire")
+;          ButtonGadget(#BG_8, 420, 510, 200, 30, "# Liscence Méca")
+;          ButtonGadget(#BG_9, 630, 510, 200, 30, "# Liscence P.E.P")
+;          ButtonGadget(#BG_10, 840, 510, 200, 30, "# Liscence S.A.A.Q")
+;          ButtonGadget(#BG_11, 1050, 510, 200, 30, "Date Naissance")
+;          ButtonGadget(#BG_12, 0, 550, 200, 30, "Date Embauche")
+;          ButtonGadget(#BG_13, 210, 550, 200, 30, "Ville")
+;          ButtonGadget(#BG_14, 420, 550, 200, 30, "Province")
+;          ButtonGadget(#BG_15, 630, 550, 200, 30, "Pays")
+;          ButtonGadget(#BG_16, 840, 550, 200, 30, "Code Postal")
+;          ButtonGadget(#BG_17, 1050, 550, 200, 30, "E-mail Personel")
+;          ButtonGadget(#BG_18, 0, 590, 200, 30, "E-mail Job")
+;          ButtonGadget(#BG_19, 210, 590, 200, 30, "Taux horraire")
+         
+         
+         
+         TextGadget(#PB_Any, 0, 0, 1280, 20, "Feuillet employé",  #PB_Text_Border | #PB_Text_Center)
+      
+      
+             If DatabaseQuery (#mysql, "SELECT * FROM comptable ORDER BY timestamp ASC")
+             
+               
+              ListIconGadget(#_compta2, 0, 20, 1280, 160, "Date", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+          
+             AddGadgetColumn(#_compta2, 1, "Description", 120)
+             AddGadgetColumn(#_compta2, 2, "NO #", 120)
+             AddGadgetColumn(#_compta2, 3, "Dépôt", 60)
+             AddGadgetColumn(#_compta2, 4, "émission", 120)
+             AddGadgetColumn(#_compta2, 5, "Montant à repporté", 120)
+             AddGadgetColumn(#_compta2, 6, "Différence Débit/Crédit", 200)
+             AddGadgetColumn(#_compta2, 7, "Compte à recevoir", 120)
+             AddGadgetColumn(#_compta2, 8, "Compte à payé", 120)
+             AddGadgetColumn(#_compta2, 9, "TPS recu", 120)
+             AddGadgetColumn(#_compta2, 10, "TVQ recu", 120)
+             AddGadgetColumn(#_compta2, 11, "TPS à payé", 120)
+             AddGadgetColumn(#_compta2, 12, "TVQ à payé", 120)
+             AddGadgetColumn(#_compta2, 13, "Revenue", 120)
+             AddGadgetColumn(#_compta2, 14, "Dépense", 120)
+             AddGadgetColumn(#_compta2, 15, "Total + taxe", 200)
+             AddGadgetColumn(#_compta2, 16, "Total compte en banque", 200)
+             
+  
+              
+            
+            
+              While NextDatabaseRow(#mysql)
+     
+      AddGadgetItem(#_compta2, -1, GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 4))
+      
+      
+      
+      
+      
+    Wend  
+    FinishDatabaseQuery(#mysql)
+               EndIf
+               
+         
+         
+
+ CloseGadgetList()
+       
+EndProcedure
+
+
 
 
 Procedure employer()
@@ -1168,13 +1255,51 @@ AddGadgetItem(1, -1, "Les Notes")
      TextGadget(726, 100, 0, 100, 20, "heya")
      CloseGadgetList()
      
-      OpenGadgetList(1)
+     
+     
+     OpenGadgetList(1)
     AddGadgetItem(1, -1, "Carnet Comptabilité")
-     TextGadget(726, 100, 0, 100, 20, "heya")
+
+    PanelGadget(#PB_2, 0, 30, 1280, 720)
+       
+    OpenGadgetList(#PB_2)
+                        OpenGadgetList(#PB_2)
+                        AddGadgetItem(#PB_2, -1, "Tenue de livre")
+                        compta()
+                        CloseGadgetList()
+                        
+                        OpenGadgetList(#PB_2)
+                        AddGadgetItem(#PB_2, -1, "État des résultats")
+                        CloseGadgetList()
+ 
+                        OpenGadgetList(#PB_2)
+                        AddGadgetItem(#PB_2, -1, "Bilan")
+                        CloseGadgetList()
+ 
+                        OpenGadgetList(#PB_2)
+                        AddGadgetItem(#PB_2, -1, "Rapport de taxe")
+                        CloseGadgetList()
+ 
+                        OpenGadgetList(#PB_2)
+                        AddGadgetItem(#PB_2, -1, "Dépense payé Perssonellement")
+                        CloseGadgetList()
+ 
+                        OpenGadgetList(#PB_2)
+                        AddGadgetItem(#PB_2, -1, "Kilometrage")
+                        CloseGadgetList()
+  
+                        OpenGadgetList(#PB_2)
+                        AddGadgetItem(#PB_2, -1, "Frais bureau à domicile")
+                        CloseGadgetList()
      CloseGadgetList()
      
       OpenGadgetList(1)
-    AddGadgetItem(1, -1, "Catalogues des pieces")
+      AddGadgetItem(1, -1, "Catalogues des pieces")
+     
+       
+       
+       
+       
      TextGadget(726, 100, 0, 100, 20, "heya")
      CloseGadgetList()
      
@@ -1509,14 +1634,29 @@ EndIf
                
                If EventGadget = #_BCC8521  ;DEL client
           OpenGadgetList(1, 2)
-                         querydelclient2.s = "DELETE FROM client WHERE nomproprec='"+GetGadgetText(#_BCC20)+"'"
+                         querydelclient2.s = "DELETE FROM client WHERE nomsent='"+GetGadgetText(#_BCC20)+"'"
   
                          DatabaseUpdate(#mysql, querydelclient2) 
                            FinishDatabaseQuery(#mysql)
-                        client()
+                        Client()
                          
                  CloseGadgetList()
-        EndIf
+               EndIf
+               
+               
+                 If EventGadget = #PB_fc  ;DEL flotte
+          OpenGadgetList(1, 3)
+                         querydelflotte.s = "DELETE FROM flotte WHERE serie='"+GetGadgetText(#_a0fl)+"'"
+  
+                         DatabaseUpdate(#mysql, querydelflotte) 
+                           FinishDatabaseQuery(#mysql)
+                        Flotte()
+                         
+                 CloseGadgetList()
+               EndIf
+               
+               
+               
 
         If EventGadget = 850 ;  add employer
           OpenGadgetList(1, 1)
@@ -1570,8 +1710,8 @@ EndIf
            
               FinishDatabaseQuery(#mysql)
              
-              client()
-              flotte()
+              Client()
+              Flotte()
        CloseGadgetList()
         EndIf
         
@@ -1579,44 +1719,34 @@ EndIf
         
   If EventGadget = #PB_fb ; add flotte vehicule
     
-   ; OpenGadgetList(1, 3)
+    OpenGadgetList(1, 3)
         
-      ;  wocli1$ = InputRequester("ajoutez un client", "Veuillez entrer le nom de l'entreprise.", "")
-       ; wocli2$ = InputRequester("ajoutez un client", "Veuillez entrer le nom du responsable.", "")
-       ; wocli3$ = InputRequester("ajoutez un client", "Veuillez entrer le email du propriétaire", "")
-      ;  wocli4$ = InputRequester("ajoutez un client", "Veuillez entrer le email du responsable", "")
-      ;  wocli5$ = InputRequester("ajoutez un client", "Veuillez entrer le # Fax du responsable", "")
-      ;  wocli6$ = InputRequester("ajoutez un client", "Veuillez entrer le # Fax de l'entreprise", "")
-      ;  wocli7$ = InputRequester("ajoutez un client", "Veuillez entrer le prenoms du propriétaire.", "")
-      ;  wocli8$ = InputRequester("ajoutez un client", "Veuillez entrer le noms du propriétaire.", "")
-      ;  wocli9$ = InputRequester("ajoutez un client", "Veuillez entrer le # cellulaire du propriétaire", "")
-      ;  cli_10$ = InputRequester("ajoutez un client", "Veuillez entrer le # cellulaire du responsable", "")
-       ; cli_11$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone propriétaire", "")
-      ;  cli_12$ = InputRequester("ajoutez un client", "Veuillez entrer le # téléphone du responsable", "")
-      ;  cli_13$ = InputRequester("ajoutez un client", "Veuillez entrer la date de création du client", "")
-      ;  cli_14$ = InputRequester("ajoutez un client", "Veuillez entrer l'addresse de l'entreprise", "")
-      ;  cli_15$ = InputRequester("ajoutez un client", "Veuillez entrer la ville de l'entreprise", "")
-      ;  cli_16$ = InputRequester("ajoutez un client", "Veuillez entrer la province de l'entreprise", "")
-      ;  cli_17$ = InputRequester("ajoutez un client", "Veuillez entrer le pays de l'entreprise", "")
-      ;  cli_18$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal de l'entreprise", "")
-      ;  cli_19$ = InputRequester("ajoutez un client", "Veuillez entrer l'addresse du propriétaire", "")
-      ;  i_20$ = InputRequester("ajoutez un client", "Veuillez entrer la ville du propriétaire", "")
-      ;  i_21$ = InputRequester("ajoutez un client", "Veuillez entrer la province du propriétaire", "")
-      ;  i_22$ = InputRequester("ajoutez un client", "Veuillez entrer le pays du propriétaire", "")
-      ;  i_23$ = InputRequester("ajoutez un client", "Veuillez entrer le Code Postal du propriétaire", "")
-      ;  i_24$ = InputRequester("ajoutez un client", "Veuillez entrer le Taux horraire du client", "")
-       
+        cli1$ = InputRequester("ajoutez un vehicule", "Veuillez entrer le # serie du vehicule.", "")
+        cli2$ = InputRequester("ajoutez un vehicule", "Veuillez entrer l'année du vehicule.", "")
+        cli3$ = InputRequester("ajoutez un vehicule", "Veuillez entrer la marque du vehicule.", "")
+        cli4$ = InputRequester("ajoutez un vehicule", "Veuillez entrer le model du vehicule.", "")
+        cli5$ = InputRequester("ajoutez un vehicule", "Veuillez entrer le kilometrage du vehicule.", "")
+        cli6$ = InputRequester("ajoutez un vehicule", "Veuillez entrer les heures du vehicule.", "")
+        cli7$ = InputRequester("ajoutez un vehicule", "Veuillez entrer la date de la derniere maintenance du vehicule.", "")
+        cli8$ = InputRequester("ajoutez un vehicule", "Veuillez entrer le nouveau mot de passe ecm du vehicule.", "")
+        cli9$ = InputRequester("ajoutez un vehicule", "Veuillez entrer le nouveau # liscense du vehicule.", "")
+        cli10$ = InputRequester("ajoutez un vehicule", "Veuillez entrer la date fin garantie du vehicule.", "")
+        cli11$ = InputRequester("ajoutez un vehicule", "Veuillez entrer la date prochaine inspection pep ou saaq du vehicule.", "")
+        cli12$ = InputRequester("ajoutez un vehicule", "Veuillez entrer la date prochaine maintenance du vehicule.", "")
+        
+        cli14$ = InputRequester("ajoutez un vehicule", "Veuillez entrer le nouveau # unité du vehicule.", "")
+        
    
         
-        ;   qq.s = "INSERT INTO client (nomsent, nomres, emailp, emailres, faxres, faxent, _prenoms, _noms, cellp, cellresp, telent, telresp, datesc, addent, villeent, provent, paysent, zipent, addp, villep, provp, paysp, zipp, tauxhc) VALUES('"+wocli1$+"', '"+wocli2$+"', '"+wocli3$+"', '"+wocli4$+"', '"+wocli5$+"', '"+wocli6$+"', '"+wocli7$+"', '"+wocli8$+"', '"+wocli9$+"', '"+cli_10$+"', '"+cli_11$+"', '"+cli_12$+"', '"+cli_13$+"', '"+cli_14$+"', '"+cli_15$+"', '"+cli_16$+"', '"+cli_17$+"', '"+cli_18$+"', '"+cli_19$+"', '"+i_20$+"', '"+i_21$+"', '"+i_22$+"', '"+i_23$+"', '"+i_24$+"')" 
+          kk.s = "INSERT INTO flotte (serie, annee, make, model, km, hrs, date, ecm, imatri, fing, nexinspq, nexmai, noment, unit) VALUES('"+cli1$+"', '"+cli2$+"', '"+cli3$+"', '"+cli4$+"', '"+cli5$+"', '"+cli6$+"', '"+cli7$+"', '"+cli8$+"', '"+cli9$+"', '"+cli10$+"', '"+cli11$+"', '"+cli12$+"', '"+GetGadgetText(#PB_fe)+"', '"+cli14$+"')" 
          
            
-         ;  DatabaseUpdate(#mysql, qq)
+           DatabaseUpdate(#mysql, kk)
            
-           ;   FinishDatabaseQuery(#mysql)
+             FinishDatabaseQuery(#mysql)
              
-       ;  client()
-     ;  CloseGadgetList()
+        Flotte()
+       CloseGadgetList()
     
     
     
@@ -2330,8 +2460,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 287
-; FirstLine = 257
+; CursorPosition = 309
+; FirstLine = 280
 ; Folding = ----
 ; EnableXP
 ; DPIAware
