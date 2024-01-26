@@ -1,15 +1,12 @@
 ﻿UseMySQLDatabase()
 
-#mysql =  1
-  
-  If OpenDatabase(1, "host=localhost port=3306 dbname=gf-logia", "root", "")
-    Debug "Connected to MySQL"
-  Else
-    Debug "Connection failed: "+DatabaseError()
-  EndIf
+
+
+
 
 Enumeration
   #PageWO
+  #mysql
   #CP_0
    #CP_1
   #_WO117
@@ -204,8 +201,22 @@ Enumeration
 EndEnumeration
 
   
+file = ReadFile(#PB_Any, "connection.cfg")
+file1 = ReadFile(#PB_Any, "user.cfg")
 
- 
+connection$ = ReadString(file)
+user$ = ReadString(file1)
+
+
+If OpenDatabase(1, connection$, user$, "")
+Debug "Connection MySQL active"
+Else
+  Debug "Connection fail:"+DatabaseError()
+  EndIf
+
+  #mysql =1
+  
+  
 Icone$ = "icon.ico"
 
 Procedure inventaire()
@@ -233,7 +244,7 @@ Procedure inventaire()
          TextGadget(#PB_Any, 0, 0, 1280, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
       
       
-             If DatabaseQuery (#mysql, "SELECT * FROM inventaire ORDER BY id ASC")
+             If DatabaseQuery (1, "SELECT * FROM inventaire ORDER BY id ASC")
              
                
             ListIconGadget(#_inv2, 0, 20, 1280, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
@@ -2671,8 +2682,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 2555
-; FirstLine = 2533
+; CursorPosition = 205
+; FirstLine = 186
 ; Folding = ----
 ; EnableXP
 ; DPIAware
