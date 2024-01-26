@@ -29,7 +29,7 @@ Vous devez editer le fichier connection.cfg et user.cfg pour refléter vos infor
 
 - Le Code Source est Cross-Plateforme Windows 11(.exe) et Linux(.sh).
 
-- Vous devez importer à partir de SQL(MySQL) la base de donnée.
+- Vous devez importer à partir de SQL(MariaDB) la base de donnée.
 
 
 
