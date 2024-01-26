@@ -38,8 +38,8 @@ INSERT INTO `flotte` (`id`, `serie`, `annee`, `make`, `model`, `km`, `hrs`, `dat
 
 -- Dumping data for table gf-logia.inventaire: ~1 rows (approximately)
 DELETE FROM `inventaire`;
-INSERT INTO `inventaire` (`id`, `nopiece`, `description`, `quantiter`, `buyprice1`, `fourn1`, `buyprice2`, `fourn2`, `sellprice`, `nolocation`) VALUES
-	(1, '25623', 'Bolt 1/2x2inch  NF grade8 ', 30, 100, 'FAKE1', 105, 'FAKE2', 125, 'a/4 - 1/2');
+INSERT INTO `inventaire` (`id`, `nopiece`, `description`, `quantiter`, `quantiterstock`, `buyprice1`, `fourn1`, `buyprice2`, `fourn2`, `sellprice`, `nolocation`) VALUES
+	(1, '25623', 'Bolt 1/2x2inch  NF grade8 ', 30, 40, 100, 'FAKE1', 105, 'FAKE2', 125, 'a/4 - 1/2');
 
 -- Dumping data for table gf-logia.job: ~0 rows (approximately)
 DELETE FROM `job`;

@@ -188,6 +188,19 @@ Enumeration
     #PB_113
     #_compta2
     #_inv2
+    #inv_0
+    #inv_1
+    #inv_2
+    #inv_3
+    #inv_4
+    #inv_5
+    #inv_6
+    #inv_7
+    #inv_8
+    #inv_9
+    #inv_10
+    #inv_add
+    #inv_del
 EndEnumeration
 
   
@@ -198,73 +211,50 @@ Icone$ = "icon.ico"
 Procedure inventaire()
   OpenGadgetList(1, 0)
   
+  ButtonGadget(#inv_add, 0, 375, 200, 30, "Ajouté une piece")
   
- 
+  ButtonGadget(#inv_del, 250, 375, 200, 30, "Supprimé une piece")
    
-  
-    
- 
-   
-  
    TextGadget(#PB_Any, 0, 420, 1280, 20, "Modification table inventaire", #PB_Text_Border | #PB_Text_Center)
  
  
-  
-        ; ButtonGadget(#BG_1, 210, 470, 200, 30, "Nom propre")
-        ; ButtonGadget(#BG_2, 420, 470, 200, 30, "Prénom")
-;          ButtonGadget(#BG_3, 630, 470, 200, 30, "Age")
-;          ButtonGadget(#BG_4, 840, 470, 200, 30, "# Téléphone")
-;          ButtonGadget(#BG_5, 1050, 470, 200, 30, "# Cell")
-;          ButtonGadget(#BG_6, 0, 510, 200, 30, "Addresse")
-;          ButtonGadget(#BG_7, 210, 510, 200, 30, "# Permis Conduire")
-;          ButtonGadget(#BG_8, 420, 510, 200, 30, "# Liscence Méca")
-;          ButtonGadget(#BG_9, 630, 510, 200, 30, "# Liscence P.E.P")
-;          ButtonGadget(#BG_10, 840, 510, 200, 30, "# Liscence S.A.A.Q")
-;          ButtonGadget(#BG_11, 1050, 510, 200, 30, "Date Naissance")
-;          ButtonGadget(#BG_12, 0, 550, 200, 30, "Date Embauche")
-;          ButtonGadget(#BG_13, 210, 550, 200, 30, "Ville")
-;          ButtonGadget(#BG_14, 420, 550, 200, 30, "Province")
-;          ButtonGadget(#BG_15, 630, 550, 200, 30, "Pays")
-;          ButtonGadget(#BG_16, 840, 550, 200, 30, "Code Postal")
-;          ButtonGadget(#BG_17, 1050, 550, 200, 30, "E-mail Personel")
-;          ButtonGadget(#BG_18, 0, 590, 200, 30, "E-mail Job")
-;          ButtonGadget(#BG_19, 210, 590, 200, 30, "Taux horraire")
-        
-        
-         
+          ButtonGadget(#inv_0, 0, 450, 200, 30, "# no piece")
+          ButtonGadget(#inv_1, 210, 450, 200, 30, "Description")
+          ButtonGadget(#inv_2, 420, 450, 200, 30, "Quantité")
+          ButtonGadget(#inv_3, 630, 450, 200, 30, "Quantité à stocké")
+          ButtonGadget(#inv_4, 840, 450, 200, 30, "Prix achat #1")
+          ButtonGadget(#inv_5, 1050, 450, 200, 30, "Fournisseur #1")
+          ButtonGadget(#inv_6, 0, 490, 200, 30, "Prix achat #2")
+          ButtonGadget(#inv_7, 210, 490, 200, 30, "Fournisseur #2")
+          ButtonGadget(#inv_8, 420, 490, 200, 30, "Prix vente")
+          ButtonGadget(#inv_9, 630, 490, 200, 30, "# Location")
+          
+     
          TextGadget(#PB_Any, 0, 0, 1280, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
       
       
              If DatabaseQuery (#mysql, "SELECT * FROM inventaire ORDER BY id ASC")
              
                
-            ListIconGadget(#_inv2, 0, 20, 1280, 400, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+            ListIconGadget(#_inv2, 0, 20, 1280, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
              AddGadgetColumn(#_inv2, 1, "# no piece", 120)
              AddGadgetColumn(#_inv2, 2, "Description", 120)
              AddGadgetColumn(#_inv2, 3, "Quantité", 120)
-             AddGadgetColumn(#_inv2, 4, "Prix achat #1", 60)
-             AddGadgetColumn(#_inv2, 5, "Fournisseur #1", 120)
-             AddGadgetColumn(#_inv2, 6, "Prix achat #2", 120)
-             AddGadgetColumn(#_inv2, 7, "Fournisseur #2", 200)
-             AddGadgetColumn(#_inv2, 8, "Prix vente", 120)
-             AddGadgetColumn(#_inv2, 9, "# Location", 120)
-          
-             
-  
-              
-            
-            
+             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 120)
+             AddGadgetColumn(#_inv2, 5, "Prix achat #1", 60)
+             AddGadgetColumn(#_inv2, 6, "Fournisseur #1", 120)
+             AddGadgetColumn(#_inv2, 7, "Prix achat #2", 120)
+             AddGadgetColumn(#_inv2, 8, "Fournisseur #2", 200)
+             AddGadgetColumn(#_inv2, 9, "Prix vente", 120)
+             AddGadgetColumn(#_inv2, 10, "# Location", 120)
+         
               While NextDatabaseRow(#mysql)
      
-      AddGadgetItem(#_inv2, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9))
+      AddGadgetItem(#_inv2, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10))
       
-      
-      
-      
-      
-    Wend  
-    FinishDatabaseQuery(#mysql)
-               EndIf
+              Wend  
+                FinishDatabaseQuery(#mysql)
+                 EndIf
          
 
  CloseGadgetList()
@@ -2569,8 +2559,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 208
-; FirstLine = 198
+; CursorPosition = 213
+; FirstLine = 208
 ; Folding = ----
 ; EnableXP
 ; DPIAware
