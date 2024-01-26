@@ -198,6 +198,8 @@ Enumeration
     #inv_10
     #inv_add
     #inv_del
+    #PB_fh2
+  #PB_fh1
 EndEnumeration
 
   
@@ -622,11 +624,23 @@ Procedure flotte()
   ButtonGadget(#PB_fc, 0, 420, 200, 30, "Supprimé un vehicule")
   
   
+   
+  ButtonGadget(#PB_fh2, 0, 470, 200, 30, "Créer un Bon de travail")
+ 
+   ListViewGadget(#PB_fh1, 0, 510, 200, 140)
+             If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY id ASC")
+             While NextDatabaseRow(#mySql) 
+               
+               AddGadgetItem(#PB_fh1, -1, "" + GetDatabaseString(#mySql, 1))
+               
+              Wend 
+             FinishDatabaseQuery(#mysql)
+            EndIf
   
   
   
   TextGadget(#PB_ff, 220, 400, 200, 20, "Ajouté par entreprise", #PB_Text_Border | #PB_Text_Center)
-  ButtonGadget(#PB_fb,220, 420, 200, 30, "Ajouté un vehicule")
+  ButtonGadget(#PB_fb, 220, 420, 200, 30, "Ajouté un vehicule")
  
   
   ListViewGadget(#PB_fe, 220, 450, 200, 200)
@@ -1503,7 +1517,30 @@ AddGadgetItem(1, -1, "Les Notes")
   CloseGadgetList()
   EndIf
  
+  If EventGadget = #PB_fh2
+    
+    OpenGadgetList(1, 3)
+          wotext1$ = InputRequester("bon de travail" , "nom du bon de travail", "")
+          wotext2$ = GetGadgetText(#PB_fh1)
+          wotext3$ = "1"
+  querywo4.s = "INSERT INTO workorder (wo, serie, status) VALUES ('"+wotext1$+"', '"+wotext2$+"', '"+wotext3$+"')"
+;     annee, model, unitee, garantie, plate, proprioname, proprioadd, vehadd, ecm, status, make
+  ; update the database with the literal prepared query and confirm the write
+  If DatabaseUpdate(#mysql, querywo4)
+    
+    Debug "data successfully inserted."
+
+  Else
+    
+    Debug "error inserting data! " + DatabaseError()
+    
+  EndIf
+ 
+  FinishDatabaseQuery(#mysql)
   
+  CloseGadgetList()
+    mainwo()
+    EndIf
   
   If EventGadget = #_WO1202
      OpenGadgetList(1, 4)
@@ -2714,8 +2751,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1738
-; FirstLine = 1708
+; CursorPosition = 1541
+; FirstLine = 1514
 ; Folding = ----
 ; EnableXP
 ; DPIAware
