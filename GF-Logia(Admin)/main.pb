@@ -1729,7 +1729,23 @@ EndIf
         
         
         
-  ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
+;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
+ If EventGadget = #inv_del  ; DEL inventaire
+          OpenGadgetList(1, 0)
+                         querydelinv.s = "DELETE FROM inventaire WHERE id='"+GetGadgetText(#_inv2)+"'"
+  
+                         DatabaseUpdate(#mysql, querydelinv) 
+                           FinishDatabaseQuery(#mysql)
+                        inventaire()
+                         
+                 CloseGadgetList()
+               EndIf
+
+
+
+
+
+
         If EventGadget = 852  ; DEL employer
           OpenGadgetList(1, 1)
                          querydelemployer.s = "DELETE FROM username WHERE id='"+GetGadgetText(#_020)+"'"
@@ -1766,6 +1782,22 @@ EndIf
                EndIf
                
                
+               
+               
+         If EventGadget = #inv_add  ;Ajout inventaire      
+            OpenGadgetList(1, 0)
+          Textinv100$ = InputRequester("ajoutez une piece", "Veuillez entrer le nouveau # piece.", "")
+        Textinv101$ = InputRequester("ajoutez une piece", "Veuillez entrer la nouvelle description.", "")
+        Textinv102$ = InputRequester("ajoutez une piece", "Veuillez entrer la quantité.", "")
+  
+             queryinv.s = "INSERT INTO inventaire (nopiece, description, quantiter) " + "VALUES ('"+Textinv100$+"', '"+Textinv101$+"', '"+Textinv102$+"')"
+  
+  
+             DatabaseUpdate(#mysql, queryinv)
+             FinishDatabaseQuery(#mysql)
+         inventaire()
+       CloseGadgetList()
+         EndIf   
                
 
         If EventGadget = 850 ;  add employer
@@ -2682,6 +2714,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
+; CursorPosition = 1738
+; FirstLine = 1708
 ; Folding = ----
 ; EnableXP
 ; DPIAware
