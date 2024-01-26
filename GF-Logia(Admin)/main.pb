@@ -2539,15 +2539,127 @@ EndIf
     CloseGadgetList()
                EndIf
   
+;////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
   
-  
-  
-
+;               INVENTAIRE
   
   
 ;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////  
-  
+               
+               
+               
+               
+               
+             If EventGadget = #inv_0
+    OpenGadgetList(1, 0)
+   invw0.s = InputRequester("Modification du # piece.", "Veuillez entrer le nouveau # de piece.", "")
+   invw1.s = "UPDATE inventaire SET nopiece='"+invw0+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invw1)
+   
+    FinishDatabaseQuery(#mysql)
+    inventaire()
+    CloseGadgetList()
+ EndIf
+ 
+ If EventGadget = #inv_1
+   OpenGadgetList(1, 0)
+     invfg2.s = InputRequester("Modification de la description.", "Veuillez entrer la nouvelle description.", "")
+   invfg3.s = "UPDATE inventaire SET description='"+invfg2+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invfg3)
+    FinishDatabaseQuery(#mysql)
+    inventaire()
+    CloseGadgetList()
+ EndIf
+ 
+ If EventGadget = #inv_2
+   OpenGadgetList(1, 0)
+   invfg4.s = InputRequester("Modification de la quantité.", "Veuillez entrer la nouvelle quantitée.", "")
+   invfg5.s = "UPDATE inventaire SET quantiter='"+invfg4+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invfg5)
+    FinishDatabaseQuery(#mysql)
+     inventaire()
+    CloseGadgetList()
+ EndIf
+ 
+ If EventGadget = #inv_3
+   OpenGadgetList(1, 0)
+   invfg6.s = InputRequester("Modification de la quantité à stocker.", "Veuillez entrer la nouvelle quantité à gardez en stock.", "")
+   invfg7.s = "UPDATE inventaire SET quantiterstock='"+invfg6+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invfg7)
+    FinishDatabaseQuery(#mysql)
+    inventaire()
+    CloseGadgetList()
+ EndIf
+ 
+ If EventGadget = #inv_4
+   OpenGadgetList(1, 0)
+   invfg8.s = InputRequester("Modification du prix achat #1.", "Veuillez entrer le nouveau prix achat #1.", "")
+   invfg9.s = "UPDATE inventaire SET buyprice1='"+invfg8+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invfg9)
+    FinishDatabaseQuery(#mysql)
+     inventaire()
+    CloseGadgetList()
+       EndIf
+       
+       If EventGadget = #inv_5
+         OpenGadgetList(1, 0)
+   invfg10.s = InputRequester("Modification du fournisseur #1", "Veuillez entrer le nouveau fournisseur #1.", "")
+   invfg11.s = "UPDATE inventaire SET fourn1='"+invfg10+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invfg11)
+    FinishDatabaseQuery(#mysql)
+    inventaire()
+    CloseGadgetList()
+        EndIf
+        
+        If EventGadget = #inv_6
+          OpenGadgetList(1, 0)
+   invfg12.s = InputRequester("Modification du prix achat #2.", "Veuillez entrer le nouveau prix achat #2.", "")
+   invfg13.s = "UPDATE inventaire SET buyprice2='"+invfg12+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invfg13)
+    FinishDatabaseQuery(#mysql)
+     inventaire()
+    CloseGadgetList()
+         EndIf
+         
+         If EventGadget = #inv_7
+           OpenGadgetList(1, 0)
+   invfg14.s = InputRequester("Modification du nouveau fournisseur #2.", "Veuillez entrer le nouveau fournisseur #2.", "")
+   invfg15.s = "UPDATE inventaire SET fourn2='"+invfg14+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invfg15)
+    FinishDatabaseQuery(#mysql)
+     inventaire()
+    CloseGadgetList()
+          EndIf
+          
+          If EventGadget = #inv_8
+            OpenGadgetList(1, 0)
+   invfg16.s = InputRequester("Modification du nouveau prix vente.", "Veuillez entrer le nouveau prix vente.", "")
+   invfg17.s = "UPDATE inventaire SET sellprice='"+invfg16+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invfg17)
+    FinishDatabaseQuery(#mysql)
+     inventaire()
+    CloseGadgetList()
+           EndIf
+           
+           If EventGadget = #inv_9
+             OpenGadgetList(1, 0)
+   invfg18.s = InputRequester("Modification du # localization.", "Veuillez entrer le nouveau # de localization.", "")
+   invfg19.s = "UPDATE inventaire SET nolocation='"+invfg18+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
+   DatabaseUpdate(#mysql, invfg19)
+    FinishDatabaseQuery(#mysql)
+     inventaire()
+    CloseGadgetList()
+            EndIf  
+               
+               
+               
+               
+               
+               
+               
+               
+; ///////////////////////////////////////////////////////////////////////
       Case #PB_Event_CloseWindow
         ; The window was closed.
              CloseWindow(1)
@@ -2559,8 +2671,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 213
-; FirstLine = 208
+; CursorPosition = 2555
+; FirstLine = 2533
 ; Folding = ----
 ; EnableXP
 ; DPIAware
