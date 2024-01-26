@@ -1,4 +1,4 @@
-﻿UseMySQLDatabase()
+﻿UseMySQLDatabase("libMariaDB.dll")
 
 
 
@@ -2682,8 +2682,6 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 205
-; FirstLine = 186
 ; Folding = ----
 ; EnableXP
 ; DPIAware

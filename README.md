@@ -6,11 +6,11 @@ Changement base de donnée pour le logiciel.
 
 Application en dévelopment!
 
-MySQL comme base de donnée.
+MariaDB comme base de donnée.
 
 À Venir!
 
-Service hébergement base de donnée MySQL.
+Service hébergement base de donnée MariaDB.
 
 Service de Compilation du logiciel avec vos information de connexion base de donné personel ou hébergé.
 
