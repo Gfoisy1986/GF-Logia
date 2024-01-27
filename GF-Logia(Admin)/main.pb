@@ -690,7 +690,7 @@ Procedure flotte()
  
   ListViewGadget(#PB_fh1, 0, 510, 200, 140)
     SetGadgetColor(#PB_fh1, #PB_Gadget_BackColor, $F3C8F3)
-             If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY id ASC")
+             If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY noment ASC")
              While NextDatabaseRow(#mySql) 
                
                AddGadgetItem(#PB_fh1, -1, ""+GetDatabaseString(#mySql, 1)+" : "+GetDatabaseString(#mysql, 13)+" : "+GetDatabaseString(#mysql, 14))
@@ -2703,7 +2703,7 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 695
+; CursorPosition = 692
 ; FirstLine = 678
 ; Folding = ----
 ; EnableXP
