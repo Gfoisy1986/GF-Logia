@@ -5,7 +5,8 @@
 
 
 Enumeration
-  
+  #_60015
+
   #_wo20
   #PB_wo1
   #PB_wo2
@@ -302,9 +303,13 @@ EndProcedure
 Procedure boite()
   OpenGadgetList(1, 12)
        
- 
   
-        ButtonGadget(#PB_Any, 0, 0, 640, 300, "GF-Comm")
+ 
+
+  
+ 
+   
+  
         ButtonGadget(#PB_Any, 640, 0, 640, 300, "Note on the fly")
         ButtonGadget(#PB_Any, 0, 300, 640, 300, "GF-Calc")
         ButtonGadget(#PB_Any, 640, 300, 640, 300, "GF-Conv")
@@ -1411,7 +1416,7 @@ AddGadgetItem(1, -1, "Les Notes")
          ; LabelUpdate(Folder)
          ; FilesExamine(Folder, Files())
          ; ListLoad(#FilesList, Files())
-        
+      
         
       If EventGadget =  #_402  ;archive Workorder
         OpenGadgetList(1 ,4)
@@ -2675,8 +2680,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 975
-; FirstLine = 965
+; CursorPosition = 1418
+; FirstLine = 1400
 ; Folding = ----
 ; EnableXP
 ; DPIAware
