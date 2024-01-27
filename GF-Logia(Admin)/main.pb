@@ -249,7 +249,8 @@ Procedure inventaire()
   
   ButtonGadget(#inv_del, 250, 375, 200, 30, "Supprimé une piece")
    
-   TextGadget(#PB_Any, 0, 420, 1280, 20, "Modification table inventaire", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(6009, 0, 420, 1280, 20, "Modification table inventaire", #PB_Text_Border | #PB_Text_Center)
+   SetGadgetColor(6009, #PB_Gadget_BackColor, $A7E3EF)
  
  
           ButtonGadget(#inv_0, 0, 450, 200, 30, "# no piece")
@@ -264,7 +265,8 @@ Procedure inventaire()
           ButtonGadget(#inv_9, 630, 490, 200, 30, "# Location")
           
      
-         TextGadget(#PB_Any, 0, 0, 1280, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
+          TextGadget(6008, 0, 0, 1280, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
+           SetGadgetColor(6008, #PB_Gadget_BackColor, $A7E3EF)
       
       
              If DatabaseQuery (#mysql, "SELECT * FROM inventaire ORDER BY id ASC")
@@ -471,13 +473,15 @@ EndProcedure
 Procedure employer()
   OpenGadgetList(1, 1)
   TextGadget(859, 0, 400, 1280, 20, "Menu employé", #PB_Text_Border | #PB_Text_Center)
+  SetGadgetColor(859, #PB_Gadget_BackColor, $A7E3EF)
   ButtonGadget(850, 0, 420, 200, 20, "Ajouté un employé")
  
   ButtonGadget(852, 250, 420, 200, 20, "Supprimé un employé")
   
   
   
-   TextGadget(#PB_Any, 0, 450, 1280, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(6007, 0, 450, 1280, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
+  SetGadgetColor(6007, #PB_Gadget_BackColor, $A7E3EF)
          ButtonGadget(#BG_0, 0, 470, 200, 30, "Username")
          ButtonGadget(#BG_1, 210, 470, 200, 30, "Nom propre")
          ButtonGadget(#BG_2, 420, 470, 200, 30, "Prénom")
@@ -502,6 +506,7 @@ Procedure employer()
          
          
          TextGadget(#_p20, 0, 0, 1280, 20, "Feuillet employé",  #PB_Text_Border | #PB_Text_Center)
+         SetGadgetColor(#_p20, #PB_Gadget_BackColor, $A7E3EF)
       
       
              If DatabaseQuery (#mysql, "SELECT * FROM username ORDER BY username ASC")
@@ -555,14 +560,16 @@ EndProcedure
 Procedure Client()
   OpenGadgetList(1, 2)
   
-   TextGadget(8591, 0, 400, 1280, 20, "Menu Client", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(8591, 0, 400, 1280, 20, "Menu Client", #PB_Text_Border | #PB_Text_Center)
+  SetGadgetColor(8591, #PB_Gadget_BackColor, $A7E3EF)
   ButtonGadget(#_BCC8501, 0, 420, 200, 20, "Ajouté un client")
  
   ButtonGadget(#_BCC8521, 250, 420, 200, 20, "Supprimé un client")
   
   
   
-   TextGadget(#PB_Any, 0, 450, 1280, 20, "Modification table des Clients", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(6006, 0, 450, 1280, 20, "Modification table des Clients", #PB_Text_Border | #PB_Text_Center)
+  SetGadgetColor(6006, #PB_Gadget_BackColor, $A7E3EF)
          ButtonGadget(#BC_024, 0, 470, 200, 30, "Noms entreprise")
          ButtonGadget(#BC_24, 210, 470, 200, 30, "Noms responsable")
          ButtonGadget(#BC_2, 420, 470, 200, 30, "E-mail propriétaire")
@@ -592,6 +599,7 @@ Procedure Client()
          
          
          TextGadget(#_pc20, 0, 0, 1280, 20, "Feuillet client",  #PB_Text_Border | #PB_Text_Center)
+         SetGadgetColor(#_pc20, #PB_Gadget_BackColor, $A7E3EF)
       
       
        If DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
@@ -644,13 +652,16 @@ Procedure flotte()
   OpenGadgetList(1, 3)
  
   TextGadget(#PB_fa, 0, 400, 200, 20, "Menu Flotte", #PB_Text_Border | #PB_Text_Center)
+  SetGadgetColor(#PB_fa, #PB_Gadget_BackColor, $A7E3EF)
   ButtonGadget(#PB_fc, 0, 420, 200, 30, "Supprimé un vehicule")
   
   
-   TextGadget(#PB_fh, 0, 460, 200, 20, "Crér bon de travail par # serie", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(#PB_fh, 0, 460, 200, 20, "Crér bon de travail par # serie", #PB_Text_Border | #PB_Text_Center)
+  SetGadgetColor(#PB_fh, #PB_Gadget_BackColor, $A7E3EF)
   ButtonGadget(#PB_fh2, 0, 480, 200, 30, "Créer un Bon de travail")
  
-   ListViewGadget(#PB_fh1, 0, 510, 200, 140)
+  ListViewGadget(#PB_fh1, 0, 510, 200, 140)
+    SetGadgetColor(#PB_fh1, #PB_Gadget_BackColor, $F3C8F3)
              If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY id ASC")
              While NextDatabaseRow(#mySql) 
                
@@ -662,11 +673,14 @@ Procedure flotte()
   
   
   
-  TextGadget(#PB_ff, 220, 400, 200, 20, "Ajouté par entreprise", #PB_Text_Border | #PB_Text_Center)
+            TextGadget(#PB_ff, 220, 400, 200, 20, "Ajouté par entreprise", #PB_Text_Border | #PB_Text_Center)
+            SetGadgetColor(#PB_ff, #PB_Gadget_BackColor, $A7E3EF)
+            
   ButtonGadget(#PB_fb, 220, 420, 200, 30, "Ajouté un vehicule")
  
   
   ListViewGadget(#PB_fe, 220, 450, 200, 200)
+  SetGadgetColor(#PB_fe, #PB_Gadget_BackColor, $F3C8F3)
              If DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
              While NextDatabaseRow(#mySql) 
                
@@ -677,7 +691,8 @@ Procedure flotte()
             EndIf
   
   
-  TextGadget(#PB_Any, 460, 400, 820, 20, "Modification table de la flotte", #PB_Text_Border | #PB_Text_Center)
+            TextGadget(6005, 460, 400, 820, 20, "Modification table de la flotte", #PB_Text_Border | #PB_Text_Center)
+            SetGadgetColor(6005, #PB_Gadget_BackColor, $A7E3EF)
          ButtonGadget(#PB_fg0, 460, 430, 200, 30, "# Série")
          ButtonGadget(#PB_fg1, 665, 430, 200, 30, "# Unité")
          ButtonGadget(#PB_fg2, 870, 430, 200, 30, "Annéee Vehivule")
@@ -697,7 +712,7 @@ Procedure flotte()
          
          
           TextGadget(#PB_fd, 0, 0, 1280, 20, "Feuillet de la flotte",  #PB_Text_Border | #PB_Text_Center)
-      
+       SetGadgetColor(#PB_fd, #PB_Gadget_BackColor, $A7E3EF)
       
              If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY serie ASC")
              
@@ -904,7 +919,7 @@ Procedure closewindowHandler()
       OpenGadgetList(1, 4)
       
       TextGadget(#p12, 200, 130, 320, 20, "Punch par Job",  #PB_Text_Border | #PB_Text_Center)
-      
+      SetGadgetColor(#p12, #PB_Gadget_BackColor, $A7E3EF)
       
              If DatabaseQuery (#mysql, "SELECT * FROM job WHERE (jobname) = ('"+GetGadgetText(#_wo4)+"')")
              
@@ -936,7 +951,7 @@ Procedure closewindowHandler()
               
              
             ButtonGadget(#_2001, 200, 60, 320, 30,"Punch IN")
-            ButtonGadget(#_2002, 200, 100, 320, 30,"Punch OUT")
+            ButtonGadget(#_2002, 200, 95, 320, 30,"Punch OUT")
                
                
           
@@ -952,9 +967,9 @@ Procedure mainwo()
   OpenGadgetList(1, 4)
   
   TextGadget(402, 0, 0, 200, 20," Liste Bon de travail", #PB_Text_Border | #PB_Text_Center)
-  
+  SetGadgetColor(402, #PB_Gadget_BackColor, $A7E3EF)
    ListViewGadget(#_WO1202, 0, 20, 200, 90) 
-    
+    SetGadgetColor(#_WO1202, #PB_Gadget_BackColor, $F3C8F3)
  If  DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='1'")
   
     While NextDatabaseRow(#mysql)       
@@ -1141,7 +1156,7 @@ Procedure oderhist()
 
   Procedure aWOordertHandler()
     OpenGadgetList(1, 4)
-    
+    SetGadgetColor(1, #PB_Gadget_BackColor, $A7E3EF)
     Debug ("Ouverture du work order " + GetGadgetText(#_WO1202))
     
     TextGadget(6000, 200, 0, 320, 20, "** ! Ne pas oubliée ! **", #PB_Text_Border | #PB_Text_Center)
@@ -1153,9 +1168,10 @@ Procedure oderhist()
     
           DatabaseQuery(#mysql, "SELECT * FROM username")
       TextGadget(#_wo1, 0, 130, 200, 20, "Liste des employés", #PB_Text_Border | #PB_Text_Center)
-      
+      SetGadgetColor(#_wo1, #PB_Gadget_BackColor, $A7E3EF)
      If  ListViewGadget(#_wo2, 0, 150, 200, 150)
-             
+       SetGadgetColor(#_wo2, #PB_Gadget_BackColor, $F3C8F3)
+       
            While  NextDatabaseRow(#mysql) 
                
                IDuser1$ = GetDatabaseString(#mysql, 1)
@@ -1170,9 +1186,10 @@ Procedure oderhist()
             
 
             TextGadget(#_wo3, 0, 320, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_Center)
+            SetGadgetColor(#_wo3, #PB_Gadget_BackColor, $A7E3EF)
                   DatabaseQuery(#mysql, "SELECT * FROM job WHERE (wo, pstatus) = ('"+GetGadgetText(#_WO1202)+"', '0')")
       ListViewGadget(#_wo4, 0, 340, 200, 120)
-             
+             SetGadgetColor(#_wo4, #PB_Gadget_BackColor, $F3C8F3)
            While  NextDatabaseRow(#mysql) 
                
                JOB1$ = GetDatabaseString(#mysql, 2)
@@ -1182,12 +1199,12 @@ Procedure oderhist()
                  ButtonGadget(#_wo14, 0, 460, 200, 30, "Nouvelle job")
 
                  TextGadget(#_wo5, 0, 500, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
-                 
+                 SetGadgetColor(#_wo5, #PB_Gadget_BackColor, $A7E3EF)
        
        
        DatabaseQuery (#mysql, "SELECT * FROM note WHERE (wo) = ('"+GetGadgetText(#_WO1202)+"')")
        ListViewGadget(#_wo6, 0, 520, 200, 80)
-           
+           SetGadgetColor(#_wo6, #PB_Gadget_BackColor, $F3C8F3)
              While NextDatabaseRow(#mysql) 
                
                
@@ -1204,8 +1221,9 @@ Procedure oderhist()
        
        
        TextGadget(#_wo12, 200, 500, 320, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
-    EditorGadget(#_wo13, 200, 520, 320, 140)
-       
+       SetGadgetColor(#_wo12, #PB_Gadget_BackColor, $A7E3EF)
+       EditorGadget(#_wo13, 200, 520, 320, 140)
+       SetGadgetColor(#_wo13, #PB_Gadget_BackColor, $F3D2A8)
        
         
         
@@ -1419,8 +1437,10 @@ AddGadgetItem(1, -1, "Les Notes")
             DatabaseQuery (#mysql, "SELECT * FROM note WHERE notename='"+GetGadgetText(#_wo6)+"'")
             ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
        NextDatabaseRow(#mysql) 
-   TextGadget(#_wo12, 200, 500, 320, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
-    EditorGadget(#_wo13, 200, 520, 320, 140)
+       TextGadget(#_wo12, 200, 500, 320, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
+       SetGadgetColor(#_wo12, #PB_Gadget_BackColor, $A7E3EF)
+       EditorGadget(#_wo13, 200, 520, 320, 140)
+       SetGadgetColor(#_wo13, #PB_Gadget_BackColor, $F3D2A8)
    AddGadgetItem(#_wo13, -1, GetDatabaseString(#mysql, 3))
    FinishDatabaseQuery(#mysql)
   CloseGadgetList()
@@ -1889,9 +1909,9 @@ EndIf
       
      
      TextGadget(1204, 200, 320, 320, 20, "Liste des rapports de travaux", #PB_Text_Border | #PB_Text_Center)
-     
+     SetGadgetColor(1204, #PB_Gadget_BackColor, $A7E3EF)
     ListViewGadget(1206, 200, 340, 320, 65)
-   
+   SetGadgetColor(1206, #PB_Gadget_BackColor, $9280EE)
         
         NextDatabaseRow(#mysql)       
         AddGadgetItem(1206, -1, "" + GetDatabaseString(#mysql, 3))
@@ -1904,7 +1924,8 @@ EndIf
       
       
  
-    EditorGadget(1207, 200, 405, 320, 85) 
+      EditorGadget(1207, 200, 405, 320, 85) 
+      SetGadgetColor(1207, #PB_Gadget_BackColor, $F3D2A8)
         
     While NextDatabaseRow(#mysql)  
      
@@ -2654,8 +2675,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1146
-; FirstLine = 1127
+; CursorPosition = 1913
+; FirstLine = 1903
 ; Folding = ----
 ; EnableXP
 ; DPIAware
