@@ -693,7 +693,7 @@ Procedure flotte()
              If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY id ASC")
              While NextDatabaseRow(#mySql) 
                
-               AddGadgetItem(#PB_fh1, -1, "" + GetDatabaseString(#mySql, 1))
+               AddGadgetItem(#PB_fh1, -1, ""+GetDatabaseString(#mySql, 1)+" : "+GetDatabaseString(#mysql, 13)+" : "+GetDatabaseString(#mysql, 14))
                
               Wend 
              FinishDatabaseQuery(#mysql)
@@ -2703,8 +2703,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 334
-; FirstLine = 319
+; CursorPosition = 695
+; FirstLine = 678
 ; Folding = ----
 ; EnableXP
 ; DPIAware
