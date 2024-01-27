@@ -310,11 +310,34 @@ Procedure boite()
  
    
   
-        ButtonGadget(#PB_Any, 640, 0, 640, 300, "Note on the fly")
-        ButtonGadget(#PB_Any, 0, 300, 640, 300, "GF-Calc")
-        ButtonGadget(#PB_Any, 640, 300, 640, 300, "GF-Conv")
+        
+        ButtonGadget(#PB_Any, 0, 0, 640, 660, "GF-Calc")
+        ButtonGadget(#PB_Any, 640, 0, 640, 660, "GF-Conv")
   CloseGadgetList()
 EndProcedure
+
+
+Procedure facturation()
+  OpenGadgetList(1, 9)
+       
+  
+ 
+
+  
+ 
+   
+        ButtonGadget(#PB_Any, 0, 0, 100, 630, "Liste Facture")
+        ButtonGadget(#PB_Any, 640, 0, 100, 630, "Liste hist. Facture")
+        
+        ButtonGadget(#PB_Any, 100, 0, 540, 630, "Facture")
+        ButtonGadget(#PB_Any, 740, 0, 540, 630, "Historique Facture")
+        
+        ButtonGadget(#PB_Any, 0, 630, 640, 30, "Archiver facture")
+        ButtonGadget(#PB_Any, 640, 630, 640, 30, "Supprimer facture")
+       
+  CloseGadgetList()
+EndProcedure
+
 
 Procedure histwo()
   OpenGadgetList(1, 5)
@@ -955,8 +978,8 @@ Procedure closewindowHandler()
              
               
              
-            ButtonGadget(#_2001, 200, 60, 320, 30,"Punch IN")
-            ButtonGadget(#_2002, 200, 95, 320, 30,"Punch OUT")
+            ButtonGadget(#_2001, 200, 40, 320, 40,"Punch IN")
+            ButtonGadget(#_2002, 200, 80, 320, 40,"Punch OUT")
                
                
           
@@ -973,7 +996,7 @@ Procedure mainwo()
   
   TextGadget(402, 0, 0, 200, 20," Liste Bon de travail", #PB_Text_Border | #PB_Text_Center)
   SetGadgetColor(402, #PB_Gadget_BackColor, $A7E3EF)
-   ListViewGadget(#_WO1202, 0, 20, 200, 90) 
+   ListViewGadget(#_WO1202, 0, 20, 200, 100) 
     SetGadgetColor(#_WO1202, #PB_Gadget_BackColor, $F3C8F3)
  If  DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='1'")
   
@@ -1306,7 +1329,7 @@ AddGadgetItem(1, -1, "Les Notes")
      
       OpenGadgetList(1)
     AddGadgetItem(1, -1, "Facturation")
-     TextGadget(726, 100, 0, 100, 20, "heya")
+     facturation()
      CloseGadgetList()
      
      
@@ -2680,8 +2703,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1418
-; FirstLine = 1400
+; CursorPosition = 334
+; FirstLine = 319
 ; Folding = ----
 ; EnableXP
 ; DPIAware
