@@ -973,7 +973,7 @@ Procedure mainwo()
  If  DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='1'")
   
     While NextDatabaseRow(#mysql)       
-      AddGadgetItem(#_WO1202, -1, "" + GetDatabaseString(#mysql, 1))
+      AddGadgetItem(#_WO1202, -1, ""+GetDatabaseString(#mysql, 2)+ " : " + GetDatabaseString(#mysql, 1))
       
     Wend 
    FinishDatabaseQuery(#mysql)
@@ -2675,8 +2675,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1913
-; FirstLine = 1903
+; CursorPosition = 975
+; FirstLine = 965
 ; Folding = ----
 ; EnableXP
 ; DPIAware
