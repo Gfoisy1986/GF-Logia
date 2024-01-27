@@ -1144,9 +1144,12 @@ Procedure oderhist()
     
     Debug ("Ouverture du work order " + GetGadgetText(#_WO1202))
     
-    TextGadget(#PB_Any, 200, 0, 320, 20, "** ! Ne pas oubliée ! **", #PB_Text_Center)
-    TextGadget(#PB_Any, 200, 20, 320, 20, "Select > Utilisateur > Travaux + Punch", #PB_Text_Border | #PB_Text_Center)
+    TextGadget(6000, 200, 0, 320, 20, "** ! Ne pas oubliée ! **", #PB_Text_Border | #PB_Text_Center)
+    TextGadget(6001, 200, 20, 320, 20, "Select > Utilisateur > Travaux + Punch", #PB_Text_Border | #PB_Text_Center)
+    
+    SetGadgetColor(6000, #PB_Gadget_BackColor, $B8F589)
    
+    SetGadgetColor(6001, #PB_Gadget_BackColor, $B8F589)
     
           DatabaseQuery(#mysql, "SELECT * FROM username")
       TextGadget(#_wo1, 0, 130, 200, 20, "Liste des employés", #PB_Text_Border | #PB_Text_Center)
@@ -1177,7 +1180,7 @@ Procedure oderhist()
                  Wend  
                  FinishDatabaseQuery(#mysql)
                  ButtonGadget(#_wo14, 0, 460, 200, 30, "Nouvelle job")
-                 
+
                  TextGadget(#_wo5, 0, 500, 200, 20, "Liste des Notes", #PB_Text_Border | #PB_Text_Center)
                  
        
@@ -2651,8 +2654,8 @@ EndIf
 
 
 ; IDE Options = PureBasic 6.04 LTS (Windows - x64)
-; CursorPosition = 1907
-; FirstLine = 1903
+; CursorPosition = 1146
+; FirstLine = 1127
 ; Folding = ----
 ; EnableXP
 ; DPIAware
