@@ -31,7 +31,7 @@ DELETE FROM `comptavariable`;
 INSERT INTO `comptavariable` (`id`, `taux_tps`, `taux_tvq`, `nomcomm`, `totaltpspaye`, `totaltvqpaye`, `totaltpsarec`, `totaltvqarec`) VALUES
 	(1, NULL, NULL, NULL, '45', NULL, NULL, NULL);
 
--- Dumping data for table gf-logia.flotte: ~3 rows (approximately)
+-- Dumping data for table gf-logia.flotte: ~2 rows (approximately)
 DELETE FROM `flotte`;
 INSERT INTO `flotte` (`id`, `serie`, `annee`, `make`, `model`, `km`, `hrs`, `date`, `ecm`, `imatri`, `fing`, `nexinspq`, `nexmai`, `noment`, `unit`) VALUES
 	(1, 'Fake1', '2002', 'Ford', 'F-250', '20000', '2500', '10/10/2022', '111', 'FAKE', NULL, NULL, NULL, 'GuillaumeFoisy', 6),
@@ -42,12 +42,12 @@ DELETE FROM `inventaire`;
 INSERT INTO `inventaire` (`id`, `nopiece`, `description`, `quantiter`, `quantiterstock`, `buyprice1`, `fourn1`, `buyprice2`, `fourn2`, `sellprice`, `nolocation`) VALUES
 	(1, '35000', 'Bolt 1/2x2inch  NF grade8 ', 30, 40, 100, 'FAKE1', 105, 'FAKE2', 250, 'a/4 - 1/2');
 
--- Dumping data for table gf-logia.invwo: ~1 rows (approximately)
+-- Dumping data for table gf-logia.invwo: ~0 rows (approximately)
 DELETE FROM `invwo`;
 INSERT INTO `invwo` (`id`, `quant`, `nopic`, `descp`, `wo`) VALUES
 	(1, '5', '25', 'petit tyrap', 'engine');
 
--- Dumping data for table gf-logia.job: ~1 rows (approximately)
+-- Dumping data for table gf-logia.job: ~2 rows (approximately)
 DELETE FROM `job`;
 INSERT INTO `job` (`id`, `username`, `jobname`, `jobinfo`, `jobrepport`, `punchin`, `punchout`, `wo`, `inspectionsheet`, `pstatus`) VALUES
 	(13, 'gfoisy', 'engine swap', 'testing one thirty two', 'ZZZZZZZZZZZZZZZZZZZZZZZZZZZZ', '26/01/2024  22:01:32', '26/01/2024  22:01:45', 'engine', NULL, 0);
