@@ -1,4 +1,4 @@
-﻿UseMySQLDatabase("libMariaDB.dll")
+﻿UseMySQLDatabase()
 
 ;"libMariaDB.dll"
 
@@ -1326,7 +1326,7 @@ EndProcedure
 
   If OpenWindow(#FenetrePrincipale, 0, 0, 1280, 720, "GF-Logia",  #PB_Window_ScreenCentered)
    
-    panel1 = PanelGadget(1, 0, 10, 1280, 720)
+    panel1 = PanelGadget(1, 0, 0, 1280, 720)
     
     ;///////////////////////////////////////////
     
@@ -1478,7 +1478,10 @@ AddGadgetItem(1, -1, "Les Notes")
     ;- Event Loop
   Repeat
     ; Wait until a new window or gadget event occurs.
-    Event = WaitWindowEvent()
+     
+   
+
+   Event = WaitWindowEvent(#PB_All)
     EventWindow = EventWindow()
     EventGadget = EventGadget()
     EventType = EventType()
@@ -2717,19 +2720,20 @@ EndIf
                
                
 ; ///////////////////////////////////////////////////////////////////////
-      Case #PB_Event_CloseWindow
+     Case #PB_Event_CloseWindow
         ; The window was closed.
-             CloseWindow(1)
-         ; End
+        
+        CloseWindow(#PB_All)
+        
+          End
       
     EndSelect
   ForEver
       
 
-
-; IDE Options = PureBasic 6.10 beta 4 (Windows - x64)
-; CursorPosition = 976
-; FirstLine = 973
+; IDE Options = PureBasic 6.04 LTS (Linux - x64)
+; CursorPosition = 1328
+; FirstLine = 1320
 ; Folding = ----
 ; EnableXP
 ; DPIAware
