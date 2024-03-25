@@ -6,6 +6,7 @@
 Enumeration
   #_60015
   #_w2
+  #PB_ll1
   #_wo20
   #PB_wo1
   #PB_wo2
@@ -252,7 +253,7 @@ Enumeration
     #PB_fh
 EndEnumeration
 
-  
+ 
 file = ReadFile(#PB_Any, "connection.cfg")
 file1 = ReadFile(#PB_Any, "user.cfg")
 
@@ -1131,10 +1132,10 @@ EndProcedure
    
         TextGadget(6050, 715, 0, 185, 20, "# série", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(6050, #PB_Gadget_BackColor, $A7E3EF)
-        DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE wo='"+GetGadgetText(6052)+"'")
+      DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE wo='"+GetGadgetText(#_WO1202)+"'")
         NextDatabaseRow(#mysql)
-           TextGadget(6054, 715, 20, 185, 20, GetDatabaseString(#mysql, 2), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6054, #PB_Gadget_BackColor, $F3C8F3)   
+       dataserie.w = TextGadget(6054, 715, 20, 185, 20, GetDatabaseString(#mysql, 2), #PB_Text_Border | #PB_Text_Center)
+          ; SetGadgetColor(6054, #PB_Gadget_BackColor, $F3C8F3)   
              FinishDatabaseQuery(#mysql)
        
        
@@ -1143,20 +1144,20 @@ EndProcedure
           
         TextGadget(#PB_wo7, 900, 0, 185, 20, "Année", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_wo7, #PB_Gadget_BackColor, $A7E3EF)
-       DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
+        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
-       TextGadget(6053, 900, 20, 185, 20, GetDatabaseString(#mysql, 2), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6053, #PB_Gadget_BackColor, $F3C8F3)
+       TextGadget(6055, 900, 20, 185, 20, GetDatabaseString(#mysql, 2), #PB_Text_Border | #PB_Text_Center)
+        ;   SetGadgetColor(2500, #PB_Gadget_BackColor, $F3C8F3)
          FinishDatabaseQuery(#mysql)     
          
-         
+         ;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
          
          TextGadget(#PB_wo8, 1085, 0, 185, 20, "Unitée", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_wo8, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
-       TextGadget(6055, 1085, 20, 185, 20, GetDatabaseString(#mysql, 14), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6055, #PB_Gadget_BackColor, $F3C8F3)
+      TextGadget(#PB_ll1, 1085, 20, 185, 20, GetDatabaseString(#mysql, 14), #PB_Text_Border | #PB_Text_Center)
+       ;    SetGadgetColor(#PB_ll1, #PB_Gadget_BackColor, $F3C8F3)
          FinishDatabaseQuery(#mysql)     
              
              
@@ -1164,8 +1165,8 @@ EndProcedure
        SetGadgetColor(#PB_wo9, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
-       TextGadget(6056, 530, 60, 185, 20, GetDatabaseString(#mysql, 3), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6056, #PB_Gadget_BackColor, $F3C8F3)
+      TextGadget(6056, 530, 60, 185, 20, GetDatabaseString(#mysql, 3), #PB_Text_Border | #PB_Text_Center)
+      ;     SetGadgetColor(6056, #PB_Gadget_BackColor, $F3C8F3)
          FinishDatabaseQuery(#mysql)     
              
          
@@ -1175,7 +1176,7 @@ EndProcedure
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
        TextGadget(6057, 715, 60, 185, 20, GetDatabaseString(#mysql, 4), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6057, #PB_Gadget_BackColor, $F3C8F3)
+      ;     SetGadgetColor(6057, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql) 
            
            
@@ -1185,7 +1186,7 @@ EndProcedure
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
        TextGadget(6058, 900, 60, 185, 20, GetDatabaseString(#mysql, 5), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6058, #PB_Gadget_BackColor, $F3C8F3)
+       ;    SetGadgetColor(6058, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
            
            
@@ -1193,8 +1194,8 @@ EndProcedure
        SetGadgetColor(#PB_w12, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
-       TextGadget(6059, 1085, 60, 185, 20, GetDatabaseString(#mysql, 6), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6059, #PB_Gadget_BackColor, $F3C8F3)
+      TextGadget(6059, 1085, 60, 185, 20, GetDatabaseString(#mysql, 6), #PB_Text_Border | #PB_Text_Center)
+       ;    SetGadgetColor(6059, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
            
            
@@ -1202,8 +1203,8 @@ EndProcedure
        SetGadgetColor(#PB_w13, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
-       TextGadget(6060, 530, 100, 185, 20, GetDatabaseString(#mysql, 7), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6060, #PB_Gadget_BackColor, $F3C8F3)
+      TextGadget(6060, 530, 100, 185, 20, GetDatabaseString(#mysql, 7), #PB_Text_Border | #PB_Text_Center)
+       ;    SetGadgetColor(6060, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
            
            
@@ -1211,17 +1212,17 @@ EndProcedure
        SetGadgetColor(#PB_w14, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
-       TextGadget(6061, 715, 100, 185, 20, GetDatabaseString(#mysql, 12), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6061, #PB_Gadget_BackColor, $F3C8F3)
+      TextGadget(6061, 715, 100, 185, 20, GetDatabaseString(#mysql, 12), #PB_Text_Border | #PB_Text_Center)
+        ;   SetGadgetColor(6061, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
            
            
-           TextGadget(#PB_w15, 900, 80, 185, 20, "Prochaine Insp. P.E.P/S.A.A.Q", #PB_Text_Border | #PB_Text_Center)
+           TextGadget(#PB_w15, 900, 80, 185, 20, "Prochaine Insp.", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w15, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
-       TextGadget(6062, 900, 100, 185, 20, GetDatabaseString(#mysql, 11), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6062, #PB_Gadget_BackColor, $F3C8F3)
+      TextGadget(6062, 900, 100, 185, 20, GetDatabaseString(#mysql, 11))
+       ;    SetGadgetColor(6062, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
            
            
@@ -1230,8 +1231,8 @@ EndProcedure
        SetGadgetColor(#PB_w16, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
-       TextGadget(6063, 1085, 100, 185, 20, GetDatabaseString(#mysql, 8), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6063, #PB_Gadget_BackColor, $F3C8F3)
+      TextGadget(6063, 1085, 100, 185, 20, GetDatabaseString(#mysql, 8), #PB_Text_Border | #PB_Text_Center)
+          ; SetGadgetColor(6063, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
            
            
@@ -1241,7 +1242,7 @@ EndProcedure
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
        TextGadget(6064, 530, 140, 185, 20, GetDatabaseString(#mysql, 10), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6064, #PB_Gadget_BackColor, $F3C8F3)
+       ;    SetGadgetColor(6064, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
            
            
@@ -1250,7 +1251,7 @@ EndProcedure
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
        TextGadget(6065, 715, 140, 185, 20, GetDatabaseString(#mysql, 9), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6065, #PB_Gadget_BackColor, $F3C8F3)
+        ;   SetGadgetColor(6065, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
            
            
@@ -1260,7 +1261,7 @@ EndProcedure
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
         NextDatabaseRow(#mysql) 
        TextGadget(6066, 900, 140, 370, 20, GetDatabaseString(#mysql, 13), #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6066, #PB_Gadget_BackColor, $F3C8F3)
+          ; SetGadgetColor(6066, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
            
            
@@ -1463,7 +1464,7 @@ AddGadgetItem(1, -1, "Les Notes")
      
       BindMenuEvent(0, 1, @QuitHandler())
        
-      EndIf
+     EndIf
     EndProcedure
     
     
@@ -1476,29 +1477,58 @@ AddGadgetItem(1, -1, "Les Notes")
     
     
     ;- Event Loop
-  Repeat
+  
     ; Wait until a new window or gadget event occurs.
      
-   
-
-   Event = WaitWindowEvent(#PB_All)
-    EventWindow = EventWindow()
-    EventGadget = EventGadget()
-    EventType = EventType()
     
-    ; Take some action.
-    Select Event
-      Case #PB_Event_Gadget
-        ; A gadget event occurred.
-      ;  If EventGadget = #FolderButton
-          ; The folder button was clicked.
-         ; Folder = FolderSelect(Folder)
-         ; LabelUpdate(Folder)
-         ; FilesExamine(Folder, Files())
-         ; ListLoad(#FilesList, Files())
-      
+      Repeat
+     Event = WaitWindowEvent()
+     
+     Select Event
+     
+       Case #PB_Event_Gadget
+         Select EventGadget()
+           Case 1 : Debug "Button 1 clicked!"
+           Case 2 : Debug "Button 2 clicked!"
+        ; EndSelect
+       
+       ;Case #PB_Event_Menu
+        ; Select EventMenu()
+         ;  Case 1 : Debug "Menu item 1 clicked!"
+          ; Case 2 : Debug "Menu item 2 clicked!"
+          ; Case 3 : Debug "Menu item 3 clicked!"
+        ; EndSelect
+     
+    
+    
+  
+  
+     
+  
+ Case #_WO1202 :
+    ;OpenGadgetList(1, 4)
+   
+          
+    
+         Debug "yes"
         
-      If EventGadget =  #_402  ;archive Workorder
+          aWOordertHandler()
+           
+          punch()
+          
+          
+          
+   ; CloseGadgetList()
+  
+ 
+
+
+ 
+ 
+ 
+ 
+ 
+Case #_402 : ;archive Workorder
         OpenGadgetList(1 ,4)
         queryarchwo.s = "UPDATE workorder SET status='2' WHERE wo='"+GetGadgetText(#_WO1202)+"'"
   
@@ -1513,10 +1543,10 @@ AddGadgetItem(1, -1, "Les Notes")
       
       
        
-      EndIf
+  
       
       
-        If EventGadget = #_wo6 ;open note
+        Case #_wo6 : ;open note
             OpenGadgetList(1, 4)
            
             DatabaseQuery (#mysql, "SELECT * FROM note WHERE notename='"+GetGadgetText(#_wo6)+"'")
@@ -1529,9 +1559,9 @@ AddGadgetItem(1, -1, "Les Notes")
    AddGadgetItem(#_wo13, -1, GetDatabaseString(#mysql, 3))
    FinishDatabaseQuery(#mysql)
   CloseGadgetList()
-  EndIf
  
-  If EventGadget = #PB_fh2
+ 
+  Case #PB_fh2 :
     
     OpenGadgetList(1, 3)
           wotext1$ = InputRequester("bon de travail" , "nom du bon de travail", "")
@@ -1554,43 +1584,13 @@ AddGadgetItem(1, -1, "Les Notes")
   
   CloseGadgetList()
     mainwo()
-    EndIf
-  
-  If EventGadget = #_WO1202
-    OpenGadgetList(1, 4)
-   
-          
     
-         Debug "yes"
-        
-          aWOordertHandler()
-           
-          punch()
-          
-          
-          
-    CloseGadgetList()
-  EndIf
- 
-
- 
- If EventGadget = #_INSPW
-   
-   OpenWindow(1, 0, 0, 800, 600, "GF-Logia_Insp-Sheet", #PB_Window_TitleBar |  #PB_Window_MinimizeGadget | #PB_Window_SizeGadget | #PB_Window_ScreenCentered)
-   
- EndIf
- 
- 
- 
- 
- 
-
  
 
  
  
  
- If EventGadget = #_wo14  ;newjobbuttonhandler
+Case #_wo14 : ;newjobbuttonhandler
    
    OpenGadgetList(1, 4)
    
@@ -1610,10 +1610,10 @@ AddGadgetItem(1, -1, "Les Notes")
   FinishDatabaseQuery(#mysql)
   aWOordertHandler()
   CloseGadgetList()
- EndIf
+
         
        
-       If EventGadget = #_2002 ;punchout
+       Case #_2002 :;punchout
           
          
          
@@ -1685,10 +1685,9 @@ second.s = "%ss"
   punch()
   aWOordertHandler()
   CloseGadgetList()
-EndIf
 
-   
-   If EventGadget = #_2001  ;punch in
+
+   Case #_2001 : ;punch in
           
         OpenGadgetList(1, 4)
 
@@ -1732,12 +1731,13 @@ second.s = "%ss"
   punch()
   
   CloseGadgetList()
-EndIf      
+
        
         
         
        
-        
+    EndSelect
+     
         
      
 
@@ -2720,20 +2720,12 @@ EndIf
                
                
 ; ///////////////////////////////////////////////////////////////////////
-     Case #PB_Event_CloseWindow
-        ; The window was closed.
-        
-        CloseWindow(#PB_All)
-        
-          End
-      
     EndSelect
-  ForEver
-      
-
-; IDE Options = PureBasic 6.04 LTS (Linux - x64)
-; CursorPosition = 1328
-; FirstLine = 1320
+   ForEver
+ 
+; IDE Options = PureBasic 6.10 LTS beta 9 (Linux - x64)
+; CursorPosition = 1733
+; FirstLine = 1717
 ; Folding = ----
 ; EnableXP
 ; DPIAware
