@@ -664,29 +664,29 @@ Procedure Client()
                
          ListIconGadget(#_BCC20, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
           SetGadgetColor(#_BCC20, #PB_Gadget_BackColor, $00FFFF)
-             AddGadgetColumn(#_BCC20, 1, "Noms Entreprise", 120)
-             AddGadgetColumn(#_BCC20, 2, "Noms du Responsable", 120)
-             AddGadgetColumn(#_BCC20, 3, "Email Propriétaire", 120)
-             AddGadgetColumn(#_BCC20, 4, "Email Responsable", 120)
-             AddGadgetColumn(#_BCC20, 5, "Fax Responsable", 120)
-             AddGadgetColumn(#_BCC20, 6, "Fax de l'entreprise", 120)
-             AddGadgetColumn(#_BCC20, 7, "Prenom Propriétaire", 120)
-             AddGadgetColumn(#_BCC20, 8, "Noms Propriétaire", 120)
-             AddGadgetColumn(#_BCC20, 9, "# cell propriétaire", 120)
-             AddGadgetColumn(#_BCC20, 10, "# cell responsable", 120)
-             AddGadgetColumn(#_BCC20, 11, "# téléphone entreprise", 120)
-             AddGadgetColumn(#_BCC20, 12, "# téléphone responsable", 120)
-             AddGadgetColumn(#_BCC20, 13, "Date création client", 120)
-             AddGadgetColumn(#_BCC20, 14, "Addresse entreprise", 120)
-             AddGadgetColumn(#_BCC20, 15, "Ville entreprise", 120)
-             AddGadgetColumn(#_BCC20, 16, "Province entreprise", 120)
-             AddGadgetColumn(#_BCC20, 17, "Pays Entreprise", 120)
-             AddGadgetColumn(#_BCC20, 18, "Code Postal entreprise", 120)
-             AddGadgetColumn(#_BCC20, 19, "Addresse propriétaire", 120)
-             AddGadgetColumn(#_BCC20, 20, "Ville propriétaire", 120)
-             AddGadgetColumn(#_BCC20, 21, "Province propriétaire", 120)
-             AddGadgetColumn(#_BCC20, 22, "Pays propriétaire", 120)
-             AddGadgetColumn(#_BCC20, 23, "Code Postal propriétaire", 120)
+             AddGadgetColumn(#_BCC20, 1, "Noms Entreprise", 220)
+             AddGadgetColumn(#_BCC20, 2, "Noms du Responsable", 220)
+             AddGadgetColumn(#_BCC20, 3, "Email Propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 4, "Email Responsable", 220)
+             AddGadgetColumn(#_BCC20, 5, "Fax Responsable", 220)
+             AddGadgetColumn(#_BCC20, 6, "Fax de l'entreprise", 220)
+             AddGadgetColumn(#_BCC20, 7, "Prenom Propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 8, "Noms Propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 9, "# cell propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 10, "# cell responsable", 220)
+             AddGadgetColumn(#_BCC20, 11, "# téléphone entreprise", 220)
+             AddGadgetColumn(#_BCC20, 12, "# téléphone responsable", 220)
+             AddGadgetColumn(#_BCC20, 13, "Date création client", 220)
+             AddGadgetColumn(#_BCC20, 14, "Addresse entreprise", 220)
+             AddGadgetColumn(#_BCC20, 15, "Ville entreprise", 220)
+             AddGadgetColumn(#_BCC20, 16, "Province entreprise", 220)
+             AddGadgetColumn(#_BCC20, 17, "Pays Entreprise", 220)
+             AddGadgetColumn(#_BCC20, 18, "Code Postal entreprise", 220)
+             AddGadgetColumn(#_BCC20, 19, "Addresse propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 20, "Ville propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 21, "Province propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 22, "Pays propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 23, "Code Postal propriétaire", 220)
              
            
               
@@ -1314,7 +1314,10 @@ EndProcedure
                 
           ButtonGadget(#PB_w25, 530, 620, 740, 40, "Fermeture Bon de travail")
            
-     CloseGadgetList()
+          CloseGadgetList()
+          
+;While WindowEvent() : Wend
+
      EndProcedure
      
      
@@ -1326,7 +1329,10 @@ EndProcedure
 #FenetrePrincipale = 0
 
   If OpenWindow(#FenetrePrincipale, 0, 0, 1280, 720, "GF-Logia",  #PB_Window_ScreenCentered)
-   
+    
+    AddWindowTimer(0, 250,10000)
+    
+  
     panel1 = PanelGadget(1, 0, 0, 1280, 720)
     
     ;///////////////////////////////////////////
@@ -1484,26 +1490,213 @@ AddGadgetItem(1, -1, "Les Notes")
       Repeat
      Event = WaitWindowEvent()
      
+     If Event = #PB_Event_Timer And EventTimer(); timer on data table
+       
+       
+       ;///Inventory datatable refresh/////////////////////////////////////////////////////////////////////////////
+       
+       OpenGadgetList(1, 0)
+       If  DatabaseQuery (#mysql, "SELECT * FROM inventaire ORDER BY id ASC")
+             
+               
+               ListIconGadget(#_inv2, 0, 20, 1280, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+                 SetGadgetColor(#_inv2, #PB_Gadget_BackColor, $00FFFF)
+             AddGadgetColumn(#_inv2, 1, "# no piece", 120)
+             AddGadgetColumn(#_inv2, 2, "Description", 120)
+             AddGadgetColumn(#_inv2, 3, "Quantité", 120)
+             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 120)
+             AddGadgetColumn(#_inv2, 5, "Prix achat #1", 60)
+             AddGadgetColumn(#_inv2, 6, "Fournisseur #1", 120)
+             AddGadgetColumn(#_inv2, 7, "Prix achat #2", 120)
+             AddGadgetColumn(#_inv2, 8, "Fournisseur #2", 200)
+             AddGadgetColumn(#_inv2, 9, "Prix vente", 120)
+             AddGadgetColumn(#_inv2, 10, "# Location", 120)
+         
+              While NextDatabaseRow(#mysql)
+     
+      AddGadgetItem(#_inv2, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10))
+      
+              Wend  
+              FinishDatabaseQuery(#mysql)   
+            EndIf  
+              CloseGadgetList()
+              
+              ;//////Flotte datatable refresh///////////////////////////////////////////////////////////////////////
+       
+       OpenGadgetList(1, 3)
+       If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY serie ASC")
+             
+               
+              
+              
+
+               ListIconGadget(#_a0fl, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+               SetGadgetColor(#_a0fl, #PB_Gadget_BackColor, $00FFFF)
+               AddGadgetColumn(#_a0fl, 1, "# Série", 120)
+               AddGadgetColumn(#_a0fl, 2, "Noms Entreprise", 120)
+              AddGadgetColumn(#_a0fl, 3, "# unité", 120)
+              AddGadgetColumn(#_a0fl, 4, "Année vehicule", 60)
+              AddGadgetColumn(#_a0fl, 5, "Marque vehicule", 120)
+              AddGadgetColumn(#_a0fl, 6, "Model vehicule", 120)
+              AddGadgetColumn(#_a0fl, 7, "kilometrage", 120)
+              AddGadgetColumn(#_a0fl, 8, "heure", 120)
+              AddGadgetColumn(#_a0fl, 9, "Date derniere maintenance", 120)
+              AddGadgetColumn(#_a0fl, 10, "Mot de passe 'ECM'", 120)
+              AddGadgetColumn(#_a0fl, 11, "Imatriculation", 120)
+              AddGadgetColumn(#_a0fl, 12, "Fin garantie", 120)
+              AddGadgetColumn(#_a0fl, 13, "prochaine inspection pep ou saaq", 120)
+              AddGadgetColumn(#_a0fl, 14, "prochaine maintenance", 120)
+          
+   
+               While NextDatabaseRow(#mysql)
+     
+       AddGadgetItem(#_a0fl, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12))
+
+     Wend  
+     FinishDatabaseQuery(#mysql)
+   EndIf
+   CloseGadgetList()
+    
+   
+   ;//Client datatable refresh ///////////////////////////////////////////////////////////////////////////////////////
+   OpenGadgetList(1, 2)
+   
+     If DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
+             
+    
+                       
+         ListIconGadget(#_BCC20, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+          SetGadgetColor(#_BCC20, #PB_Gadget_BackColor, $00FFFF)
+             AddGadgetColumn(#_BCC20, 1, "Noms Entreprise", 220)
+             AddGadgetColumn(#_BCC20, 2, "Noms du Responsable", 220)
+             AddGadgetColumn(#_BCC20, 3, "Email Propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 4, "Email Responsable", 220)
+             AddGadgetColumn(#_BCC20, 5, "Fax Responsable", 220)
+             AddGadgetColumn(#_BCC20, 6, "Fax de l'entreprise", 220)
+             AddGadgetColumn(#_BCC20, 7, "Prenom Propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 8, "Noms Propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 9, "# cell propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 10, "# cell responsable", 220)
+             AddGadgetColumn(#_BCC20, 11, "# téléphone entreprise", 220)
+             AddGadgetColumn(#_BCC20, 12, "# téléphone responsable", 220)
+             AddGadgetColumn(#_BCC20, 13, "Date création client", 220)
+             AddGadgetColumn(#_BCC20, 14, "Addresse entreprise", 220)
+             AddGadgetColumn(#_BCC20, 15, "Ville entreprise", 220)
+             AddGadgetColumn(#_BCC20, 16, "Province entreprise", 220)
+             AddGadgetColumn(#_BCC20, 17, "Pays Entreprise", 220)
+             AddGadgetColumn(#_BCC20, 18, "Code Postal entreprise", 220)
+             AddGadgetColumn(#_BCC20, 19, "Addresse propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 20, "Ville propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 21, "Province propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 22, "Pays propriétaire", 220)
+             AddGadgetColumn(#_BCC20, 23, "Code Postal propriétaire", 220)
+             
+           
+              
+            
+    While NextDatabaseRow(#mysql)
+     
+      AddGadgetItem(#_BCC20, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19)+Chr(10)+GetDatabaseString(#mysql, 20)+Chr(10)+GetDatabaseString(#mysql, 21)+Chr(10)+GetDatabaseString(#mysql, 22)+Chr(10)+GetDatabaseString(#mysql, 23))
+      
+     
+    Wend  
+    FinishDatabaseQuery(#mysql)
+  EndIf
+              
+  
+  CloseGadgetList()
+  
+  ;///////empolyer datatable refresh ////////////////////////////////////////////////////////////////////
+   
+    OpenGadgetList(1, 1)
+  
+  
+    If DatabaseQuery (#mysql, "SELECT * FROM username ORDER BY username ASC")
+             
+               
+               ListIconGadget(#_020, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+                 SetGadgetColor(#_020, #PB_Gadget_BackColor, $00FFFF)
+             AddGadgetColumn(#_020, 1, "Username", 120)
+             AddGadgetColumn(#_020, 2, "Nom", 120)
+             AddGadgetColumn(#_020, 3, "Prenom", 120)
+             AddGadgetColumn(#_020, 4, "Age", 60)
+             AddGadgetColumn(#_020, 5, "# Téléphone", 120)
+             AddGadgetColumn(#_020, 6, "# Cell", 120)
+             AddGadgetColumn(#_020, 7, "Addresse", 120)
+             AddGadgetColumn(#_020, 8, "# Permis Conduire", 120)
+             AddGadgetColumn(#_020, 9, "# Liscence Méca", 120)
+             AddGadgetColumn(#_020, 10, "# Liscence P.E.P", 120)
+             AddGadgetColumn(#_020, 11, "# Liscence S.A.A.Q", 120)
+             AddGadgetColumn(#_020, 12, "Date Naissance", 120)
+             AddGadgetColumn(#_020, 13, "Date Embauche", 120)
+             AddGadgetColumn(#_020, 14, "Ville", 120)
+             AddGadgetColumn(#_020, 15, "Province", 120)
+             AddGadgetColumn(#_020, 16, "Pays", 120)
+             AddGadgetColumn(#_020, 17, "Code Postal", 120)
+             AddGadgetColumn(#_020, 18, "E-mail Personel", 120)
+             AddGadgetColumn(#_020, 19, "E-mail Job", 120)
+             
+  
+              
+            
+            
+              While NextDatabaseRow(#mysql)
+     
+      AddGadgetItem(#_020, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19))
+      
+      
+      
+      
+      
+    Wend  
+    FinishDatabaseQuery(#mysql)
+               EndIf
+  
+  CloseGadgetList()
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  ;// A faire plus tard
+  
+     compta()
+     agenda()
+     histwo()
+     facturation()
+     boite()
+    
+       
+  
+  EndIf ;// End Case event timer
+        
+          
+  
+
+
+
+
+
+          
+          
+
+        
+             
+     
+      
+     
+     
      Select Event
      
        Case #PB_Event_Gadget
          Select EventGadget()
-           Case 1 : Debug "Button 1 clicked!"
-           Case 2 : Debug "Button 2 clicked!"
-        ; EndSelect
-       
-       ;Case #PB_Event_Menu
-        ; Select EventMenu()
-         ;  Case 1 : Debug "Menu item 1 clicked!"
-          ; Case 2 : Debug "Menu item 2 clicked!"
-          ; Case 3 : Debug "Menu item 3 clicked!"
-        ; EndSelect
-     
-    
-    
+            
+          
   
-  
-     
   
  Case #_WO1202 :
     ;OpenGadgetList(1, 4)
@@ -1736,7 +1929,7 @@ second.s = "%ss"
         
         
        
-    EndSelect
+    
      
         
      
@@ -1746,7 +1939,7 @@ second.s = "%ss"
         
         
 ;///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////      
- If EventGadget = #inv_del  ; DEL inventaire
+ Case  #inv_del : ; DEL inventaire
           OpenGadgetList(1, 0)
                          querydelinv.s = "DELETE FROM inventaire WHERE id='"+GetGadgetText(#_inv2)+"'"
   
@@ -1755,14 +1948,14 @@ second.s = "%ss"
                         inventaire()
                          
                  CloseGadgetList()
-               EndIf
+               
 
 
 
 
 
 
-        If EventGadget = 852  ; DEL employer
+        Case  852 : ; DEL employer
           OpenGadgetList(1, 1)
                          querydelemployer.s = "DELETE FROM username WHERE id='"+GetGadgetText(#_020)+"'"
   
@@ -1771,10 +1964,10 @@ second.s = "%ss"
                          employer()
                          
                  CloseGadgetList()
-               EndIf
+             
                
                
-               If EventGadget = #_BCC8521  ;DEL client
+               Case  #_BCC8521 : ;DEL client
           OpenGadgetList(1, 2)
                          querydelclient2.s = "DELETE FROM client WHERE id='"+GetGadgetText(#_BCC20)+"'"
   
@@ -1783,10 +1976,10 @@ second.s = "%ss"
                         Client()
                          
                  CloseGadgetList()
-               EndIf
                
                
-                 If EventGadget = #PB_fc  ;DEL flotte
+               
+                Case  #PB_fc  : ;DEL flotte
           OpenGadgetList(1, 3)
                          querydelflotte.s = "DELETE FROM flotte WHERE id='"+GetGadgetText(#_a0fl)+"'"
   
@@ -1795,12 +1988,12 @@ second.s = "%ss"
                         Flotte()
                          
                  CloseGadgetList()
-               EndIf
                
                
                
                
-         If EventGadget = #inv_add  ;Ajout inventaire      
+               
+        Case  #inv_add : ;Ajout inventaire      
             OpenGadgetList(1, 0)
           Textinv100$ = InputRequester("ajoutez une piece", "Veuillez entrer le nouveau # piece.", "")
         Textinv101$ = InputRequester("ajoutez une piece", "Veuillez entrer la nouvelle description.", "")
@@ -1813,10 +2006,10 @@ second.s = "%ss"
              FinishDatabaseQuery(#mysql)
          inventaire()
        CloseGadgetList()
-         EndIf   
+          
                
 
-        If EventGadget = 850 ;  add employer
+       Case  850 : ;  add employer
           OpenGadgetList(1, 1)
           Textemployer100$ = InputRequester("ajoutez un employer", "Veuillez entrer le username du nouveau", "")
         Textemployer101$ = InputRequester("ajoutez un employer", "Veuillez entrer le Nom propre du nouveau", "")
@@ -1829,9 +2022,9 @@ second.s = "%ss"
              FinishDatabaseQuery(#mysql)
          employer()
        CloseGadgetList()
-        EndIf
+       
         
-         If EventGadget = #_BCC8501  ;add client
+        Case  #_BCC8501 : ;add client
           OpenGadgetList(1, 2)
         
         wocli1$ = InputRequester("ajoutez un client", "Veuillez entrer le nom de l'entreprise.", "")
@@ -1871,11 +2064,11 @@ second.s = "%ss"
               Client()
               Flotte()
        CloseGadgetList()
-        EndIf
         
         
         
-  If EventGadget = #PB_fb ; add flotte vehicule
+        
+  Case  #PB_fb : ; add flotte vehicule
     
     OpenGadgetList(1, 3)
         
@@ -1910,12 +2103,12 @@ second.s = "%ss"
     
     
     
-  EndIf  
+ 
     
     
     
     
-        If EventGadget = #_z0 ;joblist historique
+       Case  #_z0 : ;joblist historique
           
             OpenGadgetList(1, 5)
     
@@ -1954,10 +2147,10 @@ second.s = "%ss"
     CloseGadgetList()
   
           
-          EndIf
+        
           
           
-  If EventGadget = #_w4 ;joblist
+  Case  #_w4 : ;joblist
              OpenGadgetList(1, 4)
     
      
@@ -1995,7 +2188,7 @@ punch()
     
     CloseGadgetList()
    
- EndIf
+
  
  ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
@@ -2003,7 +2196,7 @@ punch()
  ;// Table des employer ici bas  /////////
  ;////////////////////////////////////////
  
- If EventGadget = #BG_0
+ Case #BG_0 :
     OpenGadgetList(1, 1)
    texteuser0.s = InputRequester("Modification du username de l'employé.", "Veuillez entrer le nouveau username.", "")
    queryuser0.s = "UPDATE username SET username='"+texteuser0+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2011,9 +2204,9 @@ punch()
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-EndIf
+
  
-If EventGadget = #BG_1
+Case  #BG_1 :
   OpenGadgetList(1, 1)
    texteuser1.s = InputRequester("Modification du nom de l'employé.", "Veuillez entrer le nouveau nom propre.", "")
    queryuser1.s = "UPDATE username SET nom='"+texteuser1+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2021,9 +2214,9 @@ If EventGadget = #BG_1
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-EndIf
+
  
-If EventGadget = #BG_2
+Case  #BG_2 :
   OpenGadgetList(1, 1)
    texteuser2.s = InputRequester("Modification du prenom de l'employé.", "Veuillez entrer le nouveau prenom.", "")
    queryuser2.s = "UPDATE username SET prenom='"+texteuser2+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2031,9 +2224,9 @@ If EventGadget = #BG_2
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-  EndIf
   
-  If EventGadget = #BG_3
+  
+ Case  #BG_3 :
     OpenGadgetList(1, 1)
    texteuser3.s = InputRequester("Modification de age de l'employé.", "Veuillez entrer la nouvelle age.", "")
    queryuser3.s = "UPDATE username SET age='"+texteuser3+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2041,9 +2234,9 @@ If EventGadget = #BG_2
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
- EndIf
  
- If EventGadget = #BG_4
+ 
+ Case  #BG_4 :
    OpenGadgetList(1, 1)
      texteuser4.s = InputRequester("Modification du # téléphone de l'employé.", "Veuillez entrer le nouveau # téléphone.", "")
    queryuser4.s = "UPDATE username SET tel='"+texteuser4+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2051,9 +2244,9 @@ If EventGadget = #BG_2
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
- EndIf
  
- If EventGadget = #BG_5
+ 
+ Case #BG_5 :
    OpenGadgetList(1, 1)
    texteuser5.s = InputRequester("Modification du # cellulaire de l'employé.", "Veuillez entrer le nouveau # cellulaire.", "")
    queryuser5.s = "UPDATE username SET cell='"+texteuser5+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2061,9 +2254,9 @@ If EventGadget = #BG_2
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
- EndIf
+
  
-If EventGadget = #BG_6
+Case #BG_6 :
    OpenGadgetList(1, 1)
    pbuser6.s = InputRequester("Modification de l'addresse de l'employé.", "Veuillez entrer la nouvelle addresse.", "")
    pbuserqury.s = "UPDATE username SET add='"+pbuser6+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2071,9 +2264,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
- EndIf
+
  
- If EventGadget = #BG_7
+ Case #BG_7 :
    OpenGadgetList(1, 1)
    texteuser7.s = InputRequester("Modification du # permis conduire de l'employé.", "Veuillez entrer le nouveau # permis.", "")
    queryuser7.s = "UPDATE username SET permis='"+texteuser7+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2081,9 +2274,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-       EndIf
        
-       If EventGadget = #BG_8
+       
+      Case #BG_8 :
          OpenGadgetList(1, 1)
    texteuser8.s = InputRequester("Modification de la liscence de mécanique de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
    queryuser8.s = "UPDATE username SET liscence='"+texteuser8+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2091,9 +2284,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-        EndIf
+       
         
-        If EventGadget = #BG_9
+        Case #BG_9 :
           OpenGadgetList(1, 1)
    texteuser9.s = InputRequester("Modification du # p.e.p de l'employé.", "Veuillez entrer le nouveau # p.e.p.", "")
    queryuser9.s = "UPDATE username SET pep='"+texteuser9+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2101,9 +2294,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-         EndIf
+        
          
-         If EventGadget = #BG_10
+        Case #BG_10 :
            OpenGadgetList(1, 1)
    texteuser10.s = InputRequester("Modification du # liscence inspection SAAQ de l'employé.", "Veuillez entrer le nouveau # liscence.", "")
    queryuser10.s = "UPDATE username SET saaq='"+texteuser10+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2111,9 +2304,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-          EndIf
+         
           
-          If EventGadget = #BG_11
+          Case #BG_11 :
             OpenGadgetList(1, 1)
    texteuser11.s = InputRequester("Modification de la date de naissance de l'employé.", "Veuillez entrer la nouvelle date de naissance.", "")
    queryuser11.s = "UPDATE username SET date='"+texteuser11+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2121,9 +2314,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-           EndIf
+        
            
-           If EventGadget = #BG_12
+           Case #BG_12 :
              OpenGadgetList(1, 1)
    texteuser12.s = InputRequester("Modification de la date embauche de l'employé.", "Veuillez entrer la nouvelle date", "")
    queryuser12.s = "UPDATE username SET embauche='"+texteuser12+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2131,9 +2324,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-            EndIf
+         
             
-            If EventGadget = #BG_13
+            Case #BG_13 :
               OpenGadgetList(1, 1)
    texteuser13.s = InputRequester("Modification du nom de ville de l'employé.", "Veuillez entrer le nom de la nouvelle ville.", "")
    queryuser13.s = "UPDATE username SET city='"+texteuser13+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2141,9 +2334,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-             EndIf
-             
-             If EventGadget = #BG_14
+   
+   
+             Case #BG_14 :
                OpenGadgetList(1, 1)
    texteuser14.s = InputRequester("Modification de la province de l'employé.", "Veuillez entrer la nouvelle province", "")
    queryuser14.s = "UPDATE username SET province='"+texteuser14+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2151,9 +2344,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-              EndIf
+             
               
-              If EventGadget = #BG_15
+             Case #BG_15 :
                 OpenGadgetList(1, 1)
    texteuser15.s = InputRequester("Modification du pays de l'employé.", "Veuillez entrer le nouveau pays.", "")
    queryuser15.s = "UPDATE username SET pays='"+texteuser15+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2161,9 +2354,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-               EndIf
                
-               If EventGadget = #BG_16
+               
+               Case #BG_16 :
                  OpenGadgetList(1, 1)
    texteuser16.s = InputRequester("Modification du Code Postal de l'employé.", "Veuillez entrer le nouveau Code Postal.", "")
    queryuser16.s = "UPDATE username SET zip='"+texteuser16+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2171,9 +2364,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-                EndIf
                 
-                If EventGadget = #BG_17
+                
+                Case #BG_17 :
                   OpenGadgetList(1, 1)
    texteuser17.s = InputRequester("Modification du email personel de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryuser17.s = "UPDATE username SET email1='"+texteuser17+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2181,9 +2374,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
-                 EndIf
                  
-                 If EventGadget = #BG_18
+                 
+                 Case #BG_18 :
                    OpenGadgetList(1, 1)
    texteuser18.s = InputRequester("Modification du e-mail job de l'employé.", "Veuillez entrer le nouveau e-mail.", "")
    queryuser18.s = "UPDATE username SET email2='"+texteuser18+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2191,9 +2384,9 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
- EndIf 
+  
  
-   If EventGadget = #BG_19
+   Case #BG_19 :
                    OpenGadgetList(1, 1)
    texteuser19.s = InputRequester("Modification du taux horraire.", "Veuillez entrer le nouveau taux horraire de l'employer.", "")
    queryuser19.s = "UPDATE username SET tauxhr='"+texteuser19+"' WHERE id='"+GetGadgetText(#_020)+"'"
@@ -2201,8 +2394,8 @@ If EventGadget = #BG_6
    FinishDatabaseQuery(#mysql)
    employer()
    CloseGadgetList()
- EndIf
  
+ EndSelect
  ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
  ;////////////////////////////////////////
@@ -2724,8 +2917,8 @@ EndIf
    ForEver
  
 ; IDE Options = PureBasic 6.10 LTS beta 9 (Linux - x64)
-; CursorPosition = 1733
-; FirstLine = 1717
+; CursorPosition = 688
+; FirstLine = 660
 ; Folding = ----
 ; EnableXP
 ; DPIAware
