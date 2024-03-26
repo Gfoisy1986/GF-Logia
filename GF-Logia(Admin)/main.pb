@@ -307,7 +307,7 @@ Procedure inventaire()
              AddGadgetColumn(#_inv2, 1, "# no piece", 120)
              AddGadgetColumn(#_inv2, 2, "Description", 120)
              AddGadgetColumn(#_inv2, 3, "Quantité", 120)
-             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 120)
+             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 220)
              AddGadgetColumn(#_inv2, 5, "Prix achat #1", 60)
              AddGadgetColumn(#_inv2, 6, "Fournisseur #1", 120)
              AddGadgetColumn(#_inv2, 7, "Prix achat #2", 120)
@@ -1504,7 +1504,7 @@ AddGadgetItem(1, -1, "Les Notes")
              AddGadgetColumn(#_inv2, 1, "# no piece", 120)
              AddGadgetColumn(#_inv2, 2, "Description", 120)
              AddGadgetColumn(#_inv2, 3, "Quantité", 120)
-             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 120)
+             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 220)
              AddGadgetColumn(#_inv2, 5, "Prix achat #1", 60)
              AddGadgetColumn(#_inv2, 6, "Fournisseur #1", 120)
              AddGadgetColumn(#_inv2, 7, "Prix achat #2", 120)
@@ -2395,7 +2395,7 @@ Case #BG_6 :
    employer()
    CloseGadgetList()
  
- EndSelect
+ 
  ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
  
  ;////////////////////////////////////////
@@ -2403,7 +2403,7 @@ Case #BG_6 :
  ;////////////////////////////////////////  
  
  
- If EventGadget = #BC_024
+ Case #BC_024 :
    OpenGadgetList(1, 2)
    texteclient0.s = InputRequester("Modification du nom de l'entreprise.", "Veuillez entrer le nouveau nom de l'entreprise.", "")
    queryclient0.s = "UPDATE client SET nomsent='"+texteclient0+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2411,9 +2411,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-EndIf
+
  
-  If EventGadget = #BC_24
+  Case #BC_24 :
     OpenGadgetList(1, 2)
    texteclient3.s = InputRequester("Modification du nom du responsable.", "Veuillez entrer le nom du responsable.", "")
    queryclient3.s = "UPDATE client SET nomres='"+texteclient3+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2421,9 +2421,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
+
  
- If EventGadget = #BC_2
+ Case #BC_2 :
    OpenGadgetList(1, 2)
      texteclient4.s = InputRequester("Modification du email du propriétaire.", "Veuillez entrer le nouveau email du propriétaire.", "")
    queryclient4.s = "UPDATE client SET emailp='"+texteclient4+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2431,9 +2431,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #BC_3
+ 
+ Case #BC_3 :
    OpenGadgetList(1, 2)
    texteclient5.s = InputRequester("Modification du email du responsable.", "Veuillez entrer le nouveau email du responsable.", "")
    queryclient5.s = "UPDATE client SET emailres='"+texteclient5+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2441,9 +2441,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
+
  
- If EventGadget = #BC_4
+ Case #BC_4 :
    OpenGadgetList(1, 2)
    client6.s = InputRequester("Modification du nouveau # FAX du responsable.", "Veuillez entrer le nouveau # FAX du responsable", "")
    client66.s = "UPDATE client SET faxres='"+client6+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2451,9 +2451,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
+
  
- If EventGadget = #BC_5
+ Case #BC_5 :
    OpenGadgetList(1, 2)
    texteclient7.s = InputRequester("Modification du nouveau # FAX de l'entreprise.", "Veuillez entrer le nouveau # FAX de l'entreprise.", "")
    queryclient7.s = "UPDATE client SET faxent='"+texteclient7+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2461,9 +2461,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-       EndIf
+      
        
-       If EventGadget = #BC_66
+       Case #BC_66 :
          OpenGadgetList(1, 2)
    texteclient8.s = InputRequester("Modification du prenoms du propriétaire.", "Veuillez entrer le nouveau prenoms du propriétaire.", "")
    queryclient8.s = "UPDATE client SET prenoms='"+texteclient8+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2471,9 +2471,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-        EndIf
+      
         
-        If EventGadget = #BC_7
+        Case #BC_7 :
           OpenGadgetList(1, 2)
    texteclient9.s = InputRequester("Modification du noms propre du propriétaire.", "Veuillez entrer le nouveau noms propre du propriétaire", "")
    queryclient9.s = "UPDATE client SET noms='"+texteclient9+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2481,9 +2481,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-         EndIf
+        
          
-         If EventGadget = #BC_8
+         Case #BC_8 :
            OpenGadgetList(1, 2)
    texteclient10.s = InputRequester("Modification du nouveau # cellulaire du propriétaire.", "Veuillez entrer le nouveau # cellulaire du propriétaire.", "")
    queryclient10.s = "UPDATE client SET cellp='"+texteclient10+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2491,9 +2491,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-          EndIf
+         
           
-          If EventGadget = #BC_9
+          Case #BC_9 :
             OpenGadgetList(1, 2)
    texteclient11.s = InputRequester("Modification du nouveau # cellulaire du responsable.", "Veuillez entrer le nouveau # cellulaire du responsable.", "")
    queryclient11.s = "UPDATE client SET cellresp='"+texteclient11+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2501,9 +2501,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-           EndIf
+       
            
-           If EventGadget = #BC_10
+           Case #BC_10 :
              OpenGadgetList(1, 2)
    texteclient12.s = InputRequester("Modification du nouveau # téléphone de l'entreprise.", "Veuillez entrer le nouveau # téléphone de l'entreprise.", "")
    queryclient12.s = "UPDATE client SET telent='"+texteclient12+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2511,9 +2511,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-            EndIf
+          
             
-            If EventGadget = #BC_11
+            Case #BC_11 :
               OpenGadgetList(1, 2)
    texteclient13.s = InputRequester("Modification du nouveau # téléphone du responsables.", "Veuillez entrer le nouveau # téléphone du responsable.", "")
    queryclient13.s = "UPDATE client SET telresp='"+texteclient13+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2521,9 +2521,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-             EndIf
+          
              
-             If EventGadget = #BC_12
+             Case #BC_12 :
                OpenGadgetList(1, 2)
    texteclient14.s = InputRequester("Modification de la date de création du client.", "Veuillez entrer la nouvelle date de création du client", "")
    queryclient14.s = "UPDATE client SET datesc='"+texteclient14+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2531,9 +2531,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-              EndIf
+             
               
-              If EventGadget = #BC_13
+              Case #BC_13 :
                 OpenGadgetList(1, 2)
    texteclient15.s = InputRequester("Modification de la nouvelle addresse de l'entreprise.", "Veuillez entrer la nouvelle addresse de l'entreprise.", "")
    queryclient15.s = "UPDATE client SET addent='"+texteclient15+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2541,9 +2541,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-               EndIf
+             
                
-               If EventGadget = #BC_14
+               Case #BC_14 :
                  OpenGadgetList(1, 2)
    texteclient16.s = InputRequester("Modification de la nouvelle ville de l'entreprise.", "Veuillez entrer la nouvelle ville de l'entreprise.", "")
    queryclient16.s = "UPDATE client SET villeent='"+texteclient16+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2551,9 +2551,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-                EndIf
                 
-                If EventGadget = #BC_15
+                
+                Case #BC_15 :
                   OpenGadgetList(1, 2)
    texteclient17.s = InputRequester("Modification de la nouvelle province de l'entreprise.", "Veuillez entrer la nouvelle province de l'entreprise.", "")
    queryclient17.s = "UPDATE client SET provent='"+texteclient17+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2561,9 +2561,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-                 EndIf
                  
-                 If EventGadget = #BC_16
+                 
+                 Case #BC_16 :
                    OpenGadgetList(1, 2)
    texteclient18.s = InputRequester("Modification du pays de l'entrprise.", "Veuillez entrer le nouveau pays de l'entrprise.", "")
    queryclient18.s = "UPDATE client SET paysent='"+texteclient18+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2571,9 +2571,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf 
+
  
- If EventGadget = #BC_17
+ Case #BC_17 :
    OpenGadgetList(1, 2)
    texteclient19.s = InputRequester("Modification du Code Postal de l'entreprise.", "Veuillez entrer le nouveau Code Postal de l'entrprise.", "")
    queryclient19.s = "UPDATE client SET zipent='"+texteclient19+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2581,9 +2581,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
+
  
- If EventGadget = #BC_18
+ Case #BC_18 :
    OpenGadgetList(1, 2)
    texteclient20.s = InputRequester("Modification de l'addresse du propriétaire.", "Veuillez entrer la nouvelle addresse du propriétaire.", "")
    queryclient20.s = "UPDATE client SET addp='"+texteclient20+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2591,9 +2591,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #BC_19
+ 
+ Case #BC_19 :
    OpenGadgetList(1, 2)
    texteclient21.s = InputRequester("Modification de la ville du propriétaire.", "Veuillez entrer la nouvelle ville du propriétaire.", "")
    queryclient21.s = "UPDATE client SET villep='"+texteclient21+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2601,9 +2601,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
+
  
- If EventGadget = #BC_20
+ Case #BC_20 :
    OpenGadgetList(1, 2)
    texteclient22.s = InputRequester("Modification de la province du propriétaire.", "Veuillez entrer la nouvelle province du propriétaire.", "")
    queryclient22.s = "UPDATE client SET provp='"+texteclient22+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2611,9 +2611,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
+
  
- If EventGadget = #BC_21
+ Case #BC_21 :
    OpenGadgetList(1, 2)
    texteclient23.s = InputRequester("Modification du pays du propriétaire.", "Veuillez entrer le nouveau pays du propriétaire.", "")
    queryclient23.s = "UPDATE client SET paysp='"+texteclient23+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2621,9 +2621,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
+
  
- If EventGadget = #BC_22
+ Case #BC_22 :
    OpenGadgetList(1, 2)
    texteclient24.s = InputRequester("Modification du Code Postal du propriétaire.", "Veuillez entrer le nouveau Code Postal du propriétaire.", "")
    queryclient24.s = "UPDATE client SET zipp='"+texteclient24+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2631,9 +2631,9 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
- EndIf
+
  
- If EventGadget = #BC_23
+ Case #BC_23 :
    OpenGadgetList(1, 2)
    texteclient25.s = InputRequester("Modification du taux horraire du client.", "Veuillez entrer le nouveau taux horraire du client.", "")
    queryclient25.s = "UPDATE client SET tauxhc='"+texteclient25+"' WHERE id='"+GetGadgetText(#_BCC20)+"'"
@@ -2641,8 +2641,8 @@ EndIf
     FinishDatabaseQuery(#mysql)
     Client()
     CloseGadgetList()
-  EndIf
   
+  EndSelect
   
 ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ;// Flotte           //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2917,8 +2917,8 @@ EndIf
    ForEver
  
 ; IDE Options = PureBasic 6.10 LTS beta 9 (Linux - x64)
-; CursorPosition = 688
-; FirstLine = 660
+; CursorPosition = 271
+; FirstLine = 262
 ; Folding = ----
 ; EnableXP
 ; DPIAware
