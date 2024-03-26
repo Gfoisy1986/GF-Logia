@@ -2642,7 +2642,7 @@ Case #BG_6 :
     Client()
     CloseGadgetList()
   
-  EndSelect
+
   
 ;//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ;// Flotte           //////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -2650,7 +2650,7 @@ Case #BG_6 :
   
   
  
-  If EventGadget = #PB_fg0
+  Case #PB_fg0 :
     OpenGadgetList(1, 3)
    w0.s = InputRequester("Modification du # série.", "Veuillez entrer le nouveau # série du vehicule.", "")
    w1.s = "UPDATE flotte SET serie='"+w0+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2659,9 +2659,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #PB_fg2
+ 
+ Case #PB_fg2 :
    OpenGadgetList(1, 3)
      fg2.s = InputRequester("Modification de l'année.", "Veuillez entrer la nouvelle année du vehicule.", "")
    fg3.s = "UPDATE flotte SET annee='"+fg2+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2669,9 +2669,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
    flotte()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #PB_fg3
+ 
+ Case #PB_fg3 :
    OpenGadgetList(1, 3)
    fg4.s = InputRequester("Modification de la marque.", "Veuillez entrer la nouvelle marque du vehicule.", "")
    fg5.s = "UPDATE flotte SET make='"+fg4+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2679,9 +2679,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #PB_fg4
+ 
+ Case #PB_fg4 :
    OpenGadgetList(1, 3)
    fg6.s = InputRequester("Modification du nouveau model.", "Veuillez entrer le nouveau model du vehicule", "")
    fg7.s = "UPDATE flotte SET model='"+fg6+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2689,9 +2689,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
    flotte()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #PB_fg5
+ 
+ Case #PB_fg5 :
    OpenGadgetList(1, 3)
    fg8.s = InputRequester("Modification du killometrage.", "Veuillez entrer le nouveau kilometrage du vehicule.", "")
    fg9.s = "UPDATE flotte SET km='"+fg8+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2699,9 +2699,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-       EndIf
        
-       If EventGadget = #PB_fg6
+       
+ Case #PB_fg6 :
          OpenGadgetList(1, 3)
    fg10.s = InputRequester("Modification des heures.", "Veuillez entrer les nouvelles heures du vehicule.", "")
    fg11.s = "UPDATE flotte SET hrs='"+fg10+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2709,9 +2709,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-        EndIf
+       
         
-        If EventGadget = #PB_fg7
+ Case #PB_fg7 :
           OpenGadgetList(1, 3)
    fg12.s = InputRequester("Modification de la date de la derniere maintenance.", "Veuillez entrer la nouvelle date de la derniere maintenance du vehicule", "")
    fg13.s = "UPDATE flotte SET date='"+fg12+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2719,9 +2719,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-         EndIf
          
-         If EventGadget = #PB_fg8
+         
+  Case #PB_fg8 :
            OpenGadgetList(1, 3)
    fg14.s = InputRequester("Modification du nouveau mot de passe 'ECM'.", "Veuillez entrer le nouveau mot de passe 'ECM' du vehicule.", "")
    fg15.s = "UPDATE flotte SET ecm='"+fg14+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2729,9 +2729,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-          EndIf
           
-          If EventGadget = #PB_fg9
+          
+  Case #PB_fg9 :
             OpenGadgetList(1, 3)
    fg16.s = InputRequester("Modification du nouveau # plaque.", "Veuillez entrer le nouveau # plaque du vehicule.", "")
    fg17.s = "UPDATE flotte SET imatri='"+fg16+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2739,9 +2739,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-           EndIf
+          
            
-           If EventGadget = #PB_fg10
+  Case #PB_fg10 :
              OpenGadgetList(1, 3)
    fg18.s = InputRequester("Modification de la date de fin garantie.", "Veuillez entrer la nouvelle date de fin de garantie du vehicule", "")
    fg19.s = "UPDATE flotte SET fing='"+fg18+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2749,9 +2749,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-            EndIf
             
-            If EventGadget = #PB_fg11
+            
+   Case #PB_fg11 :
               OpenGadgetList(1, 3)
    fg20.s = InputRequester("Modification de la date de la prochaine inspection pepe ou saaq.", "Veuillez entrer la date inspection pep ou saaq du vehicule", "")
    fg21.s = "UPDATE flotte SET nexinspq='"+fg20+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2759,9 +2759,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-             EndIf
+            
              
-             If EventGadget = #PB_fg12
+   Case #PB_fg12 :
                OpenGadgetList(1, 3)
    fg22.s = InputRequester("Modification de la date de la prochaine maintenance.", "Veuillez entrer la nouvelle date de maintenance du vehicule", "")
    fg23.s = "UPDATE flotte SET nexmai='"+fg22+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2769,9 +2769,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-              EndIf
               
-              If EventGadget = #PB_fg1
+              
+    Case #PB_fg1 :
                 OpenGadgetList(1, 3)
    fg24.s = InputRequester("Modification du # unité.", "Veuillez entrer le nouveau #unité du vehivule.", "")
    fg25.s = "UPDATE flotte SET unit='"+fg24+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2779,10 +2779,10 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-               EndIf
+              
   
   
-  If EventGadget = #PB_fg13
+  Case #PB_fg13 :
                 OpenGadgetList(1, 3)
    fg26.s = InputRequester("Modification du noms entreprise.", "Veuillez entrer le nouveau noms entreprise du vehicule.", "")
    fg27.s = "UPDATE flotte SET noment='"+fg26+"' WHERE id='"+GetGadgetText(#_a0fl)+"'"
@@ -2790,7 +2790,7 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-               EndIf
+              
   
 ;////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   
@@ -2804,7 +2804,7 @@ Case #BG_6 :
                
                
                
-             If EventGadget = #inv_0
+   Case #inv_0 :
     OpenGadgetList(1, 0)
    invw0.s = InputRequester("Modification du # piece.", "Veuillez entrer le nouveau # de piece.", "")
    invw1.s = "UPDATE inventaire SET nopiece='"+invw0+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2813,9 +2813,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     inventaire()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #inv_1
+ 
+ Case #inv_1 :
    OpenGadgetList(1, 0)
      invfg2.s = InputRequester("Modification de la description.", "Veuillez entrer la nouvelle description.", "")
    invfg3.s = "UPDATE inventaire SET description='"+invfg2+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2823,9 +2823,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     inventaire()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #inv_2
+ 
+ Case #inv_2 :
    OpenGadgetList(1, 0)
    invfg4.s = InputRequester("Modification de la quantité.", "Veuillez entrer la nouvelle quantitée.", "")
    invfg5.s = "UPDATE inventaire SET quantiter='"+invfg4+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2833,9 +2833,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
      inventaire()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #inv_3
+ 
+ Case #inv_3 :
    OpenGadgetList(1, 0)
    invfg6.s = InputRequester("Modification de la quantité à stocker.", "Veuillez entrer la nouvelle quantité à gardez en stock.", "")
    invfg7.s = "UPDATE inventaire SET quantiterstock='"+invfg6+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2843,9 +2843,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     inventaire()
     CloseGadgetList()
- EndIf
  
- If EventGadget = #inv_4
+ 
+ Case #inv_4 :
    OpenGadgetList(1, 0)
    invfg8.s = InputRequester("Modification du prix achat #1.", "Veuillez entrer le nouveau prix achat #1.", "")
    invfg9.s = "UPDATE inventaire SET buyprice1='"+invfg8+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2853,9 +2853,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
      inventaire()
     CloseGadgetList()
-       EndIf
        
-       If EventGadget = #inv_5
+       
+ Case #inv_5 :
          OpenGadgetList(1, 0)
    invfg10.s = InputRequester("Modification du fournisseur #1", "Veuillez entrer le nouveau fournisseur #1.", "")
    invfg11.s = "UPDATE inventaire SET fourn1='"+invfg10+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2863,9 +2863,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
     inventaire()
     CloseGadgetList()
-        EndIf
         
-        If EventGadget = #inv_6
+        
+   Case #inv_6 :
           OpenGadgetList(1, 0)
    invfg12.s = InputRequester("Modification du prix achat #2.", "Veuillez entrer le nouveau prix achat #2.", "")
    invfg13.s = "UPDATE inventaire SET buyprice2='"+invfg12+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2873,9 +2873,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
      inventaire()
     CloseGadgetList()
-         EndIf
          
-         If EventGadget = #inv_7
+         
+  Case #inv_7 :
            OpenGadgetList(1, 0)
    invfg14.s = InputRequester("Modification du nouveau fournisseur #2.", "Veuillez entrer le nouveau fournisseur #2.", "")
    invfg15.s = "UPDATE inventaire SET fourn2='"+invfg14+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2883,9 +2883,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
      inventaire()
     CloseGadgetList()
-          EndIf
           
-          If EventGadget = #inv_8
+          
+  Case #inv_8 :
             OpenGadgetList(1, 0)
    invfg16.s = InputRequester("Modification du nouveau prix vente.", "Veuillez entrer le nouveau prix vente.", "")
    invfg17.s = "UPDATE inventaire SET sellprice='"+invfg16+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2893,9 +2893,9 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
      inventaire()
     CloseGadgetList()
-           EndIf
+          
            
-           If EventGadget = #inv_9
+  Case #inv_9 :
              OpenGadgetList(1, 0)
    invfg18.s = InputRequester("Modification du # localization.", "Veuillez entrer le nouveau # de localization.", "")
    invfg19.s = "UPDATE inventaire SET nolocation='"+invfg18+"' WHERE id='"+GetGadgetText(#_inv2)+"'"
@@ -2903,13 +2903,13 @@ Case #BG_6 :
     FinishDatabaseQuery(#mysql)
      inventaire()
     CloseGadgetList()
-            EndIf  
+              
                
                
                
                
                
-               
+           EndSelect      
                
                
 ; ///////////////////////////////////////////////////////////////////////
@@ -2917,8 +2917,8 @@ Case #BG_6 :
    ForEver
  
 ; IDE Options = PureBasic 6.10 LTS beta 9 (Linux - x64)
-; CursorPosition = 271
-; FirstLine = 262
+; CursorPosition = 2911
+; FirstLine = 2880
 ; Folding = ----
 ; EnableXP
 ; DPIAware
