@@ -34,15 +34,18 @@
         Case #_wo6 : ;open note
             OpenGadgetList(1, 4)
            
-            DatabaseQuery (#mysql, "SELECT * FROM note WHERE notename='"+GetGadgetText(#_wo6)+"'")
+       If     DatabaseQuery (#mysql, "SELECT * FROM note WHERE notename='"+GetGadgetText(#_wo6)+"'")
             ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-       NextDatabaseRow(#mysql) 
+       
        TextGadget(#_wo12, 200, 500, 320, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#_wo12, #PB_Gadget_BackColor, $A7E3EF)
        EditorGadget(#_wo13, 200, 520, 320, 140)
        SetGadgetColor(#_wo13, #PB_Gadget_BackColor, $F3D2A8)
-   AddGadgetItem(#_wo13, -1, GetDatabaseString(#mysql, 3))
-   FinishDatabaseQuery(#mysql)
+     While  NextDatabaseRow(#mysql) 
+         AddGadgetItem(#_wo13, -1, GetDatabaseString(#mysql, 3))
+         Wend
+         FinishDatabaseQuery(#mysql)
+         EndIf
   CloseGadgetList()
  
  
@@ -64,8 +67,8 @@
     Debug "error inserting data! " + DatabaseError()
     
   EndIf
- 
-  FinishDatabaseQuery(#mysql)
+ FinishDatabaseQuery(#mysql)
+  
   
   CloseGadgetList()
     mainwo()
@@ -83,16 +86,17 @@ Case #_wo14 : ;newjobbuttonhandler
           Text201$ = InputRequester("Info job", "Veuillez entrer les information sur les travaux", "")
         
    
-     DatabaseQuery (#mysql, "SELECT * FROM job")
+ If    DatabaseQuery (#mysql, "SELECT * FROM job")
    query67.s = "INSERT INTO job (jobname, jobinfo, wo, pstatus) VALUES ('"+Text200$+"', '"+Text201$+"', '"+GetGadgetText(#_WO1202)+"', '0')"
-   
+    
   ; update the database with the literal prepared query and confirm the write
-  DatabaseQuery(#mysql, query67)
+  DatabaseUpdate(#mysql, query67)
     
     Debug "data successfully inserted."
 
  
-  FinishDatabaseQuery(#mysql)
+    FinishDatabaseQuery(#mysql)
+  EndIf
   aWOordertHandler()
   CloseGadgetList()
 
@@ -112,28 +116,7 @@ Case #_wo14 : ;newjobbuttonhandler
      
                
        query3$ = InputRequester("rapport job : "+GetGadgetText(#_w4), " Veuillez écrire le nouveau rapport", "")
-      ; query2.s = "UPDATE job SET (jobrepport)  VALUES ('"+query3+"') WHERE (wo, username, jobname) = ('"+GetGadgetText(#_WO1202)+"', '"+GetGadgetText(#_wo2)+"', '"+GetGadgetText(#_wo4)+"')"
-     ;  query2.s = "INSERT INTO job (wo, username, jobname, jobinfo, jobrepport ) VALUES ('"+GetGadgetText(#_WO1202)+"', '"+GetGadgetText(#_wo2)+"', '"+GetGadgetText(#_wo4)+"', '"+GetGadgetText(1206)+"', '"+GetGadgetText(#_wo2)+" : "+query3$+"')"
-          
-  ; update the database with the literal prepared query and confirm the write
-     
-      ; DatabaseUpdate(#mysql, query2)
     
-   
-
- ; FinishDatabaseQuery(#mysql)
-  
-; 
-
-
-
-         
-       
-         
-         
-         
-
-;Debug FormatDate("%dd %mm %yyyy %hh:%ii:%ss", Date())
 
 
 day.s = "%dd"
@@ -148,26 +131,39 @@ second.s = "%ss"
    time.s = FormatDate(""+day+"/"+month+"/"+year+"  "+hour+":"+minute+":"+second+"", Date())
     
        
-                  query12.s = "UPDATE job SET jobrepport = '"+query3$+"', punchout = '"+time+"', pstatus = '2' WHERE (jobname, wo, pstatus) = ('"+GetGadgetText(#_w4)+"', '"+GetGadgetText(#_WO1202)+"', '1')"
-         ;  query12.s = "UPDATE job SET (jobrepport, punchout) VALUES ('"+query3$+"', '"+time+"') WHERE (jobname, wo) = ('"+GetGadgetText(#_wo4)+"', '"+GetGadgetText(#_WO1202)+"')"
-  
+   
+   query12.s = "UPDATE punch SET punchout = '"+time+"', pstatus = '2' WHERE (jobname, wo, pstatus) = ('"+GetGadgetText(#_w4)+"', '"+GetGadgetText(#_WO1202)+"', '1')"
+    query12_1.s = "INSERT INTO job (username, jobname, jobinfo, jobrepport, wo, pstatus) VALUES ('"+GetGadgetText(#_wo2)+"', '"+GetGadgetText(#_w4)+"', '"+GetGadgetText(1206)+"', '"+query3$+"', '"+GetGadgetText(#_WO1202)+"', '1')"
+    
+   
   ; update the database With the literal prepared query And confirm the write
-  If DatabaseUpdate(#mysql, query12)
+    If DatabaseUpdate(#mysql, query12)
+     
     MessageRequester("job Sauvegardée", "SAVED",  #PB_MessageRequester_Info)
-    Debug "punch out "+time+" successfully inserted."
+    Debug "punch out query12 "+time+" successfully inserted."
 
   Else
     
-    Debug "error inserting data! " + DatabaseError()
+    Debug "error inserting data query 12! " + DatabaseError()
     
   EndIf
-
-  ; close the database file
-  
-  
-
   FinishDatabaseQuery(#mysql)
-  punch()
+  
+  If  DatabaseUpdate(#mysql, query12_1)
+      MessageRequester("job Sauvegardée", "SAVED",  #PB_MessageRequester_Info)
+    Debug "query12_1 successfully inserted."
+
+  Else
+    
+    Debug "error inserting data query 12_1! " + DatabaseError()
+   
+  EndIf
+  ; close the database file
+   FinishDatabaseQuery(#mysql)
+  
+
+  
+
   aWOordertHandler()
   CloseGadgetList()
 
@@ -192,7 +188,7 @@ second.s = "%ss"
     
        
      
-           query11.s = "INSERT INTO job (wo, username, punchin, jobname, pstatus) VALUES ('"+GetGadgetText(#_WO1202)+"', '"+GetGadgetText(#_wo2)+"', '"+time+"', '"+GetGadgetText(#_w4)+"', '1')"
+   query11.s = "INSERT INTO punch (wo, jobname, username, punchin, pstatus) VALUES ('"+GetGadgetText(#_WO1202)+"', '"+GetGadgetText(#_w4)+"', '"+GetGadgetText(#_wo2)+"', '"+time+"', '1')"
           
   ; update the database With the literal prepared query And confirm the write
                   
@@ -213,15 +209,14 @@ second.s = "%ss"
 
   FinishDatabaseQuery(#mysql)
   aWOordertHandler()
-  punch()
-  
+ 
   CloseGadgetList()
   
    Case  #_w4 : ;joblist
              OpenGadgetList(1, 4)
     
      
-      DatabaseQuery (#mysql, "SELECT * FROM job WHERE (wo) = ('"+GetGadgetText(#_WO1202)+"')")
+   If   DatabaseQuery (#mysql, "SELECT * FROM job WHERE (wo) = ('"+GetGadgetText(#_WO1202)+"')")
       
      
      TextGadget(1204, 200, 320, 320, 20, "Liste des rapports de travaux", #PB_Text_Border | #PB_Text_Center)
@@ -229,18 +224,19 @@ second.s = "%ss"
     ListViewGadget(1206, 200, 340, 320, 65)
    SetGadgetColor(1206, #PB_Gadget_BackColor, $9280EE)
         
-        NextDatabaseRow(#mysql)       
+  While NextDatabaseRow(#mysql)
+  
         AddGadgetItem(1206, -1, "" + GetDatabaseString(#mysql, 3))
-       
    
+   Wend
      FinishDatabaseQuery(#mysql)
+     EndIf
      
-     
-      DatabaseQuery (#mysql, "SELECT * FROM job WHERE (jobname) = ('"+GetGadgetText(#_w4)+"')")
+   If   DatabaseQuery (#mysql, "SELECT * FROM job WHERE (jobname) = ('"+GetGadgetText(#_w4)+"')")
       
       
- 
-      EditorGadget(1207, 200, 405, 320, 85) 
+ ListViewGadget(1207, 200, 405, 320, 85)
+     ; EditorGadget(1207, 200, 405, 320, 85) 
       SetGadgetColor(1207, #PB_Gadget_BackColor, $F3D2A8)
         
     While NextDatabaseRow(#mysql)  
@@ -249,13 +245,256 @@ second.s = "%ss"
     
     Wend    
          FinishDatabaseQuery(#mysql)
-   
+   EndIf
    
 punch()
     
-    CloseGadgetList()
+CloseGadgetList()
+
+
+
+Case #PB_w20 :
+  
+  OpenGadgetList(1 ,4)
+  queryw20_1$ = InputRequester("nouveau Kilometrage", "Veuillez entrer le nouveau kilometrage du vehicule", "")
+        queryw20.s = "UPDATE flotte SET km='"+queryw20_1$+"' WHERE serie='"+GetGadgetText(6054)+"'"
+  
+        ; update the database with the literal prepared query and confirm the write
+     
+   If    DatabaseUpdate(#mysql, queryw20)
+     FinishDatabaseQuery(#mysql)
+   EndIf
+        aWOordertHandler()
+       CloseGadgetList()
+  
+     Case #PB_w21 :
+       
+         OpenGadgetList(1 ,4)
+  queryw21_1$ = InputRequester("nouveau Kilometrage", "Veuillez entrer le nouveau kilometrage du vehicule", "")
+        queryw21.s = "UPDATE flotte SET hrs='"+queryw21_1$+"' WHERE serie='"+GetGadgetText(6054)+"'"
+  
+        ; update the database with the literal prepared query and confirm the write
+     
+    If   DatabaseUpdate(#mysql, queryw21)
+     FinishDatabaseQuery(#mysql)
+   EndIf
+        aWOordertHandler()
+       CloseGadgetList()
+  
+     Case #PB_w22 :
+       
+       OpenGadgetList(1 ,4)
+       day.s = "%dd"
+month.s = "%mm"
+year.s = "%yyyy"
+hour.s = "%hh"
+minute.s = "%ii"
+second.s = "%ss"
+   date2.s = FormatDate(""+day+"/"+month+"/"+year+"", Date())
+        queryw22.s = "UPDATE flotte SET date='"+date2+"' WHERE serie='"+GetGadgetText(6054)+"'"
+  
+        ; update the database with the literal prepared query and confirm the write
+     
+    If   DatabaseUpdate(#mysql, queryw22)
+     FinishDatabaseQuery(#mysql)
+   EndIf
+        aWOordertHandler()
+        CloseGadgetList()
+        
+  
+      Case #PB_w23 :
+        
+             OpenGadgetList(1 ,4)
+       day.s = "%dd"
+month.s = "%mm"
+year.s = "%yyyy"
+hour.s = "%hh"
+minute.s = "%ii"
+second.s = "%ss"
+   date3.s = FormatDate(""+day+"/"+month+"/"+year+"", Date())
+        queryw23.s = "UPDATE flotte SET nexmai='"+date3+"' WHERE serie='"+GetGadgetText(6054)+"'"
+  
+        ; update the database with the literal prepared query and confirm the write
+     
+   If    DatabaseUpdate(#mysql, queryw23)
+     FinishDatabaseQuery(#mysql)
+   EndIf
+        aWOordertHandler()
+        CloseGadgetList()
+  
+      Case #PB_w24 :
+        
+                  OpenGadgetList(1 ,4)
+       day.s = "%dd"
+month.s = "%mm"
+year.s = "%yyyy"
+hour.s = "%hh"
+minute.s = "%ii"
+second.s = "%ss"
+   date4.s = FormatDate(""+day+"/"+month+"/"+year+"", Date())
+        queryw24.s = "UPDATE flotte SET nexinspq='"+date4+"' WHERE serie='"+GetGadgetText(6054)+"'"
+  
+        ; update the database with the literal prepared query and confirm the write
+     
+     If  DatabaseUpdate(#mysql, queryw24)
+     FinishDatabaseQuery(#mysql)
+   EndIf
+        aWOordertHandler()
+        CloseGadgetList()
+        
+        
+        
+     Case #PB_w27 :
+       
+       OpenGadgetList(1 ,4)
+        queryw27_1.s = InputRequester("nouvelle quantiter", "Veuillez entrer la nouvelle quantiter", "")
+        queryw27.s = "UPDATE invwo SET quant='"+queryw27_1+"' WHERE nopic='"+GetGadgetText(#PB_w26)+"'"
+        
+        
+        If  DatabaseQuery(#mysql, "SELECT * FROM inventaire WHERE nopiece="+GetGadgetText(#PB_w26)+"", #PB_Database_DynamicCursor) 
+   FirstDatabaseRow(#mysql)
+   
+   queryw27_3.i = GetDatabaseLong(#mysql, 3)
+   FinishDatabaseQuery(#mysql)
+   
+   
+   
+  DatabaseQuery(#mysql, "SELECT * FROM invwo WHERE nopic="+GetGadgetText(#PB_w26)+"", #PB_Database_DynamicCursor) 
+  FirstDatabaseRow(#mysql)
+  result345.i = GetDatabaseLong(#mysql, 1)
+  FinishDatabaseQuery(#mysql)
+   If GetDatabaseLong(#mysql, 1) > Val(queryw27_1)
+     
+     ;+
+    DatabaseQuery(#mysql, "SELECT * FROM invwo WHERE nopic="+GetGadgetText(#PB_w26)+"", #PB_Database_DynamicCursor) 
+   FirstDatabaseRow(#mysql)
+     result345.i = GetDatabaseLong(#mysql, 1)
+     query345.i = Val(queryw27_1) + result345
+     FinishDatabaseQuery(#mysql)
+     queryw27_5.i = queryw27_3 + query345
+   Else
+     ;-
+     DatabaseQuery(#mysql, "SELECT * FROM invwo WHERE nopic="+GetGadgetText(#PB_w26)+"", #PB_Database_DynamicCursor) 
+     FirstDatabaseRow(#mysql)
+     result345 = GetDatabaseLong(#mysql, 1)
+     query345 = Val(queryw27_1) - result345
+     FinishDatabaseQuery(#mysql)
+     queryw27_5.i = queryw27_3 - query345
+     EndIf
+   
+   ;queryw27_4.i = Val(queryw27_1)
+   ;queryw27_5.i = query345 - queryw27_4
+   queryw27_2.s = "UPDATE inventaire SET quantiter='"+Str(queryw27_5)+"' WHERE nopiece='"+GetGadgetText(#PB_w26)+"'"
+   DatabaseUpdate(#mysql, queryw27_2)
+   Debug "piece inventaire successfully updated."
+   Debug result345
+   Debug query345
+    Debug queryw27_3
+    Debug queryw27_4
+    Debug queryw27_5
+    DatabaseUpdate(#mysql, queryw27)
+  Else
+    
+    Debug "error inserting data inventaire update! " + DatabaseError()
+    
+   EndIf
+        
+        
+        
+        
+        
+        
+        ; update the database With the literal prepared query And confirm the write
+     
+       
+       FinishDatabaseQuery(#mysql)
+   
+        aWOordertHandler()
+        CloseGadgetList()
+        
+        
+        
+     ; Case #PB_w28 :
+        
+   
+        
+        
+        
+     ; Case #PB_w29 :
+        
+    
+        
+     Case #PB_w30 :
+        
+        ;  DatabaseQuery(#mysql, "SELECT * FROM inventaire WHERE id='"+GetGadgetText(#PB_w32)+"'")
+        
+     If   DatabaseQuery(#mysql, "SELECT * FROM inventaire WHERE id="+GetGadgetText(#PB_w32)+"", #PB_Database_DynamicCursor) 
+        FirstDatabaseRow(#mysql)
+       quuue1.q = GetDatabaseQuad(#mysql, 1)
+       FinishDatabaseQuery(#mysql)
+       EndIf
+     If  DatabaseQuery(#mysql, "SELECT * FROM inventaire WHERE id="+GetGadgetText(#PB_w32)+"", #PB_Database_DynamicCursor) 
+        FirstDatabaseRow(#mysql)
+       quuue4.s = GetDatabaseString(#mysql, 2)
+       FinishDatabaseQuery(#mysql)
+      EndIf
+       
+            quantiter_1.s = Str(1)
+            querycase1.s = "INSERT INTO invwo (quant, nopic, descp, wo) VALUES ('"+quantiter_1+"', '"+Str(quuue1)+"', '"+quuue4+"', '"+GetGadgetText(#_WO1202)+"')"
+            
+            
+        If DatabaseUpdate(#mysql, querycase1)
+    
+    Debug "piece successfully inserted."
+
+  Else
+    
+    Debug "error inserting data! " + DatabaseError()
+   
+  EndIf
+   FinishDatabaseQuery(#mysql)
+  ;/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+            
+ If  DatabaseQuery(#mysql, "SELECT * FROM inventaire WHERE id="+GetGadgetText(#PB_w32)+"", #PB_Database_DynamicCursor) 
+   FirstDatabaseRow(#mysql)
+   
+   quantcase1_2_2.i = GetDatabaseLong(#mysql, 3)
+   FinishDatabaseQuery(#mysql)
+   
+   test.i = 1
+   qunatcase1.i = quantcase1_2_2-test
+  
+   querycase1_2.s = "UPDATE inventaire SET quantiter='"+qunatcase1+"' WHERE id='"+GetGadgetText(#PB_w32)+"'"
+   EndIf
+      ; update the database With the literal prepared query And confirm the write
+            
+   If  DatabaseUpdate(#mysql, querycase1_2)
+     Debug "piece successfully updated."
+      Debug qunatcase1
+   Else
+    
+     Debug "error  updating data! " + DatabaseError()
+    
+   EndIf
+   FinishDatabaseQuery(#mysql)               
+            
+ 
+
+  
+  
+  
+ 
+
+
+  
+
+         
+
+        
+    ;  Case #PB_w31 :
+        
 ; IDE Options = PureBasic 6.10 LTS (Windows - x64)
-; CursorPosition = 255
-; FirstLine = 219
+; CursorPosition = 386
+; FirstLine = 352
 ; EnableXP
 ; DPIAware

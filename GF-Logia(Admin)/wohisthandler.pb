@@ -63,7 +63,7 @@
         TextGadget(6050, 715, 0, 185, 20, "# série", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(6050, #PB_Gadget_BackColor, $A7E3EF)
       DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE wo='"+GetGadgetText(#_F002)+"'")
-        NextDatabaseRow(#mysql)
+        FirstDatabaseRow(#mysql)
        dataserie.w = TextGadget(6054, 715, 20, 185, 20, GetDatabaseString(#mysql, 2), #PB_Text_Border | #PB_Text_Center)
           ; SetGadgetColor(6054, #PB_Gadget_BackColor, $F3C8F3)   
              FinishDatabaseQuery(#mysql)
@@ -75,7 +75,7 @@
         TextGadget(#PB_wo7, 900, 0, 185, 20, "Année", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_wo7, #PB_Gadget_BackColor, $A7E3EF)
         DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+        FirstDatabaseRow(#mysql) 
        TextGadget(6055, 900, 20, 185, 20, GetDatabaseString(#mysql, 2), #PB_Text_Border | #PB_Text_Center)
         ;   SetGadgetColor(2500, #PB_Gadget_BackColor, $F3C8F3)
          FinishDatabaseQuery(#mysql)     
@@ -85,7 +85,7 @@
          TextGadget(#PB_wo8, 1085, 0, 185, 20, "Unitée", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_wo8, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+        FirstDatabaseRow(#mysql) 
       TextGadget(#PB_ll1, 1085, 20, 185, 20, GetDatabaseString(#mysql, 14), #PB_Text_Border | #PB_Text_Center)
        ;    SetGadgetColor(#PB_ll1, #PB_Gadget_BackColor, $F3C8F3)
          FinishDatabaseQuery(#mysql)     
@@ -94,7 +94,7 @@
               TextGadget(#PB_wo9, 530, 40, 185, 20, "Make", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_wo9, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+        FirstDatabaseRow(#mysql)  
       TextGadget(6056, 530, 60, 185, 20, GetDatabaseString(#mysql, 3), #PB_Text_Border | #PB_Text_Center)
       ;     SetGadgetColor(6056, #PB_Gadget_BackColor, $F3C8F3)
          FinishDatabaseQuery(#mysql)     
@@ -104,7 +104,7 @@
           TextGadget(#PB_w10, 715, 40, 185, 20, "Model", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w10, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+        FirstDatabaseRow(#mysql)  
        TextGadget(6057, 715, 60, 185, 20, GetDatabaseString(#mysql, 4), #PB_Text_Border | #PB_Text_Center)
       ;     SetGadgetColor(6057, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql) 
@@ -114,7 +114,7 @@
            TextGadget(#PB_w11, 900, 40, 185, 20, "KM", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w11, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+     FirstDatabaseRow(#mysql) 
        TextGadget(6058, 900, 60, 185, 20, GetDatabaseString(#mysql, 5), #PB_Text_Border | #PB_Text_Center)
        ;    SetGadgetColor(6058, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
@@ -123,7 +123,7 @@
            TextGadget(#PB_w12, 1085, 40, 185, 20, "HRS", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w12, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+      FirstDatabaseRow(#mysql)  
       TextGadget(6059, 1085, 60, 185, 20, GetDatabaseString(#mysql, 6), #PB_Text_Border | #PB_Text_Center)
        ;    SetGadgetColor(6059, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
@@ -132,7 +132,7 @@
          TextGadget(#PB_w13, 530, 80, 185, 20, "Date", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w13, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+      FirstDatabaseRow(#mysql) 
       TextGadget(6060, 530, 100, 185, 20, GetDatabaseString(#mysql, 7), #PB_Text_Border | #PB_Text_Center)
        ;    SetGadgetColor(6060, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
@@ -141,7 +141,7 @@
             TextGadget(#PB_w14, 715, 80, 185, 20, "Prochaine maintenance", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w14, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+       FirstDatabaseRow(#mysql) 
       TextGadget(6061, 715, 100, 185, 20, GetDatabaseString(#mysql, 12), #PB_Text_Border | #PB_Text_Center)
         ;   SetGadgetColor(6061, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
@@ -150,7 +150,7 @@
            TextGadget(#PB_w15, 900, 80, 185, 20, "Prochaine Insp.", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w15, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+       FirstDatabaseRow(#mysql) 
       TextGadget(6062, 900, 100, 185, 20, GetDatabaseString(#mysql, 11))
        ;    SetGadgetColor(6062, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
@@ -160,7 +160,7 @@
            TextGadget(#PB_w16, 1085, 80, 185, 20, "Mot de passe 'ECM'", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w16, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+        FirstDatabaseRow(#mysql)  
       TextGadget(6063, 1085, 100, 185, 20, GetDatabaseString(#mysql, 8), #PB_Text_Border | #PB_Text_Center)
           ; SetGadgetColor(6063, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
@@ -170,7 +170,7 @@
             TextGadget(#PB_w17, 530, 120, 185, 20, "Fin Garantie", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w17, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+        FirstDatabaseRow(#mysql) 
        TextGadget(6064, 530, 140, 185, 20, GetDatabaseString(#mysql, 10), #PB_Text_Border | #PB_Text_Center)
        ;    SetGadgetColor(6064, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
@@ -179,7 +179,7 @@
            TextGadget(#PB_w18, 715, 120, 185, 20, "Liscence", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w18, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+        FirstDatabaseRow(#mysql) 
        TextGadget(6065, 715, 140, 185, 20, GetDatabaseString(#mysql, 9), #PB_Text_Border | #PB_Text_Center)
         ;   SetGadgetColor(6065, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
@@ -189,7 +189,7 @@
            TextGadget(#PB_w19, 900, 120, 370, 20, "Noms entreprise", #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_w19, #PB_Gadget_BackColor, $A7E3EF)
        DatabaseQuery (#mysql, "SELECT * FROM flotte WHERE serie='"+GetGadgetText(6054)+"'")
-        NextDatabaseRow(#mysql) 
+        FirstDatabaseRow(#mysql) 
        TextGadget(6066, 900, 140, 370, 20, GetDatabaseString(#mysql, 13), #PB_Text_Border | #PB_Text_Center)
           ; SetGadgetColor(6066, #PB_Gadget_BackColor, $F3C8F3)
            FinishDatabaseQuery(#mysql)
@@ -214,7 +214,7 @@
            SetGadgetColor(6068, #PB_Gadget_BackColor, $A7E3EF)
       
       
-              DatabaseQuery (#mysql, "SELECT * FROM invwo WHERE wo='"+GetGadgetText(6052)+"' ORDER BY id ASC")
+           If   DatabaseQuery (#mysql, "SELECT * FROM invwo WHERE wo='"+GetGadgetText(6052)+"' ORDER BY id ASC")
              
                
                ListIconGadget(#PB_w26, 530, 240, 1280, 280, "Quantitée", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
@@ -228,7 +228,7 @@
       AddGadgetItem(#PB_w26, -1, GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3))
               Wend  
                 FinishDatabaseQuery(#mysql)
-           
+           EndIf
            TextGadget(6069, 530, 520, 750, 20, "Modification table inventaire des pièces", #PB_Text_Border | #PB_Text_Center)
            SetGadgetColor(6069, #PB_Gadget_BackColor, $A7E3EF)
  
@@ -247,8 +247,8 @@
           CloseGadgetList()
           
 
-; IDE Options = PureBasic 6.10 LTS beta 9 (Linux - x64)
-; CursorPosition = 5
-; FirstLine = 207
+; IDE Options = PureBasic 6.10 LTS (Windows - x64)
+; CursorPosition = 15
+; FirstLine = 12
 ; EnableXP
 ; DPIAware

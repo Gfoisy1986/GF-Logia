@@ -1,41 +1,61 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 6.10 LTS beta 9 (Linux - x64)">
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 6.10 LTS (Windows - x64)">
   <section name="config">
     <options closefiles="1" openmode="0" name="GF-Logia"/>
   </section>
   <section name="data">
-    <explorer view="C:/ProgramData/PureBasic/Examples/" pattern="0"/>
+    <explorer view="C:\ProgramData\PureBasic\Examples\" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2024-03-30 06:01" user="gfoisy" host="gfoisy-desktop"/>
+    <lastopen date="2024-04-01 10:35" user="foisy" host="GUI-PC"/>
   </section>
   <section name="files">
     <file name="main.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="1" panelstate="+"/>
-      <fingerprint md5="51586cd178aaf7f9a746e48e9c8c1a7b"/>
-    </file>
-    <file name="connection.cfg">
-      <config load="0" scan="0" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+"/>
-      <fingerprint md5="8c1f0237ac689b7feddb73456511643a"/>
-    </file>
-    <file name="user.cfg">
-      <config load="0" scan="0" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+"/>
-      <fingerprint md5="74cc1c60799e0a786ac7094b532f01b1"/>
+      <fingerprint md5="cca56f576e8cf49275867e08066ce975"/>
     </file>
     <file name="wohisthandler.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="2" panelstate="+"/>
-      <fingerprint md5="b52e7c896c5a9369443214d115eee9a0"/>
+      <fingerprint md5="0b964b5bd0d720fba4d15f26ac2b441d"/>
     </file>
     <file name="wohandler.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="3" panelstate="+"/>
-      <fingerprint md5="5c5fb0851b6f504116bb197559531198"/>
+      <fingerprint md5="0c9aefdfde2f95ae1791da5a0fc0cceb"/>
+    </file>
+    <file name="caseemployer.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="4" panelstate="+"/>
+      <fingerprint md5="814c96b4af7434089890b106497ad424"/>
+    </file>
+    <file name="caseclient.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="5" panelstate="+"/>
+      <fingerprint md5="44cce820428ec038252cf2e875551494"/>
+    </file>
+    <file name="caseflotte.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="6" panelstate="+"/>
+      <fingerprint md5="92e12a1f450757c99ff8e3f2e8d9b8e7"/>
+    </file>
+    <file name="caseinventaire.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="7" panelstate="+"/>
+      <fingerprint md5="bd4b0bd89483e869a01e612e891c0116"/>
+    </file>
+    <file name="casewo.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="8" panelstate="+"/>
+      <fingerprint md5="63f2d7722d39cfafd7d9a5169cbab69b"/>
+    </file>
+    <file name="connection.cfg">
+      <config load="0" scan="0" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+"/>
+      <fingerprint md5="3f2788270f71c1b923c3cee6e7de4880"/>
+    </file>
+    <file name="user.cfg">
+      <config load="0" scan="0" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+"/>
+      <fingerprint md5="c715d34197fa6ead42de60a743e3df8e"/>
     </file>
   </section>
   <section name="targets">
     <target name="Default Target" enabled="1" default="1">
       <inputfile value="main.pb"/>
-      <outputfile value="GF-Logia.sh"/>
-      <compiler version="PureBasic 6.10 LTS beta 9 (Linux - x64)"/>
+      <outputfile value="GF-Logia.exe"/>
+      <compiler version="PureBasic 6.10 LTS (Windows - x64)"/>
       <executable value="GF-Logia.exe"/>
       <options xpskin="1" dpiaware="1" debug="1" optimizer="0"/>
       <icon enable="1">picture.ico</icon>

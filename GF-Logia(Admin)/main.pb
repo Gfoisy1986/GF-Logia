@@ -5,7 +5,10 @@
 
 Enumeration
   #_60015
+  #PB_l30
   #_w2
+  #PB_w32
+  #PB_w33
   #PB_ll1
   #_wo20
   #PB_wo1
@@ -14,6 +17,7 @@ Enumeration
   #PB_wo4
   #PB_wo5
   #PB_wo6
+  #PB_6030
   #PB_wo7
   #PB_wo8
   #PB_wo9
@@ -301,10 +305,9 @@ Procedure inventaire()
            SetGadgetColor(6008, #PB_Gadget_BackColor, $A7E3EF)
       
       
-              DatabaseQuery (#mysql, "SELECT * FROM inventaire ORDER BY id ASC")
              
                
-               ListIconGadget(#_inv2, 0, 20, 1280, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+          If      ListIconGadget(#_inv2, 0, 20, 1280, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                  SetGadgetColor(#_inv2, #PB_Gadget_BackColor, $00FFFF)
              AddGadgetColumn(#_inv2, 1, "# no piece", 120)
              AddGadgetColumn(#_inv2, 2, "Description", 120)
@@ -317,13 +320,14 @@ Procedure inventaire()
              AddGadgetColumn(#_inv2, 9, "Prix vente", 120)
              AddGadgetColumn(#_inv2, 10, "# Location", 120)
          
+             DatabaseQuery (#mysql, "SELECT * FROM inventaire ORDER BY id ASC")
               While NextDatabaseRow(#mysql)
      
       AddGadgetItem(#_inv2, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10))
       
               Wend  
                 FinishDatabaseQuery(#mysql)
-                
+          EndIf      
          
 
  CloseGadgetList()
@@ -376,9 +380,9 @@ Procedure histwo()
  TextGadget(#_001, 0, 0, 200, 20," Liste Bon de travail Archivé", #PB_Text_Border | #PB_Text_Center)
  SetGadgetColor(#_001, #PB_Gadget_BackColor, $A7E3EF)
  
-   ListViewGadget(#_F002, 0, 20, 200, 90) 
+  If  ListViewGadget(#_F002, 0, 20, 200, 90) 
     
- If  DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='2' OR status='3'")
+  DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='2' OR status='3'")
   
     While NextDatabaseRow(#mysql)       
       AddGadgetItem(#_F002, -1, "" + GetDatabaseString(#mysql, 1))
@@ -442,13 +446,13 @@ Procedure compta()
  FinishDatabaseQuery(#mysql)
    
   
-    
+   
  If  DatabaseQuery (#mysql, "SELECT * FROM comptavariable WHERE id='1'")
-  
-    While NextDatabaseRow(#mysql)       
+    FirstDatabaseRow(#mysql) 
+          
       
-       ButtonGadget(4020, 0, 420, 215, 30,""+ GetDatabaseString(#mysql, 4))
-    Wend 
+      ; ButtonGadget(4020, 0, 420, 215, 30,""+GetDatabaseQuad(#mysql, 4))
+     
    FinishDatabaseQuery(#mysql)
    EndIf
    
@@ -482,10 +486,10 @@ Procedure compta()
          TextGadget(#PB_Any, 0, 0, 1280, 20, "Feuillet employé",  #PB_Text_Border | #PB_Text_Center)
       
       
-             If DatabaseQuery (#mysql, "SELECT * FROM comptable ORDER BY timestamp ASC")
+            
              
                
-            ListIconGadget(#_compta2, 0, 20, 1280, 160, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+         If    ListIconGadget(#_compta2, 0, 20, 1280, 160, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
              AddGadgetColumn(#_compta2, 1, "Date", 120)
              AddGadgetColumn(#_compta2, 2, "Description", 120)
              AddGadgetColumn(#_compta2, 3, "NO #", 120)
@@ -506,7 +510,7 @@ Procedure compta()
              
   
               
-            
+             DatabaseQuery (#mysql, "SELECT * FROM comptable ORDER BY timestamp ASC")
             
               While NextDatabaseRow(#mysql)
      
@@ -569,10 +573,10 @@ Procedure employer()
          SetGadgetColor(#_p20, #PB_Gadget_BackColor, $A7E3EF)
       
       
-             If DatabaseQuery (#mysql, "SELECT * FROM username ORDER BY username ASC")
+             
              
                
-               ListIconGadget(#_020, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+           If     ListIconGadget(#_020, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                  SetGadgetColor(#_020, #PB_Gadget_BackColor, $00FFFF)
              AddGadgetColumn(#_020, 1, "Username", 220)
              AddGadgetColumn(#_020, 2, "Nom", 220)
@@ -596,7 +600,7 @@ Procedure employer()
              
   
               
-            
+            DatabaseQuery (#mysql, "SELECT * FROM username ORDER BY username ASC")
             
               While NextDatabaseRow(#mysql)
      
@@ -662,10 +666,10 @@ Procedure Client()
          SetGadgetColor(#_pc20, #PB_Gadget_BackColor, $A7E3EF)
       
       
-       If DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
+
              
                
-         ListIconGadget(#_BCC20, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+             If   ListIconGadget(#_BCC20, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
           SetGadgetColor(#_BCC20, #PB_Gadget_BackColor, $00FFFF)
              AddGadgetColumn(#_BCC20, 1, "Noms Entreprise", 220)
              AddGadgetColumn(#_BCC20, 2, "Noms du Responsable", 220)
@@ -693,7 +697,7 @@ Procedure Client()
              
            
               
-            
+             DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
             
     While NextDatabaseRow(#mysql)
      
@@ -720,10 +724,10 @@ Procedure flotte()
   SetGadgetColor(#PB_fh, #PB_Gadget_BackColor, $A7E3EF)
   ButtonGadget(#PB_fh2, 0, 480, 200, 30, "Créer un Bon de travail")
  
-  ListViewGadget(#PB_fh1, 0, 510, 200, 140)
+ If ListViewGadget(#PB_fh1, 0, 510, 200, 140)
     SetGadgetColor(#PB_fh1, #PB_Gadget_BackColor, $F3C8F3)
-             If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY noment ASC")
-             While NextDatabaseRow(#mySql) 
+              DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY noment ASC")
+             While NextDatabaseRow(#mysql) 
                
                AddGadgetItem(#PB_fh1, -1, ""+GetDatabaseString(#mySql, 1))
                
@@ -739,9 +743,9 @@ Procedure flotte()
   ButtonGadget(#PB_fb, 220, 420, 200, 30, "Ajouté un vehicule")
  
   
-  ListViewGadget(#PB_fe, 220, 450, 200, 200)
+   If ListViewGadget(#PB_fe, 220, 450, 200, 200)
   SetGadgetColor(#PB_fe, #PB_Gadget_BackColor, $F3C8F3)
-             If DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
+            DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
              While NextDatabaseRow(#mySql) 
                
                AddGadgetItem(#PB_fe, -1, "" + GetDatabaseString(#mySql, 1))
@@ -774,13 +778,13 @@ Procedure flotte()
           TextGadget(#PB_fd, 0, 0, 1280, 20, "Feuillet de la flotte",  #PB_Text_Border | #PB_Text_Center)
        SetGadgetColor(#PB_fd, #PB_Gadget_BackColor, $A7E3EF)
       
-             If DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY serie ASC")
+              
              
                
               
               
 
-               ListIconGadget(#_a0fl, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+          If     ListIconGadget(#_a0fl, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                SetGadgetColor(#_a0fl, #PB_Gadget_BackColor, $00FFFF)
                AddGadgetColumn(#_a0fl, 1, "# Série", 220)
                AddGadgetColumn(#_a0fl, 2, "Noms Entreprise", 220)
@@ -797,7 +801,7 @@ Procedure flotte()
               AddGadgetColumn(#_a0fl, 13, "prochaine inspection pep ou saaq", 220)
               AddGadgetColumn(#_a0fl, 14, "prochaine maintenance", 220)
           
-   
+   DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY serie ASC")
                While NextDatabaseRow(#mysql)
      
        AddGadgetItem(#_a0fl, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12))
@@ -831,8 +835,8 @@ EndProcedure
  MessageRequester("Note supprimé!", "Note supprimé!",  #PB_MessageRequester_Info)
   
 
-ListViewGadget(#_1203, 225, 320, 200, 150)
-             If DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
+ If ListViewGadget(#_1203, 225, 320, 200, 150)
+             DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
              While NextDatabaseRow(#mySql) 
                
                
@@ -858,11 +862,11 @@ Procedure savenotebuttonHandler()
     query4.s = "UPDATE note SET content=('"+GetGadgetText(#_WO117)+"') WHERE (notename)=('"+GetGadgetText(#_1203)+"')"
   
   ; update the database with the literal prepared query and confirm the write
-  DatabaseUpdate(0, query4)
+  DatabaseUpdate(#mysql, query4)
     
    
 
-  FinishDatabaseQuery(0)
+  FinishDatabaseQuery(#mysql)
   
  MessageRequester("Note "+GetGadgetText(#_1203)+" Sauvegardée", "Note "+GetGadgetText(#_1203)+" Sauvegardée",  #PB_MessageRequester_Info)
   
@@ -875,11 +879,11 @@ EndProcedure
      OpenGadgetList(1, 4)
     Text100$ = InputRequester("New Note name", "Veuillez entrer le nom de la nouvelle note", "")
     
-   If  DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
+   If  DatabaseQuery (#mysql, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
    query.s = "INSERT INTO note (notename, wo, content, serie) " + "VALUES ('"+Text100$+"', '"+GetGadgetText(4500)+"', '', '"+GetGadgetText(4500)+"')"
   
   ; update the database with the literal prepared query and confirm the write
-  If DatabaseUpdate(0, query)
+  If DatabaseUpdate(#mysql, query)
     
     Debug "data successfully inserted."
 
@@ -897,8 +901,8 @@ Else
   Debug "error opening database! " + DatabaseError()
   
 EndIf
-  ListViewGadget(#_1203, 225, 320, 200, 150)
-             If DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
+If  ListViewGadget(#_1203, 225, 320, 200, 150)
+              DatabaseQuery (0, "SELECT * FROM note WHERE wo='"+GetGadgetText(4500)+"'")
              While NextDatabaseRow(#mySql) 
                
                
@@ -909,10 +913,10 @@ EndIf
               Wend 
              
    
-             
+              FinishDatabaseQuery(#mySql)
             EndIf
             TextGadget(217, 425, 200, 600, 20, "Editeur de Note", #PB_Text_Border | #PB_Text_Center)
-                     FinishDatabaseQuery(#mySql)
+                    
                  success = #True
 
      
@@ -939,10 +943,9 @@ Procedure closewindowHandler()
       TextGadget(6030, 200, 130, 320, 20, "Punch par travaux",  #PB_Text_Border | #PB_Text_Center)
       SetGadgetColor(6030, #PB_Gadget_BackColor, $A7E3EF)
       
-              DatabaseQuery(#mysql, "SELECT * FROM job WHERE (jobname) = ('"+GetGadgetText(#_w4)+"')")
-             
+         
                
-              ListIconGadget(#_punch, 200, 150, 320, 150, "name", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+           If      ListIconGadget(#_punch, 200, 150, 320, 150, "name", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
               SetGadgetColor(#_punch, #PB_Gadget_BackColor, $00FFFF)
 
              AddGadgetColumn(#_punch, 1, "jobname", 65)
@@ -951,7 +954,8 @@ Procedure closewindowHandler()
   
   
               
-            
+              DatabaseQuery(#mysql, "SELECT * FROM job WHERE (jobname) = ('"+GetGadgetText(#_w4)+"')")
+             
             
               While NextDatabaseRow(#mysql)
      
@@ -966,14 +970,14 @@ Procedure closewindowHandler()
                
         FinishDatabaseQuery(#mysql)       
              
-              
+          EndIf    
              
           
                
                
           
  
-   FinishDatabaseQuery(#mysql)
+   
     
       CloseGadgetList()
     EndProcedure
@@ -981,26 +985,26 @@ Procedure closewindowHandler()
     Procedure punch()
       OpenGadgetList(1, 4)
       
-      TextGadget(6030, 200, 130, 320, 20, "Punch par travaux",  #PB_Text_Border | #PB_Text_Center)
-      SetGadgetColor(6030, #PB_Gadget_BackColor, $A7E3EF)
+      TextGadget(#PB_6030, 200, 130, 320, 20, "Punch par travaux",  #PB_Text_Border | #PB_Text_Center)
+      SetGadgetColor(#PB_6030, #PB_Gadget_BackColor, $A7E3EF)
       
-              DatabaseQuery(#mysql, "SELECT * FROM job WHERE (jobname) = ('"+GetGadgetText(#_w4)+"')")
-             
+           
                
-              ListIconGadget(#_punch, 200, 150, 320, 150, "name", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+           If     ListIconGadget(#_punch, 200, 150, 320, 150, "name", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
               SetGadgetColor(#_punch, #PB_Gadget_BackColor, $00FFFF)
 
-             AddGadgetColumn(#_punch, 1, "jobname", 65)
-             AddGadgetColumn(#_punch, 2, "Punch in", 100)
-             AddGadgetColumn(#_punch, 3, "Punch out", 100)
+             AddGadgetColumn(#_punch, 1, "jobname", 150)
+             AddGadgetColumn(#_punch, 2, "Punch in", 150)
+             AddGadgetColumn(#_punch, 3, "Punch out", 150)
   
   
-              
+               DatabaseQuery(#mysql, "SELECT * FROM punch WHERE (jobname) = ('"+GetGadgetText(#_w4)+"')", #PB_Database_DynamicCursor)
+             
             
             
               While NextDatabaseRow(#mysql)
      
-      AddGadgetItem(#_punch, -1, GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6))
+      AddGadgetItem(#_punch, -1, GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5))
       
       
       
@@ -1011,7 +1015,7 @@ Procedure closewindowHandler()
                
         FinishDatabaseQuery(#mysql)       
              
-              
+            EndIf  
              
             ButtonGadget(#_2001, 200, 40, 320, 40,"Punch IN")
             ButtonGadget(#_2002, 200, 80, 320, 40,"Punch OUT")
@@ -1019,7 +1023,7 @@ Procedure closewindowHandler()
                
           
  
-   FinishDatabaseQuery(#mysql)
+   
     
       CloseGadgetList()
     EndProcedure
@@ -1031,9 +1035,9 @@ Procedure mainwo()
   
   TextGadget(402, 0, 0, 200, 20," Liste Bon de travail", #PB_Text_Border | #PB_Text_Center)
   SetGadgetColor(402, #PB_Gadget_BackColor, $A7E3EF)
-   ListViewGadget(#_WO1202, 0, 20, 200, 100) 
+ If  ListViewGadget(#_WO1202, 0, 20, 200, 100) 
     SetGadgetColor(#_WO1202, #PB_Gadget_BackColor, $F3C8F3)
- If  DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='1'")
+   DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
   
     While NextDatabaseRow(#mysql)       
       AddGadgetItem(#_WO1202, -1, GetDatabaseString(#mysql, 1))
@@ -1067,7 +1071,7 @@ EndProcedure
      
   Procedure aWOordertHistHandler()
     
-    IncludeFile("wohisthandler.pb")
+   ; IncludeFile("wohisthandler.pb")
 
   EndProcedure
      
@@ -1241,6 +1245,9 @@ AddGadgetItem(1, -1, "Les Notes")
       Repeat
      Event = WaitWindowEvent()
      
+   
+     
+     
      If Event = #PB_Event_Timer And EventTimer(); timer on data table
        
        
@@ -1260,13 +1267,18 @@ AddGadgetItem(1, -1, "Les Notes")
       
      
      
-     Select Event
      
-       Case #PB_Event_Gadget
-         Select EventGadget()
+     Select Event
+       Case #PB_Event_Gadget 
+        Select EventGadget()
             
-          
-  
+           
+       
+        
+        
+       
+        
+        
   IncludeFile("caseinventaire.pb")
   IncludeFile("caseemployer.pb")
   IncludeFile("caseclient.pb")
@@ -1296,34 +1308,34 @@ AddGadgetItem(1, -1, "Les Notes")
             OpenGadgetList(1, 5)
     
      
-      DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo='"+GetGadgetText(#_F002)+"'")
+    
       
      
      TextGadget(#_pb04, 680, 490, 600, 20, "Liste des rapports de travaux", #PB_Text_Border | #PB_Text_Center)
      
-    ListViewGadget(#_pb06, 680, 510, 600, 65)
+   If  ListViewGadget(#_pb06, 680, 510, 600, 65)
    
-        
-        NextDatabaseRow(#mysql)       
+         DatabaseQuery (#mysql, "SELECT * FROM job WHERE wo='"+GetGadgetText(#_F002)+"'")
+     While   NextDatabaseRow(#mysql)       
         AddGadgetItem(#_pb06, -1, "" + GetDatabaseString(#mysql, 3))
-       
+       Wend
    
      FinishDatabaseQuery(#mysql)
+     EndIf
      
-     
-      DatabaseQuery (#mysql, "SELECT * FROM job WHERE jobname='"+GetGadgetText(#_z0)+"'")
+   
       
       
- 
-    EditorGadget(#_pb12, 680, 575, 600, 85) 
-        
+  If   ListViewGadget(#_pb12, 680, 575, 600, 85)
+   ; EditorGadget(#_pb12, 680, 575, 600, 85) 
+          DatabaseQuery (#mysql, "SELECT * FROM job WHERE jobname='"+GetGadgetText(#_z0)+"'")
     While NextDatabaseRow(#mysql)  
      
       AddGadgetItem(#_pb12, -1, "" + GetDatabaseString(#mysql, 4))
     
     Wend    
          FinishDatabaseQuery(#mysql)
-   
+   EndIf
    
 
      punchhist()
@@ -1335,16 +1347,16 @@ AddGadgetItem(1, -1, "Les Notes")
         
                
                
-           EndSelect      
-               
+            
+        EndSelect       
                
 ; ///////////////////////////////////////////////////////////////////////
     EndSelect
    ForEver
  
 ; IDE Options = PureBasic 6.10 LTS (Windows - x64)
-; CursorPosition = 1258
-; FirstLine = 1177
+; CursorPosition = 1350
+; FirstLine = 1319
 ; Folding = ----
 ; EnableXP
 ; DPIAware
