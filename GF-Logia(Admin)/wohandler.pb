@@ -251,31 +251,33 @@
            
              
                
-           If      ListIconGadget(#PB_w26, 530, 240, 350, 280, "# pièce", 30, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+           If      ListIconGadget(#PB_w26, 530, 240, 350, 280, "# pièce", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                  SetGadgetColor(#PB_w26, #PB_Gadget_BackColor, $00FFFF)
                  
                  AddGadgetColumn(#PB_w26, 1, "Quantité", 60)
              AddGadgetColumn(#PB_w26, 2, "Description", 200)
             
-          DatabaseQuery (#mysql, "SELECT * FROM invwo WHERE wo='"+GetGadgetText(6052)+"' ORDER BY id ASC", #PB_Database_DynamicCursor)
+          DatabaseQuery (#mysql, "SELECT * FROM invwo WHERE wo='"+GetGadgetText(6052)+"' ORDER BY descp ASC", #PB_Database_DynamicCursor)
               While NextDatabaseRow(#mysql)
      
       AddGadgetItem(#PB_w26, -1, GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 3))
               Wend  
                 FinishDatabaseQuery(#mysql)
                 EndIf
-                
-
-                            If  ListIconGadget(#PB_w32, 880, 240, 550, 280, "id", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+                TextGadget(#PB_Any, 880, 420, 20, 20, "<",  #PB_Text_Border | #PB_Text_Center)
+                TextGadget(#PB_Any, 880, 360, 20, 20, "<",  #PB_Text_Border | #PB_Text_Center)
+                TextGadget(#PB_Any, 880, 380, 20, 20, "<",  #PB_Text_Border | #PB_Text_Center)
+TextGadget(#PB_Any, 880, 400, 20, 20, "<",  #PB_Text_Border | #PB_Text_Center)
+                            If  ListIconGadget(#PB_w32, 900, 240, 370, 280, "# Pièce", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                  SetGadgetColor(#PB_w32, #PB_Gadget_BackColor, $00FFFF)
-                 AddGadgetColumn(#PB_w32, 1, "# Pièce", 80)
-                 AddGadgetColumn(#PB_w32, 2, "Quantité", 65)
-             AddGadgetColumn(#PB_w32, 3, "Description", 220)
+                 
+                 AddGadgetColumn(#PB_w32, 1, "Quantité", 60)
+             AddGadgetColumn(#PB_w32, 2, "Description", 190)
             
-           DatabaseQuery (#mysql, "SELECT * FROM inventaire")
+           DatabaseQuery (#mysql, "SELECT * FROM inventaire ORDER BY description ASC")
               While NextDatabaseRow(#mysql)
      
-      AddGadgetItem(#PB_w32, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 2))
+      AddGadgetItem(#PB_w32, -1, GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 2))
               Wend  
                 FinishDatabaseQuery(#mysql)
                EndIf 
@@ -299,7 +301,7 @@
           CloseGadgetList()
           
 ; IDE Options = PureBasic 6.10 LTS (Windows - x64)
-; CursorPosition = 257
-; FirstLine = 241
+; CursorPosition = 276
+; FirstLine = 249
 ; EnableXP
 ; DPIAware
