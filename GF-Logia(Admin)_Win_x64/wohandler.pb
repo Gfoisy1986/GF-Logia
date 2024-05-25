@@ -251,7 +251,7 @@
            
              
                
-           If      ListIconGadget(#PB_w26, 530, 240, 350, 280, "# pièce", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+           If      ListIconGadget(#PB_w26, 530, 240, 350, 140, "# pièce", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                  SetGadgetColor(#PB_w26, #PB_Gadget_BackColor, $00FFFF)
                  
                  AddGadgetColumn(#PB_w26, 1, "Quantité", 60)
@@ -300,8 +300,8 @@ TextGadget(#PB_Any, 880, 400, 20, 20, "<",  #PB_Text_Border | #PB_Text_Center)
           
           CloseGadgetList()
           
-; IDE Options = PureBasic 6.10 LTS (Windows - x64)
-; CursorPosition = 276
-; FirstLine = 249
+; IDE Options = PureBasic 6.10 LTS (Linux - x64)
+; CursorPosition = 253
+; FirstLine = 250
 ; EnableXP
 ; DPIAware

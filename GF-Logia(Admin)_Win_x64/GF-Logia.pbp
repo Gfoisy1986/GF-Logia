@@ -1,54 +1,54 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 6.10 LTS (Windows - x64)">
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 6.10 LTS (Linux - x64)">
   <section name="config">
     <options closefiles="1" openmode="0" name="GF-Logia"/>
   </section>
   <section name="data">
-    <explorer view="C:\ProgramData\PureBasic\Examples\" pattern="0"/>
+    <explorer view="C:/ProgramData/PureBasic/Examples/" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2024-04-04 12:23" user="foisy" host="GUI-PC"/>
+    <lastopen date="2024-05-23 01:39" user="gfoisy" host="gfoisy-desktop"/>
   </section>
   <section name="files">
     <file name="main.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="1" panelstate="+"/>
-      <fingerprint md5="cca56f576e8cf49275867e08066ce975"/>
+      <fingerprint md5="639c9c4e2d63c5a5a86e8329c95190b3"/>
     </file>
     <file name="wohisthandler.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="2" panelstate="+"/>
-      <fingerprint md5="0b964b5bd0d720fba4d15f26ac2b441d"/>
+      <fingerprint md5="29cdb794f79fab0b721f0b848899064b"/>
     </file>
     <file name="wohandler.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="3" panelstate="+"/>
-      <fingerprint md5="af7454911b1de1ac827d18970184e245"/>
+      <fingerprint md5="ad9947c862a6998c23df775a90cb768b"/>
     </file>
     <file name="caseemployer.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="4" panelstate="+"/>
-      <fingerprint md5="814c96b4af7434089890b106497ad424"/>
+      <fingerprint md5="7b90d9a3d7ca7836f9eb49338b52347f"/>
     </file>
     <file name="caseclient.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="5" panelstate="+"/>
-      <fingerprint md5="44cce820428ec038252cf2e875551494"/>
+      <fingerprint md5="f307e959428ddf6b74dd29413784e507"/>
     </file>
     <file name="caseflotte.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="6" panelstate="+"/>
-      <fingerprint md5="92e12a1f450757c99ff8e3f2e8d9b8e7"/>
+      <fingerprint md5="5b04e9ea5dabe5edc7c2f002fb060e3d"/>
     </file>
     <file name="caseinventaire.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="7" panelstate="+"/>
-      <fingerprint md5="bd4b0bd89483e869a01e612e891c0116"/>
+      <fingerprint md5="72394ae7c6765f09b540270c8c0cf973"/>
     </file>
     <file name="casewo.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="8" panelstate="+"/>
-      <fingerprint md5="e2d6db6faf28f96749d145f626d4941a"/>
+      <fingerprint md5="21b4e890e655af5be496f5f376500788"/>
     </file>
     <file name="connection.cfg">
       <config load="0" scan="0" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+"/>
-      <fingerprint md5="3f2788270f71c1b923c3cee6e7de4880"/>
+      <fingerprint md5="8c1f0237ac689b7feddb73456511643a"/>
     </file>
     <file name="user.cfg">
       <config load="0" scan="0" panel="1" warn="1" lastopen="0" sortindex="999" panelstate="+"/>
-      <fingerprint md5="c715d34197fa6ead42de60a743e3df8e"/>
+      <fingerprint md5="74cc1c60799e0a786ac7094b532f01b1"/>
     </file>
   </section>
   <section name="targets">

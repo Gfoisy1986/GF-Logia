@@ -1,4 +1,4 @@
-﻿UseMySQLDatabase("libMariaDB.dll")
+﻿UseMySQLDatabase()
 
 ;Windows using MariaDB -->   UseMySQLDatabase("libMariaDB.dll")
 
@@ -1354,9 +1354,8 @@ AddGadgetItem(1, -1, "Les Notes")
     EndSelect
    ForEver
  
-; IDE Options = PureBasic 6.10 LTS (Windows - x64)
-; CursorPosition = 1350
-; FirstLine = 1319
+; IDE Options = PureBasic 6.10 LTS (Linux - x64)
+; CursorPosition = 4
 ; Folding = ----
 ; EnableXP
 ; DPIAware
