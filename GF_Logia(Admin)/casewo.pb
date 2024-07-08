@@ -220,19 +220,37 @@ TextGadget(3002, 0, 320, 200, 20, "Liste des travaux", #PB_Text_Border | #PB_Tex
            
              
                
-           If      ListIconGadget(#PB_w26, 530, 240, 350, 280, "# pièce", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+           If      ListIconGadget(#PB_w26, 530, 240, 350, 150, "# pièce", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                  SetGadgetColor(#PB_w26, #PB_Gadget_BackColor, $00FFFF)
                  
-                 AddGadgetColumn(#PB_w26, 1, "Quantité", 60)
+                 AddGadgetColumn(#PB_w26, 1, "Quantité", 150)
              AddGadgetColumn(#PB_w26, 2, "Description", 200)
-            
+           
           DatabaseQuery (#mysql, "SELECT * FROM invwo WHERE wo='"+GetGadgetText(6052)+"' ORDER BY descp ASC", #PB_Database_DynamicCursor)
               While NextDatabaseRow(#mysql)
      
       AddGadgetItem(#PB_w26, -1, GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 3))
               Wend  
                 FinishDatabaseQuery(#mysql)
-                EndIf
+              EndIf
+              
+              
+               TextGadget(3223, 530, 390, 350, 20, "#facture WO",  #PB_Text_Border | #PB_Text_Center)
+           SetGadgetColor(3223, #PB_Gadget_BackColor, $A7E3EF)
+               If      ListIconGadget(3220, 530, 410, 350, 110, "#Facture", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+                 SetGadgetColor(3220, #PB_Gadget_BackColor, $00FFFF)
+                 
+                 AddGadgetColumn(3220, 1, "$Montant", 150)
+             AddGadgetColumn(3220, 2, "Description", 200)
+           
+          DatabaseQuery (#mysql, "SELECT * FROM invwo WHERE wo='"+GetGadgetText(6052)+"' ORDER BY descp ASC", #PB_Database_DynamicCursor)
+              While NextDatabaseRow(#mysql)
+     
+      AddGadgetItem(3220, -1, GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 3))
+              Wend  
+                FinishDatabaseQuery(#mysql)
+              EndIf
+              
                 TextGadget(#PB_Any, 880, 420, 20, 20, "<",  #PB_Text_Border | #PB_Text_Center)
                 TextGadget(#PB_Any, 880, 360, 20, 20, "<",  #PB_Text_Border | #PB_Text_Center)
                 TextGadget(#PB_Any, 880, 380, 20, 20, "<",  #PB_Text_Border | #PB_Text_Center)
@@ -260,6 +278,7 @@ TextGadget(#PB_Any, 880, 400, 20, 20, "<",  #PB_Text_Border | #PB_Text_Center)
           ButtonGadget(#PB_w28, 630, 540, 100, 30, "# Pièces")
           ButtonGadget(2002, 730, 540, 100, 30, "Desc.")
           ButtonGadget(#PB_w30, 920, 540, 300, 30, "Ajouter une pièce")
+          ButtonGadget(2010, 920, 570, 300, 30, "Ajouter une facture")
           ButtonGadget(#PB_w31, 530, 570, 300, 30, "Suprrimer une pièce")
           
           
@@ -518,6 +537,7 @@ punch()
  
   CloseGadgetList()
 ; IDE Options = PureBasic 6.11 LTS (Linux - x64)
-; CursorPosition = 298
+; CursorPosition = 237
+; FirstLine = 200
 ; EnableXP
 ; DPIAware
