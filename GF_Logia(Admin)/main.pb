@@ -29,8 +29,8 @@ Enumeration
   #PB_wo9
   #PB_w10
   #PB_w11
-  #PB_w12
-  #PB_w13
+  
+  
   #PB_w14
   #PB_w15
   #PB_w16
@@ -44,9 +44,9 @@ Enumeration
   #PB_w24
   #PB_w25
   #PB_w26
-  #PB_w27
+  #Pw270
   #PB_w28
-  #PB_w29
+  #PB_b29
   #PB_w30
   #PB_w31
   #PageWO
@@ -230,6 +230,9 @@ Enumeration
     #PB_fg6
     #PB_fg7
     #PB_fg8
+    #PB_w27
+
+   
     #PB_fg9
     #PB_fg10
     #PB_fg11
@@ -263,7 +266,11 @@ Enumeration
     #PB_fh
     #inv_22
      #inv_33
-EndEnumeration
+   EndEnumeration
+   
+   
+  
+   
 
 Procedure inventaire()
   OpenGadgetList(0, 0)
@@ -325,7 +332,7 @@ Procedure Client()
  OpenGadgetList(0, 2)
   
   
-  ButtonGadget(#_BCC8501, 10, 365, 200, 20, "Ajouté un client")
+  ButtonGadget(8501, 10, 365, 200, 20, "Ajouté un client")
  
   ButtonGadget(#_BCC8521, 1070, 365, 200, 20, "Supprimé un client")
   
@@ -747,9 +754,9 @@ If OpenWindow(0, 0, 0, 1280, 720, "GF_Logia", #PB_Window_SystemMenu | #PB_Window
      EndSelect
    Until Event = #PB_Event_CloseWindow
  EndIf
-; IDE Options = PureBasic 6.11 LTS (Windows - x64)
-; CursorPosition = 636
-; FirstLine = 621
+; IDE Options = PureBasic 6.11 LTS (Linux - x64)
+; CursorPosition = 334
+; FirstLine = 326
 ; Folding = --
 ; EnableXP
 ; DPIAware
