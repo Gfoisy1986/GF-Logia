@@ -31,8 +31,7 @@ INSTALL:
 
 
 
-- Version Admin  = Cadre de l'entreprise.
-- Version User   = Mécanicien.
+
 
   
 Guillaume Foisy
