@@ -13,6 +13,7 @@ Enumeration
   #_60015
   #PB_l30
   #_w2
+  
   #PB_w32
   #PB_w33
   #PB_ll1
@@ -188,6 +189,7 @@ Enumeration
        #BC_0
     #BC_1
     #BC_2
+     #_pc21
     #BC_3
     #BC_4
     #BC_5
@@ -275,33 +277,33 @@ Enumeration
 Procedure inventaire()
   OpenGadgetList(0, 0)
   
-  ButtonGadget(#inv_22, 10, 365, 200, 30, "Ajouté une piece")
+  ButtonGadget(#inv_22, 10, 365, 200, 20, "Ajouté une piece")
   
-  ButtonGadget(#inv_33, 590, 365, 200, 30, "Supprimé une piece")
+  ButtonGadget(#inv_33, 590, 365, 200, 20, "Supprimé une piece")
    
-  TextGadget(6009, 0, 400, 1280, 20, "Modification table inventaire", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(6009, 0, 400, 800, 20, "Modification table inventaire", #PB_Text_Border | #PB_Text_Center)
    SetGadgetColor(6009, #PB_Gadget_BackColor, $A7E3EF)
  
  
-          ButtonGadget(#inv_0, 0, 425, 180, 30, "# no piece")
-          ButtonGadget(#inv_1, 190, 425, 180, 30, "Description")
-          ButtonGadget(#inv_2, 380, 425, 180, 30, "Quantité")
-          ButtonGadget(#inv_3, 570, 425, 180, 30, "Quantité à stocké")
-          ButtonGadget(#inv_4, 0, 460, 180, 30, "Prix achat #1")
-          ButtonGadget(#inv_5, 190, 460, 180, 30, "Fournisseur #1")
-          ButtonGadget(#inv_6, 380, 460, 180, 30, "Prix achat #2")
-          ButtonGadget(#inv_7, 570, 460, 180, 30, "Fournisseur #2")
-          ButtonGadget(#inv_8, 0, 495, 180, 30, "Prix vente")
-          ButtonGadget(#inv_9, 190, 495, 180, 30, "# Location")
+          ButtonGadget(#inv_0, 0, 425, 180, 20, "# no piece")
+          ButtonGadget(#inv_1, 190, 425, 180, 20, "Description")
+          ButtonGadget(#inv_2, 380, 425, 180, 20, "Quantité")
+          ButtonGadget(#inv_3, 570, 425, 180, 20, "Quantité à stocké")
+          ButtonGadget(#inv_4, 0, 460, 180, 20, "Prix achat #1")
+          ButtonGadget(#inv_5, 190, 460, 180, 20, "Fournisseur #1")
+          ButtonGadget(#inv_6, 380, 460, 180, 20, "Prix achat #2")
+          ButtonGadget(#inv_7, 570, 460, 180, 20, "Fournisseur #2")
+          ButtonGadget(#inv_8, 0, 495, 180, 20, "Prix vente")
+          ButtonGadget(#inv_9, 190, 495, 180, 20, "# Location")
           
      
-          TextGadget(6008, 0, 0, 1280, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6008, #PB_Gadget_BackColor, $A7E3EF)
+          TextGadget(6008, 0, 0, 800, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
+           SetGadgetColor(6008, #PB_Gadget_BackColor, $F7D686)
       
       
              
                
-          If      ListIconGadget(#_inv2, 0, 20, 1280, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+          If      ListIconGadget(#_inv2, 0, 20, 800, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                  SetGadgetColor(#_inv2, #PB_Gadget_BackColor, $E2DDDC)
              AddGadgetColumn(#_inv2, 1, "# no piece", 120)
              AddGadgetColumn(#_inv2, 2, "Description", 120)
@@ -332,49 +334,50 @@ Procedure Client()
  OpenGadgetList(0, 2)
   
   
-  ButtonGadget(8501, 10, 365, 200, 20, "Ajouté un client")
+  ButtonGadget(8501, 10, 230, 200, 20, "Ajouté un client")
  
-  ButtonGadget(#_BCC8521, 1070, 365, 200, 20, "Supprimé un client")
+  ButtonGadget(#_BCC8521, 580, 230, 200, 20, "Supprimé un client")
   
-  
+  TextGadget(#_pc21, 0, 260, 800, 20, "Modification feuillet client",  #PB_Text_Border | #PB_Text_Center)
+         SetGadgetColor(#_pc21, #PB_Gadget_BackColor, $A7E3EF)
   
  
-         ButtonGadget(#BC_024, 0, 400, 180, 20, "Noms entreprise")
-         ButtonGadget(#BC_24, 185, 400, 180, 20, "Noms responsable")
-         ButtonGadget(#BC_2, 370, 400, 180, 20, "E-mail propriétaire")
-         ButtonGadget(#BC_3, 555, 400, 180, 20, "E-mail responsable")
-         ButtonGadget(#BC_4, 0, 425, 180, 20, "# Fax responsable")
-         ButtonGadget(#BC_5, 185, 425, 180, 20, "# Fax entreprise")
-         ButtonGadget(#BC_66, 370, 425, 180, 20, "Prenoms propriétaire")
-         ButtonGadget(#BC_7, 555, 425, 180, 20, "Noms propriétaire")
-         ButtonGadget(#BC_8, 0, 450, 180, 20, "# Cellulaire propriétaire")
-         ButtonGadget(#BC_9, 185, 450, 180, 20, "# Cellulaire responsable")
-         ButtonGadget(#BC_10, 370, 450, 180, 20, "# Téléphone entreprise")
-         ButtonGadget(#BC_11, 555, 450, 180, 20, "# Téléphone responsable")
-         ButtonGadget(#BC_12, 0, 475, 180, 20, "Date création client")
-         ButtonGadget(#BC_13, 185, 475, 180, 20, "Addresse entreprise")
-         ButtonGadget(#BC_14, 370, 475, 180, 20, "Ville entreprise")
-         ButtonGadget(#BC_15, 555, 475, 180, 20, "Province entreprise")
-         ButtonGadget(#BC_16, 0, 500, 180, 20, "Pays entreprise")
-         ButtonGadget(#BC_17, 185, 500, 180, 20, "Code Pastal entreprise")
-         ButtonGadget(#BC_18, 370, 500, 180, 20, "Addresse propriétaire")
-         ButtonGadget(#BC_19, 555, 500, 180, 20, "Ville propriétaire")
-         ButtonGadget(#BC_20, 0, 525, 180, 20, "Province propriétaire")
-         ButtonGadget(#BC_21, 185, 525, 180, 20, "Pays propriétaire")
-         ButtonGadget(#BC_22, 370, 525, 180, 20, "Code Postal propriétaire")
-         ButtonGadget(#BC_23, 555, 525, 180, 20, "Taux horraire")
+         ButtonGadget(#BC_024, 0, 310, 180, 20, "Noms entreprise")
+         ButtonGadget(#BC_24, 185, 310, 180, 20, "Noms responsable")
+         ButtonGadget(#BC_2, 370, 310, 180, 20, "E-mail propriétaire")
+         ButtonGadget(#BC_3, 555, 310, 180, 20, "E-mail responsable")
+         ButtonGadget(#BC_4, 0, 335, 180, 20, "# Fax responsable")
+         ButtonGadget(#BC_5, 185, 335, 180, 20, "# Fax entreprise")
+         ButtonGadget(#BC_66, 370, 335, 180, 20, "Prenoms propriétaire")
+         ButtonGadget(#BC_7, 555, 335, 180, 20, "Noms propriétaire")
+         ButtonGadget(#BC_8, 0, 360, 180, 20, "# Cellulaire propriétaire")
+         ButtonGadget(#BC_9, 185, 360, 180, 20, "# Cellulaire responsable")
+         ButtonGadget(#BC_10, 370, 360, 180, 20, "# Téléphone entreprise")
+         ButtonGadget(#BC_11, 555, 360, 180, 20, "# Téléphone responsable")
+         ButtonGadget(#BC_12, 0, 390, 180, 20, "Date création client")
+         ButtonGadget(#BC_13, 185, 390, 180, 20, "Addresse entreprise")
+         ButtonGadget(#BC_14, 370, 390, 180, 20, "Ville entreprise")
+         ButtonGadget(#BC_15, 555, 390, 180, 20, "Province entreprise")
+         ButtonGadget(#BC_16, 0, 420, 180, 20, "Pays entreprise")
+         ButtonGadget(#BC_17, 185, 420, 180, 20, "Code Pastal entreprise")
+         ButtonGadget(#BC_18, 370, 420, 180, 20, "Addresse propriétaire")
+         ButtonGadget(#BC_19, 555, 420, 180, 20, "Ville propriétaire")
+         ButtonGadget(#BC_20, 0, 450, 180, 20, "Province propriétaire")
+         ButtonGadget(#BC_21, 185, 450, 180, 20, "Pays propriétaire")
+         ButtonGadget(#BC_22, 370, 450, 180, 20, "Code Postal propriétaire")
+         ButtonGadget(#BC_23, 555, 450, 180, 20, "Taux horraire")
        
    
          
          
-         TextGadget(#_pc20, 0, 0, 1280, 20, "Feuillet client",  #PB_Text_Border | #PB_Text_Center)
-         SetGadgetColor(#_pc20, #PB_Gadget_BackColor, $A7E3EF)
+         TextGadget(#_pc20, 0, 0, 800, 20, "Feuillet client",  #PB_Text_Border | #PB_Text_Center)
+         SetGadgetColor(#_pc20, #PB_Gadget_BackColor, $F7D686)
       
       
 
              
                
-             If   ListIconGadget(#_BCC20, 0, 20, 1280, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+             If   ListIconGadget(#_BCC20, 0, 20, 800, 200, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
           SetGadgetColor(#_BCC20, #PB_Gadget_BackColor, $E2DDDC)
              AddGadgetColumn(#_BCC20, 1, "Noms Entreprise", 220)
              AddGadgetColumn(#_BCC20, 2, "Noms du Responsable", 220)
@@ -421,45 +424,45 @@ EndProcedure
 Procedure employer()
   OpenGadgetList(0, 1)
   
-  ButtonGadget(850, 0, 405, 200, 20, "Ajouté un employé")
+  ButtonGadget(850, 0, 230, 200, 20, "Ajouté un employé")
  
-  ButtonGadget(852, 1060, 405, 200, 20, "Supprimé un employé")
+  ButtonGadget(852, 580, 230, 200, 20, "Supprimé un employé")
   
   
   
-  TextGadget(6007, 0, 435, 1280, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(6007, 0, 270, 800, 20, "Modification table des employés", #PB_Text_Border | #PB_Text_Center)
   SetGadgetColor(6007, #PB_Gadget_BackColor, $A7E3EF)
-         ButtonGadget(#BG_0, 0, 470, 200, 30, "Username")
-         ButtonGadget(#BG_1, 210, 470, 200, 30, "Nom propre")
-         ButtonGadget(#BG_2, 420, 470, 200, 30, "Prénom")
-         ButtonGadget(#BG_3, 630, 470, 200, 30, "Age")
-         ButtonGadget(#BG_4, 840, 470, 200, 30, "# Téléphone")
-         ButtonGadget(#BG_5, 1050, 470, 200, 30, "# Cell")
-         ButtonGadget(#BG_6, 0, 510, 200, 30, "Addresse")
-         ButtonGadget(#BG_7, 210, 510, 200, 30, "# Permis Conduire")
-         ButtonGadget(#BG_8, 420, 510, 200, 30, "# Liscence Méca")
-         ButtonGadget(#BG_9, 630, 510, 200, 30, "# Liscence P.E.P")
-         ButtonGadget(#BG_10, 840, 510, 200, 30, "# Liscence S.A.A.Q")
-         ButtonGadget(#BG_11, 1050, 510, 200, 30, "Date Naissance")
-         ButtonGadget(#BG_12, 0, 550, 200, 30, "Date Embauche")
-         ButtonGadget(#BG_13, 210, 550, 200, 30, "Ville")
-         ButtonGadget(#BG_14, 420, 550, 200, 30, "Province")
-         ButtonGadget(#BG_15, 630, 550, 200, 30, "Pays")
-         ButtonGadget(#BG_16, 840, 550, 200, 30, "Code Postal")
-         ButtonGadget(#BG_17, 1050, 550, 200, 30, "E-mail Personel")
-         ButtonGadget(#BG_18, 0, 590, 200, 30, "E-mail Job")
-         ButtonGadget(#BG_19, 210, 590, 200, 30, "Taux horraire")
+         ButtonGadget(#BG_0, 0, 310, 100, 20, "Username")
+         ButtonGadget(#BG_1, 110, 310, 100, 20, "Nom propre")
+         ButtonGadget(#BG_2, 220, 310, 100, 20, "Prénom")
+         ButtonGadget(#BG_3, 330, 310, 100, 20, "Age")
+         ButtonGadget(#BG_4, 440, 310, 100, 20, "# Téléphone")
+         ButtonGadget(#BG_5, 550, 310, 100, 20, "# Cell")
+         ButtonGadget(#BG_6, 0, 340, 100, 20, "Addresse")
+         ButtonGadget(#BG_7, 110, 340, 100, 20, "# Permis Conduire")
+         ButtonGadget(#BG_8, 220, 340, 100, 20, "# Liscence Méca")
+         ButtonGadget(#BG_9, 330, 340, 100, 20, "# Liscence P.E.P")
+         ButtonGadget(#BG_10, 440, 340, 100, 20, "# Liscence S.A.A.Q")
+         ButtonGadget(#BG_11, 550, 340, 100, 20, "Date Naissance")
+         ButtonGadget(#BG_12, 0, 370, 100, 20, "Date Embauche")
+         ButtonGadget(#BG_13, 110, 370, 100, 20, "Ville")
+         ButtonGadget(#BG_14, 220, 370, 100, 20, "Province")
+         ButtonGadget(#BG_15, 330, 370, 100, 20, "Pays")
+         ButtonGadget(#BG_16, 440, 370, 100, 20, "Code Postal")
+         ButtonGadget(#BG_17, 550, 370, 100, 20, "E-mail Personel")
+         ButtonGadget(#BG_18, 0, 400, 100, 20, "E-mail Job")
+         ButtonGadget(#BG_19, 110, 400, 100, 20, "Taux horraire")
          
          
          
-         TextGadget(#_p20, 0, 0, 1280, 20, "Feuillet employé",  #PB_Text_Border | #PB_Text_Center)
-         SetGadgetColor(#_p20, #PB_Gadget_BackColor, $A7E3EF)
+         TextGadget(#_p20, 0, 0, 800, 20, "Feuillet employé",  #PB_Text_Border | #PB_Text_Center)
+         SetGadgetColor(#_p20, #PB_Gadget_BackColor, $F7D686)
       
       
              
              
                
-           If     ListIconGadget(#_020, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+           If     ListIconGadget(#_020, 0, 20, 800, 200, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                  SetGadgetColor(#_020, #PB_Gadget_BackColor, $E2DDDC)
              AddGadgetColumn(#_020, 1, "Username", 220)
              AddGadgetColumn(#_020, 2, "Nom", 220)
@@ -507,16 +510,16 @@ EndProcedure
 Procedure flotte()
   OpenGadgetList(0, 3)
  
-  TextGadget(#PB_fa, 0, 400, 200, 20, "Menu Flotte", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(#PB_fa, 0, 230, 150, 20, "Menu Flotte", #PB_Text_Border | #PB_Text_Center)
   SetGadgetColor(#PB_fa, #PB_Gadget_BackColor, $A7E3EF)
-  ButtonGadget(#PB_fc, 0, 420, 200, 30, "Supprimé un vehicule")
+  ButtonGadget(#PB_fc, 0, 250, 150, 30, "Supprimé un vehicule")
   
   
-  TextGadget(#PB_fh, 0, 460, 200, 20, "#série | noms entreprise | unit", #PB_Text_Border | #PB_Text_Center)
+  TextGadget(#PB_fh, 0, 290, 150, 20, "#série | noms entreprise | unit", #PB_Text_Border | #PB_Text_Center)
   SetGadgetColor(#PB_fh, #PB_Gadget_BackColor, $A7E3EF)
-  ButtonGadget(#PB_fh2, 0, 480, 200, 30, "Créer un Bon de travail")
+  ButtonGadget(#PB_fh2, 0, 310, 150, 30, "Créer un Bon de travail")
  
- If ListViewGadget(#PB_fh1, 0, 510, 200, 140)
+ If ListViewGadget(#PB_fh1, 0, 340, 150, 140)
     SetGadgetColor(#PB_fh1, #PB_Gadget_BackColor, $F3C8F3)
               DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY noment ASC")
              While NextDatabaseRow(#mysql) 
@@ -529,13 +532,13 @@ Procedure flotte()
   
   
   
-            TextGadget(#PB_ff, 220, 400, 200, 20, "Ajouté par entreprise", #PB_Text_Border | #PB_Text_Center)
+            TextGadget(#PB_ff, 170, 230, 150, 20, "Ajouté par entreprise", #PB_Text_Border | #PB_Text_Center)
             SetGadgetColor(#PB_ff, #PB_Gadget_BackColor, $A7E3EF)
             
-  ButtonGadget(#PB_fb, 220, 420, 200, 30, "Ajouté un vehicule")
+  ButtonGadget(#PB_fb, 170, 250, 150, 30, "Ajouté un vehicule")
  
   
-   If ListViewGadget(#PB_fe, 220, 450, 200, 200)
+   If ListViewGadget(#PB_fe, 170, 290, 150, 200)
   SetGadgetColor(#PB_fe, #PB_Gadget_BackColor, $F3C8F3)
             DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
              While NextDatabaseRow(#mySql) 
@@ -547,19 +550,19 @@ Procedure flotte()
             EndIf
   
   
-            TextGadget(6005, 460, 400, 820, 20, "Modification table de la flotte", #PB_Text_Border | #PB_Text_Center)
+            TextGadget(6005, 340, 230, 450, 20, "Modification table de la flotte", #PB_Text_Border | #PB_Text_Center)
             SetGadgetColor(6005, #PB_Gadget_BackColor, $A7E3EF)
-         ButtonGadget(#PB_fg0, 460, 430, 200, 30, "# Série")
-         ButtonGadget(#PB_fg1, 665, 430, 200, 30, "# Unité")
-         ButtonGadget(#PB_fg2, 870, 430, 200, 30, "Annéee Vehivule")
-         ButtonGadget(#PB_fg3, 1075, 430, 200, 30, "Marque Vehicule")
-         ButtonGadget(#PB_fg4, 460, 470, 200, 30, "Model Vehicule")
-         ButtonGadget(#PB_fg5, 665, 470, 200, 30, "Kilometrage")
-         ButtonGadget(#PB_fg6, 870, 470, 200, 30, "heures")
-         ButtonGadget(#PB_fg7, 1075, 470, 200, 30, "Date Derniere maintenance")
-         ButtonGadget(#PB_fg8, 460, 510, 200, 30, "Mot de passe 'ECM'")
-         ButtonGadget(#PB_fg9, 665, 510, 200, 30, "Imatriculation")
-         ButtonGadget(#PB_fg10, 870, 510, 200, 30, "Fin garantie")
+         ButtonGadget(#PB_fg0, 340, 250, 90, 20, "# Série")
+         ButtonGadget(#PB_fg1, 340, 280, 90, 20, "# Unité")
+         ButtonGadget(#PB_fg2, 340, 310, 90, 20, "Annéee Vehivule")
+         ButtonGadget(#PB_fg3, 340, 340, 90, 20, "Marque Vehicule")
+         ButtonGadget(#PB_fg4, 440, 250, 90, 20, "Model Vehicule")
+         ButtonGadget(#PB_fg5, 440, 280, 90, 20, "Kilometrage")
+         ButtonGadget(#PB_fg6, 440, 310, 90, 20, "heures")
+         ButtonGadget(#PB_fg7, 440, 340, 90, 20, "Date Derniere maintenance")
+         ButtonGadget(#PB_fg8, 540, 250, 90, 20, "Mot de passe 'ECM'")
+         ButtonGadget(#PB_fg9, 540, 280, 90, 20, "Imatriculation")
+         ButtonGadget(#PB_fg10, 540, 310, 90, 20, "Fin garantie")
          ButtonGadget(#PB_fg11, 1075, 510, 200, 30, "Proch.insp.Pep ou Saaq")
          ButtonGadget(#PB_fg12, 460, 550, 200, 30, "Prochaine Maintenance")
          ButtonGadget(#PB_fg13, 665, 550, 200, 30, "Nom Entreprise")
@@ -567,8 +570,8 @@ Procedure flotte()
          
          
          
-          TextGadget(#PB_fd, 0, 0, 1280, 20, "Feuillet de la flotte",  #PB_Text_Border | #PB_Text_Center)
-       SetGadgetColor(#PB_fd, #PB_Gadget_BackColor, $A7E3EF)
+          TextGadget(#PB_fd, 0, 0, 800, 20, "Feuillet de la flotte",  #PB_Text_Border | #PB_Text_Center)
+       SetGadgetColor(#PB_fd, #PB_Gadget_BackColor, $F7D686)
       
               
              
@@ -576,7 +579,7 @@ Procedure flotte()
               
               
 
-          If     ListIconGadget(#_a0fl, 0, 20, 1280, 380, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+          If     ListIconGadget(#_a0fl, 0, 20, 800, 200, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
                SetGadgetColor(#_a0fl, #PB_Gadget_BackColor, $E2DDDC)
                AddGadgetColumn(#_a0fl, 1, "# Série", 220)
                AddGadgetColumn(#_a0fl, 2, "Noms Entreprise", 220)
@@ -609,21 +612,21 @@ EndProcedure
 
 
  Procedure punch()
-      OpenGadgetList(0, 4)
+      OpenGadgetList(10, 3)
       
-      TextGadget(#PB_6030, 200, 130, 320, 20, "Punch par travaux",  #PB_Text_Border | #PB_Text_Center)
+      TextGadget(#PB_6030, 0, 310, 650, 20, "Punch par travaux",  #PB_Text_Border | #PB_Text_Center)
       SetGadgetColor(#PB_6030, #PB_Gadget_BackColor, $A7E3EF)
       
            
                
-           If     ListIconGadget(#_punch, 200, 150, 320, 150, "jobname", 65, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+           If     ListIconGadget(#_punch, 0, 330, 650, 150, "jobname", 150, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
               SetGadgetColor(#_punch, #PB_Gadget_BackColor, $00FFFF)
 
              AddGadgetColumn(#_punch, 1, "Punch in", 150)
              AddGadgetColumn(#_punch, 2, "Punch out", 150)
   
   
-               DatabaseQuery(#mysql, "SELECT * FROM punch WHERE (wo, jobname) = ('"+GetGadgetText(#_WO1202)+"', '"+GetGadgetText(#_w4)+"')", #PB_Database_DynamicCursor)
+               DatabaseQuery(#mysql, "SELECT * FROM punch WHERE (wo, jobname) = ('"+GetGadgetText(#_WO1202)+"', '"+GetGadgetText(3003)+"')", #PB_Database_DynamicCursor)
              
             
             
@@ -641,9 +644,10 @@ EndProcedure
         FinishDatabaseQuery(#mysql)       
              
             EndIf  
-             TextGadget(#PB_Any, 200, 0, 320, 40, "Sélectioner un travaux en premier lieu !",  #PB_Text_Border | #PB_Text_Center)
-            ButtonGadget(#_2001, 200, 40, 320, 40,"Punch IN")
-            ButtonGadget(#_2002, 200, 80, 320, 40,"Punch OUT")
+             TextGadget(4009, 0, 190, 650, 40, "Sélectioner un travaux en premier lieu !",  #PB_Text_Border | #PB_Text_Center)
+             SetGadgetColor(4009, #PB_Gadget_BackColor, $A7E3EF)
+             ButtonGadget(#_2001, 0, 230, 650, 40,"Punch IN")
+            ButtonGadget(#_2002, 0, 270, 650, 40,"Punch OUT")
                
                
           
@@ -652,11 +656,49 @@ EndProcedure
     
       CloseGadgetList()
     EndProcedure
+    
+    
+    
+    
+    Procedure maintravaux()
+      
+      
+      OpenGadgetList(0, 4)
+      TextGadget(490, 0, 0, 800, 20," Les Travaux", #PB_Text_Border | #PB_Text_Center)
+      SetGadgetColor(490, #PB_Gadget_BackColor, $F7D686)
+ TextGadget(402, 0, 20, 150, 20," Liste Bon de travail", #PB_Text_Border | #PB_Text_Center)
+  SetGadgetColor(402, #PB_Gadget_BackColor, $A7E3EF)
+ If  ListViewGadget(#_WO1202, 0, 40, 150, 480) 
+    SetGadgetColor(#_WO1202, #PB_Gadget_BackColor, $F3C8F3)
+   DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
   
-  
+    While NextDatabaseRow(#mysql)       
+      AddGadgetItem(#_WO1202, -1, GetDatabaseString(#mysql, 1))
+      
+    Wend 
+   FinishDatabaseQuery(#mysql)
+ EndIf
+
+  PanelGadget     (10, 150, 20, 650, 500)
+      AddGadgetItem (10, -1, "Bon de travail")
+      AddGadgetItem (10, -1, "Les notes")
+      AddGadgetItem (10, -1, "Les feuille inspection")
+      AddGadgetItem (10, -1, "Les travaux")
+      AddGadgetItem (10, -1, "Inventaire 'WO'")
+     
+      
+      
+      CloseGadgetList()
+      
+    EndProcedure
+    
   
 Procedure mainwo()
   OpenGadgetList(0, 4)
+  
+ 
+  
+  
   
   TextGadget(402, 0, 0, 200, 20," Liste Bon de travail", #PB_Text_Border | #PB_Text_Center)
   SetGadgetColor(402, #PB_Gadget_BackColor, $A7E3EF)
@@ -688,14 +730,14 @@ Procedure mainwo()
   
 EndProcedure
 
-If OpenWindow(0, 0, 0, 1280, 720, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_ScreenCentered)
+If OpenWindow(0, 0, 0, 800, 560, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_ScreenCentered)
  
 
     
     ;///////////////////////////////////////////
     
     
-  PanelGadget     (0, 0, 0, 1280, 700)
+  PanelGadget     (0, 0, 0, 800, 560)
       AddGadgetItem (0, -1, "Inventaire")
       inventaire()
       AddGadgetItem (0, -1, "Info Personel")
@@ -705,7 +747,10 @@ If OpenWindow(0, 0, 0, 1280, 720, "GF_Logia", #PB_Window_SystemMenu | #PB_Window
       AddGadgetItem (0, -1, "Info Vehicules")
       flotte()
       AddGadgetItem (0, -1, "Travaux")
-      mainwo()
+      ;mainwo()
+      maintravaux()
+      CloseGadgetList()
+      OpenGadgetList(0)
       AddGadgetItem (0, -1, "Hist. Travaux")
       AddGadgetItem (0, -1, "Facturation")
       AddGadgetItem (0, -1, "Hist. Facturation")
@@ -737,7 +782,8 @@ If OpenWindow(0, 0, 0, 1280, 720, "GF_Logia", #PB_Window_SystemMenu | #PB_Window
              IncludeFile "caseclient.pb"
              IncludeFile "caseemployer.pb"
              IncludeFile "caseflotte.pb"
-             IncludeFile "casewo.pb"
+             ;IncludeFile "casewo.pb"
+             IncludeFile "newwocase.pb"
              
              
            Case #inv_22 : Debug "Button 1 clicked!"
@@ -754,9 +800,9 @@ If OpenWindow(0, 0, 0, 1280, 720, "GF_Logia", #PB_Window_SystemMenu | #PB_Window
      EndSelect
    Until Event = #PB_Event_CloseWindow
  EndIf
-; IDE Options = PureBasic 6.11 LTS (Linux - x64)
-; CursorPosition = 334
-; FirstLine = 326
+; IDE Options = PureBasic 5.73 LTS (Windows - x86)
+; CursorPosition = 300
+; FirstLine = 276
 ; Folding = --
 ; EnableXP
 ; DPIAware

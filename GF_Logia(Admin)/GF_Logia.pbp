@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project xmlns="http://www.purebasic.com/namespace" version="1.0" creator="PureBasic 5.73 LTS (Windows - x86)">
+  <section name="config">
+    <options closefiles="1" openmode="0" name="GF_Logia"/>
+  </section>
+  <section name="data">
+    <explorer view="C:\Documents and Settings\All Users\Application Data\PureBasic\Examples\" pattern="0"/>
+    <log show="1"/>
+    <lastopen date="2024-08-10 16:39" user="Guillaume Foisy" host="MAISON-C256B815"/>
+  </section>
+  <section name="files">
+    <file name="caseclient.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0" panelstate="+"/>
+      <fingerprint md5="07733cc52904f694af64f7046534abc0"/>
+    </file>
+    <file name="caseemployer.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0" panelstate="+"/>
+      <fingerprint md5="ee4b0b9ba18f46d2075285bc42a10ba3"/>
+    </file>
+    <file name="caseflotte.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0" panelstate="+"/>
+      <fingerprint md5="1bbbf40f7fc42a4faf811c1c03ab9143"/>
+    </file>
+    <file name="caseinventaire.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="0" panelstate="+"/>
+      <fingerprint md5="bea950c4e4e36d737d21ac7c450d429b"/>
+    </file>
+    <file name="casewo.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="9ab3b74fc2f8b5c4714cd012f50e30ee"/>
+    </file>
+    <file name="GF_Logia.pbp">
+      <config load="0" scan="0" panel="1" warn="1" lastopen="0" panelstate="+"/>
+      <fingerprint md5="91b5fc9dee61096fd87219766460015b"/>
+    </file>
+    <file name="main.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="a4131b404676d4fe64894ea49c65b564"/>
+    </file>
+    <file name="newwocase.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="c9b5ad60e2d2244112b5d202c33b64fb"/>
+    </file>
+  </section>
+  <section name="targets">
+    <target name="Default Target" enabled="1" default="1">
+      <inputfile value="main.pb"/>
+      <outputfile value="GF_Logia.run.exe"/>
+      <compiler version="PureBasic 5.73 LTS (Windows - x86)"/>
+      <executable value="GF_Logia.run.exe"/>
+      <options thread="1" xpskin="1" debug="1"/>
+      <format exe="default" cpu="2"/>
+    </target>
+  </section>
+</project>
