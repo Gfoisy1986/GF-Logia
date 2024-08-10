@@ -13,7 +13,7 @@ SQLite comme base de donnée.
 
 
 Version prevue pour la release: 
-- Need MMX instruction set!  (Test on Pentium 2 mmx 266mhz running Win XP_32bits! with 425mo ram!)
+- Need MMX instruction set!  (Test Win XP_32bits! sp1 --> (IBM ThinkPad 770ED Pentium II MMX 266mhz 425mo RAM 4mo gpu)) --> Purebasic 5.73
 - Windows XP and 7 x86 32bits (En *V_1.0*) 
 - Windows 10 and 11 x64 et Linux_X64 (En *V_1.0*) 
 - aucune date n'est déterminer pour la premiere release!
