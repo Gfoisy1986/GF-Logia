@@ -13,8 +13,8 @@ SQLite comme base de donnée.
 
 
 Version prevue pour la release: 
-- Need MMX instruction set!  (Test Win XP_32bits! sp1 --> (IBM ThinkPad 770ED Pentium II MMX 266mhz 425mo RAM 4mo gpu)) --> Purebasic 5.73
-- Windows XP and 7 x86 32bits (En *V_1.0*) 
+- Need MMX instruction set!  (Test Win XP_32bits! sp1 --> (IBM ThinkPad 770ED Pentium II MMX 266mhz 425mo RAM 4mo gpu 1024x768)) --> Purebasic 5.73
+- Windows XP and 7 x86 32bits (En *V_1.0*) Résolution 800x600 minimum.
 - Windows 10 and 11 x64 et Linux_X64 (En *V_1.0*) 
 - aucune date n'est déterminer pour la premiere release!
 - une version (RPI 64 bits only) est envisagé!
