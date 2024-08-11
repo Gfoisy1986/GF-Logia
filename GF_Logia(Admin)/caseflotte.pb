@@ -39,7 +39,7 @@
            
              FinishDatabaseQuery(#mysql)
              
-        Flotte()
+        flotte()
         CloseGadgetList()    
         
         
@@ -191,7 +191,8 @@
     FinishDatabaseQuery(#mysql)
     flotte()
     CloseGadgetList()
-; IDE Options = PureBasic 6.11 LTS (Linux - x64)
-; CursorPosition = 1
+; IDE Options = PureBasic 5.73 LTS (Windows - x86)
+; CursorPosition = 41
+; FirstLine = 27
 ; EnableXP
 ; DPIAware

@@ -7,11 +7,11 @@
   <section name="data">
     <explorer view="C:\Documents and Settings\All Users\Application Data\PureBasic\Examples\" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2024-08-10 16:39" user="Guillaume Foisy" host="MAISON-C256B815"/>
+    <lastopen date="2024-08-11 09:18" user="Guillaume Foisy" host="MAISON-C256B815"/>
   </section>
   <section name="files">
     <file name="caseclient.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="0" panelstate="+"/>
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
       <fingerprint md5="07733cc52904f694af64f7046534abc0"/>
     </file>
     <file name="caseemployer.pb">
@@ -19,8 +19,8 @@
       <fingerprint md5="ee4b0b9ba18f46d2075285bc42a10ba3"/>
     </file>
     <file name="caseflotte.pb">
-      <config load="0" scan="1" panel="1" warn="1" lastopen="0" panelstate="+"/>
-      <fingerprint md5="1bbbf40f7fc42a4faf811c1c03ab9143"/>
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
+      <fingerprint md5="93f3b0ff8a1f19241fb24c30072a71b7"/>
     </file>
     <file name="caseinventaire.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="0" panelstate="+"/>
@@ -32,15 +32,15 @@
     </file>
     <file name="GF_Logia.pbp">
       <config load="0" scan="0" panel="1" warn="1" lastopen="0" panelstate="+"/>
-      <fingerprint md5="91b5fc9dee61096fd87219766460015b"/>
+      <fingerprint md5="385ca36d207fd930fe8b81a994837ae2"/>
     </file>
     <file name="main.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="a4131b404676d4fe64894ea49c65b564"/>
+      <fingerprint md5="c90e859fa935fec09cc7dc503849c5c6"/>
     </file>
     <file name="newwocase.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" panelstate="+"/>
-      <fingerprint md5="c9b5ad60e2d2244112b5d202c33b64fb"/>
+      <fingerprint md5="cc1be9d844e7c184c3d11e9a7b0456b5"/>
     </file>
   </section>
   <section name="targets">

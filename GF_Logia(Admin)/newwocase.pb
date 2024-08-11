@@ -225,7 +225,8 @@ TextGadget(3002, 0, 0, 150, 20, "Liste des travaux", #PB_Text_Border | #PB_Text_
           ButtonGadget(#PB_w23, 300, 180, 150, 30, "Prochaine maintenance")
           ButtonGadget(#PB_w24, 450, 180, 150, 30, "Prochaine Inspection")
           
-         
+          
+              
           CloseGadgetList()
           ;////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
           OpenGadgetList(10, 4)
@@ -465,8 +466,52 @@ If  ListViewGadget(3006, 0, 20, 150, 85)
  EndIf
  
  
- 
- 
+Case #PB_w20 :
+    OpenGadgetList(10, 0)
+   fg_20.s = InputRequester("Modification du kilometrage", "Veuillez entrer le kilometrage du vehicule.", "")
+   fg_25.s = "UPDATE flotte SET km='"+fg_20+"' WHERE serie='"+GetGadgetText(6054)+"'"
+   DatabaseUpdate(#mysql, fg_25)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+  
+Case #PB_w21 :
+   OpenGadgetList(10, 0)
+   fg_20.s = InputRequester("Modification des heures", "Veuillez entrer les heures du vehicule.", "")
+   fg_25.s = "UPDATE flotte SET hrs='"+fg_20+"' WHERE serie='"+GetGadgetText(6054)+"'"
+   DatabaseUpdate(#mysql, fg_25)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+  
+Case #PB_w22 :
+   OpenGadgetList(10, 0)
+   fg_20.s = InputRequester("Modification de la date", "Veuillez entrer la nouvelle date des travaux.", "")
+   fg_25.s = "UPDATE flotte SET date='"+fg_20+"' WHERE serie='"+GetGadgetText(6054)+"'"
+   DatabaseUpdate(#mysql, fg_25)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+  
+Case #PB_w23 :
+   OpenGadgetList(10, 0)
+   fg_20.s = InputRequester("Modification date inspection", "Veuillez entrer la  prochaine date inspection du vehicule.", "")
+   fg_25.s = "UPDATE flotte SET nexinspq='"+fg_20+"' WHERE serie='"+GetGadgetText(6054)+"'"
+   DatabaseUpdate(#mysql, fg_25)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+  
+Case #PB_w24 :
+   OpenGadgetList(10, 0)
+   fg_20.s = InputRequester("Modification date maintenance", "Veuillez entrer la prochaine date de maintenace du vehicule.", "")
+   fg_25.s = "UPDATE flotte SET nextmai='"+fg_20+"' WHERE serie='"+GetGadgetText(6054)+"'"
+   DatabaseUpdate(#mysql, fg_25)
+    FinishDatabaseQuery(#mysql)
+    flotte()
+    CloseGadgetList()
+  
+   
  
          
    ;ButtonGadget(#_402, 530, 620, 740, 40, "Fermer WO >> Facturation !")
@@ -478,6 +523,6 @@ If  ListViewGadget(3006, 0, 20, 150, 85)
        ;punch()
       
 ; IDE Options = PureBasic 5.73 LTS (Windows - x86)
-; CursorPosition = 232
-; FirstLine = 220
+; CursorPosition = 228
+; FirstLine = 213
 ; EnableXP

@@ -298,7 +298,7 @@ Procedure inventaire()
           
      
           TextGadget(6008, 0, 0, 800, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6008, #PB_Gadget_BackColor, $F7D686)
+           SetGadgetColor(6008, #PB_Gadget_BackColor, $2ABFDB)
       
       
              
@@ -371,7 +371,7 @@ Procedure Client()
          
          
          TextGadget(#_pc20, 0, 0, 800, 20, "Feuillet client",  #PB_Text_Border | #PB_Text_Center)
-         SetGadgetColor(#_pc20, #PB_Gadget_BackColor, $F7D686)
+         SetGadgetColor(#_pc20, #PB_Gadget_BackColor, $2ABFDB)
       
       
 
@@ -456,7 +456,7 @@ Procedure employer()
          
          
          TextGadget(#_p20, 0, 0, 800, 20, "Feuillet employé",  #PB_Text_Border | #PB_Text_Center)
-         SetGadgetColor(#_p20, #PB_Gadget_BackColor, $F7D686)
+         SetGadgetColor(#_p20, #PB_Gadget_BackColor, $2ABFDB)
       
       
              
@@ -571,7 +571,7 @@ Procedure flotte()
          
          
           TextGadget(#PB_fd, 0, 0, 800, 20, "Feuillet de la flotte",  #PB_Text_Border | #PB_Text_Center)
-       SetGadgetColor(#PB_fd, #PB_Gadget_BackColor, $F7D686)
+       SetGadgetColor(#PB_fd, #PB_Gadget_BackColor, $2ABFDB)
       
               
              
@@ -665,7 +665,7 @@ EndProcedure
       
       OpenGadgetList(0, 4)
       TextGadget(490, 0, 0, 800, 20," Les Travaux", #PB_Text_Border | #PB_Text_Center)
-      SetGadgetColor(490, #PB_Gadget_BackColor, $F7D686)
+      SetGadgetColor(490, #PB_Gadget_BackColor, $2ABFDB)
  TextGadget(402, 0, 20, 150, 20," Liste Bon de travail", #PB_Text_Border | #PB_Text_Center)
   SetGadgetColor(402, #PB_Gadget_BackColor, $A7E3EF)
  If  ListViewGadget(#_WO1202, 0, 40, 150, 480) 
@@ -801,8 +801,8 @@ If OpenWindow(0, 0, 0, 800, 560, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_
    Until Event = #PB_Event_CloseWindow
  EndIf
 ; IDE Options = PureBasic 5.73 LTS (Windows - x86)
-; CursorPosition = 300
-; FirstLine = 276
+; CursorPosition = 667
+; FirstLine = 662
 ; Folding = --
 ; EnableXP
 ; DPIAware
