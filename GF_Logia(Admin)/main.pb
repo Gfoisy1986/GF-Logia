@@ -800,9 +800,9 @@ If OpenWindow(0, 0, 0, 800, 560, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_
      EndSelect
    Until Event = #PB_Event_CloseWindow
  EndIf
-; IDE Options = PureBasic 5.73 LTS (Windows - x86)
-; CursorPosition = 667
-; FirstLine = 662
+; IDE Options = PureBasic 6.12 LTS (Linux - x64)
+; CursorPosition = 766
+; FirstLine = 752
 ; Folding = --
 ; EnableXP
 ; DPIAware
