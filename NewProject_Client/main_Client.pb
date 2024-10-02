@@ -1,21 +1,22 @@
 ﻿
 Port = 6832
+ *Buffer = AllocateMemory(1000)
 
-
+ *data = AllocateMemory(1000)
+  *test =  AllocateMemory(2200)
  ConnectionID = OpenNetworkConnection("127.0.0.1", Port)
 
    
 If ConnectionID
 OpenWindow(40, 0, 0, 800, 560, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_ScreenCentered)
-  ButtonGadget(100, 0, 0, 150, 30, "Exit") 
+ButtonGadget(100, 0, 0, 150, 30, "Exit") 
+ButtonGadget(101, 200, 40, 150, 30, "update") 
   ButtonGadget(102, 200, 0, 150, 30, "Data change")
   Debug "Connected!"
 
-   ; SendNetworkString(ConnectionID, "Hello From Gui !", #PB_UTF8)
+    ;SendNetworkString(ConnectionID, "Hello From Gui !", #PB_UTF8)
   ListViewGadget(137, 0, 30, 200, 300,  #PB_ListView_ClickSelect) 
    SetGadgetColor(137, #PB_Gadget_BackColor, $F3C8F3)
- 
-
 
 
    
@@ -29,22 +30,26 @@ Select Network
 
     
     
+  Case #PB_NetworkEvent_Data 
+   *Buffer = AllocateMemory(1000)
+  
+ 
+ 
+  
+If ReceiveNetworkData(ConnectionID, *Buffer, 1000)
+           
+                 AddGadgetItem(137, -1, PeekS(*Buffer, 1000, #PB_UTF8))
+         
+           Debug PeekS(*Buffer, 1000, #PB_UTF8)
+     EndIf 
+       FreeMemory(*Buffer)
+
+ 
+  
+
+
+
     
-           Case #PB_NetworkEvent_Data 
-                *data2 = AllocateMemory(2000)
-If ReceiveNetworkData(ConnectionID, *data2, 2000)
-   
- AddGadgetItem(137, -1, PeekS(*data2, 2000, #PB_UTF8))
-
-    Debug PeekS(*data2, 2000, #PB_UTF8)
-    ReAllocateMemory(*data2, 2000)
-  
-  
-  EndIf
-FreeMemory(*data2)
-
-
-       
  EndSelect
  
  
@@ -57,23 +62,47 @@ FreeMemory(*data2)
              
              
            Case 100 : End
+             
+              Case 101 :
+              
+          
+   
+  
+      
+     
+     
+      
+       PokeS(*test, "world", 2200, #PB_UTF8)
+       SendNetworkData(ConnectionID, *test, 2200)
+       
+       
+       invfg14$ = InputRequester("Modification du nouveau fournisseur #2.", "Veuillez entrer le nouveau fournisseur #2.", "")
+        Debug invfg14$
+       PokeS(*test, invfg14$, 1000, #PB_UTF8)
+      
+       SendNetworkData(ConnectionID, *test, 2200)
+        SendNetworkData(ConnectionID, *test, 1000)
+      ClearGadgetItems(137)
+ 
+
+   
+  
+    
+             
+             
            Case 102 : 
              
+
              
-             ClearGadgetItems(137)
           
 
-   *data3 = AllocateMemory(3000)
-      string3$ = "update Data2"
-      Debug string3$
+        string3$ = "test"
+       Debug string3$
       
-       PokeS(*data3, string3$, 3000, #PB_UTF8)
-       SendNetworkData(ConnectionID, *data3, 3000)
-       FreeMemory(*data3)
-        *data4 = AllocateMemory(4000)
-    ReceiveNetworkData(ConnectionID, *data4, 4000)
-   Debug PeekS(*data4, 4000, #PB_UTF8)
-    FreeMemory(*data4)
+         PokeS(*test, string3$, 2200, #PB_UTF8)
+         SendNetworkData(ConnectionID, *test, 2200)
+      ClearGadgetItems(137)
+     
              
          EndSelect
        
@@ -88,7 +117,6 @@ FreeMemory(*data2)
      
  ForEver
    
- 
 EndIf
 
  
@@ -110,8 +138,8 @@ EndIf
      
        
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
-; CursorPosition = 74
-; FirstLine = 64
+; CursorPosition = 103
+; FirstLine = 90
 ; EnableThread
 ; EnableXP
 ; DPIAware
