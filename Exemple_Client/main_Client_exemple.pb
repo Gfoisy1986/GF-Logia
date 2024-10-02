@@ -139,7 +139,6 @@ EndIf
        
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; CursorPosition = 103
-; FirstLine = 90
 ; EnableThread
 ; EnableXP
 ; DPIAware
