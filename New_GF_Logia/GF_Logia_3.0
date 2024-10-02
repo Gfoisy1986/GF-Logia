@@ -8,9 +8,18 @@
   <section name="data">
     <explorer view="../NewProject_Server/" pattern="0"/>
     <log show="1"/>
-    <lastopen date="2024-10-02 06:44" user="gfoisy" host="Gui-FX"/>
+    <lastopen date="2024-10-02 06:48" user="gfoisy" host="Gui-FX"/>
   </section>
-  <section name="files"/>
+  <section name="files">
+    <file name="main_Client_exemple.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="1" panelstate="+"/>
+      <fingerprint md5="6b673170f709f90e60dd7589415cd0cc"/>
+    </file>
+    <file name="Main_Server_Exemple.pb">
+      <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="2" panelstate="+"/>
+      <fingerprint md5="12467656b4154b8354b765f2491a5193"/>
+    </file>
+  </section>
   <section name="targets">
     <target name="Default Target" enabled="1" default="1">
       <inputfile value=""/>
