@@ -185,10 +185,10 @@ Debug "Console Launch!"
 End
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 130
+; CursorPosition = 135
 ; FirstLine = 135
 ; Folding = -
 ; EnableXP
 ; DPIAware
-; UseMainFile = main_server.pb
+; UseMainFile = Main_Server_Exemple.pb
 ; Executable = server.run

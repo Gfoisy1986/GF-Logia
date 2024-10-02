@@ -139,9 +139,11 @@ EndIf
        
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; CursorPosition = 103
+; FirstLine = 80
 ; EnableThread
 ; EnableXP
 ; DPIAware
+; UseMainFile = main_Client_exemple.pb
 ; Executable = client.run
 ; Compiler = PureBasic 6.12 LTS (Linux - x64)
 ; EnablePurifier
