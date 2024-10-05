@@ -1,5 +1,0 @@
-*.exe
-Thumbs.db
-__debug_bin
-
-/Fuzzing/reports
