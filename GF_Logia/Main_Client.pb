@@ -856,46 +856,43 @@ Select Network
  
    
  
-   *Buffer = AllocateMemory(1000)
+   
    OpenGadgetList(0, 11)
    
-If ReceiveNetworkData(ConnectionID, *Buffer, 1000)
-                
-                 AddGadgetItem(#PB_137, -1, PeekS(*Buffer, 1000, #PB_UTF8))
-         
-           Debug PeekS(*Buffer, 1000, #PB_UTF8)
-        
-        
-         
-         
 
+         
+*Frost = AllocateMemory(1100)
+       ReceiveNetworkData(ConnectionID, *Frost, 1100)
+       
+            If PeekS(*Frost, 1100, #PB_UTF8) = "elie"
+             ClearGadgetItems(#PB_137)
+             
+        
+              ReAllocateMemory(*Frost, 1100)
+        
+         
+         
+         
+           ElseIf PeekS(*Frost, 1100, #PB_UTF8)
+       
+             AddGadgetItem(#PB_137, -1, PeekS(*Frost, 1100, #PB_UTF8))
+         
+           Debug PeekS(*Frost, 1100, #PB_UTF8)
+         ReAllocateMemory(*Frost, 1100)
+      
+         EndIf  
+        
+          
+            
+           
        
        
               
         
         
-        
-         EndIf
+           
+           
 
-     
-       
-If PeekS(*Buffer, 1000, #PB_UTF8) = "Frost"
-             AddGadgetItem(#PB_137, -1, PeekS(*Buffer, 1000, #PB_UTF8))
-         
-           Debug PeekS(*Buffer, 1000, #PB_UTF8)
-        
-        
-         
-         
-
-       
-       
-              
-        
-        
-           FreeMemory(*Buffer)
-           EndIf
-         
 CloseGadgetList()
  
   
@@ -955,7 +952,7 @@ CloseGadgetList()
          PokeS(*test, string3$, 2200, #PB_UTF8)
          SendNetworkData(ConnectionID, *test, 2200)
          
-      ClearGadgetItems(#PB_137)
+      ;ClearGadgetItems(#PB_137)
      CloseGadgetList()
              
          EndSelect
@@ -977,12 +974,13 @@ CloseGadgetList()
   
      
 EndIf
-; IDE Options = PureBasic 5.73 LTS (Windows - x86)
-; CursorPosition = 793
-; FirstLine = 773
+; IDE Options = PureBasic 5.73 LTS (Linux - x64)
+; CursorPosition = 880
+; FirstLine = 858
 ; Folding = --
+; EnableThread
 ; EnableXP
 ; DPIAware
-; Executable = Client.exe
+; Executable = Client_x64.run
 ; CPU = 2
-; Compiler = PureBasic 5.73 LTS (Windows - x86)
+; Compiler = PureBasic 5.73 LTS (Linux - x64)
