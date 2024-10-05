@@ -6,18 +6,18 @@
     <comment>Application Client et Serveur!</comment>
   </section>
   <section name="data">
-    <explorer view="../NewProject_Server/" pattern="0"/>
+    <explorer view="" pattern="8"/>
     <log show="1"/>
-    <lastopen date="2024-10-02 07:30" user="gfoisy" host="Gui-FX"/>
+    <lastopen date="2024-10-02 20:41" user="gfoisy" host="Gui-FX"/>
   </section>
   <section name="files">
     <file name="Main_Client.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="1" panelstate="+"/>
-      <fingerprint md5="33c4fd0a5719c8eeb4869b248439b3da"/>
+      <fingerprint md5="8260277a3e7816be25a72f1e461eaa06"/>
     </file>
     <file name="Main_Serveur.pb">
       <config load="0" scan="1" panel="1" warn="1" lastopen="1" sortindex="2" panelstate="+"/>
-      <fingerprint md5="37fdbf22cc20771444db2bd9f5ef43f4"/>
+      <fingerprint md5="5ac3481478e65034cedc46be71aa9a6e"/>
     </file>
   </section>
   <section name="targets">
@@ -26,15 +26,15 @@
       <outputfile value="Client.run"/>
       <compiler version="PureBasic 6.12 LTS (Linux - x64)"/>
       <executable value="Client.run"/>
-      <options thread="1" xpskin="1" dpiaware="1" debug="1" optimizer="0"/>
+      <options thread="1" xpskin="1" debug="1" optimizer="0"/>
       <purifier enable="1"/>
     </target>
     <target name="Linux_X64_Serveur" enabled="1" default="1">
       <inputfile value="Main_Serveur.pb"/>
       <outputfile value="Serveur.run"/>
       <compiler version="PureBasic 6.12 LTS (Linux - x64)"/>
-      <executable value="Serveur.run"/>
-      <options thread="1" xpskin="1" dpiaware="1" debug="1" optimizer="0"/>
+      <executable value="Client.run"/>
+      <options thread="1" xpskin="1" debug="1" optimizer="0"/>
       <purifier enable="1"/>
     </target>
   </section>

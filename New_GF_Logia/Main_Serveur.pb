@@ -4,6 +4,9 @@
     Debug "Connected to myDatabase.sqlite3"
   EndIf
   
+                    
+  
+  
   ;_____________________________________________________________________________________________________________________________
   ;Variable
   
@@ -12,50 +15,86 @@
 *data = AllocateMemory(1000)
 *test = AllocateMemory(2200)
 *Buffer = AllocateMemory(1000)
-  
-  
-  
-  
+*Frost = AllocateMemory(1000)
+ 
   
   
   ;---------------------------------------------------------------------------------------------------------------------------------
   ;Enumeration
   
   
+    
+
+  ;==============================================================================================================================
+  ;Structure
   
   
+      Structure Client
+    Id.s
+    ; Add other fields as necessary
+EndStructure
   
   
-  
-  
-  
-  
-  ;-----------------------------------------------------------------------------------------------------------------------------------
+
+ ;--------------------------------------------------------------------------------------------------------------------------   
+   ;List:
+
+
+
+   ;-----------------------------------------------------------------------------------------------------------------------------------
   ;Start Procedure
+
   
   
-   Procedure Data2()
-     ClientID = EventClient()
-    *Buffer = AllocateMemory(1000)
+Procedure Data2()
+  
+ 
+ 
+ClientID = EventClient()
+     *Buffer = AllocateMemory(1000)
+     *Frost = AllocateMemory(1000)
+     
     DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
     While NextDatabaseRow(90)
        string7$ = GetDatabaseString(90, 1)
        PokeS(*Buffer, string7$, 1000, #PB_UTF8)
-      SendNetworkData(ClientID, *Buffer, 1000)
+       
+         SendNetworkData(ClientID, *Buffer, 1000)
+
       Debug string7$
       PrintN (string7$)
       ReAllocateMemory(*Buffer, 1000)
-     Wend  
+    Wend  
+     
+    
      FinishDatabaseQuery(90)
    EndProcedure
   
-  
-  
-  
-  
-  
-  
-  
+ 
+ 
+   Procedure AddClient()
+   NewList Clients.Client() ; The list for storing the elements
+    ; Add a new client directly to the list
+    If Not AllocateStructure(Client) ; Ensure allocation is done for the new element
+        MessageRequester("Error!", "Unable to allocate memory for new element", #PB_MessageRequester_Ok)
+        ProcedureReturn
+    EndIf
+
+    AddElement(Clients())  ; Add a new element to the list
+    Clients()\Id = Str(EventClient())  ; Assign the ID to the new element
+    Debug "Added client with ID: " + Clients()\Id
+EndProcedure
+   
+Procedure ListClients()
+  NewList Clients.Client() ; The list for storing the elements
+    ForEach Clients()
+        Debug "Client ID: " + Clients()\Id
+        ; Access other fields if necessary
+    Next
+EndProcedure
+
+
+ 
   
   
   
@@ -63,7 +102,7 @@
   ;Main forms
   
   
-serverID =    CreateNetworkServer(0, Port, #PB_Network_IPv4 | #PB_Network_TCP, "127.0.0.1")
+serverID =    CreateNetworkServer(0, Port, #PB_Network_IPv4 | #PB_Network_TCP)
 
 If serverID
  
@@ -71,10 +110,17 @@ If serverID
   OpenConsole("GF_Logia_Server", #PB_UTF8)
   ConsoleTitle("GF_Logia_Server") 
   Debug "Console Launch!"
+ 
+
+
   
+
   
-  
-  
+        
+               
+         
+;AddMapElement(Country(), Str(ClientID))  
+
   
   ;--------------------------------------------------------------------------------------------------------------------------------
   ;Loops
@@ -84,9 +130,8 @@ If serverID
   Repeat
       
     ServerEvent = NetworkServerEvent()
-    ClientID = EventClient()
-    
-    
+   key = EventClient()
+    NewList Clients.Client() ; The list for storing the elements
     
     
      
@@ -95,37 +140,91 @@ If serverID
     
     
      Select ServerEvent
-   
+         
+            
+
          Case #PB_NetworkEvent_None
 
 
-         
+        
+
      
-    
+
+
+
           
+
+    
+
+
+
+  
            
                 
-        Case #PB_NetworkEvent_Connect
-          Debug "PureBasic - Server A new client has connected !"
-        
-            Data2()
-            
-         
-      
-        
+         Case #PB_NetworkEvent_Connect
+           AddClient()  
+          
+       ListClients()
+
+          
+
+    
+ 
+           
+                Debug "PureBasic - Server A new client has connected !"+ Str(EventClient())
+               ;AddMapElement(Country(), Str(EventClient())) ; Use the unique Key
+               ; Store the ClientID as the value
+           
+                
+                Debug Key
+              
+               
+               
+
+
+          
+          
+          
+Data2()
+
+
         Case #PB_NetworkEvent_Data
-       
+           
+         
+
           
-          ReceiveNetworkData(ClientID, *test, 2200)
-          
-          
+          ReceiveNetworkData(Key, *test, 2200)
+         
           
            If PeekS(*test, 2200, #PB_UTF8) = "test"
              Debug "yeah test..."
-             Data2()
+             
+    DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
+  While  NextDatabaseRow(90)
+       string7$ = GetDatabaseString(90, 1)
+       PokeS(*Buffer, string7$, 1000, #PB_UTF8)
+     
+       
+  
+   
+            SendNetworkData(Key, *Buffer, 1000)  ; Send the buffer to the client
+       
+
+         
+   
+    
+
+
+      Debug string7$
+      PrintN (string7$)
+      ReAllocateMemory(*Buffer, 1000)
+    Wend
+     
+    
+     FinishDatabaseQuery(90)
            
            
-           
+         
            
          
           
@@ -133,10 +232,11 @@ If serverID
             
            ElseIf  PeekS(*test, 2200, #PB_UTF8) = "world"
              Debug "Hello world!"
+           
             
-            
-       ElseIf ReceiveNetworkData(ClientID, *test, 1000)
-          
+       ElseIf ReceiveNetworkData(Key, *test, 1000)
+             Debug PeekS(*test, 1000, #PB_UTF8)
+         
            Data1$ = PeekS(*test, 1000, #PB_UTF8) 
            Debug PeekS(*test, 1000, #PB_UTF8) 
            Debug Data1$
@@ -170,13 +270,13 @@ If serverID
           
             
           Case #PB_NetworkEvent_Disconnect
-          Debug "PureBasic - Server Client "+ClientID+" has closed the connection..."
-          PrintN("PureBasic - Server Client "+ClientID+" has closed the connection...")
-          
-    
-      EndSelect
+          Debug "PureBasic - Server Client "+Key+" has closed the connection..."
+          PrintN("PureBasic - Server Client "+Key+" has closed the connection...")
+         
+         
   
-     
+      EndSelect
+    
   ForEver
   
   
@@ -187,7 +287,7 @@ If serverID
   
 EndIf
    Debug "PureBasic - Server Click To quit the server."
-      
+     ClearList(Clients())
    CloseDatabase(90)
    CloseNetworkServer(0)
    CloseConsole()
@@ -314,8 +414,10 @@ End
   
   
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
-; CursorPosition = 2
+; CursorPosition = 133
+; FirstLine = 129
 ; Folding = -
 ; EnableXP
 ; DPIAware
 ; UseMainFile = Main_Serveur.pb
+; Executable = Serveur.run

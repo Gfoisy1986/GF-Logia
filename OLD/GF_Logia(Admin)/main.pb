@@ -730,10 +730,9 @@ Procedure mainwo()
   
 EndProcedure
 
-If OpenWindow(0, 0, 0, 800, 560, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_ScreenCentered)
+If OpenWindow(0, 0, 0, 800, 600, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_ScreenCentered)
  
 
-    
     ;///////////////////////////////////////////
     
     
@@ -801,8 +800,8 @@ If OpenWindow(0, 0, 0, 800, 560, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_
    Until Event = #PB_Event_CloseWindow
  EndIf
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
-; CursorPosition = 766
-; FirstLine = 752
+; CursorPosition = 734
+; FirstLine = 720
 ; Folding = --
 ; EnableXP
 ; DPIAware
