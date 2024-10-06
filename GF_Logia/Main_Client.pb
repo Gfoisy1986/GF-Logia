@@ -1,7 +1,9 @@
-﻿
-
-
-
+﻿UseSQLiteDatabase()
+  Filename$ = "myDatabase.sqlite3"
+  If OpenDatabase(90, Filename$, "", "")
+    Debug "Connected to myDatabase.sqlite3"
+  EndIf
+  
 
 
 
@@ -16,13 +18,8 @@
   ;Variable
   
   Port = 6832
- *Buffer = AllocateMemory(1000)
 
- *data = AllocateMemory(1000)
-  *test =  AllocateMemory(2200)
 
-   *Frost = AllocateMemory(1000)
-  
   
   
   
@@ -76,7 +73,7 @@
   #PB_w30
   #PB_w31
   #PageWO
-  #mysql = 0
+  
   #CP_0
   #_wo
   #_wo1
@@ -306,59 +303,17 @@
   ;Start Procedure
   
   Procedure inventaire()
-  OpenGadgetList(0, 0)
   
-  ButtonGadget(#inv_22, 10, 365, 200, 20, "Ajouté une piece")
-  
-  ButtonGadget(#inv_33, 590, 365, 200, 20, "Supprimé une piece")
-   
-  TextGadget(6009, 0, 400, 800, 20, "Modification table inventaire", #PB_Text_Border | #PB_Text_Center)
-   SetGadgetColor(6009, #PB_Gadget_BackColor, $A7E3EF)
- 
- 
-          ButtonGadget(#inv_0, 0, 425, 180, 20, "# no piece")
-          ButtonGadget(#inv_1, 190, 425, 180, 20, "Description")
-          ButtonGadget(#inv_2, 380, 425, 180, 20, "Quantité")
-          ButtonGadget(#inv_3, 570, 425, 180, 20, "Quantité à stocké")
-          ButtonGadget(#inv_4, 0, 455, 180, 20, "Prix achat #1")
-          ButtonGadget(#inv_5, 190, 455, 180, 20, "Fournisseur #1")
-          ButtonGadget(#inv_6, 380, 455, 180, 20, "Prix achat #2")
-          ButtonGadget(#inv_7, 570, 455, 180, 20, "Fournisseur #2")
-          ButtonGadget(#inv_8, 0, 485, 180, 20, "Prix vente")
-          ButtonGadget(#inv_9, 190, 485, 180, 20, "# Location")
-          
-     
-          TextGadget(6008, 0, 0, 800, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6008, #PB_Gadget_BackColor, $2ABFDB)
-      
-      
-             
-               
-          If      ListIconGadget(#_inv2, 0, 20, 800, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
-                 SetGadgetColor(#_inv2, #PB_Gadget_BackColor, $E2DDDC)
-             AddGadgetColumn(#_inv2, 1, "# no piece", 120)
-             AddGadgetColumn(#_inv2, 2, "Description", 120)
-             AddGadgetColumn(#_inv2, 3, "Quantité", 120)
-             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 220)
-             AddGadgetColumn(#_inv2, 5, "Prix achat #1", 60)
-             AddGadgetColumn(#_inv2, 6, "Fournisseur #1", 120)
-             AddGadgetColumn(#_inv2, 7, "Prix achat #2", 120)
-             AddGadgetColumn(#_inv2, 8, "Fournisseur #2", 200)
-             AddGadgetColumn(#_inv2, 9, "Prix vente", 120)
-             AddGadgetColumn(#_inv2, 10, "# Location", 120)
-         
-            ; DatabaseQuery (#mysql, "SELECT * FROM inventaire ORDER BY id ASC")
-            ;  While NextDatabaseRow(#mysql)
-     
-      ;AddGadgetItem(#_inv2, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10))
-      
-             ; Wend  
-               ; FinishDatabaseQuery(#mysql)
-          EndIf      
-         
 
-CloseGadgetList()
-       
+
+
+
+
+;------------------------------------------------------------------------------
+
+
+    
+
 EndProcedure
 
 Procedure Client()
@@ -436,15 +391,15 @@ Procedure Client()
              
            
               
-           ;  DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
+           ;  DatabaseQuery (90, "SELECT * FROM client ORDER BY nomsent ASC")
             
-    ;While NextDatabaseRow(#mysql)
+    ;While NextDatabaseRow(90)
      
-     ; AddGadgetItem(#_BCC20, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19)+Chr(10)+GetDatabaseString(#mysql, 20)+Chr(10)+GetDatabaseString(#mysql, 21)+Chr(10)+GetDatabaseString(#mysql, 22)+Chr(10)+GetDatabaseString(#mysql, 23))
+     ; AddGadgetItem(#_BCC20, -1, GetDatabaseString(90, 0)+Chr(10)+GetDatabaseString(90, 1)+Chr(10)+GetDatabaseString(90, 2)+Chr(10)+GetDatabaseString(90, 3)+Chr(10)+GetDatabaseString(90, 4)+Chr(10)+GetDatabaseString(90, 5)+Chr(10)+GetDatabaseString(90, 6)+Chr(10)+GetDatabaseString(90, 7)+Chr(10)+GetDatabaseString(90, 8)+Chr(10)+GetDatabaseString(90, 9)+Chr(10)+GetDatabaseString(90, 10)+Chr(10)+GetDatabaseString(90, 11)+Chr(10)+GetDatabaseString(90, 12)+Chr(10)+GetDatabaseString(90, 13)+Chr(10)+GetDatabaseString(90, 14)+Chr(10)+GetDatabaseString(90, 15)+Chr(10)+GetDatabaseString(90, 16)+Chr(10)+GetDatabaseString(90, 17)+Chr(10)+GetDatabaseString(90, 18)+Chr(10)+GetDatabaseString(90, 19)+Chr(10)+GetDatabaseString(90, 20)+Chr(10)+GetDatabaseString(90, 21)+Chr(10)+GetDatabaseString(90, 22)+Chr(10)+GetDatabaseString(90, 23))
       
      
   ;  Wend  
-   ; FinishDatabaseQuery(#mysql)
+   ; FinishDatabaseQuery(90)
   EndIf
               
   
@@ -517,18 +472,18 @@ Procedure employer()
              
   
               
-         ;   DatabaseQuery (#mysql, "SELECT * FROM utilizateur ORDER BY utilizateur ASC")
+         ;   DatabaseQuery (90, "SELECT * FROM utilizateur ORDER BY utilizateur ASC")
             
-           ;   While NextDatabaseRow(#mysql)
+           ;   While NextDatabaseRow(90)
      
-    ;  AddGadgetItem(#_020, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 15)+Chr(10)+GetDatabaseString(#mysql, 16)+Chr(10)+GetDatabaseString(#mysql, 17)+Chr(10)+GetDatabaseString(#mysql, 18)+Chr(10)+GetDatabaseString(#mysql, 19))
+    ;  AddGadgetItem(#_020, -1, GetDatabaseString(90, 0)+Chr(10)+GetDatabaseString(90, 1)+Chr(10)+GetDatabaseString(90, 2)+Chr(10)+GetDatabaseString(90, 3)+Chr(10)+GetDatabaseString(90, 4)+Chr(10)+GetDatabaseString(90, 5)+Chr(10)+GetDatabaseString(90, 6)+Chr(10)+GetDatabaseString(90, 7)+Chr(10)+GetDatabaseString(90, 8)+Chr(10)+GetDatabaseString(90, 9)+Chr(10)+GetDatabaseString(90, 10)+Chr(10)+GetDatabaseString(90, 11)+Chr(10)+GetDatabaseString(90, 12)+Chr(10)+GetDatabaseString(90, 13)+Chr(10)+GetDatabaseString(90, 14)+Chr(10)+GetDatabaseString(90, 15)+Chr(10)+GetDatabaseString(90, 16)+Chr(10)+GetDatabaseString(90, 17)+Chr(10)+GetDatabaseString(90, 18)+Chr(10)+GetDatabaseString(90, 19))
       
       
       
       
       
    ; Wend  
-  ;  FinishDatabaseQuery(#mysql)
+  ;  FinishDatabaseQuery(90)
                EndIf
                
          
@@ -552,13 +507,13 @@ Procedure flotte()
  
  If ListViewGadget(#PB_fh1, 0, 340, 150, 140)
     SetGadgetColor(#PB_fh1, #PB_Gadget_BackColor, $F3C8F3)
-            ;  DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY noment ASC")
-           ;  While NextDatabaseRow(#mysql) 
+            ;  DatabaseQuery (90, "SELECT * FROM flotte ORDER BY noment ASC")
+           ;  While NextDatabaseRow(90) 
                
-            ;   AddGadgetItem(#PB_fh1, -1, ""+GetDatabaseString(#mySql, 1))
+            ;   AddGadgetItem(#PB_fh1, -1, ""+GetDatabaseString(90, 1))
                
            ;   Wend 
-           ;  FinishDatabaseQuery(#mysql)
+           ;  FinishDatabaseQuery(90)
             EndIf
   
   
@@ -571,13 +526,13 @@ Procedure flotte()
   
    If ListViewGadget(#PB_fe, 170, 290, 150, 200)
   SetGadgetColor(#PB_fe, #PB_Gadget_BackColor, $F3C8F3)
-         ;   DatabaseQuery (#mysql, "SELECT * FROM client ORDER BY nomsent ASC")
-            ; While NextDatabaseRow(#mySql) 
+         ;   DatabaseQuery (90, "SELECT * FROM client ORDER BY nomsent ASC")
+            ; While NextDatabaseRow(90) 
                
-            ;   AddGadgetItem(#PB_fe, -1, "" + GetDatabaseString(#mySql, 1))
+            ;   AddGadgetItem(#PB_fe, -1, "" + GetDatabaseString(90, 1))
                
             ;  Wend 
-            ; FinishDatabaseQuery(#mysql)
+            ; FinishDatabaseQuery(90)
             EndIf
   
   
@@ -627,13 +582,13 @@ Procedure flotte()
               AddGadgetColumn(#_a0fl, 13, "prochaine inspection pep ou saaq", 220)
               AddGadgetColumn(#_a0fl, 14, "prochaine maintenance", 220)
           
-   ;DatabaseQuery (#mysql, "SELECT * FROM flotte ORDER BY serie ASC")
-           ;    While NextDatabaseRow(#mysql)
+   ;DatabaseQuery (90, "SELECT * FROM flotte ORDER BY serie ASC")
+           ;    While NextDatabaseRow(90)
      
-      ; AddGadgetItem(#_a0fl, -1, GetDatabaseString(#mysql, 0)+Chr(10)+GetDatabaseString(#mysql, 1)+Chr(10)+GetDatabaseString(#mysql, 13)+Chr(10)+GetDatabaseString(#mysql, 14)+Chr(10)+GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 3)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5)+Chr(10)+GetDatabaseString(#mysql, 6)+Chr(10)+GetDatabaseString(#mysql, 7)+Chr(10)+GetDatabaseString(#mysql, 8)+Chr(10)+GetDatabaseString(#mysql, 9)+Chr(10)+GetDatabaseString(#mysql, 10)+Chr(10)+GetDatabaseString(#mysql, 11)+Chr(10)+GetDatabaseString(#mysql, 12))
+      ; AddGadgetItem(#_a0fl, -1, GetDatabaseString(90, 0)+Chr(10)+GetDatabaseString(90, 1)+Chr(10)+GetDatabaseString(90, 13)+Chr(10)+GetDatabaseString(90, 14)+Chr(10)+GetDatabaseString(90, 2)+Chr(10)+GetDatabaseString(90, 3)+Chr(10)+GetDatabaseString(90, 4)+Chr(10)+GetDatabaseString(90, 5)+Chr(10)+GetDatabaseString(90, 6)+Chr(10)+GetDatabaseString(90, 7)+Chr(10)+GetDatabaseString(90, 8)+Chr(10)+GetDatabaseString(90, 9)+Chr(10)+GetDatabaseString(90, 10)+Chr(10)+GetDatabaseString(90, 11)+Chr(10)+GetDatabaseString(90, 12))
 
    ;  Wend  
-   ;  FinishDatabaseQuery(#mysql)
+   ;  FinishDatabaseQuery(90)
                 EndIf
   
   
@@ -657,13 +612,13 @@ EndProcedure
              AddGadgetColumn(#_punch, 2, "Punch out", 150)
   
   
-             ;  DatabaseQuery(#mysql, "SELECT * FROM punch WHERE (wo, jobname) = ('"+GetGadgetText(#_WO1202)+"', '"+GetGadgetText(3003)+"')", #PB_Database_DynamicCursor)
+             ;  DatabaseQuery(90, "SELECT * FROM punch WHERE (wo, jobname) = ('"+GetGadgetText(#_WO1202)+"', '"+GetGadgetText(3003)+"')", #PB_Database_DynamicCursor)
              
             
             
-           ;   While NextDatabaseRow(#mysql)
+           ;   While NextDatabaseRow(90)
      
-     ; AddGadgetItem(#_punch, -1, GetDatabaseString(#mysql, 2)+Chr(10)+GetDatabaseString(#mysql, 4)+Chr(10)+GetDatabaseString(#mysql, 5))
+     ; AddGadgetItem(#_punch, -1, GetDatabaseString(90, 2)+Chr(10)+GetDatabaseString(90, 4)+Chr(10)+GetDatabaseString(90, 5))
       
       
       
@@ -672,7 +627,7 @@ EndProcedure
     ;Wend 
     
                
-       ; FinishDatabaseQuery(#mysql)       
+       ; FinishDatabaseQuery(90)       
              
             EndIf  
              TextGadget(4009, 0, 190, 650, 40, "Sélectioner un travaux en premier lieu !",  #PB_Text_Border | #PB_Text_Center)
@@ -701,13 +656,13 @@ EndProcedure
   SetGadgetColor(402, #PB_Gadget_BackColor, $A7E3EF)
  If  ListViewGadget(#_WO1202, 0, 40, 150, 480) 
     SetGadgetColor(#_WO1202, #PB_Gadget_BackColor, $F3C8F3)
-  ; DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
+  ; DatabaseQuery (90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
   
-   ; While NextDatabaseRow(#mysql)       
-   ;   AddGadgetItem(#_WO1202, -1, GetDatabaseString(#mysql, 1))
+   ; While NextDatabaseRow(90)       
+   ;   AddGadgetItem(#_WO1202, -1, GetDatabaseString(90, 1))
       
   ;  Wend 
-  ; FinishDatabaseQuery(#mysql)
+  ; FinishDatabaseQuery(90)
  EndIf
 
   PanelGadget     (10, 150, 20, 650, 500)
@@ -735,13 +690,13 @@ Procedure mainwo()
   SetGadgetColor(402, #PB_Gadget_BackColor, $A7E3EF)
  If  ListViewGadget(#_WO1202, 0, 20, 200, 300) 
     SetGadgetColor(#_WO1202, #PB_Gadget_BackColor, $F3C8F3)
-  ; DatabaseQuery (#mysql, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
+  ; DatabaseQuery (90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
   
-   ; While NextDatabaseRow(#mysql)       
-   ;   AddGadgetItem(#_WO1202, -1, GetDatabaseString(#mysql, 1))
+   ; While NextDatabaseRow(90)       
+   ;   AddGadgetItem(#_WO1202, -1, GetDatabaseString(90, 1))
       
   ;  Wend 
-  ; FinishDatabaseQuery(#mysql)
+  ; FinishDatabaseQuery(90)
  EndIf
  
  
@@ -780,7 +735,7 @@ CloseGadgetList()
 EndProcedure
 
   
-  
+
   
   
   
@@ -790,7 +745,7 @@ EndProcedure
   
   ;_______________________________________________________________________________________________________________________________
   ;Main forms
-  InitNetwork()
+  ;InitNetwork()
   ConnectionID = OpenNetworkConnection("127.0.0.1", Port)
   
   If ConnectionID
@@ -798,12 +753,12 @@ EndProcedure
     
 OpenWindow(40, 0, 0, 800, 600, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_ScreenCentered)
 
-
-
+;---------------------------------Start panel gadget------------------------------------------             
+             ;Panel gadget
 
 PanelGadget     (0, 0, 0, 800, 560)
       AddGadgetItem (0, -1, "Inventaire")
-      inventaire()
+      
       AddGadgetItem (0, -1, "Info Personel")
       employer()
       AddGadgetItem (0, -1, "Info Clients")
@@ -827,7 +782,11 @@ PanelGadget     (0, 0, 0, 800, 560)
       AddGadgetItem (0, -1, "Support Technique")
         CloseGadgetList()
 
-  
+        ;Panel gadget
+        ;----------------------------------End Panel gadget-----------------------------------
+        ;------------------------------Start Menu gadget--------------------------------------
+        ;Menu gadget
+        
    If CreateMenu(0, WindowID(40))
      MenuTitle("Menu")
      MenuItem(1, "Item 1")
@@ -835,9 +794,61 @@ PanelGadget     (0, 0, 0, 800, 560)
      MenuItem(3, "Item 3")
    EndIf
   
-  ;SendNetworkString(ConnectionID, "hello from client", #PB_UTF8)
+   ;Panel gadget
+   ;-----------------------------End menu gadget------------------------------------------
+   
+   ;------------------------------Start Inventaire------------------------------------------------
+;Inventaire
+OpenGadgetList(0, 0)
   
-  ;--------------------------------------------------------------------------------------------------------------------------------
+  ButtonGadget(#inv_22, 10, 365, 200, 20, "Ajouté une piece")
+  
+  ButtonGadget(#inv_33, 590, 365, 200, 20, "Supprimé une piece")
+   
+  TextGadget(6009, 0, 400, 800, 20, "Modification table inventaire", #PB_Text_Border | #PB_Text_Center)
+   SetGadgetColor(6009, #PB_Gadget_BackColor, $A7E3EF)
+ 
+ 
+          ButtonGadget(#inv_0, 0, 425, 180, 20, "# no piece")
+          ButtonGadget(#inv_1, 190, 425, 180, 20, "Description")
+          ButtonGadget(#inv_2, 380, 425, 180, 20, "Quantité")
+          ButtonGadget(#inv_3, 570, 425, 180, 20, "Quantité à stocké")
+          ButtonGadget(#inv_4, 0, 455, 180, 20, "Prix achat #1")
+          ButtonGadget(#inv_5, 190, 455, 180, 20, "Fournisseur #1")
+          ButtonGadget(#inv_6, 380, 455, 180, 20, "Prix achat #2")
+          ButtonGadget(#inv_7, 570, 455, 180, 20, "Fournisseur #2")
+          ButtonGadget(#inv_8, 0, 485, 180, 20, "Prix vente")
+          ButtonGadget(#inv_9, 190, 485, 180, 20, "# Location")
+          
+     
+          TextGadget(6008, 0, 0, 800, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
+           SetGadgetColor(6008, #PB_Gadget_BackColor, $2ABFDB)
+      
+      
+             
+               
+          If      ListIconGadget(#_inv2, 0, 20, 800, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+                 SetGadgetColor(#_inv2, #PB_Gadget_BackColor, $E2DDDC)
+             AddGadgetColumn(#_inv2, 1, "# no piece", 120)
+             AddGadgetColumn(#_inv2, 2, "Description", 120)
+             AddGadgetColumn(#_inv2, 3, "Quantité", 120)
+             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 220)
+             AddGadgetColumn(#_inv2, 5, "Prix achat #1", 60)
+             AddGadgetColumn(#_inv2, 6, "Fournisseur #1", 120)
+             AddGadgetColumn(#_inv2, 7, "Prix achat #2", 120)
+             AddGadgetColumn(#_inv2, 8, "Fournisseur #2", 200)
+             AddGadgetColumn(#_inv2, 9, "Prix vente", 120)
+             AddGadgetColumn(#_inv2, 10, "# Location", 120)
+           EndIf
+           CloseGadgetList()
+;Inventaire
+;----------------------------End Inventaire----------------------------------------
+
+   
+   
+   
+   
+   ;-------------------------------Start loop!-------------------------------------------------------------------------------------------------
   ;Loops
   
   
@@ -851,56 +862,140 @@ Select Network
 
     
     
-  Case #PB_NetworkEvent_Data 
+ Case #PB_NetworkEvent_Data 
   
- 
-   
- 
-   
-   OpenGadgetList(0, 11)
+   *Frost = AllocateMemory(1100)
+ ReceiveNetworkData(ConnectionID, *Frost, 1100)
+    ;
    
 
-         
-*Frost = AllocateMemory(1100)
-       ReceiveNetworkData(ConnectionID, *Frost, 1100)
-       
-            If PeekS(*Frost, 1100, #PB_UTF8) = "elie"
+        
+        
+     
+ If PeekS(*Frost, 1100, #PB_UTF8) = "elie"
+    OpenGadgetList(0, 11)
              ClearGadgetItems(#PB_137)
-             
-        
-              ReAllocateMemory(*Frost, 1100)
-        
-         
-         
-         
-           ElseIf PeekS(*Frost, 1100, #PB_UTF8)
-       
-             AddGadgetItem(#PB_137, -1, PeekS(*Frost, 1100, #PB_UTF8))
-         
-           Debug PeekS(*Frost, 1100, #PB_UTF8)
-         ReAllocateMemory(*Frost, 1100)
+          CloseGadgetList()    
       
-         EndIf  
-        
+         
+      ; ReceiveNetworkData(ConnectionID, *Frost, 1100)
+       
           
-            
-           
-       
-       
-              
-        
-        
-           
-           
-
-CloseGadgetList()
- 
+   
+  
   
 
-
-
+; ReceiveNetworkData(ConnectionID, *Frost, 1100)
+      ElseIf    PeekS(*Frost, 1100, #PB_UTF8) = "gui"
+        *sty = AllocateMemory(5501)
+         OpenGadgetList(0, 0)
+      ReceiveNetworkData(ConnectionID, *sty, 5501)
+          
+     Debug PeekS(*sty, 5501, #PB_UTF8)   
+   
+     ;       
+     AddGadgetItem(#_inv2, -1,  PeekS(*sty, 5501, #PB_UTF8));fff+Chr(10)+qqq+Chr(10)+www+Chr(10)+eee+Chr(10)+rrr+Chr(10)+ttt+Chr(10)+yyy+Chr(10)+uuu+Chr(10)+iii+Chr(10)+ooo+Chr(10)+ppp)
     
- EndSelect
+   
+       
+       
+  CloseGadgetList()
+        
+         
+ElseIf    PeekS(*Frost, 1100, #PB_UTF8) = "charle"
+    *charle = AllocateMemory(1100)
+          ReceiveNetworkData(ConnectionID, *charle, 1100)
+          OpenGadgetList(0, 11)
+             AddGadgetItem(#PB_137, -1, PeekS(*charle, 1100, #PB_UTF8))
+         
+          Debug PeekS(*charle, 1100, #PB_UTF8)
+      
+   
+          CloseGadgetList()
+        
+           EndIf 
+;   ;       *Frost = AllocateMemory(191)
+;  If ReceiveNetworkData(ConnectionID, *Frost, 191)
+          
+;    qqq.s = PeekS(*Frost, 191, #PB_UTF8); = str101$
+;    Debug qqq
+;      FreeMemory(*Frost)      
+;    EndIf 
+;    *Frost = AllocateMemory(192)
+;         If ReceiveNetworkData(ConnectionID, *Frost, 192)
+;           www.s = PeekS(*Frost, 192, #PB_UTF8)
+;           Debug  www  ; = str102$ 
+;              FreeMemory(*Frost) 
+;            EndIf 
+;            *Frost = AllocateMemory(193)
+; If ReceiveNetworkData(ConnectionID, *Frost, 193)
+;             
+;            eee.s  =  PeekS(*Frost, 193, #PB_UTF8); = str103$
+;      Debug eee
+;               FreeMemory(*Frost) 
+;             EndIf 
+;             *Frost = AllocateMemory(194)
+;      If  ReceiveNetworkData(ConnectionID, *Frost, 194)
+;             
+;            rrr.s =   PeekS(*Frost, 194, #PB_UTF8); = str104$
+;        Debug rrr
+;       FreeMemory(*Frost)
+;      EndIf 
+;      *Frost = AllocateMemory(195)
+;      If ReceiveNetworkData(ConnectionID, *Frost, 195)
+;            
+;            ttt.s = PeekS(*Frost, 195, #PB_UTF8); = str105$
+;             Debug ttt  
+;            FreeMemory(*Frost)
+;           EndIf 
+;           *Frost = AllocateMemory(196)
+;       If ReceiveNetworkData(ConnectionID, *Frost, 196)
+;             
+;            yyyy.s =  PeekS(*Frost, 196, #PB_UTF8); = str106$
+;       Debug yyy
+;       FreeMemory(*Frost) 
+;     EndIf 
+;     *Frost = AllocateMemory(197)
+;       If ReceiveNetworkData(ConnectionID, *Frost, 197)
+;             
+;             uuu.s  = PeekS(*Frost, 197, #PB_UTF8); = str107$
+;            Debug uuu
+;               FreeMemory(*Frost) 
+;             EndIf 
+;             *Frost = AllocateMemory(198)
+;     If   ReceiveNetworkData(ConnectionID, *Frost, 198)
+;            
+;             iii.s = PeekS(*Frost, 198, #PB_UTF8); = str108$
+;            Debug iii 
+;            FreeMemory(*Frost)
+;          EndIf 
+;          *Frost = AllocateMemory(199)
+;         If  ReceiveNetworkData(ConnectionID, *Frost, 199)
+;             
+;           ooo.s = PeekS(*Frost, 199, #PB_UTF8); = str109$
+;      Debug ooo
+;              FreeMemory(*Frost) 
+;            EndIf 
+;            *Frost = AllocateMemory(200)
+;       If ReceiveNetworkData(ConnectionID, *Frost, 200)
+;            
+;           ppp.s = PeekS(*Frost, 200, #PB_UTF8); = str110$
+;          Debug ppp
+;             FreeMemory(*Frost) 
+;           EndIf 
+;           
+      
+;           
+;            ;CloseGadgetList()
+;       
+;          
+         
+
+
+EndSelect
+;------------------------Case INVENTAIRE------------------------------------------------------
+;Inventaire
+
  
  
  
@@ -909,6 +1004,12 @@ CloseGadgetList()
        Case #PB_Event_Gadget
          Select EventGadget()
             
+             
+             
+            ; IncludeFile "newwocase.pb"
+             
+             
+             
              
              
            Case #PB_100 : End
@@ -921,17 +1022,16 @@ CloseGadgetList()
       
      
      
-      
+      *test = AllocateMemory(2200)
        PokeS(*test, "world", 2200, #PB_UTF8)
        SendNetworkData(ConnectionID, *test, 2200)
-       
+       ReAllocateMemory(*test, 1000)
        
        invfg14$ = InputRequester("Modification du nouveau fournisseur #2.", "Veuillez entrer le nouveau fournisseur #2.", "")
         Debug invfg14$
        PokeS(*test, invfg14$, 1000, #PB_UTF8)
-      
-       SendNetworkData(ConnectionID, *test, 2200)
-        SendNetworkData(ConnectionID, *test, 1000)
+       SendNetworkData(ConnectionID, *test, 1000)
+       FreeMemory(*test)
       ClearGadgetItems(#PB_137)
  
 CloseGadgetList()
@@ -948,10 +1048,10 @@ CloseGadgetList()
 
         string3$ = "test"
        Debug string3$
-      
+      *test = AllocateMemory(2200)
          PokeS(*test, string3$, 2200, #PB_UTF8)
          SendNetworkData(ConnectionID, *test, 2200)
-         
+         FreeMemory(*test)
       ;ClearGadgetItems(#PB_137)
      CloseGadgetList()
              
@@ -972,15 +1072,14 @@ CloseGadgetList()
    ;-------------------------------------------------------------------------------------------------------------------------------
    ;Footer
   
-     
+   
 EndIf
-; IDE Options = PureBasic 5.73 LTS (Linux - x64)
-; CursorPosition = 880
-; FirstLine = 858
+; IDE Options = PureBasic 6.12 LTS (Linux - x64)
+; CursorPosition = 891
+; FirstLine = 883
 ; Folding = --
-; EnableThread
 ; EnableXP
 ; DPIAware
 ; Executable = Client_x64.run
-; CPU = 2
-; Compiler = PureBasic 5.73 LTS (Linux - x64)
+; Compiler = PureBasic 6.12 LTS (Linux - x64)
+; Debugger = Standalone
