@@ -25,8 +25,8 @@
   
   
   
-  ;---------------------------------------------------------------------------------------------------------------------------------
-  ;Enumeration
+  ;-----Enumeration------------------------------------------------------------------------------------------------------------------------
+ 
   
   Enumeration
   #_60015
@@ -299,22 +299,61 @@
   
   
   
-  ;-----------------------------------------------------------------------------------------------------------------------------------
-  ;Start Procedure
-  
-  Procedure inventaire()
-  
-
-
-
-
-
-;------------------------------------------------------------------------------
-
-
+ ;----Start Procedure------------------------------------------------------------------------------------------------------------------
+   Procedure inventaire()
+     
+     
     
 
-EndProcedure
+OpenGadgetList(0, 0)
+  
+  ButtonGadget(#inv_22, 10, 365, 200, 20, "Ajouté une piece")
+  
+  ButtonGadget(#inv_33, 590, 365, 200, 20, "Supprimé une piece")
+   
+  TextGadget(6009, 0, 400, 800, 20, "Modification table inventaire", #PB_Text_Border | #PB_Text_Center)
+   SetGadgetColor(6009, #PB_Gadget_BackColor, $A7E3EF)
+ 
+ 
+          ButtonGadget(#inv_0, 0, 425, 180, 20, "# no piece")
+          ButtonGadget(#inv_1, 190, 425, 180, 20, "Description")
+          ButtonGadget(#inv_2, 380, 425, 180, 20, "Quantité")
+          ButtonGadget(#inv_3, 570, 425, 180, 20, "Quantité à stocké")
+          ButtonGadget(#inv_4, 0, 455, 180, 20, "Prix achat #1")
+          ButtonGadget(#inv_5, 190, 455, 180, 20, "Fournisseur #1")
+          ButtonGadget(#inv_6, 380, 455, 180, 20, "Prix achat #2")
+          ButtonGadget(#inv_7, 570, 455, 180, 20, "Fournisseur #2")
+          ButtonGadget(#inv_8, 0, 485, 180, 20, "Prix vente")
+          ButtonGadget(#inv_9, 190, 485, 180, 20, "# Location")
+          
+     
+          TextGadget(6008, 0, 0, 800, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
+           SetGadgetColor(6008, #PB_Gadget_BackColor, $2ABFDB)
+      
+      
+             
+               
+          If      ListIconGadget(#_inv2, 0, 20, 800, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
+                 SetGadgetColor(#_inv2, #PB_Gadget_BackColor, $E2DDDC)
+             AddGadgetColumn(#_inv2, 1, "# no piece", 120)
+             AddGadgetColumn(#_inv2, 2, "Description", 120)
+             AddGadgetColumn(#_inv2, 3, "Quantité", 120)
+             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 220)
+             AddGadgetColumn(#_inv2, 5, "Prix achat #1", 60)
+             AddGadgetColumn(#_inv2, 6, "Fournisseur #1", 120)
+             AddGadgetColumn(#_inv2, 7, "Prix achat #2", 120)
+             AddGadgetColumn(#_inv2, 8, "Fournisseur #2", 200)
+             AddGadgetColumn(#_inv2, 9, "Prix vente", 120)
+             AddGadgetColumn(#_inv2, 10, "# Location", 120)
+           EndIf
+           CloseGadgetList()
+        
+           
+   EndProcedure
+   
+     
+  
+ 
 
 Procedure Client()
  OpenGadgetList(0, 2)
@@ -718,7 +757,18 @@ EndProcedure
   
   
 Procedure Testing()
+   OpenGadgetList(0, 11)
   
+ButtonGadget(#PB_100, 0, 0, 150, 30, "Exit") 
+ButtonGadget(#PB_101, 200, 40, 150, 30, "update") 
+  ButtonGadget(#PB_102, 200, 0, 150, 30, "Data change")
+
+  ;SendNetworkString(ConnectionID, "Hello From Gui !", #PB_UTF8)
+ 
+  ListViewGadget(#PB_137, 0, 30, 200, 300,  #PB_ListView_ClickSelect) 
+  SetGadgetColor(#PB_137, #PB_Gadget_BackColor, $F3C8F3)
+  
+CloseGadgetList()
  
 EndProcedure
 
@@ -731,8 +781,7 @@ EndProcedure
   
   
   
-  ;_______________________________________________________________________________________________________________________________
-  ;Main forms
+ ;----Main forms--------------------------------------
   ;InitNetwork()
   ConnectionID = OpenNetworkConnection("127.0.0.1", Port)
   
@@ -741,12 +790,12 @@ EndProcedure
     
 OpenWindow(40, 0, 0, 800, 600, "GF_Logia", #PB_Window_SystemMenu | #PB_Window_ScreenCentered)
 
-;---------------------------------Start panel gadget------------------------------------------             
-             ;Panel gadget
+;--Start panel gadget------------------------------------------             
+            
 
 PanelGadget     (0, 0, 0, 800, 560)
       AddGadgetItem (0, -1, "Inventaire")
-      
+      inventaire()
       AddGadgetItem (0, -1, "Info Personel")
       employer()
       AddGadgetItem (0, -1, "Info Clients")
@@ -770,10 +819,9 @@ PanelGadget     (0, 0, 0, 800, 560)
       AddGadgetItem (0, -1, "Support Technique")
         CloseGadgetList()
 
-        ;Panel gadget
-        ;----------------------------------End Panel gadget-----------------------------------
-        ;------------------------------Start Menu gadget--------------------------------------
-        ;Menu gadget
+       
+        ;--Start Menu gadget--------------------------------------
+        
         
    If CreateMenu(0, WindowID(40))
      MenuTitle("Menu")
@@ -782,67 +830,9 @@ PanelGadget     (0, 0, 0, 800, 560)
      MenuItem(3, "Item 3")
    EndIf
   
-   ;Panel gadget
-   ;-----------------------------End menu gadget------------------------------------------
-   
-   ;------------------------------Start Inventaire------------------------------------------------
-;Inventaire
-OpenGadgetList(0, 0)
   
-  ButtonGadget(#inv_22, 10, 365, 200, 20, "Ajouté une piece")
-  
-  ButtonGadget(#inv_33, 590, 365, 200, 20, "Supprimé une piece")
-   
-  TextGadget(6009, 0, 400, 800, 20, "Modification table inventaire", #PB_Text_Border | #PB_Text_Center)
-   SetGadgetColor(6009, #PB_Gadget_BackColor, $A7E3EF)
- 
- 
-          ButtonGadget(#inv_0, 0, 425, 180, 20, "# no piece")
-          ButtonGadget(#inv_1, 190, 425, 180, 20, "Description")
-          ButtonGadget(#inv_2, 380, 425, 180, 20, "Quantité")
-          ButtonGadget(#inv_3, 570, 425, 180, 20, "Quantité à stocké")
-          ButtonGadget(#inv_4, 0, 455, 180, 20, "Prix achat #1")
-          ButtonGadget(#inv_5, 190, 455, 180, 20, "Fournisseur #1")
-          ButtonGadget(#inv_6, 380, 455, 180, 20, "Prix achat #2")
-          ButtonGadget(#inv_7, 570, 455, 180, 20, "Fournisseur #2")
-          ButtonGadget(#inv_8, 0, 485, 180, 20, "Prix vente")
-          ButtonGadget(#inv_9, 190, 485, 180, 20, "# Location")
-          
-     
-          TextGadget(6008, 0, 0, 800, 20, "Feuillet inventaire",  #PB_Text_Border | #PB_Text_Center)
-           SetGadgetColor(6008, #PB_Gadget_BackColor, $2ABFDB)
-      
-      
-             
-               
-          If      ListIconGadget(#_inv2, 0, 20, 800, 340, "# ID", 120, #PB_ListIcon_FullRowSelect | #PB_ListIcon_AlwaysShowSelection)
-                 SetGadgetColor(#_inv2, #PB_Gadget_BackColor, $E2DDDC)
-             AddGadgetColumn(#_inv2, 1, "# no piece", 120)
-             AddGadgetColumn(#_inv2, 2, "Description", 120)
-             AddGadgetColumn(#_inv2, 3, "Quantité", 120)
-             AddGadgetColumn(#_inv2, 4, "Quantité à stoké", 220)
-             AddGadgetColumn(#_inv2, 5, "Prix achat #1", 60)
-             AddGadgetColumn(#_inv2, 6, "Fournisseur #1", 120)
-             AddGadgetColumn(#_inv2, 7, "Prix achat #2", 120)
-             AddGadgetColumn(#_inv2, 8, "Fournisseur #2", 200)
-             AddGadgetColumn(#_inv2, 9, "Prix vente", 120)
-             AddGadgetColumn(#_inv2, 10, "# Location", 120)
-           EndIf
-           CloseGadgetList()
-;Inventaire
-;----------------------------End Inventaire----------------------------------------
- OpenGadgetList(0, 11)
-  
-ButtonGadget(#PB_100, 0, 0, 150, 30, "Exit") 
-ButtonGadget(#PB_101, 200, 40, 150, 30, "update") 
-  ButtonGadget(#PB_102, 200, 0, 150, 30, "Data change")
 
-  ;SendNetworkString(ConnectionID, "Hello From Gui !", #PB_UTF8)
- 
-  ListViewGadget(#PB_137, 0, 30, 200, 300,  #PB_ListView_ClickSelect) 
-  SetGadgetColor(#PB_137, #PB_Gadget_BackColor, $F3C8F3)
-  
-CloseGadgetList()
+
   
    
    
@@ -1094,8 +1084,8 @@ CloseGadgetList()
    
 EndIf
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
-; CursorPosition = 1050
-; FirstLine = 1035
+; CursorPosition = 835
+; FirstLine = 812
 ; Folding = --
 ; EnableXP
 ; DPIAware
