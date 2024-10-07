@@ -1,21 +1,4 @@
-﻿UseSQLiteDatabase()
-  Filename$ = "myDatabase.sqlite3"
-  If OpenDatabase(90, Filename$, "", "")
-    Debug "Connected to myDatabase.sqlite3"
-  EndIf
-  
-
-
-
-
-
-
-
-
-
-
- ;_____________________________________________________________________________________________________________________________
-  ;Variable
+﻿;----Variable
   
   Port = 6832
 
@@ -1084,8 +1067,7 @@ CloseGadgetList()
    
 EndIf
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
-; CursorPosition = 835
-; FirstLine = 812
+; CursorPosition = 1
 ; Folding = --
 ; EnableXP
 ; DPIAware
