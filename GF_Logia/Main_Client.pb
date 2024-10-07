@@ -888,19 +888,29 @@ Select Network
 ; ReceiveNetworkData(ConnectionID, *Frost, 1100)
       ElseIf    PeekS(*Frost, 1100, #PB_UTF8) = "gui"
         *sty = AllocateMemory(5501)
+         ReceiveNetworkData(ConnectionID, *sty, 5501)
          OpenGadgetList(0, 0)
-      ReceiveNetworkData(ConnectionID, *sty, 5501)
+     
           
      Debug PeekS(*sty, 5501, #PB_UTF8)   
+     
+      ElseIf    PeekS(*Frost, 1100, #PB_UTF8) = "gui1"
+    *Frost8 = AllocateMemory(191)
+          ReceiveNetworkData(ConnectionID, *Frost8, 191)
+          OpenGadgetList(0, 0)
+             
+         
+          Debug PeekS(*Frost8, 191, #PB_UTF8)
+      
    
-     ;       
-     AddGadgetItem(#_inv2, -1,  PeekS(*sty, 5501, #PB_UTF8));fff+Chr(10)+qqq+Chr(10)+www+Chr(10)+eee+Chr(10)+rrr+Chr(10)+ttt+Chr(10)+yyy+Chr(10)+uuu+Chr(10)+iii+Chr(10)+ooo+Chr(10)+ppp)
     
-   
        
-       
+     AddGadgetItem(#_inv2, -1,  PeekS(*sty, 5501, #PB_UTF8)+Chr(10)+PeekS(*Frost8, 191, #PB_UTF8));fff+Chr(10)+qqq+Chr(10)+www+Chr(10)+eee+Chr(10)+rrr+Chr(10)+ttt+Chr(10)+yyy+Chr(10)+uuu+Chr(10)+iii+Chr(10)+ooo+Chr(10)+ppp)
+    
   CloseGadgetList()
-        
+  ;-----------------------------------------------------------------------------------------------------------------------------
+  
+  
          
 ElseIf    PeekS(*Frost, 1100, #PB_UTF8) = "charle"
     *charle = AllocateMemory(1100)
@@ -912,8 +922,17 @@ ElseIf    PeekS(*Frost, 1100, #PB_UTF8) = "charle"
       
    
           CloseGadgetList()
-        
+          
+          
+             
            EndIf 
+          ;----------------------------------------------------------------------------------------------------------------------------
+         
+          
+          
+          
+          
+     
 ;   ;       *Frost = AllocateMemory(191)
 ;  If ReceiveNetworkData(ConnectionID, *Frost, 191)
           
@@ -1075,8 +1094,8 @@ CloseGadgetList()
    
 EndIf
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
-; CursorPosition = 891
-; FirstLine = 883
+; CursorPosition = 890
+; FirstLine = 888
 ; Folding = --
 ; EnableXP
 ; DPIAware

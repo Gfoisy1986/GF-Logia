@@ -232,7 +232,8 @@ If serverID
             FinishDatabaseQuery(90)    
                 
       
-;-------------------------------------------------------------------------------
+            ;-------------------------------------------------------------------------------
+            ;Inventaire transaction list id
    *sty = AllocateMemory(5501)
    *Frost =    AllocateMemory(1100)
   DatabaseQuery (90, "SELECT * FROM inventaire")
@@ -253,10 +254,11 @@ If serverID
        SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
        Debug Programm()\Con
        Debug Programm()\Id
-        Debug str0
+        Debug string90$
        SendNetworkData(Con, *sty, 5501)
        Debug Programm()\Con
        Debug Programm()\Id
+       Debug str0
          Next         
          ReAllocateMemory(*sty, 5501)
    Wend
@@ -264,10 +266,46 @@ If serverID
   FinishDatabaseQuery(90)
    FreeMemory(*sty)
 FreeMemory(*Frost)
-
-
+;-----------------------------------------------------------------------------------------------------------------------------------
+      ;Inventaire transaction list 1
+   *Frost = AllocateMemory(191)
+   *Frost8 = AllocateMemory(1100)
+  DatabaseQuery (90, "SELECT * FROM inventaire")
+  While NextDatabaseRow(90)
+    
+    
+     string99$ = "gui1"
+       PokeS(*Frost, string99$, 1100, #PB_UTF8)
+       Debug string99$
+       
+         str1.s = GetDatabaseString(90, 1)
+                  PokeS(*Frost8, str1, 191, #PB_UTF8)
+ Debug str1
+      
+     ForEach Programm()
+        Con = Programm()\Con
+        SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
+         Debug string99$
+       Debug Programm()\Con
+       Debug Programm()\Id
+       
+                
+                   SendNetworkData(Con, *Frost8, 191)
+                  Debug str1
+                   Debug Programm()\Con
+                     Debug Programm()\Id
+       
+         Next         
+        
+         ReAllocateMemory(*Frost8, 191)
           
+   Wend
   
+  FinishDatabaseQuery(90)
+  FreeMemory(*Frost8)
+FreeMemory(*Frost)
+          
+  ;-----------------------------------------------------------------------------------------------------------------------------
                
                
                
@@ -450,145 +488,140 @@ FreeMemory(*Frost)
         Case #PB_NetworkEvent_Data
            
          
-                *test = AllocateMemory(2200)
-          
-          ReceiveNetworkData(Key, *test, 2200)
-         
-          
-           If PeekS(*test, 2200, #PB_UTF8) = "test"
-             Debug "yeah test..."
-            FreeMemory(*test)
-         *Frost =   AllocateMemory(1100)
-           string15$ = "elie"
-       PokeS(*Frost, string15$, 1100, #PB_UTF8)
-     
-   
-       ForEach Programm()
-         
-       Con = Programm()\Con
-       SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
-       Debug Programm()\Con
-       Debug Programm()\Id
-         Next 
-             
-            ReAllocateMemory(*Frost, 1100)
-                  
-   DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
-  While  NextDatabaseRow(90)
-       string7$ = GetDatabaseString(90, 1)
-       PokeS(*Frost, string7$, 1100, #PB_UTF8)
-     Debug string7$
-   
-       ForEach Programm()
-         
-       Con = Programm()\Con
-       SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
-       Debug Programm()\Con
-       Debug Programm()\Id
-         Next         
-  
-         
-   ReAllocateMemory(*Frost, 1100)
-   
-   Wend
-   
-
-    FinishDatabaseQuery(90)
-
-
-      
-      ;FreeMemory(*Buffer, 1000)
-FreeMemory(*Frost)
-         
-           
-     
-     
-     
-     *test = AllocateMemory(2200)
-           ElseIf  PeekS(*test, 2200, #PB_UTF8) = "world"
-             Debug "Hello world!"
-           ReAllocateMemory(*test, 1000)
-            
-       ElseIf ReceiveNetworkData(Key, *test, 1000)
-             Debug PeekS(*test, 1000, #PB_UTF8)
-             FreeMemory(*test)
-             
-             
-         *Frost =    AllocateMemory(1100)
-                 string13$ = "elie"
-       PokeS(*Frost, string13$, 1100, #PB_UTF8)
-     
-   
-       ForEach Programm()
-         
-       Con = Programm()\Con
-       SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
-       Debug Programm()\Con
-       Debug Programm()\Id
-         Next 
-             
-             FreeMemory(*Frost)
-             
-             
-             
-             
-             *test = AllocateMemory(1000)
-           Data1$ = PeekS(*test, 1000, #PB_UTF8) 
-           Debug PeekS(*test, 1000, #PB_UTF8) 
-           Debug Data1$
-          DatabaseQuery (90, "SELECT * FROM workorder")
-               invfg15$ = "UPDATE workorder SET wo='"+Data1$+"' WHERE id=4"  
-            ; Debug "Query success..."
-            NextDatabaseRow(90)
-       DatabaseUpdate(90, invfg15$)
-           ; Debug "update db success..."
-             ;Debug PeekS(*data, 5000, #PB_UTF8)
-               FreeMemory(*test)
-           
-     FinishDatabaseQuery(90)
-               *Frost =   AllocateMemory(1100)
-   DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
-  While  NextDatabaseRow(90)
-       string7$ = GetDatabaseString(90, 1)
-       PokeS(*Frost, string7$, 1100, #PB_UTF8)
-     
-   
-       ForEach Programm()
-         
-       Con = Programm()\Con
-       SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
-       Debug Programm()\Con
-       Debug Programm()\Id
-         Next         
-  
-          ReAllocateMemory(*Frost, 1100)
-   
-   
-   Wend
-   
-
-    
-
-
-      
-      ;FreeMemory(*Buffer, 1000)
-FreeMemory(*Frost)
-          
-      ; Debug "Update DB not working..."
-      ; Debug DatabaseError()
-    
-     FinishDatabaseQuery(90)
-   
-       ;Debug "Query not working"
- 
-            Debug "data5 is execute..."
-            Debug Data1$
-            ;PrintN(PeekS(*test, 1000, #PB_UTF8))
-            
-          EndIf
-           
-       
-      
+;                 *test = AllocateMemory(2200)
+;           
+;           ReceiveNetworkData(Key, *test, 2200)
+;          
+;           
+;            If PeekS(*test, 2200, #PB_UTF8) = "test"
+;              Debug "yeah test..."
+;             FreeMemory(*test)
+;          *Frost =   AllocateMemory(1100)
+;            string15$ = "elie"
+;        PokeS(*Frost, string15$, 1100, #PB_UTF8)
+;      
+;    
+;        ForEach Programm()
+;          
+;        Con = Programm()\Con
+;        SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
+;        Debug Programm()\Con
+;        Debug Programm()\Id
+;          Next 
+;              
+;             ReAllocateMemory(*Frost, 1100)
+;                   
+;    DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
+;   While  NextDatabaseRow(90)
+;        string7$ = GetDatabaseString(90, 1)
+;        PokeS(*Frost, string7$, 1100, #PB_UTF8)
+;      Debug string7$
+;    
+;        ForEach Programm()
+;          
+;        Con = Programm()\Con
+;        SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
+;        Debug Programm()\Con
+;        Debug Programm()\Id
+;          Next         
+;       
+;    ReAllocateMemory(*Frost, 1100)
+;    
+;    Wend
+;    
+;     FinishDatabaseQuery(90)
+; ;FreeMemory(*Buffer, 1000)
+; FreeMemory(*Frost)
+;          
+;            
+;      
+;      
+;      
+; ;      *test = AllocateMemory(2200)
+; ;            ElseIf  PeekS(*test, 2200, #PB_UTF8) = "world"
+;              Debug "Hello world!"
+;            ReAllocateMemory(*test, 1000)
+;             
+;        ElseIf ReceiveNetworkData(Key, *test, 1000)
+;              Debug PeekS(*test, 1000, #PB_UTF8)
+;              FreeMemory(*test)
+;              
+;              
+;          *Frost =    AllocateMemory(1100)
+;                  string13$ = "elie"
+;        PokeS(*Frost, string13$, 1100, #PB_UTF8)
+;      
+;    
+;        ForEach Programm()
+;          
+;        Con = Programm()\Con
+;        SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
+;        Debug Programm()\Con
+;        Debug Programm()\Id
+;          Next 
+;              
+;              FreeMemory(*Frost)
+;              
+;              
+;              
+;              
+;              *test = AllocateMemory(1000)
+;            Data1$ = PeekS(*test, 1000, #PB_UTF8) 
+;            Debug PeekS(*test, 1000, #PB_UTF8) 
+;            Debug Data1$
+;           DatabaseQuery (90, "SELECT * FROM workorder")
+;                invfg15$ = "UPDATE workorder SET wo='"+Data1$+"' WHERE id=4"  
+;             ; Debug "Query success..."
+;             NextDatabaseRow(90)
+;        DatabaseUpdate(90, invfg15$)
+;            ; Debug "update db success..."
+;              ;Debug PeekS(*data, 5000, #PB_UTF8)
+;                FreeMemory(*test)
+;            
+;      FinishDatabaseQuery(90)
+;                *Frost =   AllocateMemory(1100)
+;    DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
+;   While  NextDatabaseRow(90)
+;        string7$ = GetDatabaseString(90, 1)
+;        PokeS(*Frost, string7$, 1100, #PB_UTF8)
+;      
+;    
+;        ForEach Programm()
+;          
+;        Con = Programm()\Con
+;        SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
+;        Debug Programm()\Con
+;        Debug Programm()\Id
+;          Next         
+;   
+;           ReAllocateMemory(*Frost, 1100)
+;    
+;    
+;    Wend
+;    
+; 
+;     
+; 
+; 
+;       
+;       ;FreeMemory(*Buffer, 1000)
+; FreeMemory(*Frost)
+;           
+;       ; Debug "Update DB not working..."
+;       ; Debug DatabaseError()
+;     
+;      FinishDatabaseQuery(90)
+;    
+;        ;Debug "Query not working"
+;  
+;             Debug "data5 is execute..."
+;             Debug Data1$
+;             ;PrintN(PeekS(*test, 1000, #PB_UTF8))
+;             
+;           EndIf
+;            
+;        
+;       
 
            
           
@@ -622,8 +655,8 @@ End
   
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 231
-; FirstLine = 214
+; CursorPosition = 300
+; FirstLine = 289
 ; Folding = -
 ; EnableXP
 ; DPIAware
