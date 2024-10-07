@@ -719,19 +719,7 @@ EndProcedure
   
 Procedure Testing()
   
-  OpenGadgetList(0, 11)
-  
-ButtonGadget(#PB_100, 0, 0, 150, 30, "Exit") 
-ButtonGadget(#PB_101, 200, 40, 150, 30, "update") 
-  ButtonGadget(#PB_102, 200, 0, 150, 30, "Data change")
-
-  ;SendNetworkString(ConnectionID, "Hello From Gui !", #PB_UTF8)
  
-  ListViewGadget(#PB_137, 0, 30, 200, 300,  #PB_ListView_ClickSelect) 
-  SetGadgetColor(#PB_137, #PB_Gadget_BackColor, $F3C8F3)
-  
-CloseGadgetList()
-  
 EndProcedure
 
   
@@ -843,7 +831,19 @@ OpenGadgetList(0, 0)
            CloseGadgetList()
 ;Inventaire
 ;----------------------------End Inventaire----------------------------------------
+ OpenGadgetList(0, 11)
+  
+ButtonGadget(#PB_100, 0, 0, 150, 30, "Exit") 
+ButtonGadget(#PB_101, 200, 40, 150, 30, "update") 
+  ButtonGadget(#PB_102, 200, 0, 150, 30, "Data change")
 
+  ;SendNetworkString(ConnectionID, "Hello From Gui !", #PB_UTF8)
+ 
+  ListViewGadget(#PB_137, 0, 30, 200, 300,  #PB_ListView_ClickSelect) 
+  SetGadgetColor(#PB_137, #PB_Gadget_BackColor, $F3C8F3)
+  
+CloseGadgetList()
+  
    
    
    
@@ -878,7 +878,7 @@ Select Network
           CloseGadgetList()    
       
          
-      ; ReceiveNetworkData(ConnectionID, *Frost, 1100)
+    ;ReceiveNetworkData(ConnectionID, *Frost, 1111)
        
           
    
@@ -912,13 +912,13 @@ Select Network
   
   
          
-ElseIf    PeekS(*Frost, 1100, #PB_UTF8) = "charle"
-    *charle = AllocateMemory(1100)
-          ReceiveNetworkData(ConnectionID, *charle, 1100)
+ElseIf    PeekS(*Frost, 1111, #PB_UTF8) = "charle"
+    *charle = AllocateMemory(1111)
+          ReceiveNetworkData(ConnectionID, *charle, 1111)
           OpenGadgetList(0, 11)
-             AddGadgetItem(#PB_137, -1, PeekS(*charle, 1100, #PB_UTF8))
+             AddGadgetItem(#PB_137, -1, PeekS(*charle, 1111, #PB_UTF8))
          
-          Debug PeekS(*charle, 1100, #PB_UTF8)
+          Debug PeekS(*charle, 1111, #PB_UTF8)
       
    
           CloseGadgetList()
@@ -1040,22 +1040,22 @@ EndSelect
   
       
      
-     
+     *test1 = AllocateMemory(1060)
       *test = AllocateMemory(2200)
-       PokeS(*test, "world", 2200, #PB_UTF8)
-       SendNetworkData(ConnectionID, *test, 2200)
-       ReAllocateMemory(*test, 1000)
+      PokeS(*test, "world", 2200, #PB_UTF8)
        
        invfg14$ = InputRequester("Modification du nouveau fournisseur #2.", "Veuillez entrer le nouveau fournisseur #2.", "")
-        Debug invfg14$
-       PokeS(*test, invfg14$, 1000, #PB_UTF8)
-       SendNetworkData(ConnectionID, *test, 1000)
-       FreeMemory(*test)
-      ClearGadgetItems(#PB_137)
+       Debug invfg14$
+       PokeS(*test1, invfg14$, 1060, #PB_UTF8)
+      SendNetworkData(ConnectionID, *test, 2200)
+      SendNetworkData(ConnectionID, *test1, 1060)
+      
+     ;  FreeMemory(*test)
+     ; ClearGadgetItems(#PB_137)
  
 CloseGadgetList()
-   
-  
+  FreeMemory(*test)
+  FreeMemory(*test1)
     
              
              
@@ -1094,8 +1094,8 @@ CloseGadgetList()
    
 EndIf
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
-; CursorPosition = 890
-; FirstLine = 888
+; CursorPosition = 1050
+; FirstLine = 1035
 ; Folding = --
 ; EnableXP
 ; DPIAware
