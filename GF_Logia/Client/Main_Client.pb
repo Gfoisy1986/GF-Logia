@@ -1042,8 +1042,8 @@ EndSelect
   
 EndIf
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
-; CursorPosition = 769
-; FirstLine = 765
+; CursorPosition = 871
+; FirstLine = 857
 ; Folding = --
 ; EnableXP
 ; DPIAware

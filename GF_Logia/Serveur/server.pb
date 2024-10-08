@@ -3,7 +3,7 @@
   If OpenDatabase(90, Filename$, "", "")
     Debug "Connected to myDatabase.sqlite3"
   EndIf
-  XIncludeFile "WebSocket_Server.pbi"
+  UseJPEGImageDecoder() 
                   
   
   
@@ -46,34 +46,7 @@ Global NewList Programm.Client()  ; The list for storing the elements
 
 
 
-  Procedure WebSocket_Event(*Server, *Client, Event, *Event_Frame.WebSocket_Server::Event_Frame) ; no need to worry about mutexes as this call is coming from your main loop
-  Select Event
-    Case WebSocket_Server::#Event_Connect
-      PrintN(" #### Client connected: " + *Client)
-      
-    Case WebSocket_Server::#Event_Disconnect
-      PrintN(" #### Client disconnected: " + *Client)
-      ; !!!! From the moment you receive this event *Client must not be used anymore !!!!
-      
-    Case WebSocket_Server::#Event_Frame
-      PrintN(" #### Frame received from " + *Client)
-      
-      ; #### OpCode is the type of frame you receive.
-      ; #### It's either Text, Binary-Data, Ping-Frames or other stuff.
-      ; #### You only need to care about text and binary frames.
-      Select *Event_Frame\Opcode
-        Case WebSocket_Server::#Opcode_Ping
-          PrintN("      Client sent a ping frame")
-        Case WebSocket_Server::#Opcode_Text
-          PrintN("      Text received: " + PeekS(*Event_Frame\Payload, *Event_Frame\Payload_Size, #PB_UTF8|#PB_ByteLength))
-        Case WebSocket_Server::#Opcode_Binary
-          PrintN("      Binary data received")
-          ; *Event_Frame\Payload contains the data, *Event_Frame\Payload_Size is the size of the data in bytes.
-          ; !!!! Don't use the Payload after you return from this callback. If you need to do so, make a copy of the memory in here. !!!!
-      EndSelect
-      
-  EndSelect
-EndProcedure
+ 
   
 Procedure Data2()
   
@@ -114,9 +87,7 @@ FreeMemory(*Frost)
   
  
  
-  Procedure AddClient()
-  
-EndProcedure
+
 
 Procedure Wo()
  *Frost =    AllocateMemory(1100)
@@ -242,14 +213,16 @@ If serverID
   ConsoleTitle("GF_Logia_Server") 
   Debug "Console Launch!"
   
-*Server = WebSocket_Server::Create(8099)  
 
 
-        
+
+     
       
-      
-         
- 
+     
+
+
+
+  
 
   
   ;--------------------------------------------------------------------------------------------------------------------------------
@@ -264,8 +237,7 @@ If serverID
     
     
     
-   While WebSocket_Server::Event_Callback(*Server, @WebSocket_Event())
-   Wend
+  
      
              
     
@@ -308,6 +280,9 @@ If serverID
         
 
            
+          
+           
+
    
  
            
@@ -676,8 +651,8 @@ If serverID
   ;----------------------------------------------------------------------------------------------------------------------------
   ;Footer
   
-  
-EndIf
+  EndIf
+
    Debug "PureBasic - Server Click To quit the server."
      ClearList(Programm())
    CloseDatabase(90)
@@ -689,10 +664,11 @@ End
   
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 685
-; FirstLine = 665
+; CursorPosition = 91
+; FirstLine = 83
 ; Folding = -
+; EnableThread
 ; EnableXP
 ; DPIAware
-; Executable = Serveur_x64.run
+; Executable = ../GF_Logia/GF_Logia/Serveur/Serveur_x64.run
 ; Compiler = PureBasic 6.12 LTS (Linux - x64)
