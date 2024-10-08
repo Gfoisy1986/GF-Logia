@@ -32,13 +32,16 @@
         Con.l
   EndStructure
   
-  
+    Structure World
+     Nick.s
+     Message.s
+  EndStructure
 
  ;--------------------------------------------------------------------------------------------------------------------------   
    ;List:
 
 Global NewList Programm.Client()  ; The list for storing the elements
-
+Global NewList Programm2.World()  ; The list for storing the elements
    ;-----------------------------------------------------------------------------------------------------------------------------------
   ;Start Procedure
 
@@ -277,78 +280,19 @@ If serverID
         MessageRequester("Error!", "Unable to allocate memory for new element", #PB_MessageRequester_Ok)
     EndIf 
           
-        
-
-           
-          
-           
-
-   
- 
            
                 Debug "PureBasic - Server A new client has connected !"+ Str(EventClient())
-               ;
-                
-               
-              
-                ;   -----------------------------------------------------------------------------          
-             ;   Wo list
-                ;Wo()
-                ;---------------------------------------------------------------------------------------
-                
-                
-                
-                
-                
-                
-                    
-
-
-  
-  
-      
-                
-      
-  ;-------------------------------------------------------------------------------
-            ;Inventaire transaction list 
- 
-         ; inventaire()
-  ;-----------------------------------------------------------------------------------------------------------------------------
-               
-               
-               
                  
-   
-       
-   
- 
-  
-;        
-;              
-;                   *Frost = AllocateMemory(192)
-;                   DatabaseQuery (90, "SELECT * FROM inventaire")
-;              While NextDatabaseRow(90)
-;                      str2.s = GetDatabaseString(90, 2)
-;                      PokeS(*Frost, str2, 192, #PB_UTF8)
-;                      ForEach Programm()
-;                      Con = Programm()\Con
-;                     SendNetworkData(Con, *Frost, 192)
-;                     Debug str2
-;                            Debug Programm()\Con
-;                          Debug Programm()\Id
-;                   Next
-;                      ReAllocateMemory(*Frost, 192)
-;                   Wend 
-;                   FinishDatabaseQuery(90)
-;                   FreeMemory(*Frost)
-
-
-
-
-
-
-
-
+    
+             
+                
+                
+                
+                
+                
+                
+                
+                
 
 
 
@@ -578,10 +522,92 @@ If serverID
         FreeMemory(*Mario)
 
 ; --------------------------------------------------------------------------------------------------------------------------           
-;        
-;       
-
+;    Case Chat click    
+    Case #PB_NetworkEvent_Data  
+      
+      
+                
+                   *Eric = AllocateMemory(500)
+                   ReceiveNetworkData(Key, *Eric, 500)
+                   Debug PeekS(*Eric, 500, #PB_UTF8)
+                  If PeekS(*Eric, 500, #PB_UTF8) = "Eric"
+                   ; DeleteElement(Programm2())
+            
+                    
+                  
+                  
+                 ElseIf PeekS(*Eric, 500, #PB_UTF8) = "Eric2" 
+                 Debug "JoinWorldChat!"
+      ; *Element2.World = AddElement(Programm2())  ; Add a new element to the list
+;     If *Element2 <> 0  ; Check if the element was successfully allocated
+;       *Element2\Nick = ; ; Assign the ID to the new element
+;        *Element2\Message = ;EventClient() ; Assign the Connection Client to the new element
+;        Debug "Added client with ID: " + *Element2\Name
+;        Debug "Added client with ID: " + *Element2\Message
+;     Else
+;         MessageRequester("Error!", "Unable to allocate memory for new element", #PB_MessageRequester_Ok)
+;     EndIf 
+;  
+                   
+                EndIf
+                 
+                   FreeMemory(*Eric)
+                    
+                   
+                   
+                   
+;                ;    DatabaseQuery (90, "SELECT * FROM inventaire")
+;             ;  While NextDatabaseRow(90)
+;                     ;  str2.s = GetDatabaseString(90, 2)
+;                     ;  PokeS(*Frost, str2, 192, #PB_UTF8)
+;                       ForEach Programm()
+;                       Con = Programm()\Con
+;                      SendNetworkData(Con, *Frost, 192)
+;                      Debug str2
+;                             Debug Programm()\Con
+;                           Debug Programm()\Id
+;                    Next
+;                       ReAllocateMemory(*Frost, 192)
+;                    Wend 
+                  ; FinishDatabaseQuery(90)
+                 
+      
+      
+      
+      
+      
+;       *Element2.World = AddElement(Programm2())  ; Add a new element to the list
+;     If *Element2 <> 0  ; Check if the element was successfully allocated
+;       *Element2\Nick = ; ; Assign the ID to the new element
+;        *Element2\Message = ;EventClient() ; Assign the Connection Client to the new element
+;        Debug "Added client with ID: " + *Element2\Name
+;        Debug "Added client with ID: " + *Element2\Message
+;     Else
+;         MessageRequester("Error!", "Unable to allocate memory for new element", #PB_MessageRequester_Ok)
+;     EndIf 
+;           
            
+                Debug "Un utilisateur ces connecter au chat!  Client: "+ Str(EventClient())
+             
+  
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
           
           
             
@@ -592,6 +618,10 @@ If serverID
          
   
       EndSelect
+      
+      
+      
+      
     
   ForEver
   
@@ -609,12 +639,16 @@ If serverID
    CloseConsole()
       
 End
-  
+
+
+
+
+                 
   
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 314
-; FirstLine = 183
+; CursorPosition = 533
+; FirstLine = 521
 ; Folding = -
 ; EnableThread
 ; EnableXP

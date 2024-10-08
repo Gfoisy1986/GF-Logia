@@ -3,7 +3,7 @@
   If OpenDatabase(90, Filename$, "", "")
     Debug "Connected to myDatabase.sqlite3"
   EndIf
-  XIncludeFile "WebSocket_Server.pbi"
+
                   
   
   
@@ -32,7 +32,7 @@
         Con.l
   EndStructure
   
-  
+ 
 
  ;--------------------------------------------------------------------------------------------------------------------------   
    ;List:
@@ -46,34 +46,7 @@ Global NewList Programm.Client()  ; The list for storing the elements
 
 
 
-  Procedure WebSocket_Event(*Server, *Client, Event, *Event_Frame.WebSocket_Server::Event_Frame) ; no need to worry about mutexes as this call is coming from your main loop
-  Select Event
-    Case WebSocket_Server::#Event_Connect
-      PrintN(" #### Client connected: " + *Client)
-      
-    Case WebSocket_Server::#Event_Disconnect
-      PrintN(" #### Client disconnected: " + *Client)
-      ; !!!! From the moment you receive this event *Client must not be used anymore !!!!
-      
-    Case WebSocket_Server::#Event_Frame
-      PrintN(" #### Frame received from " + *Client)
-      
-      ; #### OpCode is the type of frame you receive.
-      ; #### It's either Text, Binary-Data, Ping-Frames or other stuff.
-      ; #### You only need to care about text and binary frames.
-      Select *Event_Frame\Opcode
-        Case WebSocket_Server::#Opcode_Ping
-          PrintN("      Client sent a ping frame")
-        Case WebSocket_Server::#Opcode_Text
-          PrintN("      Text received: " + PeekS(*Event_Frame\Payload, *Event_Frame\Payload_Size, #PB_UTF8|#PB_ByteLength))
-        Case WebSocket_Server::#Opcode_Binary
-          PrintN("      Binary data received")
-          ; *Event_Frame\Payload contains the data, *Event_Frame\Payload_Size is the size of the data in bytes.
-          ; !!!! Don't use the Payload after you return from this callback. If you need to do so, make a copy of the memory in here. !!!!
-      EndSelect
-      
-  EndSelect
-EndProcedure
+  
   
 Procedure Data2()
   
@@ -114,9 +87,7 @@ FreeMemory(*Frost)
   
  
  
-  Procedure AddClient()
   
-EndProcedure
 
 Procedure Wo()
  *Frost =    AllocateMemory(1100)
@@ -242,53 +213,9 @@ If serverID
   ConsoleTitle("GF_Logia_Server") 
   Debug "Console Launch!"
   
-*Server = WebSocket_Server::Create(8099)  
-
-
-   If ReadFile(0, #PB_Compiler_Home + "examples\sources\data\purebasiclogo.bmp") 
-  *inputbuffer = AllocateMemory(Lof(0)) 
-  If *inputbuffer 
-    ReadData(0,*inputbuffer, Lof(0)) 
-    *encodedbuffer = AllocateMemory(MemorySize(*inputbuffer) * 1.35) 
-    If *encodedbuffer 
-      encodedlength = Base64EncoderBuffer(*inputbuffer, MemorySize(*inputbuffer), *encodedbuffer, MemorySize(*encodedbuffer)) 
-      pic64string.s = PeekS(*encodedbuffer) ; We'll save this in the database 
-FreeMemory(*encodedbuffer)
-    EndIf 
-    CloseFile(0) 
-    FreeMemory(*inputbuffer) 
-  EndIf 
-EndIf      
-      
-     
 
 
 
-    DatabaseUpdate(90, "CREATE TABLE MyTable (test VARCHAR);") 
-      
-    ; Save the string        
-    DatabaseUpdate(90, "insert into MyTable (test) values('" + pic64string+ "')") 
-    
-    ; Retrieve the string 
-    DatabaseQuery(90, "SELECT * FROM MyTable") 
-    If NextDatabaseRow(90) 
-      pic64in.s = GetDatabaseString(90, 0) 
-      
-      ; Decode it 
-      *decodedbuffer = AllocateMemory(Len(pic64in)) 
-      Base64DecoderBuffer(@pic64in, Len(pic64in), *decodedbuffer, Len(pic64in)) 
-      
-      ; Convert it to an image 
-      CatchImage(0, *decodedbuffer) 
-      FreeMemory(*decodedbuffer) 
-      
-      ; Look at it.. 
-      OpenWindow(5,0,0,ImageWidth(0),ImageHeight(0),"Image Test") 
-      
-      ImageGadget(0,0,0,0,0,ImageID(0))   
-         
-    EndIf
-    EndIf
 
   
   ;--------------------------------------------------------------------------------------------------------------------------------
@@ -303,8 +230,7 @@ EndIf
     
     
     
-   While WebSocket_Server::Event_Callback(*Server, @WebSocket_Event())
-   Wend
+   
      
              
     
@@ -727,7 +653,7 @@ NextDatabaseRow(90)
   ;----------------------------------------------------------------------------------------------------------------------------
   ;Footer
   
-  
+  EndIf
 
    Debug "PureBasic - Server Click To quit the server."
      ClearList(Programm())
@@ -740,8 +666,8 @@ End
   
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 274
-; FirstLine = 240
+; CursorPosition = 34
+; FirstLine = 29
 ; Folding = -
 ; EnableThread
 ; EnableXP
