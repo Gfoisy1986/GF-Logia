@@ -537,24 +537,29 @@ If serverID
                   
                   
                  ElseIf PeekS(*Eric, 500, #PB_UTF8) = "Eric2" 
-                 Debug "JoinWorldChat!"
-      ; *Element2.World = AddElement(Programm2())  ; Add a new element to the list
-;     If *Element2 <> 0  ; Check if the element was successfully allocated
-;       *Element2\Nick = ; ; Assign the ID to the new element
-;        *Element2\Message = ;EventClient() ; Assign the Connection Client to the new element
-;        Debug "Added client with ID: " + *Element2\Name
-;        Debug "Added client with ID: " + *Element2\Message
-;     Else
-;         MessageRequester("Error!", "Unable to allocate memory for new element", #PB_MessageRequester_Ok)
-;     EndIf 
-;  
+                   Debug "JoinWorldChat!"
+                   *EditS = AllocateMemory(10000)
+                   ReceiveNetworkData(key, *EditS, 10000)
+                   Text34567$ = PeekS(*EditS, 10000, #PB_UTF8)
+              
+                   Debug "Editor : "+PeekS(*EditS, 10000, #PB_UTF8)
+       *Element2.World = AddElement(Programm2())  ; Add a new element to the list
+     If *Element2 <> 0  ; Check if the element was successfully allocated
+       *Element2\Nick = "Guest: "+Str(EventClient()) ;Assign the ID To the new element
+        *Element2\Message = PeekS(*EditS, 10000, #PB_UTF8) ; Assign the Connection Client to the new element
+       Debug "Added client with ID: " + *Element2\Nick
+       Debug "Added client with ID: " + *Element2\Message
+     Else
+         MessageRequester("Error!", "Unable to allocate memory for new element", #PB_MessageRequester_Ok)
+     EndIf 
+  
                    
-                EndIf
+             
                  
-                   FreeMemory(*Eric)
-                    
+                   ReAllocateMemory(*Eric, 500)
+                   ReAllocateMemory(*EditS, 10000)
                    
-                   
+             EndIf         
                    
 ;                ;    DatabaseQuery (90, "SELECT * FROM inventaire")
 ;             ;  While NextDatabaseRow(90)
@@ -615,7 +620,7 @@ If serverID
           Debug "PureBasic - Server Client "+Key+" has closed the connection..."
           PrintN("PureBasic - Server Client "+Key+" has closed the connection...")
           DeleteElement(Programm())
-         
+          DeleteElement(Programm2())
   
       EndSelect
       
@@ -647,8 +652,8 @@ End
   
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 533
-; FirstLine = 521
+; CursorPosition = 549
+; FirstLine = 545
 ; Folding = -
 ; EnableThread
 ; EnableXP
