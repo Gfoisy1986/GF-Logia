@@ -283,6 +283,14 @@
   
   
  ;----Start Procedure------------------------------------------------------------------------------------------------------------------
+    Procedure CloseWindowEvent()
+  Debug "Closing window: " + EventWindow()
+  
+  CloseWindow(EventWindow()) ; Close the specific window
+EndProcedure
+   
+   
+   
    Procedure inventaire()
      
      
@@ -750,18 +758,18 @@ ButtonGadget(#PB_101, 200, 40, 150, 30, "update")
  
   ListViewGadget(#PB_137, 0, 30, 200, 300,  #PB_ListView_ClickSelect) 
   SetGadgetColor(#PB_137, #PB_Gadget_BackColor, $F3C8F3)
-  
+ 
 CloseGadgetList()
  
 EndProcedure
 
-  
-
-  
-  
+Procedure test2()  
+OpenGadgetList(0, 12)
   
   
-  
+   WebGadget(4508, 0, 40, 800, 500, "file:///home/gfoisy/Documents/GitHub/GF_Logia/GF_Logia/Webtest/index.html")
+  CloseGadgetList()
+EndProcedure  
   
   
  ;----Main forms--------------------------------------
@@ -798,8 +806,9 @@ PanelGadget     (0, 0, 0, 800, 560)
       AddGadgetItem (0, -1, "Info Techniques")
       AddGadgetItem (0, -1, "Boite a Outils")
       Testing()
-      CloseGadgetList()
       AddGadgetItem (0, -1, "Support Technique")
+      test2()
+      CloseGadgetList()
         CloseGadgetList()
 
        
@@ -812,7 +821,7 @@ PanelGadget     (0, 0, 0, 800, 560)
      MenuItem(2, "Item 2")
      MenuItem(3, "Item 3")
    EndIf
-  
+  BindEvent(#PB_Event_CloseWindow, @CloseWindowEvent())
   
 
 
@@ -1033,8 +1042,8 @@ EndSelect
   
 EndIf
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
-; CursorPosition = 842
-; FirstLine = 830
+; CursorPosition = 769
+; FirstLine = 765
 ; Folding = --
 ; EnableXP
 ; DPIAware

@@ -3,8 +3,8 @@
   If OpenDatabase(90, Filename$, "", "")
     Debug "Connected to myDatabase.sqlite3"
   EndIf
-  
-                    
+  XIncludeFile "WebSocket_Server.pbi"
+                  
   
   
   ;_____________________________________________________________________________________________________________________________
@@ -42,7 +42,38 @@ Global NewList Programm.Client()  ; The list for storing the elements
    ;-----------------------------------------------------------------------------------------------------------------------------------
   ;Start Procedure
 
-  
+
+
+
+
+  Procedure WebSocket_Event(*Server, *Client, Event, *Event_Frame.WebSocket_Server::Event_Frame) ; no need to worry about mutexes as this call is coming from your main loop
+  Select Event
+    Case WebSocket_Server::#Event_Connect
+      PrintN(" #### Client connected: " + *Client)
+      
+    Case WebSocket_Server::#Event_Disconnect
+      PrintN(" #### Client disconnected: " + *Client)
+      ; !!!! From the moment you receive this event *Client must not be used anymore !!!!
+      
+    Case WebSocket_Server::#Event_Frame
+      PrintN(" #### Frame received from " + *Client)
+      
+      ; #### OpCode is the type of frame you receive.
+      ; #### It's either Text, Binary-Data, Ping-Frames or other stuff.
+      ; #### You only need to care about text and binary frames.
+      Select *Event_Frame\Opcode
+        Case WebSocket_Server::#Opcode_Ping
+          PrintN("      Client sent a ping frame")
+        Case WebSocket_Server::#Opcode_Text
+          PrintN("      Text received: " + PeekS(*Event_Frame\Payload, *Event_Frame\Payload_Size, #PB_UTF8|#PB_ByteLength))
+        Case WebSocket_Server::#Opcode_Binary
+          PrintN("      Binary data received")
+          ; *Event_Frame\Payload contains the data, *Event_Frame\Payload_Size is the size of the data in bytes.
+          ; !!!! Don't use the Payload after you return from this callback. If you need to do so, make a copy of the memory in here. !!!!
+      EndSelect
+      
+  EndSelect
+EndProcedure
   
 Procedure Data2()
   
@@ -131,24 +162,22 @@ EndProcedure
     
        string90$ = "gui"
        PokeS(*Frost, string90$, 1100, #PB_UTF8)
-     Debug string90$
+     
      
      
      
                   str0.s = GetDatabaseString(90, 0)
                   PokeS(*sty, str0, 5501, #PB_UTF8)
-                  Debug str0
+                 
        ForEach Programm()
          
        Con = Programm()\Con
        SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
-       Debug Programm()\Con
-       Debug Programm()\Id
-        Debug string90$
-       SendNetworkData(Con, *sty, 5501)
+        SendNetworkData(Con, *sty, 5501)
        Debug Programm()\Con
        Debug Programm()\Id
        Debug str0
+       Debug string90$
          Next         
          ReAllocateMemory(*sty, 5501)
    Wend
@@ -166,11 +195,11 @@ FreeMemory(*Frost)
     
        string99$ = "gui1"
        PokeS(*Frost, string99$, 1100, #PB_UTF8)
-       Debug string99$
+       
        
                   str1.s = GetDatabaseString(90, 1)
                   PokeS(*Frost8, str1, 191, #PB_UTF8)
-                  Debug str1
+                 
       
      ForEach Programm()
            Con = Programm()\Con
@@ -213,7 +242,7 @@ If serverID
   ConsoleTitle("GF_Logia_Server") 
   Debug "Console Launch!"
   
-
+*Server = WebSocket_Server::Create(8099)  
 
 
         
@@ -235,7 +264,8 @@ If serverID
     
     
     
-    
+   While WebSocket_Server::Event_Callback(*Server, @WebSocket_Event())
+   Wend
      
              
     
@@ -487,7 +517,11 @@ If serverID
 
         Case #PB_NetworkEvent_Data
            
-         
+          *Frost = AllocateMemory(5000)
+          ReceiveNetworkData(Key, *Frost, 5000)
+          Debug PeekS(*Frost, 5000, #PB_UTF8)
+          SendNetworkString(Key, "Hello web app", #PB_UTF8)
+         ; FreeMemory(*Frost)
                  *test = AllocateMemory(2200)
            *test1 =  AllocateMemory(1060)
             
@@ -649,14 +683,14 @@ EndIf
    CloseDatabase(90)
    CloseNetworkServer(0)
    CloseConsole()
-  
+      
 End
   
   
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 121
-; FirstLine = 98
+; CursorPosition = 685
+; FirstLine = 665
 ; Folding = -
 ; EnableXP
 ; DPIAware
