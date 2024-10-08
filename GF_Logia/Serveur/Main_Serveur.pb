@@ -3,7 +3,7 @@
   If OpenDatabase(90, Filename$, "", "")
     Debug "Connected to myDatabase.sqlite3"
   EndIf
-  UseJPEGImageDecoder() 
+  XIncludeFile "WebSocket_Server.pbi"
                   
   
   
@@ -46,14 +46,41 @@ Global NewList Programm.Client()  ; The list for storing the elements
 
 
 
- 
+  Procedure WebSocket_Event(*Server, *Client, Event, *Event_Frame.WebSocket_Server::Event_Frame) ; no need to worry about mutexes as this call is coming from your main loop
+  Select Event
+    Case WebSocket_Server::#Event_Connect
+      PrintN(" #### Client connected: " + *Client)
+      
+    Case WebSocket_Server::#Event_Disconnect
+      PrintN(" #### Client disconnected: " + *Client)
+      ; !!!! From the moment you receive this event *Client must not be used anymore !!!!
+      
+    Case WebSocket_Server::#Event_Frame
+      PrintN(" #### Frame received from " + *Client)
+      
+      ; #### OpCode is the type of frame you receive.
+      ; #### It's either Text, Binary-Data, Ping-Frames or other stuff.
+      ; #### You only need to care about text and binary frames.
+      Select *Event_Frame\Opcode
+        Case WebSocket_Server::#Opcode_Ping
+          PrintN("      Client sent a ping frame")
+        Case WebSocket_Server::#Opcode_Text
+          PrintN("      Text received: " + PeekS(*Event_Frame\Payload, *Event_Frame\Payload_Size, #PB_UTF8|#PB_ByteLength))
+        Case WebSocket_Server::#Opcode_Binary
+          PrintN("      Binary data received")
+          ; *Event_Frame\Payload contains the data, *Event_Frame\Payload_Size is the size of the data in bytes.
+          ; !!!! Don't use the Payload after you return from this callback. If you need to do so, make a copy of the memory in here. !!!!
+      EndSelect
+      
+  EndSelect
+EndProcedure
   
 Procedure Data2()
   
  
  *Frost = AllocateMemory(1100)
 ClientID = EventClient()
-        DatabaseQuery(90, "SELECT * FROM utilizateur", #PB_Database_DynamicCursor)
+        DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
   While  NextDatabaseRow(90)
        string7$ = GetDatabaseString(90, 1)
        PokeS(*Frost, string7$, 1100, #PB_UTF8)
@@ -87,14 +114,16 @@ FreeMemory(*Frost)
   
  
  
-
+  Procedure AddClient()
+  
+EndProcedure
 
 Procedure Wo()
  *Frost =    AllocateMemory(1100)
                  *charle =    AllocateMemory(1111)
-  DatabaseQuery(90, "SELECT * FROM utilizateur", #PB_Database_DynamicCursor)
+  DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
   While  NextDatabaseRow(90)
-       string90$ = GetDatabaseString(90,0)
+       string90$ = GetDatabaseString(90, 1)
        PokeS(*charle, string90$, 1100, #PB_UTF8)
        Debug string90$
        
@@ -213,16 +242,53 @@ If serverID
   ConsoleTitle("GF_Logia_Server") 
   Debug "Console Launch!"
   
+*Server = WebSocket_Server::Create(8099)  
 
 
-
-     
+   If ReadFile(0, #PB_Compiler_Home + "examples\sources\data\purebasiclogo.bmp") 
+  *inputbuffer = AllocateMemory(Lof(0)) 
+  If *inputbuffer 
+    ReadData(0,*inputbuffer, Lof(0)) 
+    *encodedbuffer = AllocateMemory(MemorySize(*inputbuffer) * 1.35) 
+    If *encodedbuffer 
+      encodedlength = Base64EncoderBuffer(*inputbuffer, MemorySize(*inputbuffer), *encodedbuffer, MemorySize(*encodedbuffer)) 
+      pic64string.s = PeekS(*encodedbuffer) ; We'll save this in the database 
+FreeMemory(*encodedbuffer)
+    EndIf 
+    CloseFile(0) 
+    FreeMemory(*inputbuffer) 
+  EndIf 
+EndIf      
       
      
 
 
 
-  
+    DatabaseUpdate(90, "CREATE TABLE MyTable (test VARCHAR);") 
+      
+    ; Save the string        
+    DatabaseUpdate(90, "insert into MyTable (test) values('" + pic64string+ "')") 
+    
+    ; Retrieve the string 
+    DatabaseQuery(90, "SELECT * FROM MyTable") 
+    If NextDatabaseRow(90) 
+      pic64in.s = GetDatabaseString(90, 0) 
+      
+      ; Decode it 
+      *decodedbuffer = AllocateMemory(Len(pic64in)) 
+      Base64DecoderBuffer(@pic64in, Len(pic64in), *decodedbuffer, Len(pic64in)) 
+      
+      ; Convert it to an image 
+      CatchImage(0, *decodedbuffer) 
+      FreeMemory(*decodedbuffer) 
+      
+      ; Look at it.. 
+      OpenWindow(5,0,0,ImageWidth(0),ImageHeight(0),"Image Test") 
+      
+      ImageGadget(0,0,0,0,0,ImageID(0))   
+         
+    EndIf
+    EndIf
 
   
   ;--------------------------------------------------------------------------------------------------------------------------------
@@ -237,7 +303,8 @@ If serverID
     
     
     
-  
+   While WebSocket_Server::Event_Callback(*Server, @WebSocket_Event())
+   Wend
      
              
     
@@ -280,9 +347,18 @@ If serverID
         
 
            
-          
+           *Frosty =   AllocateMemory(500)
+                DatabaseQuery(90, "SELECT * FROM utilizateur WHERE id='1'")
+                       
            
-
+    
+           
+NextDatabaseRow(90)
+ GetDatabaseBlob(90, 27, *Frosty, 500) 
+   SendNetworkData(EventClient(), *Frosty, 500)
+ 
+ FinishDatabaseQuery(90)
+ FreeMemory(*Frosty)
    
  
            
@@ -293,7 +369,7 @@ If serverID
               
                 ;   -----------------------------------------------------------------------------          
              ;   Wo list
-                ;Wo()
+                Wo()
                 ;---------------------------------------------------------------------------------------
                 
                 
@@ -312,7 +388,7 @@ If serverID
   ;-------------------------------------------------------------------------------
             ;Inventaire transaction list 
  
-         ; inventaire()
+          inventaire()
   ;-----------------------------------------------------------------------------------------------------------------------------
                
                
@@ -489,7 +565,74 @@ If serverID
 ;               FreeMemory(*Frost)
 ;--------------------------------------------------------------------------
 
+
+        Case #PB_NetworkEvent_Data
+           
+          *Frost = AllocateMemory(5000)
+          ReceiveNetworkData(Key, *Frost, 5000)
+          Debug PeekS(*Frost, 5000, #PB_UTF8)
+          SendNetworkString(Key, "Hello web app", #PB_UTF8)
+         ; FreeMemory(*Frost)
+                 *test = AllocateMemory(2200)
+           *test1 =  AllocateMemory(1060)
+            
+           ReceiveNetworkData(Key, *test, 2200)
+           
+           
+  If PeekS(*test, 2200, #PB_UTF8) = "test"
+             Debug "yeah test..."
+             
+          *Frost =   AllocateMemory(1100)
+           *Frost =   AllocateMemory(1111)
+      
+           
+ DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
+ While  NextDatabaseRow(90)
+   
+       string15$ = "elie"
+        PokeS(*Frost, string15$, 1100, #PB_UTF8)
+        
+        
+        
+        string7$ = GetDatabaseString(90, 1)
+        PokeS(*Frost, string7$, 1111, #PB_UTF8)
+      Debug string7$
     
+        ForEach Programm()
+          
+         
+           Con = Programm()\Con
+       SendNetworkData(Con, *Frost, 1100)  ; Send the buffer to the client
+        Debug Programm()\Con
+        Debug Programm()\Id
+          
+        SendNetworkData(Con, *Frost, 1111)  ; Send the buffer to the client
+        Debug Programm()\Con
+        Debug Programm()\Id
+          Next         
+       
+    ReAllocateMemory(*Frost, 1111)
+    
+    Wend
+    
+    FinishDatabaseQuery(90)
+
+ FreeMemory(*Frost)
+           
+;            
+;      
+;      
+;    --------------------------------------------------------------------------  
+    ; Update Valeur here >>
+    ElseIf  PeekS(*test, 2200, #PB_UTF8) = "world"
+              Debug "mod wo list"
+              
+            ReceiveNetworkData(Key, *test1, 1060)
+              Data111.s = PeekS(*test1, 1060, #PB_UTF8) 
+            Debug Data111
+;      
+;            
+;               
 ;              
            *Frost =    AllocateMemory(1100)
                    string13$ = "elie"
@@ -514,33 +657,28 @@ If serverID
 ;              
           
              
-     
+      If    DatabaseQuery (90, "SELECT * FROM workorder")
+       invfg15$ = "UPDATE workorder SET wo='"+Data111+"' WHERE id=4"  
+         
+            If  NextDatabaseRow(90)
+         DatabaseUpdate(90, invfg15$)
+       Else
+         Debug "update not working"
+       EndIf
+       
+     Else
+       Debug "query not working"
+       EndIf
+      FinishDatabaseQuery(90)
            
             *Frost =    AllocateMemory(1100)
-            *charle =    AllocateMemory(1111)
-            *Alex =    AllocateMemory(2000)
-            *Mario =    AllocateMemory(2003)
-   DatabaseQuery(90, "SELECT * FROM utilizateur", #PB_Database_DynamicCursor)
+                  *charle =    AllocateMemory(1111)
+   DatabaseQuery(90, "SELECT * FROM workorder WHERE status='1'", #PB_Database_DynamicCursor)
    While  NextDatabaseRow(90)
-       string90$ = GetDatabaseString(90, 32)
+       string90$ = GetDatabaseString(90, 1)
         PokeS(*charle, string90$, 1100, #PB_UTF8)
         Debug string90$
-        FinishDatabaseQuery(90)
-        
-  DatabaseQuery(90, "SELECT * FROM utilizateur", #PB_Database_DynamicCursor)
-        NextDatabaseRow(90)
-        string209$ = GetDatabaseString(90, 34)
-        PokeS(*Alex, string209$, 2000, #PB_UTF8)
-        Debug string209$
-        FinishDatabaseQuery(90)
-        
-        DatabaseQuery(90, "SELECT * FROM utilizateur", #PB_Database_DynamicCursor)
-        NextDatabaseRow(90)
-        string309$ = GetDatabaseString(90, 36)
-        PokeS(*Mario, string309$, 2003, #PB_UTF8)
-        Debug string309$
-        FinishDatabaseQuery(90)
-        
+          
         string92$ = "charle"
         PokeS(*Frost, string92$, 1111, #PB_UTF8)
       Debug string92$
@@ -555,28 +693,17 @@ If serverID
         SendNetworkData(Con, *charle, 1111)  ; Send the buffer to the client
        Debug Programm()\Con
        Debug Programm()\Id
-       
-        SendNetworkData(Con, *Alex, 2000)  ; Send the buffer to the client
-       Debug Programm()\Con
-       Debug Programm()\Id
-       
-        SendNetworkData(Con, *Mario, 2003)  ; Send the buffer to the client
-       Debug Programm()\Con
-       Debug Programm()\Id
 ;        
           Next         
           ReAllocateMemory(*charle, 1111)
-          ReAllocateMemory(*Alex, 2000)
-          ReAllocateMemory(*Mario, 2003)
     Wend 
 ;                 
       FreeMemory(*Frost)           
        FreeMemory(*charle)          
-      
-       
-        FreeMemory(*Alex)
-        FreeMemory(*Mario)
-
+       FreeMemory(*test)
+        FreeMemory(*test1)
+             FinishDatabaseQuery(90) 
+        EndIf 
 ; --------------------------------------------------------------------------------------------------------------------------           
 ;        
 ;       
@@ -600,7 +727,7 @@ If serverID
   ;----------------------------------------------------------------------------------------------------------------------------
   ;Footer
   
-  EndIf
+  
 
    Debug "PureBasic - Server Click To quit the server."
      ClearList(Programm())
@@ -613,11 +740,11 @@ End
   
 ; IDE Options = PureBasic 6.12 LTS (Linux - x64)
 ; ExecutableFormat = Console
-; CursorPosition = 314
-; FirstLine = 183
+; CursorPosition = 274
+; FirstLine = 240
 ; Folding = -
 ; EnableThread
 ; EnableXP
 ; DPIAware
-; Executable = ../GF_Logia/GF_Logia/Serveur/Serveur_x64.run
+; Executable = Serveur_x64.run
 ; Compiler = PureBasic 6.12 LTS (Linux - x64)
